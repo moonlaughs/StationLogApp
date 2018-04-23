@@ -20,16 +20,11 @@ namespace StationLogApp.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MenuTreePage : Page
+    public sealed partial class TaskPage : Page
     {
-        public MenuTreePage()
+        public TaskPage()
         {
             this.InitializeComponent();
-        }
-
-        private void SeeTasksButton(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(TaskPage));
         }
     }
 }
