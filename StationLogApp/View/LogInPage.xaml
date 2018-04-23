@@ -8,6 +8,6 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <Button Content="Log in" FontSize="50" Height="200" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" Click="LogInButton"></Button>
     </Grid>
 </Page>
