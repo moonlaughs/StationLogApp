@@ -8,6 +8,17 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Button Content="Log in" FontSize="50" Height="200" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" Click="LogInButton"></Button>
+        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Vertical" Width="600" Height="1000">
+            <StackPanel.Background>
+                <SolidColorBrush Color="Black" Opacity="0.9" />
+            </StackPanel.Background>
+            <TextBlock Text="USER NAME" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,300,20,0" Foreground="Gray" />
+            <TextBox FontSize="23" Height="40" Width="200" Background="Transparent"/>
+            <TextBlock Text="PASSWORD" FontSize="15" Margin="0,20,43,0" Foreground="Gray" HorizontalAlignment="Center"/>
+            <TextBox FontSize="23" Height="40" Width="200" Background="Transparent"/>
+            <Button Content="Log in" FontSize="30" HorizontalAlignment="Center" Margin="0,50,0,40" 
+                    BorderThickness="2" BorderBrush="Black" 
+                    Foreground="White" Click="Button_Click"/>
+        </StackPanel>
     </Grid>
 </Page>
