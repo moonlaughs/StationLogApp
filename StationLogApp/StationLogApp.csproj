@@ -95,6 +95,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\FrameNavigateClass.cs" />
+    <Compile Include="Common\NotifyPropertyChangedClass.cs" />
+    <Compile Include="Common\RelayCommandClass.cs" />
+    <Compile Include="Model\Equipment.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="View\LogInPage.xaml.cs">
       <DependentUpon>LogInPage.xaml</DependentUpon>
     </Compile>
@@ -135,7 +140,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\MenuTreePage.xaml"/>
+    <Page Include="View\MenuTreePage.xaml" />
     <Page Include="View\TaskHistoryTechnicianPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -151,9 +156,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Common\" />
     <Folder Include="Interfaces\" />
-    <Folder Include="Model\" />
     <Folder Include="Persistancy\" />
     <Folder Include="ViewModel\" />
   </ItemGroup>
