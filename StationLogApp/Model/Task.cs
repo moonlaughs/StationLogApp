@@ -47,7 +47,6 @@ namespace StationLogApp.Model
             
         }
 
-
         public Task(int taskId, string taskName, DateTime taskSchedule, string registration, string taskType, DateTime doneDate, string comment, string doneVar )
         {
             _taskId = taskId;
@@ -60,7 +59,6 @@ namespace StationLogApp.Model
             _doneVar = doneVar;
             _doneVar = doneVar;
         }
-
 
         // Methods
 
