@@ -95,6 +95,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Task.cs" />
     <Compile Include="View\LogInPage.xaml.cs">
       <DependentUpon>LogInPage.xaml</DependentUpon>
     </Compile>
@@ -141,7 +142,6 @@
   <ItemGroup>
     <Folder Include="Common\" />
     <Folder Include="Interfaces\" />
-    <Folder Include="Model\" />
     <Folder Include="Persistancy\" />
     <Folder Include="ViewModel\" />
   </ItemGroup>

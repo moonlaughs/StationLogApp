@@ -6,9 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-<!--small change 2-->
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*"/>
@@ -22,6 +21,7 @@
                     <TextBlock Name="UsernameTextBlock" Text="" RelativePanel.RightOf="UserIcon" Width="200" />
                 </RelativePanel>
 
+                
                 <RelativePanel Name="MenuBarButtons" AlignRightWithPanel="True">
                     <Button Name="TodayButton" Content="Today's" Margin="0,0,2,0"/>
                     <Button Name="DoneButton" Content="Done" RelativePanel.RightOf="TodayButton" Margin="0,0,2,0"/>
@@ -35,7 +35,7 @@
             <StackPanel Name="SortingBar" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" >
                 <ComboBox Name="StationComboBox" PlaceholderText="Station" />
                 <CalendarDatePicker HorizontalAlignment="Left"  VerticalAlignment="Top"/>
-                <Button Content="Technician" VerticalAlignment="Top"></Button>
+                <ComboBox Name="Technician" PlaceholderText="Technician" VerticalAlignment="Top"></ComboBox>
             </StackPanel>
 
 
