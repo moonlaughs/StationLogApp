@@ -8,14 +8,14 @@ namespace StationLogApp.Model
 {
     public class Equipment
     {
-        #region properties
+        #region // properties
         public int EquipmentID { get; set; }
         public string EquipmentName { get; set; }
         public string EquipmentType { get; set; }
         public int StationID { get; set; }
         #endregion
 
-        #region constructors
+        #region // constructors
         public Equipment(int equipmentID, string equipmentName, string equipmentType, int stationID)
         {
             EquipmentID = equipmentID;
@@ -30,7 +30,7 @@ namespace StationLogApp.Model
         }
         #endregion
 
-        #region ToStringMethod
+        #region // ToStringMethod
 
         public override string ToString()
         {
