@@ -16,7 +16,7 @@
             <Button Content="TASKS" FontSize="100" Foreground="Bisque" Background="#00000000" BorderBrush="#00000000" Height="300" Width="750" Click="SeeTasksButton">
 
             </Button>
-            <Button Content="HISTORY" FontSize="100" Foreground="Bisque" Background="#00000000" BorderBrush="#00000000" Height="300" Width="750">
+            <Button Content="HISTORY" FontSize="100" Foreground="Bisque" Background="#00000000" BorderBrush="#00000000" Height="300" Width="750" Click="SeeHistoryButton">
 
             </Button>
         </StackPanel>

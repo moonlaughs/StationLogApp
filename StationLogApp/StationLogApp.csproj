@@ -102,6 +102,9 @@
     <Compile Include="View\MenuTreePage.xaml.cs">
       <DependentUpon>MenuTreePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\TaskHistoryTechnicianPage.xaml.cs">
+      <DependentUpon>TaskHistoryTechnicianPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\TaskPage.xaml.cs">
       <DependentUpon>TaskPage.xaml</DependentUpon>
     </Compile>
@@ -133,6 +136,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\MenuTreePage.xaml"/>
+    <Page Include="View\TaskHistoryTechnicianPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\TaskPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
