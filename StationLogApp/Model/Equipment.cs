@@ -9,14 +9,14 @@ namespace StationLogApp.Model
     public class Equipment
     {
         #region properties
-        public string EquipmentID { get; set; }
+        public int EquipmentID { get; set; }
         public string EquipmentName { get; set; }
         public string EquipmentType { get; set; }
-        public string StationID { get; set; }
+        public int StationID { get; set; }
         #endregion
 
         #region constructors
-        public Equipment(string equipmentID, string equipmentName, string equipmentType, string stationID)
+        public Equipment(int equipmentID, string equipmentName, string equipmentType, int stationID)
         {
             EquipmentID = equipmentID;
             EquipmentName = equipmentName;
