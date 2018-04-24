@@ -15,12 +15,14 @@
                 <RowDefinition Height="70*"/>
             </Grid.RowDefinitions>
 
+            
+            <!--Relative panel of the Menu Bar-->
+            
             <RelativePanel Name="MenuBar" Grid.Row="0">
                 <RelativePanel Name="UserNameComposition" AlignLeftWithPanel="True">
                     <Image Name="UserIcon" Width="30" Height="30"/>
                     <TextBlock Name="UsernameTextBlock" Text="" RelativePanel.RightOf="UserIcon" Width="200" />
                 </RelativePanel>
-
                 <RelativePanel Name="MenuBarButtons" AlignRightWithPanel="True">
                     <Button Name="TodayButton" Content="Today's" Margin="0,0,2,0"/>
                     <Button Name="DoneButton" Content="Done" RelativePanel.RightOf="TodayButton" Margin="0,0,2,0"/>
@@ -30,13 +32,18 @@
                 </RelativePanel>
             </RelativePanel>
 
+            
+            <!--StackPanel of the Sorting Bar-->
+            
             <StackPanel Name="SortingMenuBar" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" >
-                <ComboBox Name="StationComboBox" PlaceholderText="Station" />
+                <ComboBox Name="StationComboBox" PlaceholderText="Station"/>
                 <CalendarDatePicker HorizontalAlignment="Left"  VerticalAlignment="Top"/>
-                <Button Content="Technician" VerticalAlignment="Top"></Button>
+                <ComboBox Name="Technician" PlaceholderText="Technician" VerticalAlignment="Top"></ComboBox>
             </StackPanel>
 
-
+            
+            <!--ListView with the history of task-->
+            
             <ListView Grid.Row="2" VerticalAlignment="Center" Width="700" Height="500" Background="Azure">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -49,18 +56,18 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-
+                            
                             <StackPanel>
                                 <StackPanel Name="TechnicianNameStackPanel">
                                     <TextBlock Name="TechnicianNameTextBlock"/>
                                     <TextBlock Name="TechnicinName" />
                                 </StackPanel>
-                                <StackPanel Name="StationLocationStackPanel"  Orientation="Horizontal">
+                                <StackPanel Name="StationLocationStackPanel" Orientation="Horizontal">
                                     <Image Name="LocationIcon" />
                                     <TextBlock Name="StationName"/>
                                 </StackPanel>
                             </StackPanel>
-
+                            
                             <StackPanel>
                                 <StackPanel Name="TaskDateStackPanel">
                                     <TextBlock Name="TaskDateTextBlock"/>
@@ -75,7 +82,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            
         </Grid>
-
     </Grid>
 </Page>
