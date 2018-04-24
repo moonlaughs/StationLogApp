@@ -95,13 +95,18 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Task.cs" />
     <Compile Include="View\LogInPage.xaml.cs">
       <DependentUpon>LogInPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\TechnicianTaskHistory.xaml.cs">
-      <DependentUpon>TechnicianTaskHistory.xaml</DependentUpon>
+    <Compile Include="View\MenuTreePage.xaml.cs">
+      <DependentUpon>MenuTreePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TaskHistoryTechnicianPage.xaml.cs">
+      <DependentUpon>TaskHistoryTechnicianPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TaskPage.xaml.cs">
+      <DependentUpon>TaskPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +116,7 @@
     <None Include="StationLogApp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\1.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -129,7 +135,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\TechnicianTaskHistory.xaml">
+    <Page Include="View\MenuTreePage.xaml"/>
+    <Page Include="View\TaskHistoryTechnicianPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TaskPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -142,6 +153,7 @@
   <ItemGroup>
     <Folder Include="Common\" />
     <Folder Include="Interfaces\" />
+    <Folder Include="Model\" />
     <Folder Include="Persistancy\" />
     <Folder Include="ViewModel\" />
   </ItemGroup>
