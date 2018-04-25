@@ -7,21 +7,25 @@ using System.Threading.Tasks;
 using StationLogApp.Common;
 using StationLogApp.Factories;
 using StationLogApp.Interfaces;
+using StationLogApp.Persistancy;
+using StationLogApp.View;
 
 namespace StationLogApp.ViewModel
 {
     public class TaskVm : NotifyPropertyChangedClass
     {
         #region instancefields
-        private MainFactory _newTask;
-        private MainFactory _selectedItem;
-        private ObservableCollection<MainFactory> _collection;
+        private IMainFactory _newTask;
+        private IMainFactory _selectedItem;
+        private ObservableCollection<IMainFactory> _collection;
+        private FrameNavigateClass _frameNavigation;
         #endregion
 
         #region properties
-        ILoad<Collection<>>
 
-        public MainFactory NewTask
+        public IMainFactory taskobj = new MainFactory();
+
+        public IMainFactory NewTask
         {
             get { return _newTask; }
             set { _newTask = value;
@@ -29,7 +33,7 @@ namespace StationLogApp.ViewModel
             }
         }
         
-        public MainFactory SelectedItem
+        public IMainFactory SelectedItem
         {
             get { return _selectedItem; }
             set
@@ -39,16 +43,30 @@ namespace StationLogApp.ViewModel
             }
         }
 
-        public ObservableCollection<MainFactory> Collection
+        public ObservableCollection<IMainFactory> Catalog
         {
             get { return _collection; }
-            set { _collection = value; OnPropertyChanged(nameof(Collection)); }
+            set { _collection = value; OnPropertyChanged(nameof(Catalog)); }
         }
+
+        ILoad<Collection<IMainFactory>> load = new LoadM<Collection<IMainFactory>>();
+
+        public RelayCommandClass LoadCommand { get; set; }
         #endregion
 
         #region constructor
         public TaskVm()
         {
+            LoadCommand = new RelayCommandClass(LoadMethod);
+            _frameNavigation = new FrameNavigateClass();
+        }
+        #endregion
+
+        #region Methods
+        public void LoadMethod()
+        {
+            _frameNavigation.ActivateFrameNavigation(typeof(TaskPage));
+            load.Load();
         }
         #endregion
     }
