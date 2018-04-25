@@ -101,11 +101,20 @@
     <Compile Include="Factories\MainFactory.cs" />
     <Compile Include="Interfaces\IMainFactory.cs" />
     <Compile Include="Interfaces\ITaskFactory.cs" />
+    <Compile Include="Interfaces\ICreate.cs" />
+    <Compile Include="Interfaces\IDelete.cs" />
+    <Compile Include="Interfaces\ILoad.cs" />
+    <Compile Include="Interfaces\IRead.cs" />
+    <Compile Include="Interfaces\IUpdate.cs" />
     <Compile Include="Model\Equipment.cs" />
     <Compile Include="Model\Notes.cs" />
     <Compile Include="Model\Station.cs" />
-    <Compile Include="Persistancy\Facade.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Persistancy\CreateM.cs" />
+    <Compile Include="Persistancy\DeleteM.cs" />
+    <Compile Include="Persistancy\LoadM.cs" />
+    <Compile Include="Persistancy\ReadM.cs" />
+    <Compile Include="Persistancy\UpdateM.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Model\TaskClass.cs" />
     <Compile Include="Common\TaskCatalogSingleton.cs" />
@@ -160,8 +169,14 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client">
+      <Version>5.2.4</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>11.0.2</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
