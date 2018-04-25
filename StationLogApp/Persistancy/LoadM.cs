@@ -5,14 +5,16 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
 using Newtonsoft.Json;
 using StationLogApp.Interfaces;
 
 namespace StationLogApp.Persistancy
 {
-    public class LoadM<T> : ILoad<T> where T : class 
+    public class LoadM<T> : ILoad<T> where T : class
     {
         #region
+
         private const string ServerUrl = "http://stationlogwebservice20180424112310.azurewebsites.net/";
 
         private string _serverURL;
@@ -20,11 +22,12 @@ namespace StationLogApp.Persistancy
         private string _apiID;
         private HttpClientHandler _httpClientHandler;
         private HttpClient _httpClient;
+
         #endregion
 
         public async Task<List<T>> Load()
         {
-            _httpClientHandler = new HttpClientHandler() { UseDefaultCredentials = true };
+            _httpClientHandler = new HttpClientHandler() {UseDefaultCredentials = true};
             using (_httpClient = new HttpClient(_httpClientHandler))
             {
                 _httpClient.BaseAddress = new Uri(ServerUrl);
@@ -42,14 +45,12 @@ namespace StationLogApp.Persistancy
                             return listt;
                         }
                     }
-
-                    return null;
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    Console.WriteLine(e);
-                    return null;
+                    await new MessageDialog(ex.Message).ShowAsync();
                 }
+                return null;
             }
         }
     }

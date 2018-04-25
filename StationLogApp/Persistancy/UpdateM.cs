@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
 using Newtonsoft.Json;
 using StationLogApp.Interfaces;
 
@@ -41,14 +42,13 @@ namespace StationLogApp.Persistancy
                     {
                         if (task2.Result.IsSuccessStatusCode)
                         {
-                            Console.WriteLine(task2.Result.Content.ReadAsStringAsync().Result);
+                            await task2.Result.Content.ReadAsStringAsync();
                         }
                     }
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    Console.WriteLine(e);
-                    throw;
+                    await new MessageDialog(ex.Message).ShowAsync();
                 }
             }
         }

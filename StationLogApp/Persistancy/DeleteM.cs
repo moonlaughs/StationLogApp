@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
 using StationLogApp.Interfaces;
 
 namespace StationLogApp.Persistancy
@@ -38,13 +39,13 @@ namespace StationLogApp.Persistancy
                     {
                         if (task4.Result.IsSuccessStatusCode)
                         {
-                            Console.WriteLine(task4.Result.Content.ReadAsAsync<T>().Result);
+                            await task4.Result.Content.ReadAsAsync<T>();
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    return;
+                    await new MessageDialog(ex.Message).ShowAsync();
                 }
             }
         }

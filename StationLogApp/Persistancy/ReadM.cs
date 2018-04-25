@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
 using StationLogApp.Interfaces;
 
 namespace StationLogApp.Persistancy
@@ -39,14 +40,12 @@ namespace StationLogApp.Persistancy
                             return task1.Result.Content.ReadAsAsync<T>().Result;
                         }
                     }
-
-                    return null;
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    Console.WriteLine(e);
-                    return null;
+                    await new MessageDialog(ex.Message).ShowAsync();
                 }
+                return null;
             }
         }
     }

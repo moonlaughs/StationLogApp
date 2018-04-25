@@ -117,7 +117,7 @@
     <Compile Include="Persistancy\UpdateM.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Model\TaskClass.cs" />
-    <Compile Include="Common\TaskCatalogSingleton.cs" />
+    <Compile Include="Singletons\TaskCatalogSingleton.cs" />
     <Compile Include="View\LogInPage.xaml.cs">
       <DependentUpon>LogInPage.xaml</DependentUpon>
     </Compile>
@@ -176,7 +176,7 @@
       <Version>6.0.6</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>11.0.2</Version>
+      <Version>8.0.3</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

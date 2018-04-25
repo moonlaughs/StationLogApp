@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
 using Newtonsoft.Json;
 using StationLogApp.Interfaces;
 
@@ -43,9 +44,9 @@ namespace StationLogApp.Persistancy
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    return;
+                    new MessageDialog(ex.Message).ShowAsync();
                 }
             }
         }
