@@ -118,6 +118,7 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Model\TaskClass.cs" />
     <Compile Include="Singletons\TaskCatalogSingleton.cs" />
+    <Compile Include="ViewModel\TaskVm.cs" />
     <Compile Include="View\LogInPage.xaml.cs">
       <DependentUpon>LogInPage.xaml</DependentUpon>
     </Compile>
@@ -179,9 +180,7 @@
       <Version>11.0.2</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Reference Include="System.ObjectModel">
       <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETCore\v4.5\System.ObjectModel.dll</HintPath>
