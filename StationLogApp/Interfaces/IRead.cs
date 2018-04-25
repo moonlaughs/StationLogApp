@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StationLogApp.Persistancy
+namespace StationLogApp.Interfaces
 {
-    public class Facade
+    public interface IRead<T>
     {
+        Task<T> Read(int key);
     }
 }

@@ -10,10 +10,10 @@ using StationLogApp.Persistancy;
 
 namespace StationLogApp.Common
 {
-    public class TaskListSingleton
+    public class TaskCatalogSingleton
     {
 
-        private static TaskListSingleton _instance;
+        private static TaskCatalogSingleton _instance;
 
 
         // List of Task 
@@ -21,7 +21,8 @@ namespace StationLogApp.Common
 
 
         // Constructor of the Singleton
-        private TaskListSingleton()
+
+        private TaskCatalogSingleton()
         {
             TaskList = new ObservableCollection<MainFactory>();
             TaskList = new ObservableCollection<MainFactory>(new Facade.GetTaskList());
@@ -30,13 +31,13 @@ namespace StationLogApp.Common
 
         // Singleton Method
 
-        public static TaskListSingleton Instance
+        public static TaskCatalogSingleton Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = new TaskListSingleton();
+                    _instance = new TaskCatalogSingleton();
                 }
                 return _instance;
             }
