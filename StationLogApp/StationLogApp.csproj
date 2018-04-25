@@ -98,13 +98,16 @@
     <Compile Include="Common\FrameNavigateClass.cs" />
     <Compile Include="Common\NotifyPropertyChangedClass.cs" />
     <Compile Include="Common\RelayCommandClass.cs" />
+    <Compile Include="Factories\MainFactory.cs" />
+    <Compile Include="Interfaces\IMainFactory.cs" />
+    <Compile Include="Interfaces\ITaskFactory.cs" />
     <Compile Include="Model\Equipment.cs" />
     <Compile Include="Model\Notes.cs" />
     <Compile Include="Model\Station.cs" />
     <Compile Include="Persistancy\Facade.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="Model\Task.cs" />
+    <Compile Include="Model\TaskClass.cs" />
     <Compile Include="View\LogInPage.xaml.cs">
       <DependentUpon>LogInPage.xaml</DependentUpon>
     </Compile>
@@ -161,8 +164,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Persistancy\" />
     <Folder Include="ViewModel\" />
   </ItemGroup>
   <ItemGroup>
