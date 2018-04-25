@@ -21,7 +21,6 @@ namespace StationLogApp.Common
 
 
         // Constructor of the Singleton
-
         private TaskListSingleton()
         {
             TaskList = new ObservableCollection<MainFactory>();
