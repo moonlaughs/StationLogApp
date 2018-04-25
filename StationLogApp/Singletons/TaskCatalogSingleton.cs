@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using StationLogApp.Factories;
+using StationLogApp.Interfaces;
+using StationLogApp.Persistancy;
 
 namespace StationLogApp.Singletons
 {
@@ -11,6 +13,7 @@ namespace StationLogApp.Singletons
 
         // List of Task 
         public ObservableCollection<MainFactory> TaskList { get; set;}
+        public ICreate<MainFactory> TaskObject = new CreateM<MainFactory>();
 
 
         // Constructor of the Singleton
@@ -18,7 +21,7 @@ namespace StationLogApp.Singletons
         private TaskCatalogSingleton()
         {
             TaskList = new ObservableCollection<MainFactory>();
-            TaskList = new ObservableCollection<MainFactory>(new Facade.GetTaskList());
+            // TaskList = new ObservableCollection<MainFactory>(TaskObject.Create());
         }
 
 

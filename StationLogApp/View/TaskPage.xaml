@@ -28,9 +28,9 @@
                 <ComboBoxItem Content="Today" Foreground="White"/>
                 <ComboBoxItem Content="This week" Foreground="White"/>
                 <ComboBoxItem Content="This month" Foreground="White"/>
-                
             </ComboBox>
-            <ListView Grid.Row="1" Grid.Column="0" Name="Tasks">
+
+            <ListView Name="Tasks" ItemsSource="{Binding TaskList}" Grid.Row="1" Grid.Column="0">
                 <ListView.Background>Transparent</ListView.Background>
                 <StackPanel>
                     <TextBlock Text="Task:" Foreground="White" FontSize="18"/>
