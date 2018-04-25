@@ -108,6 +108,8 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Model\TaskClass.cs" />
+  
+    <Compile Include="Common\TaskListSingleton.cs" />
     <Compile Include="View\LogInPage.xaml.cs">
       <DependentUpon>LogInPage.xaml</DependentUpon>
     </Compile>
@@ -164,6 +166,8 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Interfaces\" />
+    <Folder Include="Persistancy\" />
     <Folder Include="ViewModel\" />
   </ItemGroup>
   <ItemGroup>
