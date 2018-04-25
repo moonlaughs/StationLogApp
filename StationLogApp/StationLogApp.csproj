@@ -99,6 +99,7 @@
     <Compile Include="Common\NotifyPropertyChangedClass.cs" />
     <Compile Include="Common\RelayCommandClass.cs" />
     <Compile Include="Model\Equipment.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="View\LogInPage.xaml.cs">
       <DependentUpon>LogInPage.xaml</DependentUpon>
