@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -13,7 +14,7 @@ namespace StationLogApp.Persistancy
 {
     public class LoadM<T> : ILoad<T> where T : class
     {
-        #region
+        #region instancefields
 
         private const string ServerUrl = "http://stationlogwebservice20180424112310.azurewebsites.net/";
 
@@ -25,7 +26,7 @@ namespace StationLogApp.Persistancy
 
         #endregion
 
-        public async Task<List<T>> Load()
+        public async Task<ObservableCollection<T>> Load()
         {
             _httpClientHandler = new HttpClientHandler() {UseDefaultCredentials = true};
             using (_httpClient = new HttpClient(_httpClientHandler))
@@ -41,7 +42,7 @@ namespace StationLogApp.Persistancy
                         if (task5.Result.IsSuccessStatusCode)
                         {
                             var task51 = await task5.Result.Content.ReadAsStringAsync();
-                            List<T> listt = JsonConvert.DeserializeObject<List<T>>(task51);
+                            ObservableCollection<T> listt = JsonConvert.DeserializeObject<ObservableCollection<T>>(task51);
                             return listt;
                         }
                     }

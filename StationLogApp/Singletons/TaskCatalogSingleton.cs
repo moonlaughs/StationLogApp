@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using StationLogApp.Factories;
-using StationLogApp.Model;
+using StationLogApp.Interfaces;
 using StationLogApp.Persistancy;
 
-namespace StationLogApp.Common
+namespace StationLogApp.Singletons
 {
     public class TaskCatalogSingleton
     {
@@ -18,6 +14,7 @@ namespace StationLogApp.Common
 
         // List of Task 
         public ObservableCollection<MainFactory> TaskList { get; set;}
+        public ICreate<MainFactory> TaskObject = new CreateM<MainFactory>();
 
 
         // Constructor of the Singleton
@@ -25,7 +22,7 @@ namespace StationLogApp.Common
         private TaskCatalogSingleton()
         {
             TaskList = new ObservableCollection<MainFactory>();
-            TaskList = new ObservableCollection<MainFactory>(new Facade.GetTaskList());
+            //TaskList = new ObservableCollection<MainFactory>(TaskObject.Create());
         }
 
 

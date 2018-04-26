@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Newtonsoft.Json;
+using StationLogApp.Factories;
 using StationLogApp.Interfaces;
 
 namespace StationLogApp.Persistancy
@@ -46,7 +47,7 @@ namespace StationLogApp.Persistancy
                 }
                 catch (Exception ex)
                 {
-                    new MessageDialog(ex.Message).ShowAsync();
+                    await new MessageDialog(ex.Message).ShowAsync();
                 }
             }
         }
