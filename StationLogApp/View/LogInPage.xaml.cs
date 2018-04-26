@@ -36,9 +36,5 @@ namespace StationLogApp
             coreTitleBar.ExtendViewIntoTitleBar = true;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(MenuTreePage));
-        }
     }
 }

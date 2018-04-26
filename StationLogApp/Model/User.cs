@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StationLogApp.Interfaces;
 
 namespace StationLogApp.Model
 {
-    public class User
+    public class User : IUserFactory
     {
         #region Properties
         public string UserID { get; set; }
