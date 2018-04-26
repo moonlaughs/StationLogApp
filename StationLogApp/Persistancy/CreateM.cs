@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Windows.Media.Capture.Frames;
 using Windows.UI.Popups;
 using Newtonsoft.Json;
+using StationLogApp.Factories;
 using StationLogApp.Interfaces;
 
 namespace StationLogApp.Persistancy
