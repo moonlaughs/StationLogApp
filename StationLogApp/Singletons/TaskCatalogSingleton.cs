@@ -10,21 +10,22 @@ namespace StationLogApp.Singletons
     {
 
         private static TaskCatalogSingleton _instance;
+        
 
+        // List of Task
 
-        // List of Task 
-        public ObservableCollection<MainFactory> TaskList { get; set;}
-        public ICreate<MainFactory> TaskObject = new CreateM<MainFactory>();
+        public ObservableCollection<ITaskFactory> TaskCatalog { get; set; }
 
 
         // Constructor of the Singleton
 
         private TaskCatalogSingleton()
         {
-            TaskList = new ObservableCollection<MainFactory>();
-            //TaskList = new ObservableCollection<MainFactory>(TaskObject.Create());
+            TaskCatalog = new ObservableCollection<ITaskFactory>();
+            ILoad<ITaskFactory> retrievedCatalog = new LoadM<ITaskFactory>();
+            TaskCatalog = new ObservableCollection<ITaskFactory>(retrievedCatalog.Load());
         }
-
+        
 
         // Singleton Method
 

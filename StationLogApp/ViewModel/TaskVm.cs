@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using StationLogApp.Common;
 using StationLogApp.Factories;
 using StationLogApp.Interfaces;
+using StationLogApp.Singletons;
 
 namespace StationLogApp.ViewModel
 {
@@ -16,10 +17,14 @@ namespace StationLogApp.ViewModel
         private MainFactory _newTask;
         private MainFactory _selectedItem;
         private ObservableCollection<MainFactory> _collection;
+        private TaskCatalogSingleton _taskCatalogSingleton;
+        private ObservableCollection<ITaskFactory> _taskCatalog;
         #endregion
 
         #region properties
-        ILoad<Collection<>>
+        // ILoad<Collection<>>
+
+        public ObservableCollection<ITaskFactory> TaskCatalog { get; set; }
 
         public MainFactory NewTask
         {
@@ -49,6 +54,7 @@ namespace StationLogApp.ViewModel
         #region constructor
         public TaskVm()
         {
+            _taskCatalogSingleton = TaskCatalogSingleton.Instance; 
         }
         #endregion
     }
