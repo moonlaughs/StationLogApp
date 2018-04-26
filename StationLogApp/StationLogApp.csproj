@@ -107,6 +107,7 @@
     <Compile Include="Interfaces\ILoad.cs" />
     <Compile Include="Interfaces\IRead.cs" />
     <Compile Include="Interfaces\IUpdate.cs" />
+    <Compile Include="Interfaces\IUserFactory.cs" />
     <Compile Include="Model\Equipment.cs" />
     <Compile Include="Model\Notes.cs" />
     <Compile Include="Model\SaveM.cs" />
