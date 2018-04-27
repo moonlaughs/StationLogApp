@@ -107,6 +107,7 @@
     <Compile Include="Interfaces\ILoad.cs" />
     <Compile Include="Interfaces\IRead.cs" />
     <Compile Include="Interfaces\IUpdate.cs" />
+    <Compile Include="Interfaces\IUserFactory.cs" />
     <Compile Include="Model\Equipment.cs" />
     <Compile Include="Model\Notes.cs" />
     <Compile Include="Model\SaveM.cs" />
@@ -120,6 +121,8 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Model\TaskClass.cs" />
     <Compile Include="Singletons\TaskCatalogSingleton.cs" />
+    <Compile Include="Singletons\UserSingleton.cs" />
+    <Compile Include="ViewModel\LoginVM.cs" />
     <Compile Include="ViewModel\TaskVm.cs" />
     <Compile Include="View\LogInPage.xaml.cs">
       <DependentUpon>LogInPage.xaml</DependentUpon>
