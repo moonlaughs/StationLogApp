@@ -16,7 +16,7 @@ namespace StationLogApp.Persistancy
     {
         #region
 
-        private const string ServerUrl = "http://http://stationlogwebservice20180424112310.azurewebsites.net/";
+        private const string ServerUrl = "http://stationlogwebservice20180424112310.azurewebsites.net/";
 
         private string _serverURL;
         private string _apiPrefix;
@@ -65,7 +65,7 @@ namespace StationLogApp.Persistancy
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var response = client.GetAsync("api/TaskTables").Result;
+                var response = client.GetAsync("api/Tasks").Result;
 
                 if (response.IsSuccessStatusCode)
                 {
