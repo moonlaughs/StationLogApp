@@ -8,7 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Newtonsoft.Json;
+using StationLogApp.Common;
 using StationLogApp.Interfaces;
+using StationLogApp.Model;
 
 namespace StationLogApp.Persistancy
 {
@@ -16,17 +18,17 @@ namespace StationLogApp.Persistancy
     {
         #region instancefields
 
-        private const string ServerUrl = "http://stationlogwebservice20180424112310.azurewebsites.net/api";
+        private const string ServerUrl = "http://stationlogwebservice20180424112310.azurewebsites.net";
 
         private string _serverURL;
         private string _apiPrefix = "api";
-        private string _apiID = "UserTables";
+        private string _apiID;
         private HttpClientHandler _httpClientHandler;
         private HttpClient _httpClient;
 
         #endregion
 
-        public async Task<ObservableCollection<T>> Load()
+        public async Task<ObservableCollection<T>> Load(string _apiID)
         {
             _httpClientHandler = new HttpClientHandler() {UseDefaultCredentials = true};
             using (_httpClient = new HttpClient(_httpClientHandler))
@@ -42,7 +44,8 @@ namespace StationLogApp.Persistancy
                         if (task5.Result.IsSuccessStatusCode)
                         {
                             var task51 = await task5.Result.Content.ReadAsStringAsync();
-                            ObservableCollection<T> listt = JsonConvert.DeserializeObject<ObservableCollection<T>>(task51);
+                           // ObservableCollection<T> listt = JsonConvert.DeserializeObject<ObservableCollection<T>>(task51);
+                            ObservableCollection<T> listt = DeserializeUser(task51);
                             return listt;
                         }
                     }
@@ -53,6 +56,15 @@ namespace StationLogApp.Persistancy
                 }
                 return null;
             }
+        }
+
+        private static ObservableCollection<T> DeserializeUser(string json)
+        {
+            GenericJsonConverter<T> userConverter = new GenericJsonConverter<T>();
+            var settings = new JsonSerializerSettings();
+            settings.Converters.Add(new GenericJsonConverter<T>());
+            ObservableCollection<T> userConverted = JsonConvert.DeserializeObject<ObservableCollection<T>>(json, settings);
+            return userConverted;
         }
     }
 }

@@ -16,14 +16,14 @@ namespace StationLogApp.ViewModel
 {
    public class LoginVM: NotifyPropertyChangedClass
     {
-        public IUserFactory _currentUser;
+        public IUserFactory _currentUser = new User();
         private readonly FrameNavigateClass _frame;
         private readonly UserSingleton _userSingleton;
         
-        public string UserName { get; set; }
-        public string Password { get; set; }
+        //public string UserName { get; set; }
+        //public string Password { get; set; }
         private bool LoginStatus { get; set; }
-        public IUserFactory UserObj { get; set; }
+        //public IUserFactory UserObj { get; set; }
         public RelayCommandClass CheckCommand { get; set; }
 
         public IUserFactory CurrentUser
@@ -39,10 +39,10 @@ namespace StationLogApp.ViewModel
 
         public LoginVM()
         {
-            IUserFactory _currentUser = new User();
+           // IUserFactory _currentUser = new User();
             _frame =  new FrameNavigateClass();
             _userSingleton = UserSingleton.GetInstance();
-            IUserFactory UserObj = new User();
+           // IUserFactory UserObj = new User();
             CheckCommand = new RelayCommandClass(Check);
         }
 
@@ -50,7 +50,7 @@ namespace StationLogApp.ViewModel
         {
             LoginStatus = false;
             ILoad<IUserFactory> loaded = new LoadM<IUserFactory>();
-            Task<ObservableCollection<IUserFactory>> sth = loaded.Load();
+            Task<ObservableCollection<IUserFactory>> sth = loaded.Load("UserTables");
             await sth;
             ObservableCollection<IUserFactory> col =  sth.Result;
             if (col != null)
@@ -64,14 +64,14 @@ namespace StationLogApp.ViewModel
                         _frame.ActivateFrameNavigation(typeof(MenuTreePage), user);
                         break;
                     }
-                    else
-                    {
-                        MessageDialog msg = new MessageDialog("No user found with that username and password!");
-                        await msg.ShowAsync();
-                    }
                 }
             }
-           
+            else
+            {
+                MessageDialog msg = new MessageDialog("No user found with that username and password!");
+                await msg.ShowAsync();
+            }
+
         }
 
     }
