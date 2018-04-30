@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using StationLogApp.Interfaces;
 using StationLogApp.Model;
 
 namespace StationLogApp.Common
@@ -23,7 +24,7 @@ namespace StationLogApp.Common
 
         public override bool CanConvert(Type objectType)
         {
-            return (objectType == typeof(ObservableCollection<User>));
+            return (objectType == typeof(ObservableCollection<IUserFactory>));
         }
     }
 }
