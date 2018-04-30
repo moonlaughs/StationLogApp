@@ -22,7 +22,8 @@
             <TextBox FontSize="23" Height="40" Width="200" Background="Transparent" Text="{Binding CurrentUser.UserPassword, Mode=TwoWay}"/>
             <Button Content="Log in" FontSize="30" HorizontalAlignment="Center" Margin="0,50,0,40" 
                     BorderThickness="2" BorderBrush="Black" 
-                    Foreground="White" Command="{Binding CheckCommand, Mode=TwoWay}"/>
+                    Foreground="White" Command="{Binding CheckCommand}"
+                    />
         </StackPanel>
     </Grid>
 </Page>

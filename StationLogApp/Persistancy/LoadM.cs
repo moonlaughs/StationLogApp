@@ -16,11 +16,11 @@ namespace StationLogApp.Persistancy
     {
         #region instancefields
 
-        private const string ServerUrl = "http://stationlogwebservice20180424112310.azurewebsites.net/";
+        private const string ServerUrl = "http://stationlogwebservice20180424112310.azurewebsites.net/api";
 
         private string _serverURL;
-        private string _apiPrefix;
-        private string _apiID;
+        private string _apiPrefix = "api";
+        private string _apiID = "UserTables";
         private HttpClientHandler _httpClientHandler;
         private HttpClient _httpClient;
 
