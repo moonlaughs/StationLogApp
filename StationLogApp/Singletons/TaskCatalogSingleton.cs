@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using StationLogApp.Factories;
 using StationLogApp.Interfaces;
 using StationLogApp.Persistancy;
@@ -22,8 +23,9 @@ namespace StationLogApp.Singletons
         private TaskCatalogSingleton()
         {
             TaskCatalog = new ObservableCollection<ITaskFactory>();
-            ILoad<ITaskFactory> retrievedCatalog = new LoadM<ITaskFactory>();
-            TaskCatalog = new ObservableCollection<ITaskFactory>(retrievedCatalog.Load()); 
+            ILoad<ITaskFactory> retrievedCatalog = new LoadTask<ITaskFactory>();
+            //TaskCatalog = new ObservableCollection<ITaskFactory>(retrievedCatalog.Load()); 
+            TaskCatalog = retrievedCatalog.Load();
         }
         
 

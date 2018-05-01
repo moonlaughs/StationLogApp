@@ -42,7 +42,7 @@ namespace StationLogApp.Persistancy
                         if (task5.Result.IsSuccessStatusCode)
                         {
                             var task51 = await task5.Result.Content.ReadAsStringAsync();
-                            ObservableCollection<TaskClass> listt = JsonConvert.DeserializeObject<ObservableCollection<TaskClass>>(task51);
+                            var listt = JsonConvert.DeserializeObject<ObservableCollection<TaskClass>>(task51);
                             return listt;
                         }
                     }
