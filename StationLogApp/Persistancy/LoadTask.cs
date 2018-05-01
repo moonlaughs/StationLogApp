@@ -9,24 +9,23 @@ using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Newtonsoft.Json;
 using StationLogApp.Interfaces;
+using StationLogApp.Model;
 
 namespace StationLogApp.Persistancy
 {
-    public class LoadM<T> : ILoad<T> where T : class
+    public class LoadTask<TaskClass>: ILoad<TaskClass>
     {
-        #region instancefields
-
-        private const string ServerUrl = "http://http://stationlogwebservice20180424112310.azurewebsites.net/";
+        private const string ServerUrl = "http://stationlogwebservice20180424112310.azurewebsites.net/";
 
         private string _serverURL;
-        private string _apiPrefix;
-        private string _apiID;
+        private string _apiPrefix = "api";
+        private string _apiID = "Tasks";
+
         private HttpClientHandler _httpClientHandler;
         private HttpClient _httpClient;
 
-        #endregion
 
-        public async Task<ObservableCollection<T>> Load()
+        public async Task<ObservableCollection<TaskClass>> Load()
         {
             _httpClientHandler = new HttpClientHandler() { UseDefaultCredentials = true };
 
@@ -43,7 +42,7 @@ namespace StationLogApp.Persistancy
                         if (task5.Result.IsSuccessStatusCode)
                         {
                             var task51 = await task5.Result.Content.ReadAsStringAsync();
-                            ObservableCollection<T> listt = JsonConvert.DeserializeObject<ObservableCollection<T>>(task51);
+                            ObservableCollection<TaskClass> listt = JsonConvert.DeserializeObject<ObservableCollection<TaskClass>>(task51);
                             return listt;
                         }
                     }
@@ -55,29 +54,5 @@ namespace StationLogApp.Persistancy
                 return null;
             }
         }
-
-        //public ObservableCollection<ITaskFactory> Load()
-        //{
-        //    _httpClientHandler = new HttpClientHandler() {UseDefaultCredentials = true};
-
-        //    using (var client = new HttpClient(_httpClientHandler))
-        //    {
-        //        client.BaseAddress = new Uri(ServerUrl);
-        //        client.DefaultRequestHeaders.Clear();
-        //        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-        //        var response = client.GetAsync("api/TaskTables").Result;
-
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            var taskCatalog = response.Content.ReadAsAsync<ObservableCollection<ITaskFactory>>().Result;
-        //            return taskCatalog;
-        //        }
-        //        else
-        //        {
-        //            return null;
-        //        }
-        //    }
-        //}
     }
 }

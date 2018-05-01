@@ -9,6 +9,6 @@ namespace StationLogApp.Interfaces
 {
     public interface ILoad<T>
     {
-        ObservableCollection<ITaskFactory> Load();
+        Task<ObservableCollection<T>> Load();
     }
 }

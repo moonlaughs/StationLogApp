@@ -23,7 +23,7 @@ namespace StationLogApp.Singletons
         {
             TaskCatalog = new ObservableCollection<ITaskFactory>();
             ILoad<ITaskFactory> retrievedCatalog = new LoadM<ITaskFactory>();
-            TaskCatalog = new ObservableCollection<ITaskFactory>(retrievedCatalog.Load());
+            TaskCatalog = new ObservableCollection<ITaskFactory>(retrievedCatalog.Load()); 
         }
         
 
