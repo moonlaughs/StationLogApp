@@ -99,6 +99,7 @@
     <Compile Include="Common\GenericJsonConverter.cs" />
     <Compile Include="Common\NotifyPropertyChangedClass.cs" />
     <Compile Include="Common\RelayCommandClass.cs" />
+    <Compile Include="Common\TaskConverter.cs" />
     <Compile Include="Common\UserConverter.cs" />
     <Compile Include="Factories\MainFactory.cs" />
     <Compile Include="Interfaces\IMainFactory.cs" />
