@@ -44,6 +44,7 @@ namespace StationLogApp.Persistancy
                             var task51 = await task5.Result.Content.ReadAsStringAsync();
                             var listt = JsonConvert.DeserializeObject<ObservableCollection<TaskClass>>(task51);
                             return listt;
+                            
                         }
                     }
                 }
@@ -54,5 +55,7 @@ namespace StationLogApp.Persistancy
                 return null;
             }
         }
+
+        
     }
 }

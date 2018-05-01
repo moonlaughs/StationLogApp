@@ -16,36 +16,22 @@ namespace StationLogApp.Singletons
         
 
         // List of Task
-
-        public ObservableCollection<ITaskFactory> TaskCatalog { get; set; }
-
+        
 
         // Constructor of the Singleton
 
         private TaskCatalogSingleton()
         {
-            
-            TaskCatalog = new ObservableCollection<ITaskFactory>(); 
-            
-            //ILoad<User> loaded = new LoadM<User>();
-            //Task<ObservableCollection<User>> sth = loaded.Load();
-            //await sth;
-            //ObservableCollection<User> col = sth.Result;
-
            
-            
-            
-            //TaskCatalog = new ObservableCollection<ITaskFactory>(retrievedCatalog.Load()); 
-            TaskCatalog = retrievedCatalog.Load();
         }
-        
-        public static async Task<ObservableCollection<TaskClass>> LoadCatalog()
+
+
+        public static async void LoadCatalog()
         {
             ILoad<TaskClass> retrievedCatalog = new LoadTask<TaskClass>();
             Task<ObservableCollection<TaskClass>> sth = retrievedCatalog.Load();
             await sth;
             ObservableCollection<TaskClass> col = sth.Result;
-            
         }
 
         // Singleton Method

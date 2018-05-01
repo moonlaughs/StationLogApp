@@ -31,6 +31,11 @@ namespace StationLogApp.ViewModel
         public TaskVm()
         {
             _catalogSingleton = TaskCatalogSingleton.Instance;
+            
+            
+
+
+
         }
         #endregion
 
