@@ -56,6 +56,14 @@ namespace StationLogApp.Persistancy
             }
         }
 
-        
+        public async void LoadCatalog()
+        {
+            ILoad<TaskClass> retrievedCatalog = new LoadTask<TaskClass>();
+            Task<ObservableCollection<TaskClass>> sth = retrievedCatalog.Load();
+            await sth;
+            ObservableCollection<TaskClass> col = sth.Result;
+            
+        }
+
     }
 }

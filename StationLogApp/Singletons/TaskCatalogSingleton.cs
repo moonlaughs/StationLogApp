@@ -14,7 +14,8 @@ namespace StationLogApp.Singletons
 
 
         private static TaskCatalogSingleton _instance;
-        private static ObservableCollection<ITaskFactory> _taskCatalog;
+        private ObservableCollection<ITaskFactory> _taskCatalog;
+        private LoadTask<TaskClass> _loadTask;
 
         // List of Task
         
@@ -23,9 +24,12 @@ namespace StationLogApp.Singletons
 
         private TaskCatalogSingleton()
         {
-           _taskCatalog = new ObservableCollection<TaskClass>();
-        }
+           _taskCatalog = new ObservableCollection<ITaskFactory>();
+           _taskCatalog = new ObservableCollection<ITaskFactory>(_loadTask.LoadCatalog());
 
+            
+        }
+       
 
         public static async void LoadCatalog()
         {
