@@ -5,9 +5,13 @@
     xmlns:local="using:StationLogApp.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModel="using:StationLogApp.ViewModel"
     mc:Ignorable="d">
     <Grid>
         <Grid Background="#FF232121">
+            <Grid.DataContext>
+                <viewModel:TaskVm/>
+            </Grid.DataContext>
             <Grid.RowDefinitions>
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="500"/>
@@ -30,7 +34,7 @@
                 <ComboBoxItem Content="This month" Foreground="White"/>
             </ComboBox>
 
-            <ListView Name="Tasks" ItemsSource="{Binding TaskList}" Grid.Row="1" Grid.Column="0">
+            <ListView Name="Tasks" ItemsSource="{Binding TaskCatalog}" Grid.Row="1" Grid.Column="0">
                 <ListView.Background>Transparent</ListView.Background>
                 <StackPanel>
                     <TextBlock Text="Task:" Foreground="White" FontSize="18"/>

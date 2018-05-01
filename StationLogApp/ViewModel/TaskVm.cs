@@ -66,7 +66,7 @@ namespace StationLogApp.ViewModel
         public void LoadMethod()
         {
             _frameNavigation.ActivateFrameNavigation(typeof(TaskPage));
-            load.Load();
+            load.Load("Tasks");
         }
         #endregion
     }

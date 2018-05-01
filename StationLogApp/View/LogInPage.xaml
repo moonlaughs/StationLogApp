@@ -17,12 +17,13 @@
                 <SolidColorBrush Color="Black" Opacity="0.9" />
             </StackPanel.Background>
             <TextBlock Text="USER NAME" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,300,20,0" Foreground="Gray" />
-            <TextBox  FontSize="23" Height="40" Width="200" Background="Transparent" Text="{Binding CurrentUser.UserID, Mode=TwoWay}"/>
+            <TextBox  FontSize="23" Height="40" Width="200" Background="Transparent" Text="{Binding CurrentUser.Username, Mode=TwoWay}"/>
             <TextBlock Text="PASSWORD" FontSize="15" Margin="0,20,43,0" Foreground="Gray" HorizontalAlignment="Center"/>
             <TextBox FontSize="23" Height="40" Width="200" Background="Transparent" Text="{Binding CurrentUser.UserPassword, Mode=TwoWay}"/>
             <Button Content="Log in" FontSize="30" HorizontalAlignment="Center" Margin="0,50,0,40" 
                     BorderThickness="2" BorderBrush="Black" 
-                    Foreground="White" Command="{Binding CheckCommand, Mode=TwoWay}"/>
+                    Foreground="White" Command="{Binding CheckCommand}"
+                    />
         </StackPanel>
     </Grid>
 </Page>
