@@ -52,5 +52,13 @@ namespace StationLogApp.ViewModel
             //load.Load("Tasks");
         }
         #endregion
+
+        public void Read()
+        {
+            using (var db = new StationLogApp)
+            {
+                
+            }
+        }
     }
 }
