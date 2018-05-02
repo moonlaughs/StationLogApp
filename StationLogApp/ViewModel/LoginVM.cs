@@ -20,11 +20,8 @@ namespace StationLogApp.ViewModel
         private readonly FrameNavigateClass _frame;
         private readonly UserSingleton _userSingleton;
 
-
         private bool LoginStatus { get; set; }
-
         public RelayCommandClass CheckCommand { get; set; }
-
         public IUserFactory CurrentUser
         {
             get => _currentUser;
@@ -33,17 +30,13 @@ namespace StationLogApp.ViewModel
                 _currentUser = value;
                 OnPropertyChanged(nameof(CurrentUser));
             }
-
         }
-
         public LoginVM()
         {
-
             _frame = new FrameNavigateClass();
             _userSingleton = UserSingleton.GetInstance();
             CheckCommand = new RelayCommandClass(Check);
         }
-
 
         public async void Check()
         {
@@ -52,7 +45,6 @@ namespace StationLogApp.ViewModel
             Task<ObservableCollection<User>> sth = loaded.Load("UserTables");
             await sth;
             ObservableCollection<User> col = sth.Result;
-
             if (col != null)
             {
                 foreach (User user in col)
@@ -72,7 +64,5 @@ namespace StationLogApp.ViewModel
                 await msg.ShowAsync();
             }
         }
-
     }
-
 }
