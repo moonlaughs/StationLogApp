@@ -13,34 +13,44 @@
                 <viewModel:TaskVm/>
             </Grid.DataContext>
             <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
-                <RowDefinition Height="500"/>
-                <RowDefinition Height="100"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="20"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Filters" Foreground="White" FontSize="20" Grid.Row="0"/>
-
-            <ComboBox Grid.Row="0" Name="Stations" Foreground="White" Grid.ColumnSpan="2" Margin="93,6,-157,-38" Grid.RowSpan="3">
+            
+            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Margin="5">
+               <TextBlock Text="Filters" Foreground="White" FontSize="20" Margin="0,0,10,0"/>
+               <ComboBox Name="Stations" Foreground="White" Margin="20,0,0,0" Width="200">
                 <ComboBoxItem Content="Sation1"  Foreground="White"/>
                 <ComboBoxItem Content="Station2" Foreground="White"/>
                 <ComboBoxItem Content="Station3" Foreground="White"/>
-            </ComboBox>
-            <ComboBox Grid.Row="0" Name="Date" Grid.ColumnSpan="2" Margin="179,6,-157,-38" Grid.RowSpan="3">
+               </ComboBox>
+                <ComboBox Name="Date" Margin="20,0,0,0" Width="200">
                 <ComboBoxItem Content="Today" Foreground="White"/>
                 <ComboBoxItem Content="This week" Foreground="White"/>
                 <ComboBoxItem Content="This month" Foreground="White"/>
-            </ComboBox>
+               </ComboBox>
+            </StackPanel>
 
-            <ListView Name="Tasks" ItemsSource="{Binding TaskCatalog}" Grid.Row="1" Grid.Column="0">
+            <ListView Name="Tasks" ItemsSource="{Binding TaskCatalog}" Grid.Row="3" Grid.Column="1">
                 <ListView.Background>Transparent</ListView.Background>
-                <StackPanel>
-                    <TextBlock Text="Task:" Foreground="White" FontSize="18"/>
-                    <TextBlock Text="Location:" Foreground="White" FontSize="18"/>
-                    <TextBlock Text="Date:" Foreground="White" FontSize="18"/>
-                    <TextBlock Text="Due To:" Foreground="White" FontSize="18"/>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel>
+                        <TextBlock Text="{Binding }" Foreground="White" FontSize="18"/>
+                        <TextBlock Text="Location:" Foreground="White" FontSize="18"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock Text="Date:" Foreground="White" FontSize="18"/>
+                        <TextBlock Text="Due To:" Foreground="White" FontSize="18"/>
+                    </StackPanel>
                     <TextBlock Text="Add comment" Foreground="White" FontSize="18"/>
                     <TextBox PlaceholderText="Add comment" Foreground="White" FontSize="18" Height="29" Width="243"/>
                     <Button Content="Save" Foreground="White"/>
@@ -49,7 +59,7 @@
             </ListView>
 
 
-            <ListView Grid.Row="1" Grid.Column="1" Name="Notes">
+            <ListView Grid.Row="3" Grid.Column="2" Name="Notes">
                 <ListView.Background>Transparent</ListView.Background>
                 <StackPanel>
                     <TextBlock Text="Name:" Foreground="White" FontSize="18"/>

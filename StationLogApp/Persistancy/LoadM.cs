@@ -22,7 +22,7 @@ namespace StationLogApp.Persistancy
 
         private string _serverURL;
         private string _apiPrefix = "api";
-        private string _apiID = "UserTables";
+        private string _apiID;
         private HttpClientHandler _httpClientHandler;
         private HttpClient _httpClient;
 
