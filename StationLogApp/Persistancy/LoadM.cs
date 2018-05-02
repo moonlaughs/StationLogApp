@@ -78,5 +78,10 @@ namespace StationLogApp.Persistancy
                 }
             }
         }
+
+        Task<ObservableCollection<T>> ILoad<T>.Load()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

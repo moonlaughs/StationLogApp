@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using StationLogApp.Common;
 using StationLogApp.Factories;
 using StationLogApp.Interfaces;
+using StationLogApp.Model;
 using StationLogApp.Persistancy;
 using StationLogApp.Singletons;
 using StationLogApp.View;
@@ -23,7 +24,16 @@ namespace StationLogApp.ViewModel
 
         #region properties
 
-        public ObservableCollection<ITaskFactory> TaskCatalog { get; set; }
+        public ObservableCollection<TaskClass> TaskCatalog {
+            get
+            {
+                return _catalogSingleton.TaskCatalog;
+            }
+            set
+            {
+                _catalogSingleton.TaskCatalog = value;
+            } 
+        }
         
         #endregion
 
@@ -31,11 +41,6 @@ namespace StationLogApp.ViewModel
         public TaskVm()
         {
             _catalogSingleton = TaskCatalogSingleton.Instance;
-            
-            
-
-
-
         }
         #endregion
 

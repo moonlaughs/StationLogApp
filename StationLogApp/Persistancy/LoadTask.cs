@@ -13,7 +13,7 @@ using StationLogApp.Model;
 
 namespace StationLogApp.Persistancy
 {
-    public class LoadTask<TaskClass>: ILoad<TaskClass>
+    public class LoadTask<T>: ILoad<T> where T : class
     {
         private const string ServerUrl = "http://stationlogwebservice20180424112310.azurewebsites.net/";
 
@@ -25,7 +25,7 @@ namespace StationLogApp.Persistancy
         private HttpClient _httpClient;
 
 
-        public async Task<ObservableCollection<TaskClass>> Load()
+        public async Task<ObservableCollection<T>> Load()
         {
             _httpClientHandler = new HttpClientHandler() { UseDefaultCredentials = true };
 
@@ -42,7 +42,7 @@ namespace StationLogApp.Persistancy
                         if (task5.Result.IsSuccessStatusCode)
                         {
                             var task51 = await task5.Result.Content.ReadAsStringAsync();
-                            var listt = JsonConvert.DeserializeObject<ObservableCollection<TaskClass>>(task51);
+                            var listt = JsonConvert.DeserializeObject<ObservableCollection<T>>(task51);
                             return listt;
                             
                         }
