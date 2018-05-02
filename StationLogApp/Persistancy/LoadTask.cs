@@ -1,33 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.Media.Capture.Frames;
 using Windows.UI.Popups;
 using Newtonsoft.Json;
-using StationLogApp.Factories;
 using StationLogApp.Interfaces;
+using StationLogApp.Model;
 
 namespace StationLogApp.Persistancy
 {
-    class CreateM<T> : ICreate<T> where T : class
+    public class LoadTask<TaskClass>: ILoad<TaskClass>
     {
-        #region
         private const string ServerUrl = "http://stationlogwebservice20180424112310.azurewebsites.net/";
 
         private string _serverURL;
-        private string _apiPrefix;
-        private string _apiID;
+        private string _apiPrefix = "api";
+        private string _apiID = "Tasks";
+
         private HttpClientHandler _httpClientHandler;
         private HttpClient _httpClient;
-        #endregion
 
-        public async Task Create(T obj)
+
+        public async Task<ObservableCollection<TaskClass>> Load()
         {
             _httpClientHandler = new HttpClientHandler() { UseDefaultCredentials = true };
+
             using (_httpClient = new HttpClient(_httpClientHandler))
             {
                 _httpClient.BaseAddress = new Uri(ServerUrl);
@@ -35,14 +36,15 @@ namespace StationLogApp.Persistancy
                 _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 try
                 {
-                    string postitem = JsonConvert.SerializeObject(obj);
-                    Task<HttpResponseMessage> task3 = _httpClient.PostAsync($"{ServerUrl}/{_apiPrefix}/{_apiID}",
-                        new StringContent(postitem, Encoding.UTF8, "application/json"));
-                    if (task3 != null)
+                    Task<HttpResponseMessage> task5 = _httpClient.GetAsync($"{ServerUrl}/{_apiPrefix}/{_apiID}");
+                    if (task5 != null)
                     {
-                        if (task3.Result.IsSuccessStatusCode)
+                        if (task5.Result.IsSuccessStatusCode)
                         {
-                            task3.Result.Content.ReadAsAsync<T>();
+                            var task51 = await task5.Result.Content.ReadAsStringAsync();
+                            var listt = JsonConvert.DeserializeObject<ObservableCollection<TaskClass>>(task51);
+                            return listt;
+                            
                         }
                     }
                 }
@@ -50,7 +52,18 @@ namespace StationLogApp.Persistancy
                 {
                     await new MessageDialog(ex.Message).ShowAsync();
                 }
+                return null;
             }
         }
+
+        public async void LoadCatalog()
+        {
+            ILoad<TaskClass> retrievedCatalog = new LoadTask<TaskClass>();
+            Task<ObservableCollection<TaskClass>> sth = retrievedCatalog.Load();
+            await sth;
+            ObservableCollection<TaskClass> col = sth.Result;
+            
+        }
+
     }
 }

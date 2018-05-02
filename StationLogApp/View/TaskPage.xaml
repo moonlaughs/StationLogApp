@@ -36,6 +36,7 @@
 
             <ListView Name="Tasks" ItemsSource="{Binding TaskCatalog}" Grid.Row="1" Grid.Column="0" Foreground="White" FontSize="20">
                 <ListView.Background>Transparent</ListView.Background>
+                <TextBlock Text="{Binding }" Foreground="White" FontSize="18"/>
                 <!--<StackPanel>
                     <TextBlock Text="{Binding }" Foreground="White" FontSize="18"/>
                     <TextBlock Text="Location:" Foreground="White" FontSize="18"/>

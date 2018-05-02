@@ -98,26 +98,33 @@
     <Compile Include="Common\FrameNavigateClass.cs" />
     <Compile Include="Common\NotifyPropertyChangedClass.cs" />
     <Compile Include="Common\RelayCommandClass.cs" />
+    <Compile Include="Common\TaskConverter.cs" />
     <Compile Include="Factories\MainFactory.cs" />
     <Compile Include="Interfaces\IMainFactory.cs" />
+    <Compile Include="Interfaces\ISave.cs" />
     <Compile Include="Interfaces\ITaskFactory.cs" />
     <Compile Include="Interfaces\ICreate.cs" />
     <Compile Include="Interfaces\IDelete.cs" />
     <Compile Include="Interfaces\ILoad.cs" />
     <Compile Include="Interfaces\IRead.cs" />
     <Compile Include="Interfaces\IUpdate.cs" />
+    <Compile Include="Interfaces\IUserFactory.cs" />
     <Compile Include="Model\Equipment.cs" />
     <Compile Include="Model\Notes.cs" />
+    <Compile Include="Model\SaveM.cs" />
     <Compile Include="Model\Station.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Persistancy\CreateM.cs" />
     <Compile Include="Persistancy\DeleteM.cs" />
     <Compile Include="Persistancy\LoadM.cs" />
+    <Compile Include="Persistancy\LoadTask.cs" />
     <Compile Include="Persistancy\ReadM.cs" />
     <Compile Include="Persistancy\UpdateM.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Model\TaskClass.cs" />
     <Compile Include="Singletons\TaskCatalogSingleton.cs" />
+    <Compile Include="Singletons\UserSingleton.cs" />
+    <Compile Include="ViewModel\LoginVM.cs" />
     <Compile Include="ViewModel\TaskVm.cs" />
     <Compile Include="View\LogInPage.xaml.cs">
       <DependentUpon>LogInPage.xaml</DependentUpon>
@@ -178,6 +185,9 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>11.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="System.Runtime">
+      <Version>4.3.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup />

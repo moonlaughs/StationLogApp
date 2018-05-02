@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace StationLogApp.Interfaces
 {
-    public interface ILoad<T>
+    public interface ISave<T>
     {
-        Task<ObservableCollection<T>> Load();
+        Task Save(T obj);
     }
 }

@@ -1,7 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection.Metadata;
+using System.Threading.Tasks;
 using StationLogApp.Factories;
 using StationLogApp.Interfaces;
+using StationLogApp.Model;
 using StationLogApp.Persistancy;
 
 namespace StationLogApp.Singletons
@@ -9,23 +12,32 @@ namespace StationLogApp.Singletons
     public class TaskCatalogSingleton
     {
 
+
         private static TaskCatalogSingleton _instance;
-        
+        private ObservableCollection<ITaskFactory> _taskCatalog;
+        private LoadTask<TaskClass> _loadTask;
 
         // List of Task
-
-        public ObservableCollection<ITaskFactory> TaskCatalog { get; set; }
-
+        
 
         // Constructor of the Singleton
 
         private TaskCatalogSingleton()
         {
-            TaskCatalog = new ObservableCollection<ITaskFactory>();
-            ILoad<ITaskFactory> retrievedCatalog = new LoadM<ITaskFactory>();
-            TaskCatalog = new ObservableCollection<ITaskFactory>(retrievedCatalog.Load());
+           _taskCatalog = new ObservableCollection<ITaskFactory>();
+           _taskCatalog = new ObservableCollection<ITaskFactory>(_loadTask.LoadCatalog());
+
+            
         }
-        
+       
+
+        public static async void LoadCatalog()
+        {
+            ILoad<TaskClass> retrievedCatalog = new LoadTask<TaskClass>();
+            Task<ObservableCollection<TaskClass>> sth = retrievedCatalog.Load();
+            await sth;
+            ObservableCollection<TaskClass> col = sth.Result;
+        }
 
         // Singleton Method
 
