@@ -96,11 +96,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\FrameNavigateClass.cs" />
-    <Compile Include="Common\GenericJsonConverter.cs" />
     <Compile Include="Common\NotifyPropertyChangedClass.cs" />
     <Compile Include="Common\RelayCommandClass.cs" />
-    <Compile Include="Common\TaskConverter.cs" />
-    <Compile Include="Common\UserConverter.cs" />
     <Compile Include="Factories\MainFactory.cs" />
     <Compile Include="Interfaces\IMainFactory.cs" />
     <Compile Include="Interfaces\ISave.cs" />
@@ -119,7 +116,6 @@
     <Compile Include="Persistancy\CreateM.cs" />
     <Compile Include="Persistancy\DeleteM.cs" />
     <Compile Include="Persistancy\LoadM.cs" />
-    <Compile Include="Persistancy\LoadTask.cs" />
     <Compile Include="Persistancy\ReadM.cs" />
     <Compile Include="Persistancy\UpdateM.cs" />
     <Compile Include="Properties\Annotations.cs" />

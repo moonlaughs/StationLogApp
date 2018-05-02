@@ -10,6 +10,6 @@ namespace StationLogApp.Interfaces
 {
     public interface ILoad<T>
     {
-        Task<ObservableCollection<User>> Load(string _apiID);
+        Task<ObservableCollection<T>> Load(string _apiID);
     }
 }
