@@ -33,11 +33,14 @@
                 <ComboBoxItem Content="This week" Foreground="White"/>
                 <ComboBoxItem Content="This month" Foreground="White"/>
             </ComboBox>
+            
+           
+                <ListView Name="Tasks" ItemsSource="{Binding TaskCatalog}" Grid.Row="1" Grid.Column="0" Foreground="White" FontSize="20">
+                    <ListView.Background>Transparent</ListView.Background>
 
-            <ListView Name="Tasks" ItemsSource="{Binding TaskCatalog}" Grid.Row="1" Grid.Column="0">
-                <ListView.Background>Transparent</ListView.Background>
-                <StackPanel>
-                    <TextBlock Text="Task:" Foreground="White" FontSize="18"/>
+                    <!--<StackPanel>
+                    <TextBlock Text="{Binding }" Foreground="White" FontSize="18"/>
+                    <TextBlock Text="{Binding }" Foreground="White" FontSize="18"/>
                     <TextBlock Text="Location:" Foreground="White" FontSize="18"/>
                     <TextBlock Text="Date:" Foreground="White" FontSize="18"/>
                     <TextBlock Text="Due To:" Foreground="White" FontSize="18"/>
@@ -45,11 +48,11 @@
                     <TextBox PlaceholderText="Add comment" Foreground="White" FontSize="18" Height="29" Width="243"/>
                     <Button Content="Save" Foreground="White"/>
                     <Line Fill="White" Stroke="White" Height="0.5" StrokeThickness="2" X1="1000"/>
-                </StackPanel>
-            </ListView>
+                </StackPanel>-->
+                </ListView>
 
 
-            <ListView Grid.Row="1" Grid.Column="1" Name="Notes">
+                <ListView Grid.Row="1" Grid.Column="1" Name="Notes">
                 <ListView.Background>Transparent</ListView.Background>
                 <StackPanel>
                     <TextBlock Text="Name:" Foreground="White" FontSize="18"/>
