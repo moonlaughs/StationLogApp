@@ -7,7 +7,7 @@ using StationLogApp.Interfaces;
 
 namespace StationLogApp.Model
 {
-    public class TaskClass : ITaskFactory
+    public class TaskClass
     {
 
         #region // Properties

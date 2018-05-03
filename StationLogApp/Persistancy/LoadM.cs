@@ -61,14 +61,5 @@ namespace StationLogApp.Persistancy
                 return null;
             }
         }
-
-        //private static ObservableCollection<User> DeserialiseUser(string json)
-        //{
-        //    UserConverter userConverter = new UserConverter();
-        //    var settings = new JsonSerializerSettings();
-        //    settings.Converters.Add(new UserConverter());
-        //    ObservableCollection<User> userConverted = JsonConvert.DeserializeObject<ObservableCollection<User>>(json, settings);
-        //    return userConverted;
-        //}
     }
 }

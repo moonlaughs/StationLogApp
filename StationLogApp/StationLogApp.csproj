@@ -101,13 +101,11 @@
     <Compile Include="Factories\MainFactory.cs" />
     <Compile Include="Interfaces\IMainFactory.cs" />
     <Compile Include="Interfaces\ISave.cs" />
-    <Compile Include="Interfaces\ITaskFactory.cs" />
     <Compile Include="Interfaces\ICreate.cs" />
     <Compile Include="Interfaces\IDelete.cs" />
     <Compile Include="Interfaces\ILoad.cs" />
     <Compile Include="Interfaces\IRead.cs" />
     <Compile Include="Interfaces\IUpdate.cs" />
-    <Compile Include="Interfaces\IUserFactory.cs" />
     <Compile Include="Model\Equipment.cs" />
     <Compile Include="Model\Notes.cs" />
     <Compile Include="Persistancy\SaveM.cs" />

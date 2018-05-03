@@ -10,7 +10,7 @@ namespace StationLogApp.Factories
 {
     public class MainFactory : IMainFactory
     {
-        public ITaskFactory Create()
+        public TaskClass Create()
         {
             return new TaskClass();
         }
