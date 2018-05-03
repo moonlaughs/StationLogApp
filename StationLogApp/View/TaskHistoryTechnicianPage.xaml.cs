@@ -26,5 +26,10 @@ namespace StationLogApp.View
         {
             this.InitializeComponent();
         }
+
+        private void TodoButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(TaskPage));
+        }
     }
 }

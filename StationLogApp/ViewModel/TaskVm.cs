@@ -25,7 +25,8 @@ namespace StationLogApp.ViewModel
 
         #region properties
 
-        public ObservableCollection<TaskClass> TaskCatalog {
+        public ObservableCollection<TaskClass> TaskCatalog
+        {
             get
             {
                 return _catalogSingleton.TaskCatalog;
@@ -35,6 +36,7 @@ namespace StationLogApp.ViewModel
                 _catalogSingleton.TaskCatalog = value;
             } 
         }
+
         
         #endregion
 
@@ -46,11 +48,7 @@ namespace StationLogApp.ViewModel
         #endregion
 
         #region Methods
-        public void LoadMethod()
-        {
-            _frameNavigation.ActivateFrameNavigation(typeof(TaskPage));
-            //load.Load("Tasks");
-        }
+        
         #endregion
     }
 }
