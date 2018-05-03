@@ -62,7 +62,7 @@ namespace StationLogApp.Persistancy
             Task<ObservableCollection<TaskClass>> sth = retrievedCatalog.Load("Tasks");
             await sth;
             ObservableCollection<TaskClass> col = sth.Result;
-            
+
         }
     }
 }

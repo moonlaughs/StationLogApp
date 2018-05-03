@@ -55,10 +55,10 @@ namespace StationLogApp.ViewModel
 
         public void Read()
         {
-            using (var db = new StationLogApp)
-            {
+            //using (var db = new StationLogWebService.StationLogDBContext)
+            //{
                 
-            }
+            //}
         }
     }
 }
