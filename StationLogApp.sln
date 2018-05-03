@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StationLogApp", "StationLogApp\StationLogApp.csproj", "{32996C0F-0F79-42B0-B4CA-CE17707B6B54}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StationLogWebService", "..\StationLogWebService\StationLogWebService\StationLogWebService.csproj", "{7BC03C4F-78F9-4DDD-BDEC-4C04E0225E4F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,22 @@ Global
 		{32996C0F-0F79-42B0-B4CA-CE17707B6B54}.Release|x86.ActiveCfg = Release|x86
 		{32996C0F-0F79-42B0-B4CA-CE17707B6B54}.Release|x86.Build.0 = Release|x86
 		{32996C0F-0F79-42B0-B4CA-CE17707B6B54}.Release|x86.Deploy.0 = Release|x86
+		{7BC03C4F-78F9-4DDD-BDEC-4C04E0225E4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BC03C4F-78F9-4DDD-BDEC-4C04E0225E4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BC03C4F-78F9-4DDD-BDEC-4C04E0225E4F}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{7BC03C4F-78F9-4DDD-BDEC-4C04E0225E4F}.Debug|ARM.Build.0 = Debug|Any CPU
+		{7BC03C4F-78F9-4DDD-BDEC-4C04E0225E4F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7BC03C4F-78F9-4DDD-BDEC-4C04E0225E4F}.Debug|x64.Build.0 = Debug|Any CPU
+		{7BC03C4F-78F9-4DDD-BDEC-4C04E0225E4F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7BC03C4F-78F9-4DDD-BDEC-4C04E0225E4F}.Debug|x86.Build.0 = Debug|Any CPU
+		{7BC03C4F-78F9-4DDD-BDEC-4C04E0225E4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BC03C4F-78F9-4DDD-BDEC-4C04E0225E4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BC03C4F-78F9-4DDD-BDEC-4C04E0225E4F}.Release|ARM.ActiveCfg = Release|Any CPU
+		{7BC03C4F-78F9-4DDD-BDEC-4C04E0225E4F}.Release|ARM.Build.0 = Release|Any CPU
+		{7BC03C4F-78F9-4DDD-BDEC-4C04E0225E4F}.Release|x64.ActiveCfg = Release|Any CPU
+		{7BC03C4F-78F9-4DDD-BDEC-4C04E0225E4F}.Release|x64.Build.0 = Release|Any CPU
+		{7BC03C4F-78F9-4DDD-BDEC-4C04E0225E4F}.Release|x86.ActiveCfg = Release|Any CPU
+		{7BC03C4F-78F9-4DDD-BDEC-4C04E0225E4F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

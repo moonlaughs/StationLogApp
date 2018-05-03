@@ -34,7 +34,19 @@ namespace StationLogApp.Singletons
             LoadTask<TaskClass> retrievedCatalog = new LoadTask<TaskClass>();
             Task<ObservableCollection<TaskClass>> sth = retrievedCatalog.Load("Tasks");
             ObservableCollection<TaskClass> col = sth.Result;
+
+            //LoadM<Station> retrivedStationCatalog = new LoadM<Station>();
+            //Task<ObservableCollection<Station>> st = retrivedStationCatalog.Load("Stations");
+            //ObservableCollection<Station> stations = st.Result;
+
+            //LoadM<Equipment> retrivedEquipment = new LoadM<Equipment>();
+            //Task<ObservableCollection<Equipment>> eq = retrivedEquipment.Load("Equipments");
+            //ObservableCollection<Equipment> equipments = eq.Result;
             return col;
+            //var query = from task in col
+            //            join e in equipments
+            //            on task.
+
         }
 
         // Singleton Method
