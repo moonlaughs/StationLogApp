@@ -5,84 +5,127 @@
     xmlns:local="using:StationLogApp.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModel="using:StationLogApp.ViewModel"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid>
+        <Grid Background="WhiteSmoke">
+            <Grid.DataContext>
+                <viewModel:TaskVm/>
+            </Grid.DataContext>
             <Grid.RowDefinitions>
-                <RowDefinition Height="10*"/>
-                <RowDefinition Height="10*"/>
-                <RowDefinition Height="70*"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="20"/>
+            </Grid.ColumnDefinitions>
 
-            
-            <!--Relative panel of the Menu Bar-->
-            
-            <RelativePanel Name="MenuBar" Grid.Row="0">
-                <RelativePanel Name="UserNameComposition" AlignLeftWithPanel="True">
-                    <Image Name="UserIcon" Width="30" Height="30"/>
-                    <TextBlock Name="UsernameTextBlock" Text="" RelativePanel.RightOf="UserIcon" Width="200" />
-                </RelativePanel>
-                <RelativePanel Name="MenuBarButtons" AlignRightWithPanel="True">
-                    <Button Name="TodayButton" Content="Today's" Margin="0,0,2,0"/>
-                    <Button Name="DoneButton" Content="Done" RelativePanel.RightOf="TodayButton" Margin="0,0,2,0"/>
-                    <Button Name="ProfileIconButton" RelativePanel.RightOf="DoneButton" Margin="0,0,2,0">
-                        <Image Name="ProfileIcon" Height="20" Width="20"/>
-                    </Button>
-                </RelativePanel>
+            <RelativePanel Grid.Row="1" 
+                       Grid.Column="1">
+                <TextBlock Text="Hej, " 
+                       FontSize="30" 
+                       Name="TextBlock1"
+                       Margin="22,0,0,0"/>
+                <TextBlock FontSize="30" 
+                       RelativePanel.AlignRightWith="TextBlock1" 
+                       DataContext="LoginVM" 
+                       Text="{Binding CurrentUser.Username}"/>
+                <Button Name="TodoButton" 
+                    RelativePanel.LeftOf="DoneButton" 
+                    Content="TO DO" 
+                    Background="Transparent" FontSize="30"
+                    BorderThickness="2" BorderBrush="Black"
+                        Click="TodoButton_OnClick"/>
+                <Button Name="DoneButton" 
+                    RelativePanel.LeftOf="ProfileButton"
+                    Content="DONE" 
+                    Background="Transparent" FontSize="30"
+                    BorderThickness="2" BorderBrush="Black"/>
+                <Button Name="ProfileButton" Background="Transparent" RelativePanel.AlignRightWithPanel="True">
+                    <Image Source="../Assets/profile.png"/>
+                    <Button.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem Text="Log out"/>
+                        </MenuFlyout>
+                    </Button.Flyout>
+
+                </Button>
             </RelativePanel>
 
-            
-            <!--StackPanel of the Sorting Bar-->
-            
-            <StackPanel Name="SortingMenuBar" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" >
-                <ComboBox Name="StationComboBox" PlaceholderText="Station"/>
-                <CalendarDatePicker HorizontalAlignment="Left"  VerticalAlignment="Top"/>
-                <ComboBox Name="Technician" PlaceholderText="Technician" VerticalAlignment="Top"></ComboBox>
+            <StackPanel Grid.Row="2" 
+                    Grid.Column="1" 
+                    Orientation="Horizontal" 
+                    Margin="5">
+                <TextBlock Text="Filters" 
+                       Foreground="Black" 
+                       FontSize="20"
+                       Margin="15,0,10,0"/>
+                <ComboBox Name="Stations" Foreground="Black" Margin="20,0,0,0" Width="200">
+                    <ComboBoxItem Content="Sation1"  Foreground="Black"/>
+                    <ComboBoxItem Content="Station2" Foreground="Black"/>
+                    <ComboBoxItem Content="Station3" Foreground="Black"/>
+                </ComboBox>
+                <ComboBox Name="Date" Margin="20,0,0,0" Width="200">
+                    <ComboBoxItem Content="Today" Foreground="Black"/>
+                    <ComboBoxItem Content="This week" Foreground="Black"/>
+                    <ComboBoxItem Content="This month" Foreground="Black"/>
+                </ComboBox>
             </StackPanel>
 
-            
-            <!--ListView with the history of task-->
-            
-            <ListView Grid.Row="2" VerticalAlignment="Center" Width="700" Height="500" Background="Azure">
+
+            <ListView Name="Tasks" 
+                  ItemsSource="{Binding TaskCatalog, Mode=TwoWay}" 
+                  Grid.Row="3" 
+                  Grid.Column="1" 
+                  Width="1400" 
+                  HorizontalAlignment="Center">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            
-                            <StackPanel>
-                                <StackPanel Name="TechnicianNameStackPanel">
-                                    <TextBlock Name="TechnicianNameTextBlock"/>
-                                    <TextBlock Name="TechnicinName" />
-                                </StackPanel>
-                                <StackPanel Name="StationLocationStackPanel" Orientation="Horizontal">
-                                    <Image Name="LocationIcon" />
-                                    <TextBlock Name="StationName"/>
-                                </StackPanel>
-                            </StackPanel>
-                            
-                            <StackPanel>
-                                <StackPanel Name="TaskDateStackPanel">
-                                    <TextBlock Name="TaskDateTextBlock"/>
-                                    <TextBlock Name="TaskDate"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" Name="CommentStackPanel">
-                                    <TextBlock Name="TaskCommentBlock" />
-                                    <TextBlock Name="TaskCommentDefinition"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </Grid>
+                        <Border Margin="5" 
+                                Width="1300"
+                                BorderBrush="Black" BorderThickness="2">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="0.7*"/>
+                                    <ColumnDefinition Width="0.2*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Margin="0,0,20,0">
+                                    <TextBlock Text="{Binding TaskName, Mode=TwoWay}" 
+                                           Foreground="Black"
+                                           FontSize="25" 
+                                           Margin="10,0,0,5"/>
+                                    <StackPanel Orientation="Horizontal" Margin="5">
+                                        <Image Source="../Assets/place.png" Width="30" Margin="10,0,10,0"/>
+                                        <TextBlock Text="Station 1" Foreground="Black" FontSize="20"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <StackPanel Margin="10">
+                                            <TextBlock Text="Due to:" Foreground="Black" FontSize="20"/>
+                                            <TextBlock Text="Type:" Foreground="Black" FontSize="20"/>
+                                        </StackPanel>
+                                        <StackPanel Margin="10">
+                                            <TextBlock Text="{Binding DoneDate}" Foreground="Black" FontSize="20"/>
+                                            <TextBlock Text="{Binding TaskType}" Foreground="Black" FontSize="20"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel >
+                                <TextBlock Text="COMMENT:" Grid.Column="1"/>
+                                <TextBlock Text="Couldn't finish with the whole task !!!" 
+                                           TextWrapping="Wrap" Foreground="DarkRed" FontSize="20"
+                                           Grid.Column="1" Width="210" Height="110" Margin="-90,20,5,0"/>
+                            </Grid>
+                        </Border>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            
+
         </Grid>
     </Grid>
 </Page>
