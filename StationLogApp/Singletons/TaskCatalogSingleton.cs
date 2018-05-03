@@ -42,10 +42,16 @@ namespace StationLogApp.Singletons
             //Task<ObservableCollection<Equipment>> eq = retrivedEquipment.Load("Equipments");
             //ObservableCollection<Equipment> equipments = eq.Result;
             return col;
-            //var query = from task in col
-            //            join e in equipments
-            //            on task.
+            //var query = (from t in col
+            //    join e in equipments
+            //        on t.EquipmentID equals e.EquipmentID
+            //    join s in stations
+            //        on e.StationID equals s.StationID
+            //    select new {t, e, s}).ToList();
 
+            //return query.;
+
+            //return ;
         }
 
 
