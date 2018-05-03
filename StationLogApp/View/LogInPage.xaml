@@ -12,14 +12,20 @@
         <Grid.DataContext>
             <viewModel:LoginVM/>
         </Grid.DataContext>
-        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Vertical" Width="600" Height="1000">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Image Stretch="Uniform"  Source="../Assets/Green.png" HorizontalAlignment="Right"/>
+        <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical" Width="900" Height="1100">
             <StackPanel.Background>
                 <SolidColorBrush Color="Black" Opacity="0.9" />
             </StackPanel.Background>
             <TextBlock Text="USER NAME" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,300,20,0" Foreground="Gray" />
             <TextBox  FontSize="23" Height="40" Width="200" Background="Transparent" Text="{Binding CurrentUser.Username, Mode=TwoWay}"/>
             <TextBlock Text="PASSWORD" FontSize="15" Margin="0,20,43,0" Foreground="Gray" HorizontalAlignment="Center"/>
-            <TextBox FontSize="23" Height="40" Width="200" Background="Transparent" Text="{Binding CurrentUser.UserPassword, Mode=TwoWay}"/>
+            <PasswordBox FontSize="23" Height="40" Width="200" Background="Transparent" Password="{Binding CurrentUser.UserPassword, Mode=TwoWay}"/>
             <Button Content="Log in" FontSize="30" HorizontalAlignment="Center" Margin="0,50,0,40" 
                     BorderThickness="2" BorderBrush="Black" 
                     Foreground="White" Command="{Binding CheckCommand}"

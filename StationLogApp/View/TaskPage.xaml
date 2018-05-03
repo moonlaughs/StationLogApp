@@ -7,69 +7,159 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModel="using:StationLogApp.ViewModel"
     mc:Ignorable="d">
-    <Grid>
-        <Grid Background="#FF232121">
-            <Grid.DataContext>
-                <viewModel:TaskVm/>
-            </Grid.DataContext>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="20"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="20"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="20"/>
-            </Grid.ColumnDefinitions>
-            
-            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Margin="5">
-               <TextBlock Text="Filters" Foreground="White" FontSize="20" Margin="0,0,10,0"/>
-               <ComboBox Name="Stations" Foreground="White" Margin="20,0,0,0" Width="200">
-                <ComboBoxItem Content="Sation1"  Foreground="White"/>
-                <ComboBoxItem Content="Station2" Foreground="White"/>
-                <ComboBoxItem Content="Station3" Foreground="White"/>
-               </ComboBox>
-                <ComboBox Name="Date" Margin="20,0,0,0" Width="200">
-                <ComboBoxItem Content="Today" Foreground="White"/>
-                <ComboBoxItem Content="This week" Foreground="White"/>
-                <ComboBoxItem Content="This month" Foreground="White"/>
-               </ComboBox>
-            </StackPanel>
+    <Grid Background="WhiteSmoke">
+        <Grid.DataContext>
+            <viewModel:TaskVm/>
+        </Grid.DataContext>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
 
-            <ListView Name="Tasks" ItemsSource="{Binding TaskCatalog}" Grid.Row="3" Grid.Column="1">
-                <ListView.Background>Transparent</ListView.Background>
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel>
-                        <TextBlock Text="{Binding }" Foreground="White" FontSize="18"/>
-                        <TextBlock Text="Location:" Foreground="White" FontSize="18"/>
-                    </StackPanel>
-                    <StackPanel>
-                        <TextBlock Text="Date:" Foreground="White" FontSize="18"/>
-                        <TextBlock Text="Due To:" Foreground="White" FontSize="18"/>
-                    </StackPanel>
-                    <TextBlock Text="Add comment" Foreground="White" FontSize="18"/>
-                    <TextBox PlaceholderText="Add comment" Foreground="White" FontSize="18" Height="29" Width="243"/>
-                    <Button Content="Save" Foreground="White"/>
-                    <Line Fill="White" Stroke="White" Height="0.5" StrokeThickness="2" X1="1000"/>
+        <RelativePanel Grid.Row="1" 
+                       Grid.Column="1"
+                       Grid.ColumnSpan="2">
+            <TextBlock Text="Hej, " 
+                       FontSize="30" 
+                       Name="TextBlock1"
+                       Margin="22,0,0,0"/>
+            <TextBlock FontSize="30" 
+                       RelativePanel.AlignRightWith="TextBlock1" 
+                       DataContext="LoginVM" 
+                       Text="{Binding CurrentUser.Username}"/>
+            <Button Name="TodoButton" 
+                    RelativePanel.LeftOf="DoneButton" 
+                    Content="TO DO" 
+                    Background="Transparent" FontSize="30"
+                    BorderThickness="2" BorderBrush="Black"/>
+            <Button Name="DoneButton" 
+                    RelativePanel.LeftOf="ProfileButton"
+                    Content="DONE" 
+                    Background="Transparent" FontSize="30"
+                    BorderThickness="2" BorderBrush="Black" VerticalAlignment="Bottom" Click="DoneButton_Click"/>
+            <Button Name="ProfileButton" Background="Transparent" RelativePanel.AlignRightWithPanel="True">
+                <Image Source="../Assets/profile.png"/>
+                <Button.Flyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="Log out"/>
+                    </MenuFlyout>
+                </Button.Flyout>
+
+            </Button>
+        </RelativePanel>
+
+        <StackPanel Grid.Row="2" 
+                    Grid.Column="1" 
+                    Orientation="Horizontal" 
+                    Margin="5">
+            <TextBlock Text="Filters" 
+                       Foreground="Black" 
+                       FontSize="20"
+                       Margin="15,0,10,0"/>
+            <ComboBox Name="Stations" Foreground="Black" Margin="20,0,0,0" Width="200">
+                <ComboBoxItem Content="Sation1"  Foreground="Black"/>
+                <ComboBoxItem Content="Station2" Foreground="Black"/>
+                <ComboBoxItem Content="Station3" Foreground="Black"/>
+            </ComboBox>
+            <ComboBox Name="Date" Margin="20,0,0,0" Width="200">
+                <ComboBoxItem Content="Today" Foreground="Black"/>
+                <ComboBoxItem Content="This week" Foreground="Black"/>
+                <ComboBoxItem Content="This month" Foreground="Black"/>
+            </ComboBox>
+        </StackPanel>
+
+        <ListView Name="Tasks" 
+                  ItemsSource="{Binding TaskCatalog, Mode=TwoWay}" 
+                  Grid.Row="3" 
+                  Grid.Column="1" 
+                  Width="1100" 
+                  HorizontalAlignment="Left">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="5" 
+                                Width="1060"
+                                BorderBrush="Black" BorderThickness="2">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="0.7*"/>
+                                <ColumnDefinition Width="0.2*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="0,0,20,0">
+                                <TextBlock Text="{Binding TaskName, Mode=TwoWay}" 
+                                           Foreground="Black"
+                                           FontSize="25" 
+                                           Margin="10,0,0,5"/>
+                                <StackPanel Orientation="Horizontal" Margin="5">
+                                    <Image Source="../Assets/place.png" Width="30" Margin="10,0,10,0"/>
+                                    <TextBlock Text="Station 1" Foreground="Black" FontSize="20"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel Margin="10">
+                                        <TextBlock Text="Due to:" Foreground="Black" FontSize="20"/>
+                                        <TextBlock Text="Type:" Foreground="Black" FontSize="20"/>
+                                    </StackPanel>
+                                    <StackPanel Margin="10">
+                                        <TextBlock Text="{Binding DoneDate}" Foreground="Black" FontSize="20"/>
+                                        <TextBlock Text="{Binding TaskType}" Foreground="Black" FontSize="20"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel >
+                            <TextBlock Text="Add comment:" Grid.Column="1"/>
+                            <TextBox Grid.Column="1" Width="250" Height="110" Margin="0,20,5,0"/>
+                            <Button Grid.Column="2" Background="Transparent" Height="130">
+                                <Image Source="../Assets/Done.png" Width="40"/>
+                            </Button>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <ListView Grid.Row="3" Grid.Column="2" Name="Notes" HorizontalAlignment="Left">
+            <ListView.Background>Transparent</ListView.Background>
+            <!--<ListView.ItemTemplate>
+             <DataTemplate>-->
+              <StackPanel Background="DarkGreen" Opacity="0.7" Width="450" 
+                          BorderThickness="3" BorderBrush="Black"
+                          HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <TextBlock Text="Name:" Foreground="Black" FontSize="18"/>
+                    <TextBlock Text="Low battery" FontSize="18" Margin="10,0,0,0"/>
                 </StackPanel>
-            </ListView>
-
-
-            <ListView Grid.Row="3" Grid.Column="2" Name="Notes">
-                <ListView.Background>Transparent</ListView.Background>
-                <StackPanel>
-                    <TextBlock Text="Name:" Foreground="White" FontSize="18"/>
-                    <TextBlock Text="Due date:" Foreground="White" FontSize="18"/>
-                    <TextBlock Text="Description:" Foreground="White" FontSize="18"/>
-                    <TextBlock Text="Technician/Station:" Foreground="White" FontSize="18"/>
-                    <Button Content="Add log" Foreground="White" FontSize="18"/>
-                    <Line Fill="White" Stroke="White" Height="0.5" StrokeThickness="2" X1="1000"/>
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <TextBlock Text="Due date:" Foreground="Black" FontSize="18"/>
+                    <TextBlock Text="20th May 2018" Margin="10,0,0,0" FontSize="18"/>
                 </StackPanel>
-            </ListView>
-        </Grid>
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <TextBlock Text="Description:" Foreground="Black" FontSize="18"/>
+                    <TextBlock Margin="10,0,0,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <TextBlock Text="Technician/Station:" Foreground="Black" FontSize="18"/>
+                    <TextBlock Text="X"  Margin="10,0,0,0" FontSize="18"/>
+                </StackPanel>
+                <Button Content="Add log" 
+                        HorizontalAlignment="Center"
+                        Width="200"
+                        Foreground="Black" 
+                        FontSize="18" 
+                        Background="Transparent" 
+                        BorderBrush="Black" 
+                        BorderThickness="2" 
+                        Margin="0,30,0,10"/>
+               </StackPanel>
+              <!--</DataTemplate>
+            </ListView.ItemTemplate>-->
+        </ListView>
     </Grid>
 </Page>
