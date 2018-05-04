@@ -17,14 +17,15 @@ namespace StationLogApp.Model
         private const string ServerUrl = "http://stationlogwebservice20180424112310.azurewebsites.net/";
 
         private string _serverURL;
-        private string _apiPrefix;
+        private string _apiPrefix = "api/";
         private string _apiID;
         private HttpClientHandler _httpClientHandler;
         private HttpClient _httpClient;
         #endregion
 
-        public async Task Save(T obj)
+        public async Task<T> Save (T obj, string apiId)
         {
+            string url = String.Concat(_apiPrefix, apiId);
             {
                 _httpClientHandler = new HttpClientHandler() { UseDefaultCredentials = true };
                 using (_httpClient = new HttpClient(_httpClientHandler))
@@ -32,10 +33,11 @@ namespace StationLogApp.Model
                     _httpClient.BaseAddress = new Uri(ServerUrl);
                     _httpClient.DefaultRequestHeaders.Clear();
                     _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
                     try
                     {
                         string postBody = JsonConvert.SerializeObject(obj);
-                        var response = _httpClient.PostAsync("api/Tasks", 
+                        var response = _httpClient.PostAsync(url, 
                         new StringContent(postBody, Encoding.UTF8, "application/json")).Result;
                     }
                     catch (Exception ex)
@@ -43,8 +45,9 @@ namespace StationLogApp.Model
                         new MessageDialog(ex.Message).ShowAsync();
                     }
                 }
-
             }
+
+            return null;
         }
     }
 }

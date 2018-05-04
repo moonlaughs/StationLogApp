@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using StationLogApp.Common;
 using StationLogApp.Factories;
+using StationLogApp.Handlers;
 using StationLogApp.Interfaces;
 using StationLogApp.Model;
 using StationLogApp.Persistancy;
@@ -20,6 +21,10 @@ namespace StationLogApp.ViewModel
 
         private TaskCatalogSingleton _catalogSingleton;
         private FrameNavigateClass _frameNavigation;
+        private TaskClass _selectedTaskClass;
+       
+        
+
 
         #endregion
 
@@ -37,13 +42,31 @@ namespace StationLogApp.ViewModel
             } 
         }
 
-        
+        public TaskClass SelectedEvent
+        {
+            get
+            {
+                return _selectedTaskClass;
+            }
+            set
+            {
+                _selectedTaskClass = value;
+                OnPropertyChanged(nameof(SelectedEvent));
+            }
+        }
+
+        public RelayCommandClass SaveTaskClass { get; set; }
+
+        public TaskHandler TaskHandler { get; set; }
+
         #endregion
 
         #region constructor
         public TaskVm()
         {
             _catalogSingleton = TaskCatalogSingleton.Instance;
+            TaskHandler = new TaskHandler(this);
+            SaveTaskClass = new RelayCommandClass(TaskHandler.SaveTaskClass);
         }
         #endregion
 
