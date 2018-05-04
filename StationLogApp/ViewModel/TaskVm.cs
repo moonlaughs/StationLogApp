@@ -42,7 +42,7 @@ namespace StationLogApp.ViewModel
             } 
         }
 
-        public TaskClass SelectedEvent
+        public TaskClass SelectedTaskClass
         {
             get
             {
@@ -51,7 +51,7 @@ namespace StationLogApp.ViewModel
             set
             {
                 _selectedTaskClass = value;
-                OnPropertyChanged(nameof(SelectedEvent));
+                OnPropertyChanged(nameof(SelectedTaskClass));
             }
         }
 
@@ -70,8 +70,6 @@ namespace StationLogApp.ViewModel
         }
         #endregion
 
-        #region Methods
         
-        #endregion
     }
 }

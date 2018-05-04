@@ -13,8 +13,14 @@ namespace StationLogApp.Handlers
 {
     public class TaskHandler
     {
-        private ISave<TaskClass> _savedTaskClass;
+        
+        private ISave<TaskClass> _savedTaskClass = new SaveM<TaskClass>();
         private TaskVm _taskVm;
+
+        public TaskClass SelectedTask
+        {
+            get { return _taskVm.SelectedTaskClass;}
+        }
 
         public TaskHandler(TaskVm taskVm)
         {
@@ -27,26 +33,25 @@ namespace StationLogApp.Handlers
             Task<ObservableCollection<TaskClass>> sth = retrievedCatalog.Load("Tasks");
             ObservableCollection<TaskClass> col = sth.Result;
             return col;
-
-
-            //LoadM<Station> retrivedStationCatalog = new LoadM<Station>();
-            //Task<ObservableCollection<Station>> st = retrivedStationCatalog.Load("Stations");
-            //ObservableCollection<Station> stations = st.Result;
-
-            //LoadM<Equipment> retrivedEquipment = new LoadM<Equipment>();
-            //Task<ObservableCollection<Equipment>> eq = retrivedEquipment.Load("Equipments");
-            //ObservableCollection<Equipment> equipments = eq.Result;
-
-            //var query = from task in col
-            //            join e in equipments
-            //            on task.
-
         }
-
 
         public void SaveTaskClass()
         {
-            _savedTaskClass.Save(_taskVm.SelectedEvent, "Tasks");
+            DateTime updatedDate = DateTime.Now;
+
+            TaskClass becomeDoneTask = new TaskClass(
+                _taskVm.SelectedTaskClass.TaskId, 
+                _taskVm.SelectedTaskClass.TaskName, 
+                _taskVm.SelectedTaskClass.TaskSchedule, 
+                _taskVm.SelectedTaskClass.Registration, 
+                _taskVm.SelectedTaskClass.TaskType, 
+                updatedDate, 
+                _taskVm.SelectedTaskClass.Comment, 
+                _taskVm.SelectedTaskClass.DoneVar, 
+                _taskVm.SelectedTaskClass.EquipmentID
+                );
+            
+            _savedTaskClass.Save(becomeDoneTask, "Tasks");
         }
     }
 }

@@ -86,7 +86,8 @@
 
 
         <ListView Name="Tasks" 
-                  ItemsSource="{Binding TaskCatalog, Mode=TwoWay}" 
+                  ItemsSource="{Binding TaskCatalog, Mode=TwoWay}"
+                  SelectedItem="{Binding SelectedTaskClass, Mode= TwoWay}"
                   Grid.Row="3" 
                   Grid.Column="1" 
                   Width="1100" 
@@ -168,7 +169,9 @@
             <!--</DataTemplate>
             </ListView.ItemTemplate>-->
         </ListView>
-        <Button Grid.Column="1"
+        <Button Name="DoneCommandButton"
+                Command="{Binding SaveTaskClass, Mode=TwoWay}"
+                Grid.Column="1"
                 Grid.Row="4"
                 Width="200"
                 FontSize="40"
