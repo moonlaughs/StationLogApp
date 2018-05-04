@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using StationLogApp.Singletons;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,14 +23,17 @@ namespace StationLogApp.View
     /// </summary>
     public sealed partial class MenuTreePage : Page
     {
+        private UserSingleton user;
+
         public MenuTreePage()
         {
             this.InitializeComponent();
+            user = UserSingleton.GetInstance();
         }
 
         private void SeeTasksButton(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(TaskPage));
+            Frame.Navigate(typeof(TaskPage), user);
         }
 
         private void SeeHistoryButton(object sender, RoutedEventArgs e)
