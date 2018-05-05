@@ -124,7 +124,8 @@
                                 </StackPanel>
                             </StackPanel >
                             <TextBlock Text="Registrations:" Grid.Column="1"/>
-                            <TextBox Grid.Column="1" Width="250" Height="110" Margin="0,20,5,0"/>
+                            <TextBox Name="Registrations"
+                                     Text="{Binding Registration, Mode=TwoWay}" Grid.Column="1" Width="250" Height="110" Margin="0,20,5,0"/>
                             <TextBlock Text="Add comment:" Grid.Column="2"/>
                             <TextBox Name="Comment"
                                      Text="{Binding Comment, Mode=TwoWay}"
