@@ -76,6 +76,8 @@ namespace StationLogApp.Handlers
                         _taskVm.SelectedTaskClass.DoneVar,
                         _taskVm.SelectedTaskClass.EquipmentID
                     );
+
+                    _savedTaskClass.Save(newReSchedule, "Tasks");
                 }
 
                 else if (_taskVm.SelectedTaskClass.TaskSchedule == "Every two weeks")
@@ -84,7 +86,7 @@ namespace StationLogApp.Handlers
                     int daysUntilThreeWeeksTuesday = ((int) DayOfWeek.Tuesday - (int) today.DayOfWeek + 14) % 14;
                     DateTime nextTuesdayDate = today.AddDays(daysUntilThreeWeeksTuesday);
 
-                    TaskClass twoWeeksReSchedule = new TaskClass(
+                    TaskClass newReSchedule = new TaskClass(
                         _taskVm.SelectedTaskClass.TaskId,
                         _taskVm.SelectedTaskClass.TaskName,
                         _taskVm.SelectedTaskClass.TaskSchedule,
@@ -95,6 +97,8 @@ namespace StationLogApp.Handlers
                         _taskVm.SelectedTaskClass.DoneVar,
                         _taskVm.SelectedTaskClass.EquipmentID
                     );
+
+                    _savedTaskClass.Save(newReSchedule, "Tasks");
                 }
 
                 else if (_taskVm.SelectedTaskClass.TaskSchedule == "Every three weeks")
@@ -103,7 +107,7 @@ namespace StationLogApp.Handlers
                     int daysUntilNextMonthlyTuesday = ((int)DayOfWeek.Tuesday - (int)today.DayOfWeek + 21) % 21;
                     DateTime nextTuesdayDate = today.AddDays(daysUntilNextMonthlyTuesday);
 
-                    TaskClass monthReSchedule = new TaskClass(
+                    TaskClass newReSchedule = new TaskClass(
                         _taskVm.SelectedTaskClass.TaskId,
                         _taskVm.SelectedTaskClass.TaskName,
                         _taskVm.SelectedTaskClass.TaskSchedule,
@@ -114,6 +118,8 @@ namespace StationLogApp.Handlers
                         _taskVm.SelectedTaskClass.DoneVar,
                         _taskVm.SelectedTaskClass.EquipmentID
                     );
+
+                    _savedTaskClass.Save(newReSchedule, "Tasks");
                 }
 
                 else if (_taskVm.SelectedTaskClass.TaskSchedule == "Every month")
@@ -122,7 +128,7 @@ namespace StationLogApp.Handlers
                     int daysUntilNextMonthlyTuesday = ((int)DayOfWeek.Tuesday - (int)today.DayOfWeek + 28) % 28;
                     DateTime nextTuesdayDate = today.AddDays(daysUntilNextMonthlyTuesday);
 
-                    TaskClass monthReSchedule = new TaskClass(
+                    TaskClass newReSchedule = new TaskClass(
                         _taskVm.SelectedTaskClass.TaskId,
                         _taskVm.SelectedTaskClass.TaskName,
                         _taskVm.SelectedTaskClass.TaskSchedule,
@@ -133,6 +139,8 @@ namespace StationLogApp.Handlers
                         _taskVm.SelectedTaskClass.DoneVar,
                         _taskVm.SelectedTaskClass.EquipmentID
                     );
+
+                    _savedTaskClass.Save(newReSchedule, "Tasks");
                 }
 
                 else if (_taskVm.SelectedTaskClass.TaskSchedule == "Every two month")
@@ -141,7 +149,7 @@ namespace StationLogApp.Handlers
                     int daysUntilNextTwoMonthlyTuesday = ((int)DayOfWeek.Tuesday - (int)today.DayOfWeek +56) % 56;
                     DateTime nextTuesdayDate = today.AddDays(daysUntilNextTwoMonthlyTuesday);
 
-                    TaskClass monthReSchedule = new TaskClass(
+                    TaskClass newReSchedule = new TaskClass(
                         _taskVm.SelectedTaskClass.TaskId,
                         _taskVm.SelectedTaskClass.TaskName,
                         _taskVm.SelectedTaskClass.TaskSchedule,
@@ -152,6 +160,8 @@ namespace StationLogApp.Handlers
                         _taskVm.SelectedTaskClass.DoneVar,
                         _taskVm.SelectedTaskClass.EquipmentID
                     );
+
+                    _savedTaskClass.Save(newReSchedule, "Tasks");
                 }
 
                 else if (_taskVm.SelectedTaskClass.TaskSchedule == "Every two month")
@@ -160,7 +170,7 @@ namespace StationLogApp.Handlers
                     int daysUntilNextTwoMonthlyTuesday = ((int)DayOfWeek.Tuesday - (int)today.DayOfWeek + 84) % 84;
                     DateTime nextTuesdayDate = today.AddDays(daysUntilNextTwoMonthlyTuesday);
 
-                    TaskClass monthReSchedule = new TaskClass(
+                    TaskClass newReSchedule = new TaskClass(
                         _taskVm.SelectedTaskClass.TaskId,
                         _taskVm.SelectedTaskClass.TaskName,
                         _taskVm.SelectedTaskClass.TaskSchedule,
@@ -171,7 +181,12 @@ namespace StationLogApp.Handlers
                         _taskVm.SelectedTaskClass.DoneVar,
                         _taskVm.SelectedTaskClass.EquipmentID
                     );
+
+                    _savedTaskClass.Save(newReSchedule, "Tasks");
+
                 }
+
+                
             }
 
         }
