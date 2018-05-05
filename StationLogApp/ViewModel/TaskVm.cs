@@ -20,13 +20,10 @@ namespace StationLogApp.ViewModel
         #region instancefields
 
         private TaskCatalogSingleton _catalogSingleton;
-        private FrameNavigateClass _frameNavigation;
         private TaskClass _selectedTaskClass;
        
-        
+        #endregion 
 
-
-        #endregion
 
         #region properties
 
@@ -39,6 +36,7 @@ namespace StationLogApp.ViewModel
             set
             {
                 _catalogSingleton.TaskCatalog = value;
+                OnPropertyChanged(nameof(TaskCatalog));
             } 
         }
 
