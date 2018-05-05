@@ -54,6 +54,7 @@ namespace StationLogApp.ViewModel
         }
 
         public RelayCommandClass SaveTaskClass { get; set; }
+        public RelayCommandClass ReScheduleTask { get; set; }
 
         public TaskHandler TaskHandler { get; set; }
 
@@ -65,6 +66,7 @@ namespace StationLogApp.ViewModel
             _catalogSingleton = TaskCatalogSingleton.Instance;
             TaskHandler = new TaskHandler(this);
             SaveTaskClass = new RelayCommandClass(TaskHandler.SaveTaskClass);
+            SaveTaskClass = new RelayCommandClass(TaskHandler.ReScheduleTask);
         }
         #endregion
 
