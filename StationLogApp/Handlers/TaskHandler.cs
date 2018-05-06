@@ -17,15 +17,17 @@ namespace StationLogApp.Handlers
 
         private TaskVm _taskVm;
 
-        //public TaskClass SelectedTask
-        //{
-        //    get { return _taskVm.SelectedTaskClass;}
-        //}
+        public TaskClass SelectedTask
+        {
+            get { return _taskVm.SelectedTaskClass; }
+        }
 
         public TaskHandler(TaskVm taskVm)
         {
             _taskVm = taskVm;
         }
+
+        // Methods 
 
         public static ObservableCollection<TaskClass> LoadCatalog()
         {
@@ -33,6 +35,15 @@ namespace StationLogApp.Handlers
             Task<ObservableCollection<TaskClass>> sth = retrievedCatalog.Load("Tasks");
             ObservableCollection<TaskClass> col = sth.Result;
             return col;
+        }
+
+
+        // This method is activated by the button of the relayCommand  
+        // and save the logged task and add a task to the next date that it has to be made
+        public void OperateTask()
+        {
+            SaveTaskClass();
+            ReScheduleTask();
         }
 
 
@@ -107,6 +118,7 @@ namespace StationLogApp.Handlers
             DateTime nextTuesdayDate = today.AddDays(daysUntilNextTwoMonthlyTuesday);
             return nextTuesdayDate;
         }
+
 
         private void DoRescheduleTask(int periodicity)
         {

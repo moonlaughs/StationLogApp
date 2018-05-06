@@ -66,8 +66,7 @@ namespace StationLogApp.ViewModel
             _catalogSingleton = TaskCatalogSingleton.Instance;
             _selectedTaskClass = new TaskClass();
             TaskHandler = new TaskHandler(this);
-            SaveTaskClass = new RelayCommandClass(TaskHandler.SaveTaskClass);
-            SaveTaskClass = new RelayCommandClass(TaskHandler.ReScheduleTask);
+            SaveTaskClass = new RelayCommandClass(TaskHandler.OperateTask);
         }
         #endregion
 
