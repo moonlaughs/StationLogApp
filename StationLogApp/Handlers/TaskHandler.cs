@@ -13,14 +13,14 @@ namespace StationLogApp.Handlers
 {
     public class TaskHandler
     {
-        
         private ISave<TaskClass> _savedTaskClass = new SaveM<TaskClass>();
+
         private TaskVm _taskVm;
 
-        public TaskClass SelectedTask
-        {
-            get { return _taskVm.SelectedTaskClass;}
-        }
+        //public TaskClass SelectedTask
+        //{
+        //    get { return _taskVm.SelectedTaskClass;}
+        //}
 
         public TaskHandler(TaskVm taskVm)
         {
@@ -35,24 +35,14 @@ namespace StationLogApp.Handlers
             return col;
         }
 
+
         public void SaveTaskClass()
         {
             DateTime loggedDate = DateTime.Now;
-
-            TaskClass becomeDoneTask = new TaskClass(
-                _taskVm.SelectedTaskClass.TaskId, 
-                _taskVm.SelectedTaskClass.TaskName, 
-                _taskVm.SelectedTaskClass.TaskSchedule, 
-                _taskVm.SelectedTaskClass.Registration, 
-                _taskVm.SelectedTaskClass.TaskType, 
-                loggedDate, 
-                _taskVm.SelectedTaskClass.Comment, 
-                _taskVm.SelectedTaskClass.DoneVar, 
-                _taskVm.SelectedTaskClass.EquipmentID
-                );
-            
-            _savedTaskClass.Save(becomeDoneTask, "Tasks");
+            TaskClass loggedTask = CreateScheduledTask(loggedDate);
+            _savedTaskClass.Save(loggedTask, "Tasks");
         }
+
 
         public void ReScheduleTask()
         {
@@ -60,135 +50,69 @@ namespace StationLogApp.Handlers
             {
                 if (_taskVm.SelectedTaskClass.TaskSchedule == "Every week")
                 {
-                    DateTime today = DateTime.Today;
-                    int daysUntilTuesday = ((int) DayOfWeek.Tuesday - (int) today.DayOfWeek + 7) % 7;
-                    DateTime nextTuesdayDate = today.AddDays(daysUntilTuesday);
-
-
-                    TaskClass newReSchedule = new TaskClass(
-                        _taskVm.SelectedTaskClass.TaskId,
-                        _taskVm.SelectedTaskClass.TaskName,
-                        _taskVm.SelectedTaskClass.TaskSchedule,
-                        _taskVm.SelectedTaskClass.Registration,
-                        _taskVm.SelectedTaskClass.TaskType,
-                        nextTuesdayDate,
-                        _taskVm.SelectedTaskClass.Comment,
-                        _taskVm.SelectedTaskClass.DoneVar,
-                        _taskVm.SelectedTaskClass.EquipmentID
-                    );
-
-                    _savedTaskClass.Save(newReSchedule, "Tasks");
+                    DoRescheduleTask(7);
                 }
 
                 else if (_taskVm.SelectedTaskClass.TaskSchedule == "Every two weeks")
                 {
-                    DateTime today = DateTime.Today;
-                    int daysUntilThreeWeeksTuesday = ((int) DayOfWeek.Tuesday - (int) today.DayOfWeek + 14) % 14;
-                    DateTime nextTuesdayDate = today.AddDays(daysUntilThreeWeeksTuesday);
-
-                    TaskClass newReSchedule = new TaskClass(
-                        _taskVm.SelectedTaskClass.TaskId,
-                        _taskVm.SelectedTaskClass.TaskName,
-                        _taskVm.SelectedTaskClass.TaskSchedule,
-                        _taskVm.SelectedTaskClass.Registration,
-                        _taskVm.SelectedTaskClass.TaskType,
-                        nextTuesdayDate,
-                        _taskVm.SelectedTaskClass.Comment,
-                        _taskVm.SelectedTaskClass.DoneVar,
-                        _taskVm.SelectedTaskClass.EquipmentID
-                    );
-
-                    _savedTaskClass.Save(newReSchedule, "Tasks");
+                    DoRescheduleTask(14);
                 }
 
                 else if (_taskVm.SelectedTaskClass.TaskSchedule == "Every three weeks")
                 {
-                    DateTime today = DateTime.Today;
-                    int daysUntilNextMonthlyTuesday = ((int)DayOfWeek.Tuesday - (int)today.DayOfWeek + 21) % 21;
-                    DateTime nextTuesdayDate = today.AddDays(daysUntilNextMonthlyTuesday);
-
-                    TaskClass newReSchedule = new TaskClass(
-                        _taskVm.SelectedTaskClass.TaskId,
-                        _taskVm.SelectedTaskClass.TaskName,
-                        _taskVm.SelectedTaskClass.TaskSchedule,
-                        _taskVm.SelectedTaskClass.Registration,
-                        _taskVm.SelectedTaskClass.TaskType,
-                        nextTuesdayDate,
-                        _taskVm.SelectedTaskClass.Comment,
-                        _taskVm.SelectedTaskClass.DoneVar,
-                        _taskVm.SelectedTaskClass.EquipmentID
-                    );
-
-                    _savedTaskClass.Save(newReSchedule, "Tasks");
+                    DoRescheduleTask(21);
                 }
 
                 else if (_taskVm.SelectedTaskClass.TaskSchedule == "Every month")
                 {
-                    DateTime today = DateTime.Today;
-                    int daysUntilNextMonthlyTuesday = ((int)DayOfWeek.Tuesday - (int)today.DayOfWeek + 28) % 28;
-                    DateTime nextTuesdayDate = today.AddDays(daysUntilNextMonthlyTuesday);
+                    DoRescheduleTask(28);
+                }
 
-                    TaskClass newReSchedule = new TaskClass(
-                        _taskVm.SelectedTaskClass.TaskId,
-                        _taskVm.SelectedTaskClass.TaskName,
-                        _taskVm.SelectedTaskClass.TaskSchedule,
-                        _taskVm.SelectedTaskClass.Registration,
-                        _taskVm.SelectedTaskClass.TaskType,
-                        nextTuesdayDate,
-                        _taskVm.SelectedTaskClass.Comment,
-                        _taskVm.SelectedTaskClass.DoneVar,
-                        _taskVm.SelectedTaskClass.EquipmentID
-                    );
-
+                else if (_taskVm.SelectedTaskClass.TaskSchedule == "Every two month")
+                {
+                    DateTime nextTuesdayDate = GetNexTuesdayDate(56);
+                    TaskClass newReSchedule = CreateScheduledTask(nextTuesdayDate);
                     _savedTaskClass.Save(newReSchedule, "Tasks");
                 }
 
                 else if (_taskVm.SelectedTaskClass.TaskSchedule == "Every two month")
                 {
-                    DateTime today = DateTime.Today;
-                    int daysUntilNextTwoMonthlyTuesday = ((int)DayOfWeek.Tuesday - (int)today.DayOfWeek +56) % 56;
-                    DateTime nextTuesdayDate = today.AddDays(daysUntilNextTwoMonthlyTuesday);
-
-                    TaskClass newReSchedule = new TaskClass(
-                        _taskVm.SelectedTaskClass.TaskId,
-                        _taskVm.SelectedTaskClass.TaskName,
-                        _taskVm.SelectedTaskClass.TaskSchedule,
-                        _taskVm.SelectedTaskClass.Registration,
-                        _taskVm.SelectedTaskClass.TaskType,
-                        nextTuesdayDate,
-                        _taskVm.SelectedTaskClass.Comment,
-                        _taskVm.SelectedTaskClass.DoneVar,
-                        _taskVm.SelectedTaskClass.EquipmentID
-                    );
-
-                    _savedTaskClass.Save(newReSchedule, "Tasks");
+                    DoRescheduleTask(84);
                 }
-
-                else if (_taskVm.SelectedTaskClass.TaskSchedule == "Every two month")
-                {
-                    DateTime today = DateTime.Today;
-                    int daysUntilNextTwoMonthlyTuesday = ((int)DayOfWeek.Tuesday - (int)today.DayOfWeek + 84) % 84;
-                    DateTime nextTuesdayDate = today.AddDays(daysUntilNextTwoMonthlyTuesday);
-
-                    TaskClass newReSchedule = new TaskClass(
-                        _taskVm.SelectedTaskClass.TaskId,
-                        _taskVm.SelectedTaskClass.TaskName,
-                        _taskVm.SelectedTaskClass.TaskSchedule,
-                        _taskVm.SelectedTaskClass.Registration,
-                        _taskVm.SelectedTaskClass.TaskType,
-                        nextTuesdayDate,
-                        _taskVm.SelectedTaskClass.Comment,
-                        _taskVm.SelectedTaskClass.DoneVar,
-                        _taskVm.SelectedTaskClass.EquipmentID
-                    );
-
-                    _savedTaskClass.Save(newReSchedule, "Tasks");
-
-                }
-
-                
             }
+        }
 
+
+        private TaskClass CreateScheduledTask( DateTime newDate)
+        {
+            TaskClass newReSchedule = new TaskClass(
+                _taskVm.SelectedTaskClass.TaskId,
+                _taskVm.SelectedTaskClass.TaskName,
+                _taskVm.SelectedTaskClass.TaskSchedule,
+                _taskVm.SelectedTaskClass.Registration,
+                _taskVm.SelectedTaskClass.TaskType,
+                newDate,
+                _taskVm.SelectedTaskClass.Comment,
+                _taskVm.SelectedTaskClass.DoneVar,
+                _taskVm.SelectedTaskClass.EquipmentID
+            );
+
+            return newReSchedule;
+        }
+
+        private DateTime GetNexTuesdayDate (int periodicity)
+        {
+            DateTime today = DateTime.Today;
+            int daysUntilNextTwoMonthlyTuesday = ((int)DayOfWeek.Tuesday - (int)today.DayOfWeek + periodicity) % periodicity;
+            DateTime nextTuesdayDate = today.AddDays(daysUntilNextTwoMonthlyTuesday);
+            return nextTuesdayDate;
+        }
+
+        private void DoRescheduleTask(int periodicity)
+        {
+            DateTime nextTuesdayDate = GetNexTuesdayDate(periodicity);
+            TaskClass newReSchedule = CreateScheduledTask(nextTuesdayDate);
+            _savedTaskClass.Save(newReSchedule, "Tasks");
         }
     }
 }
