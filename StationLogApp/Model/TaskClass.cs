@@ -7,7 +7,7 @@ using StationLogApp.Interfaces;
 
 namespace StationLogApp.Model
 {
-    public class TaskClass : ITaskFactory
+    public class TaskClass
     {
 
         #region // Properties
@@ -19,6 +19,7 @@ namespace StationLogApp.Model
         public DateTime DoneDate { get; set; }
         public string Comment { get; set; }
         public string DoneVar { get; set; }
+        public int EquipmentID { get; set; }
         #endregion
 
         #region // Constructors
@@ -27,7 +28,7 @@ namespace StationLogApp.Model
             
         }
 
-        public TaskClass(int taskId, string taskName, string taskSchedule, string registration, string taskType, DateTime doneDate, string comment, string doneVar)
+        public TaskClass(int taskId, string taskName, string taskSchedule, string registration, string taskType, DateTime doneDate, string comment, string doneVar, int equipmentID)
         {
             TaskId = taskId;
             TaskName = taskName;
@@ -37,14 +38,17 @@ namespace StationLogApp.Model
             DoneDate = doneDate;
             Comment = comment;
             DoneVar = doneVar;
+            EquipmentID = equipmentID;
         }
+
+
         #endregion
 
 
         #region // ToString() Method
         public override string ToString()
         {
-            return $"{TaskId}, {TaskName}, {TaskSchedule}, {Registration}, {TaskType}, {DoneDate}, {Comment}, {DoneVar}";
+            return $"{TaskId}, {TaskName}, {TaskSchedule}, {Registration}, {TaskType}, {DoneDate}, {Comment}, {DoneVar}, {EquipmentID}";
         }
         #endregion
     }

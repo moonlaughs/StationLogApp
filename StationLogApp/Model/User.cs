@@ -7,7 +7,7 @@ using StationLogApp.Interfaces;
 
 namespace StationLogApp.Model
 {
-    public class User : IUserFactory
+    public class User
     {
         #region Properties
         public string UserID { get; set; }

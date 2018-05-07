@@ -96,30 +96,25 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\FrameNavigateClass.cs" />
-    <Compile Include="Common\GenericJsonConverter.cs" />
     <Compile Include="Common\NotifyPropertyChangedClass.cs" />
     <Compile Include="Common\RelayCommandClass.cs" />
-    <Compile Include="Common\TaskConverter.cs" />
-    <Compile Include="Common\UserConverter.cs" />
     <Compile Include="Factories\MainFactory.cs" />
+    <Compile Include="Handlers\TaskHandler.cs" />
     <Compile Include="Interfaces\IMainFactory.cs" />
     <Compile Include="Interfaces\ISave.cs" />
-    <Compile Include="Interfaces\ITaskFactory.cs" />
     <Compile Include="Interfaces\ICreate.cs" />
     <Compile Include="Interfaces\IDelete.cs" />
     <Compile Include="Interfaces\ILoad.cs" />
     <Compile Include="Interfaces\IRead.cs" />
     <Compile Include="Interfaces\IUpdate.cs" />
-    <Compile Include="Interfaces\IUserFactory.cs" />
     <Compile Include="Model\Equipment.cs" />
     <Compile Include="Model\Notes.cs" />
-    <Compile Include="Model\SaveM.cs" />
+    <Compile Include="Persistancy\SaveM.cs" />
     <Compile Include="Model\Station.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Persistancy\CreateM.cs" />
     <Compile Include="Persistancy\DeleteM.cs" />
     <Compile Include="Persistancy\LoadM.cs" />
-    <Compile Include="Persistancy\LoadTask.cs" />
     <Compile Include="Persistancy\ReadM.cs" />
     <Compile Include="Persistancy\UpdateM.cs" />
     <Compile Include="Properties\Annotations.cs" />
@@ -150,6 +145,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\1.jpg" />
+    <Content Include="Assets\Done.png" />
+    <Content Include="Assets\Green.png" />
+    <Content Include="Assets\place.png" />
+    <Content Include="Assets\profile.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

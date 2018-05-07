@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using StationLogApp.Common;
 using StationLogApp.Factories;
+using StationLogApp.Handlers;
 using StationLogApp.Interfaces;
 using StationLogApp.Model;
 using StationLogApp.Persistancy;
@@ -19,13 +20,15 @@ namespace StationLogApp.ViewModel
         #region instancefields
 
         private TaskCatalogSingleton _catalogSingleton;
-        private FrameNavigateClass _frameNavigation;
+        private TaskClass _selectedTaskClass;
+       
+        #endregion 
 
-        #endregion
 
         #region properties
 
-        public ObservableCollection<TaskClass> TaskCatalog {
+        public ObservableCollection<TaskClass> TaskCatalog
+        {
             get
             {
                 return _catalogSingleton.TaskCatalog;
@@ -33,18 +36,41 @@ namespace StationLogApp.ViewModel
             set
             {
                 _catalogSingleton.TaskCatalog = value;
+                OnPropertyChanged(nameof(TaskCatalog));
             } 
         }
+
+        public TaskClass SelectedTaskClass
+        {
+            get
+            {
+                return _selectedTaskClass;
+            }
+            set
+            {
+                _selectedTaskClass = value;
+                OnPropertyChanged(nameof(SelectedTaskClass));
+            }
+        }
+
+        public RelayCommandClass SaveTaskClass { get; set; }
         
+
+        public TaskHandler TaskHandler { get; set; }
+
         #endregion
 
         #region constructor
         public TaskVm()
         {
             _catalogSingleton = TaskCatalogSingleton.Instance;
+            _selectedTaskClass = new TaskClass();
+            TaskHandler = new TaskHandler(this);
+            SaveTaskClass = new RelayCommandClass(TaskHandler.OperateTask);
         }
         #endregion
 
+<<<<<<< HEAD
         #region Methods
         public void LoadMethod()
         {
@@ -60,5 +86,8 @@ namespace StationLogApp.ViewModel
                 
             //}
         }
+=======
+        
+>>>>>>> b93bf92ed4f8f6c0036a7973ff05f2ac73c3eb93
     }
 }
