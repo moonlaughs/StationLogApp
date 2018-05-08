@@ -9,6 +9,9 @@
     mc:Ignorable="d">
 
     <Grid>
+        <Grid.DataContext>
+            <viewModel:LoginVM/>
+        </Grid.DataContext>
         <Grid.Background>
             <ImageBrush ImageSource="../Assets/1.jpg"  Stretch="Fill"/>
         </Grid.Background>
@@ -21,7 +24,12 @@
             <Button Content="TASKS" FontSize="100" Foreground="Bisque" Background="#00000000" BorderBrush="#00000000" Height="300" Width="750" Command="{Binding GoTask}">
 
             </Button>
+<<<<<<< HEAD
             <Button Content="HISTORY" FontSize="100" Foreground="Bisque" Background="#00000000" BorderBrush="#00000000" Height="300" Width="750" Command="{Binding GoDone}">
+=======
+          <TextBlock Text="{Binding CurrentUser.Username, Mode=TwoWay}" FontSize="50" Foreground="AliceBlue"/>
+            <Button Content="HISTORY" FontSize="100" Foreground="Bisque" Background="#00000000" BorderBrush="#00000000" Height="300" Width="750" Click="SeeHistoryButton">
+>>>>>>> dc3f6f390ea3ee052dd8b78aec5eece193df9b12
 
             </Button>
         </StackPanel>
