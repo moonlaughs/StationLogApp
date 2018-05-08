@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace StationLogApp.Model
         #endregion
 
         #region // Constructors 
+
         public Notes(int notesID, string note, int stationID, DateTime dueDate, int userID)
         {
             NotesID = notesID;
@@ -24,6 +26,12 @@ namespace StationLogApp.Model
             StationID = stationID;
             DueDate = dueDate;
             UserID = userID;
+        }
+
+        public Notes(string note, DateTime dueDate)
+        {
+            Note = note;
+            DueDate = dueDate;
         }
 
         public Notes()

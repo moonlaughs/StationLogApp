@@ -181,7 +181,8 @@
                         Background="Transparent" 
                         BorderBrush="Black" 
                         BorderThickness="2" 
-                        Margin="0,30,0,10"/>
+                        Margin="0,30,0,10"
+                        Click="GoToNotesPage"/>
             </StackPanel>
             <!--</DataTemplate>
             </ListView.ItemTemplate>-->
