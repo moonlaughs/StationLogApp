@@ -45,7 +45,6 @@ namespace StationLogApp.ViewModel
             CheckCommand = new RelayCommandClass(Check);
         }
 
-
         // Check checks the Currrent User information against tha information of the user in the database
 
         public async void Check()
