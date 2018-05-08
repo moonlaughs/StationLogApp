@@ -21,7 +21,7 @@ namespace StationLogApp.ViewModel
 
         private readonly FrameNavigateClass _frame;
 
-        private readonly UserSingleton _userSingleton;
+        private UserSingleton _userSingleton;
 
         private bool LoginStatus { get; set; }
 

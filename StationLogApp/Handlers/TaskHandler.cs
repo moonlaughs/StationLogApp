@@ -29,14 +29,42 @@ namespace StationLogApp.Handlers
 
         // Methods 
 
-        public static ObservableCollection<TaskClass> LoadCatalog()
-        {
-            LoadM<TaskClass> retrievedCatalog = new LoadM<TaskClass>();
-            Task<ObservableCollection<TaskClass>> sth = retrievedCatalog.Load("Tasks");
-            ObservableCollection<TaskClass> col = sth.Result;
-            return col;
-        }
+        //public static ObservableCollection<TaskClass> LoadCatalog()
+        //{
+        //    LoadM<TaskClass> retrievedCatalog = new LoadM<TaskClass>();
+        //    Task<ObservableCollection<TaskClass>> sth = retrievedCatalog.Load("Tasks");
+        //    ObservableCollection<TaskClass> col = sth.Result;
+        //    return col;
+        //}
 
+        public static ObservableCollection<TaskEquipmentStation> LoadTaskEquipmentStations()
+        {
+            ObservableCollection<TaskEquipmentStation> ltes = new ObservableCollection<TaskEquipmentStation>();
+
+            LoadM<TaskClass> retrivedTask = new LoadM<TaskClass>();
+            Task<ObservableCollection<TaskClass>> api = retrivedTask.Load("Tasks");
+            ObservableCollection<TaskClass> taskCollection = api.Result;
+
+            LoadM<Station> retrivedStation = new LoadM<Station>();
+            Task<ObservableCollection<Station>> api2 = retrivedStation.Load("Stations");
+            ObservableCollection<Station> stationCollection = api2.Result;
+
+            LoadM<Equipment> retrivedEquipment = new LoadM<Equipment>();
+            Task<ObservableCollection<Equipment>> api3 = retrivedEquipment.Load("Equipments");
+            ObservableCollection<Equipment> equipmentCollection = api3.Result;
+            
+            var query = (from t in taskCollection
+                         join e in equipmentCollection on t.EquipmentID equals e.EquipmentID
+                         join s in stationCollection on e.StationID equals s.StationID
+                         select new TaskEquipmentStation(){TaskName = t.TaskName, TaskType = t.TaskType, EquipmentName = e.EquipmentName, StationName = s.StationName }).ToList();
+
+            foreach (var item in query)
+            {
+                ltes.Add(item);
+            }
+
+            return ltes;
+        }
 
         // This method is activated by the button of the relayCommand  
         // and save the logged task and add a task to the next date that it has to be made

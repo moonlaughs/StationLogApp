@@ -18,14 +18,14 @@ namespace StationLogApp.Singletons
 
         // Properties
 
-        public ObservableCollection<TaskClass> TaskCatalog {get; set; }
+        public ObservableCollection<TaskEquipmentStation> TaskCatalog {get; set; }
         
 
         // Constructor of the Singleton
 
         private TaskCatalogSingleton()
         {
-            TaskCatalog = TaskHandler.LoadCatalog();
+            TaskCatalog = TaskHandler.LoadTaskEquipmentStations();
         }
        
 

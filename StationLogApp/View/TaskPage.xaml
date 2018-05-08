@@ -41,8 +41,8 @@
 
             <TextBlock FontSize="30" 
                        RelativePanel.AlignRightWith="TextBlock1" 
-                       DataContext="LoginVM" 
-                       Text="{Binding CurrentUser.Username}"/>
+                       DataContext="" 
+                       Text=""/>
 
             <Button Name="TodoButton" 
                     RelativePanel.LeftOf="DoneButton" 
@@ -110,7 +110,7 @@
                                            Margin="10,0,0,5"/>
                                 <StackPanel Orientation="Horizontal" Margin="5">
                                     <Image Source="../Assets/place.png" Width="30" Margin="10,0,10,0"/>
-                                    <TextBlock Text="Station 1" Foreground="Black" FontSize="20"/>
+                                    <TextBlock Text="{Binding StationName}" Foreground="Black" FontSize="20"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <StackPanel Margin="10">

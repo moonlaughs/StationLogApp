@@ -27,7 +27,7 @@ namespace StationLogApp.ViewModel
 
         #region properties
 
-        public ObservableCollection<TaskClass> TaskCatalog
+        public ObservableCollection<TaskEquipmentStation> TaskCatalog
         {
             get
             {
@@ -70,11 +70,10 @@ namespace StationLogApp.ViewModel
         }
         #endregion
 
-<<<<<<< HEAD
         #region Methods
         public void LoadMethod()
         {
-            _frameNavigation.ActivateFrameNavigation(typeof(TaskPage));
+           // _frameNavigation.ActivateFrameNavigation(typeof(TaskPage));
             //load.Load("Tasks");
         }
         #endregion
@@ -86,8 +85,5 @@ namespace StationLogApp.ViewModel
                 
             //}
         }
-=======
-        
->>>>>>> b93bf92ed4f8f6c0036a7973ff05f2ac73c3eb93
     }
 }
