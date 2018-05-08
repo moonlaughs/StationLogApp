@@ -11,7 +11,7 @@ namespace StationLogApp.Singletons
     public class UserSingleton
     {
         #region Instance fields
-        public static IUserFactory _user;
+        public static User _user;
         #endregion
 
         #region Properties
@@ -35,7 +35,7 @@ namespace StationLogApp.Singletons
             return Instance;
         }
 
-        public void SetPerson(IUserFactory user)
+        public void SetPerson(User user)
         {
             _user = user;
         }

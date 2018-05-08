@@ -16,13 +16,13 @@ namespace StationLogApp.ViewModel
 {
     public class LoginVM : NotifyPropertyChangedClass
     {
-        private IUserFactory _currentUser = new User();
+        private User _currentUser = new User();
         private readonly FrameNavigateClass _frame;
         private readonly UserSingleton _userSingleton;
 
         private bool LoginStatus { get; set; }
         public RelayCommandClass CheckCommand { get; set; }
-        public IUserFactory CurrentUser
+        public User CurrentUser
         {
             get => _currentUser;
             set
@@ -41,7 +41,7 @@ namespace StationLogApp.ViewModel
         public async void Check()
         {
             LoginStatus = false;
-            ILoad<IUserFactory> loaded = new LoadM<IUserFactory>();
+            ILoad<User> loaded = new LoadM<User>();
             Task<ObservableCollection<User>> sth = loaded.Load("UserTables");
             await sth;
             ObservableCollection<User> col = sth.Result;
@@ -54,6 +54,7 @@ namespace StationLogApp.ViewModel
                         _userSingleton.SetPerson(user);
                         LoginStatus = true;
                         _frame.ActivateFrameNavigation(typeof(MenuTreePage), user);
+                        CurrentUser = user;
                         break;
                     }
                 }
