@@ -20,27 +20,11 @@ namespace StationLogApp.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class TaskPage : Page
+    public sealed partial class AddNotesPage : Page
     {
-        public TaskPage()
+        public AddNotesPage()
         {
             this.InitializeComponent();
-        }
-
-        private void DoneButton_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(TaskHistoryTechnicianPage));
-        }
-
-        private void MenuFlyoutItem_OnClick(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(LogInPage));
-        }
-
-
-        private void GoToNotesPage(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(AddNotesPage));
         }
     }
 }
