@@ -23,7 +23,7 @@ namespace StationLogApp.Handlers
         public void SaveNote()
         {
             Notes note1 = new Notes(
-                _noteVM.Note, _noteVM.DueDate);
+                _noteVM.Note, _noteVM.StationID, _noteVM.DueDate, _noteVM.UserID);
 
             _savedNote.Save(note1, "Notes");
         }

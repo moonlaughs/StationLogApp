@@ -28,10 +28,12 @@ namespace StationLogApp.Model
             UserID = userID;
         }
 
-        public Notes(string note, DateTime dueDate)
+        public Notes(string note, int stationID, DateTime dueDate, int userID)
         {
             Note = note;
+            StationID = stationID;
             DueDate = dueDate;
+            UserID = userID;
         }
 
         public Notes()

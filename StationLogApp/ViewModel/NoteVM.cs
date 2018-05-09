@@ -11,8 +11,9 @@ namespace StationLogApp.ViewModel
     public class NoteVM :NotifyPropertyChangedClass
     {
         private string _note;
-        private string _description;
+        private int _stationID;
         private DateTime _dueDate;
+        private int _userID;
 
         public string Note
         {
@@ -24,13 +25,13 @@ namespace StationLogApp.ViewModel
             }
         }
 
-        public string Descrption
+        public int StationID
         {
-            get { return _description; }
+            get { return _stationID; }
             set
             {
-                _description = value;
-                OnPropertyChanged(nameof(Descrption));
+                _stationID = value;
+                OnPropertyChanged(nameof(StationID));
             }
         }
 
@@ -41,6 +42,16 @@ namespace StationLogApp.ViewModel
             {
                 _dueDate = value;
                 OnPropertyChanged(nameof(DueDate));
+            }
+        }
+
+        public int UserID
+        {
+            get { return _userID; }
+            set
+            {
+                _userID = value;
+                OnPropertyChanged(nameof(UserID));
             }
         }
 
