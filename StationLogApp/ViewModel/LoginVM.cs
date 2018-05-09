@@ -16,18 +16,16 @@ namespace StationLogApp.ViewModel
 {
     public class LoginVM : NotifyPropertyChangedClass
     {
-
         private User _currentUser = new User();
 
         private readonly FrameNavigateClass _frame;
 
-        private readonly UserSingleton _userSingleton;
+        private UserSingleton _userSingleton;
 
         private bool LoginStatus { get; set; }
 
         public RelayCommandClass CheckCommand { get; set; }
-
-
+        
         public User CurrentUser
         {
             get => _currentUser;
@@ -44,7 +42,6 @@ namespace StationLogApp.ViewModel
             _userSingleton = UserSingleton.GetInstance();
             CheckCommand = new RelayCommandClass(Check);
         }
-
 
         // Check checks the Currrent User information against tha information of the user in the database
 

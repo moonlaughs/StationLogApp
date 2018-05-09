@@ -110,6 +110,7 @@
     <Compile Include="Interfaces\IUpdate.cs" />
     <Compile Include="Model\Equipment.cs" />
     <Compile Include="Model\Notes.cs" />
+    <Compile Include="Model\TaskEquipmentStation.cs" />
     <Compile Include="Persistancy\SaveM.cs" />
     <Compile Include="Model\Station.cs" />
     <Compile Include="Model\User.cs" />

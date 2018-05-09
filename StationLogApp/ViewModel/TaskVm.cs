@@ -27,7 +27,7 @@ namespace StationLogApp.ViewModel
 
         #region properties
 
-        public ObservableCollection<TaskClass> TaskCatalog
+        public ObservableCollection<TaskEquipmentStation> TaskCatalog
         {
             get
             {
@@ -70,6 +70,20 @@ namespace StationLogApp.ViewModel
         }
         #endregion
 
-        
+        #region Methods
+        public void LoadMethod()
+        {
+           // _frameNavigation.ActivateFrameNavigation(typeof(TaskPage));
+            //load.Load("Tasks");
+        }
+        #endregion
+
+        public void Read()
+        {
+            //using (var db = new StationLogWebService.StationLogDBContext)
+            //{
+                
+            //}
+        }
     }
 }
