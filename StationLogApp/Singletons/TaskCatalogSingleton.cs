@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Threading.Tasks;
-using StationLogApp.Factories;
 using StationLogApp.Handlers;
 using StationLogApp.Interfaces;
 using StationLogApp.Model;
@@ -17,21 +16,17 @@ namespace StationLogApp.Singletons
        
 
         // Properties
-
         public ObservableCollection<TaskEquipmentStation> TaskCatalog {get; set; }
-        
+        public ObservableCollection<TaskEquipmentStation> DoneCatalog { get; set; }
 
         // Constructor of the Singleton
-
         private TaskCatalogSingleton()
         {
-            TaskCatalog = TaskHandler.LoadTaskEquipmentStations();
+            TaskCatalog = TaskHandler.LoadToDo();
+            DoneCatalog = TaskHandler.LoadDone();
         }
        
-
-       
         // Singleton Method
-
         public static TaskCatalogSingleton Instance
         {
             get

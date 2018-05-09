@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StationLogApp.Common;
-using StationLogApp.Factories;
 using StationLogApp.Handlers;
 using StationLogApp.Interfaces;
 using StationLogApp.Model;
@@ -21,12 +20,9 @@ namespace StationLogApp.ViewModel
 
         private TaskCatalogSingleton _catalogSingleton;
         private TaskClass _selectedTaskClass;
-       
         #endregion 
 
-
         #region properties
-
         public ObservableCollection<TaskEquipmentStation> TaskCatalog
         {
             get
@@ -38,6 +34,19 @@ namespace StationLogApp.ViewModel
                 _catalogSingleton.TaskCatalog = value;
                 OnPropertyChanged(nameof(TaskCatalog));
             } 
+        }
+
+        public ObservableCollection<TaskEquipmentStation> DoneCatalog
+        {
+            get
+            {
+                return _catalogSingleton.DoneCatalog;
+            }
+            set
+            {
+                _catalogSingleton.DoneCatalog = value;
+                OnPropertyChanged(nameof(DoneCatalog));
+            }
         }
 
         public TaskClass SelectedTaskClass
@@ -54,10 +63,8 @@ namespace StationLogApp.ViewModel
         }
 
         public RelayCommandClass SaveTaskClass { get; set; }
-        
 
         public TaskHandler TaskHandler { get; set; }
-
         #endregion
 
         #region constructor
@@ -69,21 +76,5 @@ namespace StationLogApp.ViewModel
             SaveTaskClass = new RelayCommandClass(TaskHandler.OperateTask);
         }
         #endregion
-
-        #region Methods
-        public void LoadMethod()
-        {
-           // _frameNavigation.ActivateFrameNavigation(typeof(TaskPage));
-            //load.Load("Tasks");
-        }
-        #endregion
-
-        public void Read()
-        {
-            //using (var db = new StationLogWebService.StationLogDBContext)
-            //{
-                
-            //}
-        }
     }
 }

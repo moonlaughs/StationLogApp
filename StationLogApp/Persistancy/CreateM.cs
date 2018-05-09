@@ -8,14 +8,13 @@ using System.Threading.Tasks;
 using Windows.Media.Capture.Frames;
 using Windows.UI.Popups;
 using Newtonsoft.Json;
-using StationLogApp.Factories;
 using StationLogApp.Interfaces;
 
 namespace StationLogApp.Persistancy
 {
     class CreateM<T> : ICreate<T> where T : class
     {
-        #region
+        #region instancefields
         private const string ServerUrl = "http://stationlogwebservice20180424112310.azurewebsites.net/";
 
         private string _serverURL;

@@ -188,7 +188,7 @@
             </ListView.ItemTemplate>-->
         </ListView>
         <Button Name="DoneCommandButton"
-                Command="{Binding SaveTaskClass, Mode=TwoWay}"
+                Command="{Binding SaveTaskClass}"
                 Grid.Column="1"
                 Grid.Row="4"
                 Width="200"
