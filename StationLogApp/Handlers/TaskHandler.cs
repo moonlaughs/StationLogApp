@@ -109,9 +109,7 @@ namespace StationLogApp.Handlers
 
                 else if (_taskVm.SelectedTaskClass.TaskSchedule == "Every two month")
                 {
-                    DateTime nextTuesdayDate = GetNexTuesdayDate(56);
-                    TaskClass newReSchedule = CreateScheduledTask(nextTuesdayDate);
-                    _savedTaskClass.Save(newReSchedule, "Tasks");
+                    DoRescheduleTask(56);
                 }
 
                 else if (_taskVm.SelectedTaskClass.TaskSchedule == "Every two month")
