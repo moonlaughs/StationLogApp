@@ -8,7 +8,7 @@ using StationLogApp.Common;
 using StationLogApp.Factories;
 using StationLogApp.Interfaces;
 using StationLogApp.Persistancy;
-using StationLogApp.View;
+using StationLogApp.View;  
 
 namespace StationLogApp.ViewModel
 {

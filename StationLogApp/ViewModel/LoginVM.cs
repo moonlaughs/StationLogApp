@@ -26,6 +26,16 @@ namespace StationLogApp.ViewModel
         public IUserFactory UserObj { get; set; }
         public RelayCommandClass CheckCommand { get; set; }
 
+
+        ObservableCollection<Station> DiyanaCollection = new ObservableCollection<Station>();
+
+
+        
+        
+
+        
+        
+
         public IUserFactory CurrentUser
         {
             get => _currentUser;
