@@ -1,19 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Appointments.AppointmentsProvider;
 using StationLogApp.Common;
 using StationLogApp.Handlers;
+using StationLogApp.Model;
 
 namespace StationLogApp.ViewModel
 {
-    public class NoteVM :NotifyPropertyChangedClass
+    public class NoteVM : NotifyPropertyChangedClass
     {
         private string _note;
         private int _stationID;
-        private DateTime _dueDate;
+        private DateTimeOffset _dueDate;
         private int _userID;
+        private ObservableCollection<Station> stationCollection;
+        
+        public ObservableCollection<Station> StationCollection
+        {
+            get
+            {
+                return stationCollection;
+            }
+            set { stationCollection = value; }
+        }
 
         public string Note
         {
@@ -35,7 +48,7 @@ namespace StationLogApp.ViewModel
             }
         }
 
-        public DateTime DueDate
+        public DateTimeOffset DueDate
         {
             get { return _dueDate; }
             set
@@ -61,7 +74,8 @@ namespace StationLogApp.ViewModel
         public NoteVM()
         {
             NoteHandler = new NoteHandler(this);
-            SaveNote = new RelayCommandClass(NoteHandler.SaveNote);
+            SaveNote = new RelayCommandClass(NoteHandler.CreateNote);
+            
         }
 
     }

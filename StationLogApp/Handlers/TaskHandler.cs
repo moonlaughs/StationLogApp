@@ -29,14 +29,6 @@ namespace StationLogApp.Handlers
 
         // Methods 
 
-        //public static ObservableCollection<TaskClass> LoadCatalog()
-        //{
-        //    LoadM<TaskClass> retrievedCatalog = new LoadM<TaskClass>();
-        //    Task<ObservableCollection<TaskClass>> sth = retrievedCatalog.Load("Tasks");
-        //    ObservableCollection<TaskClass> col = sth.Result;
-        //    return col;
-        //}
-
         public static ObservableCollection<TaskEquipmentStation> LoadTaskEquipmentStations()
         {
             ObservableCollection<TaskEquipmentStation> ltes = new ObservableCollection<TaskEquipmentStation>();
