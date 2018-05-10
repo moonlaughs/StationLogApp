@@ -7,58 +7,41 @@ using System.Threading.Tasks;
 using StationLogApp.Common;
 using StationLogApp.Factories;
 using StationLogApp.Interfaces;
+using StationLogApp.Model;
 using StationLogApp.Persistancy;
-using StationLogApp.View;  
+using StationLogApp.Singletons;
+using StationLogApp.View;
 
 namespace StationLogApp.ViewModel
 {
     public class TaskVm : NotifyPropertyChangedClass
     {
         #region instancefields
-        private IMainFactory _newTask;
-        private IMainFactory _selectedItem;
-        private ObservableCollection<IMainFactory> _collection;
+
+        private TaskCatalogSingleton _catalogSingleton;
         private FrameNavigateClass _frameNavigation;
+
         #endregion
 
         #region properties
 
-        public IMainFactory taskobj = new MainFactory();
-
-        public IMainFactory NewTask
-        {
-            get { return _newTask; }
-            set { _newTask = value;
-                OnPropertyChanged(nameof(NewTask));
+        public ObservableCollection<TaskClass> TaskCatalog {
+            get
+            {
+                return _catalogSingleton.TaskCatalog;
             }
-        }
-        
-        public IMainFactory SelectedItem
-        {
-            get { return _selectedItem; }
             set
             {
-                _selectedItem = value;
-                OnPropertyChanged(nameof(SelectedItem));
-            }
+                _catalogSingleton.TaskCatalog = value;
+            } 
         }
-
-        public ObservableCollection<IMainFactory> Catalog
-        {
-            get { return _collection; }
-            set { _collection = value; OnPropertyChanged(nameof(Catalog)); }
-        }
-
-        ILoad<Collection<IMainFactory>> load = new LoadM<Collection<IMainFactory>>();
-
-        public RelayCommandClass LoadCommand { get; set; }
+        
         #endregion
 
         #region constructor
         public TaskVm()
         {
-            LoadCommand = new RelayCommandClass(LoadMethod);
-            _frameNavigation = new FrameNavigateClass();
+            _catalogSingleton = TaskCatalogSingleton.Instance;
         }
         #endregion
 
@@ -66,7 +49,7 @@ namespace StationLogApp.ViewModel
         public void LoadMethod()
         {
             _frameNavigation.ActivateFrameNavigation(typeof(TaskPage));
-            load.Load();
+            //load.Load("Tasks");
         }
         #endregion
     }
