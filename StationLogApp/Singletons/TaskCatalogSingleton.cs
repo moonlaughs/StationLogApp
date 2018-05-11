@@ -7,6 +7,7 @@ using StationLogApp.Handlers;
 using StationLogApp.Interfaces;
 using StationLogApp.Model;
 using StationLogApp.Persistancy;
+using StationLogApp.ViewModel;
 
 namespace StationLogApp.Singletons
 {
@@ -14,6 +15,7 @@ namespace StationLogApp.Singletons
     {
         
         private static TaskCatalogSingleton _instance;
+
        
 
         // Properties
@@ -25,6 +27,7 @@ namespace StationLogApp.Singletons
 
         private TaskCatalogSingleton()
         {
+            
             TaskCatalog = TaskHandler.LoadTaskEquipmentStations();
         }
        

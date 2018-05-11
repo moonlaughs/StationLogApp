@@ -36,9 +36,12 @@ namespace StationLogApp.Model
 
                     try
                     {
-                        string postBody = JsonConvert.SerializeObject(obj);
-                        var response = _httpClient.PostAsync(url, 
-                        new StringContent(postBody, Encoding.UTF8, "application/json")).Result;
+                        //string postBody = JsonConvert.SerializeObject(obj);
+                        //var response = _httpClient.PostAsync(url,
+                        //new StringContent(postBody, Encoding.UTF8, "application/json")).Result;
+
+                        HttpResponseMessage response = await _httpClient.PostAsJsonAsync(url, obj);
+                        response.EnsureSuccessStatusCode();
                     }
                     catch (Exception ex)
                     {

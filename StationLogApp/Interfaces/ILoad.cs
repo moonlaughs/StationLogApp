@@ -11,5 +11,6 @@ namespace StationLogApp.Interfaces
     public interface ILoad<T>
     {
         Task<ObservableCollection<T>> Load(string _apiID);
+        ObservableCollection<T> RetrieveCollection(string table);
     }
 }
