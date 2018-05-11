@@ -151,6 +151,7 @@
   <ItemGroup>
     <Content Include="Assets\1.jpg" />
     <Content Include="Assets\Done.png" />
+    <Content Include="Assets\forest.jpg" />
     <Content Include="Assets\Green.png" />
     <Content Include="Assets\place.png" />
     <Content Include="Assets\profile.png" />
