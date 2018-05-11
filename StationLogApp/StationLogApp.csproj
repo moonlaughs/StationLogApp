@@ -156,6 +156,8 @@
     <Content Include="Assets\Green.png" />
     <Content Include="Assets\place.png" />
     <Content Include="Assets\profile.png" />
+    <Content Include="Assets\sign.png" />
+    <Content Include="Assets\yas.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

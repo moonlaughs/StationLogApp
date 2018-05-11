@@ -114,7 +114,7 @@
                 <DataTemplate>
                     <Border Margin="5"
                             Width="1060"
-                            BorderBrush="Black" BorderThickness="2">
+                            BorderBrush="#407c3a" BorderThickness="2">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1.5*"/>
@@ -161,16 +161,16 @@
             <ListView.Background>Transparent</ListView.Background>
             <!--<ListView.ItemTemplate>
              <DataTemplate>-->
-            <StackPanel Background="DarkGreen" Opacity="0.7" Width="450" 
+            <StackPanel Background="#407c3a" Opacity="0.7" Width="450" 
                           BorderThickness="3" BorderBrush="White"
                           HorizontalAlignment="Left">
                 <StackPanel Orientation="Horizontal" Margin="10">
                     <TextBlock Text="Name:" Foreground="White" FontSize="18"/>
-                    <TextBlock Text="Low battery" FontSize="18" Margin="10,0,0,0"/>
+                    <TextBlock Text="Low battery" Foreground="White" FontSize="18" Margin="10,0,0,0"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="10">
                     <TextBlock Text="Due date:" Foreground="White" FontSize="18"/>
-                    <TextBlock Text="20th May 2018" Margin="10,0,0,0" FontSize="18"/>
+                    <TextBlock Text="20th May 2018" Margin="10,0,0,0" Foreground="White" FontSize="18"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="10">
                     <TextBlock Text="Description:" Foreground="White" FontSize="18"/>
@@ -178,7 +178,7 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="10">
                     <TextBlock Text="Technician/Station:" Foreground="White" FontSize="18"/>
-                    <TextBlock Text="X"  Margin="10,0,0,0" FontSize="18"/>
+                    <TextBlock Text="X" Foreground="White" Margin="10,0,0,0" FontSize="18"/>
                 </StackPanel>
                 <Button Content="Add log" 
                         HorizontalAlignment="Center"
