@@ -40,7 +40,7 @@ namespace StationLogApp.Singletons
             _user = user;
         }
 
-        public string GetUserID()
+        public int GetUserID()
         {
             return _user.UserID;
         }
@@ -60,7 +60,7 @@ namespace StationLogApp.Singletons
             return _user.Username;
         }
 
-        public string GetUserPassword()
+        public int GetUserPassword()
         {
             return _user.UserID;
         }

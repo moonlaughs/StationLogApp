@@ -17,15 +17,15 @@ namespace StationLogApp.ViewModel
         private int _stationID;
         private DateTimeOffset _dueDate;
         private int _userID;
-        private ObservableCollection<Station> stationCollection;
+        private ObservableCollection<Station> _stationCollection;
         
         public ObservableCollection<Station> StationCollection
         {
             get
             {
-                return stationCollection;
+                return _stationCollection;
             }
-            set { stationCollection = value; }
+            set { _stationCollection = value; }
         }
 
         public string Note
@@ -75,7 +75,7 @@ namespace StationLogApp.ViewModel
         {
             NoteHandler = new NoteHandler(this);
             SaveNote = new RelayCommandClass(NoteHandler.CreateNote);
-            
+            _stationCollection = NoteHandler.LoadStations();
         }
 
     }

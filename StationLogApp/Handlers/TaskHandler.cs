@@ -29,13 +29,13 @@ namespace StationLogApp.Handlers
             get { return LoadStation(); } 
         }
 
+        // Methods 
 
         public TaskHandler(TaskVm taskVm)
         {
             _taskVm = taskVm;
         }
-      
-       
+
         public static ObservableCollection<TaskEquipmentStation> LoadTaskEquipmentStations()
         {
             ObservableCollection<TaskEquipmentStation> ltes = new ObservableCollection<TaskEquipmentStation>();
