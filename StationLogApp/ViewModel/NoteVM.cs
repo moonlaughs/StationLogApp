@@ -30,7 +30,10 @@ namespace StationLogApp.ViewModel
 
         public string Note
         {
-            get { return _note; }
+            get
+            {
+                return _note;
+            }
             set
             {
                 _note = value; 
@@ -69,13 +72,16 @@ namespace StationLogApp.ViewModel
         }
 
         public RelayCommandClass SaveNote { get; set; }
+
+
         public NoteHandler NoteHandler { get; set; }
 
         public NoteVM()
         {
+            _dueDate = DateTimeOffset.Now;
+            _stationCollection = NoteHandler.LoadStations();
             NoteHandler = new NoteHandler(this);
             SaveNote = new RelayCommandClass(NoteHandler.CreateNote);
-            _stationCollection = NoteHandler.LoadStations();
         }
 
     }
