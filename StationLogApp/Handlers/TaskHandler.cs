@@ -17,12 +17,12 @@ namespace StationLogApp.Handlers
         private ISave<TaskClass> _savedTaskClass = new SaveM<TaskClass>();
         private TaskVm _taskVm;
         
-        
 
         public TaskClass SelectedTask
         {
             get { return _taskVm.SelectedTaskClass; }
         }
+
 
         public ObservableCollection<Station> StationCatalog
         {
@@ -53,7 +53,7 @@ namespace StationLogApp.Handlers
             var query = (from t in taskCollection
                          join e in equipmentCollection on t.EquipmentID equals e.EquipmentID
                          join s in stationCollection on e.StationID equals s.StationID
-                         select new TaskEquipmentStation() { TaskName = t.TaskName, TaskType = t.TaskType, EquipmentName = e.EquipmentName, StationName = s.StationName }).ToList();
+                         select new TaskEquipmentStation() { TaskName = t.TaskName, TaskType = t.TaskType, EquipmentName = e.EquipmentName, StationName = s.StationName, TaskSchedule =  t.TaskSchedule, EquipmentID = e.EquipmentID }).ToList();
 
             foreach (var item in query)
             {
@@ -61,6 +61,7 @@ namespace StationLogApp.Handlers
             }
             return ltes;
         }
+
 
         public ObservableCollection<Station> LoadStation()
         {
@@ -77,11 +78,12 @@ namespace StationLogApp.Handlers
             return stationCollection;
         }
 
+
         // This method is activated by the button of the relayCommand  
         // and save the logged task and add a task to the next date that it has to be made
         public void OperateTask()
         {
-            SaveTaskClass();
+            // SaveTaskClass();
             ReScheduleTask();
         }
 
@@ -89,7 +91,7 @@ namespace StationLogApp.Handlers
         public void SaveTaskClass()
         {
             DateTime loggedDate = DateTime.Now;
-            TaskClass loggedTask = CreateScheduledTask(loggedDate);
+            TaskClass loggedTask = CreateScheduledTask(loggedDate, "Y");
             _savedTaskClass.Save(loggedTask, "Tasks");
         }
 
@@ -131,8 +133,9 @@ namespace StationLogApp.Handlers
         }
 
 
-        private TaskClass CreateScheduledTask( DateTime newDate)
+        private TaskClass CreateScheduledTask(DateTime newDate, string doneVariable)
         {
+
             TaskClass newReSchedule = new TaskClass(
                 _taskVm.SelectedTaskClass.TaskId,
                 _taskVm.SelectedTaskClass.TaskName,
@@ -141,7 +144,7 @@ namespace StationLogApp.Handlers
                 _taskVm.SelectedTaskClass.TaskType,
                 newDate,
                 _taskVm.SelectedTaskClass.Comment,
-                _taskVm.SelectedTaskClass.DoneVar,
+                doneVariable,
                 _taskVm.SelectedTaskClass.EquipmentID
             );
 
@@ -160,7 +163,7 @@ namespace StationLogApp.Handlers
         private void DoRescheduleTask(int periodicity)
         {
             DateTime nextTuesdayDate = GetNexTuesdayDate(periodicity);
-            TaskClass newReSchedule = CreateScheduledTask(nextTuesdayDate);
+            TaskClass newReSchedule = CreateScheduledTask(nextTuesdayDate, "N");
             _savedTaskClass.Save(newReSchedule, "Tasks");
         }
     }
