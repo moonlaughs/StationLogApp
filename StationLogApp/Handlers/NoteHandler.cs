@@ -14,7 +14,7 @@ namespace StationLogApp.Handlers
 {
     public class NoteHandler
     {
-        private NoteVM _noteVM;
+        private NoteVM _noteVM;  
         private ISave<Notes> _savedNote = new SaveM<Notes>();
         private DateConverter _dateConverter = new DateConverter();
         
