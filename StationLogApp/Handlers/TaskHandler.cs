@@ -7,62 +7,83 @@ using System.Threading.Tasks;
 using StationLogApp.Interfaces;
 using StationLogApp.Model;
 using StationLogApp.Persistancy;
+using StationLogApp.View;
 using StationLogApp.ViewModel;
 
 namespace StationLogApp.Handlers
 {
-    public class TaskHandler
+    public class TaskHandler 
     {
         private ISave<TaskClass> _savedTaskClass = new SaveM<TaskClass>();
-
         private TaskVm _taskVm;
+        
 
         public TaskClass SelectedTask
         {
             get { return _taskVm.SelectedTaskClass; }
         }
 
+
+        public ObservableCollection<Station> StationCatalog
+        {
+            get { return LoadStation(); } 
+        }
+
+
         public TaskHandler(TaskVm taskVm)
         {
             _taskVm = taskVm;
         }
-
-        // Methods 
-
+      
+       
         public static ObservableCollection<TaskEquipmentStation> LoadTaskEquipmentStations()
         {
             ObservableCollection<TaskEquipmentStation> ltes = new ObservableCollection<TaskEquipmentStation>();
 
-            LoadM<TaskClass> retrivedTask = new LoadM<TaskClass>();
-            Task<ObservableCollection<TaskClass>> api = retrivedTask.Load("Tasks");
-            ObservableCollection<TaskClass> taskCollection = api.Result;
+            ILoad<TaskClass> loadedTaskClass = new LoadM<TaskClass>();
+            ObservableCollection<TaskClass> taskCollection = loadedTaskClass.RetrieveCollection("Tasks");
 
-            LoadM<Station> retrivedStation = new LoadM<Station>();
-            Task<ObservableCollection<Station>> api2 = retrivedStation.Load("Stations");
-            ObservableCollection<Station> stationCollection = api2.Result;
+            ILoad<Station> loadedStationClass = new LoadM<Station>();
+            ObservableCollection<Station> stationCollection = loadedStationClass.RetrieveCollection("Stations");
 
-            LoadM<Equipment> retrivedEquipment = new LoadM<Equipment>();
-            Task<ObservableCollection<Equipment>> api3 = retrivedEquipment.Load("Equipments");
-            ObservableCollection<Equipment> equipmentCollection = api3.Result;
+            ILoad<Equipment> loadedEquipmentClass = new LoadM<Equipment>();
+            ObservableCollection<Equipment> equipmentCollection = loadedEquipmentClass.RetrieveCollection("Equipments");
             
+
             var query = (from t in taskCollection
                          join e in equipmentCollection on t.EquipmentID equals e.EquipmentID
                          join s in stationCollection on e.StationID equals s.StationID
-                         select new TaskEquipmentStation(){TaskName = t.TaskName, TaskType = t.TaskType, EquipmentName = e.EquipmentName, StationName = s.StationName }).ToList();
+                         select new TaskEquipmentStation() { TaskName = t.TaskName, TaskType = t.TaskType, EquipmentName = e.EquipmentName, StationName = s.StationName, TaskSchedule =  t.TaskSchedule, EquipmentID = e.EquipmentID }).ToList();
 
             foreach (var item in query)
             {
                 ltes.Add(item);
             }
-
             return ltes;
         }
+
+
+        public ObservableCollection<Station> LoadStation()
+        {
+           ILoad<Station> loadedStationClass = new LoadM<Station>();
+           ObservableCollection<Station> stationCollection = loadedStationClass.RetrieveCollection("Stations");
+
+            var query = (from s in stationCollection
+                select new Station() { StationName = s.StationName, StationID = s.StationID}).ToList();
+
+            foreach (var item in query)
+            {
+                stationCollection.Add(item);
+            }
+            return stationCollection;
+        }
+
 
         // This method is activated by the button of the relayCommand  
         // and save the logged task and add a task to the next date that it has to be made
         public void OperateTask()
         {
-            SaveTaskClass();
+            // SaveTaskClass();
             ReScheduleTask();
         }
 
@@ -70,7 +91,7 @@ namespace StationLogApp.Handlers
         public void SaveTaskClass()
         {
             DateTime loggedDate = DateTime.Now;
-            TaskClass loggedTask = CreateScheduledTask(loggedDate);
+            TaskClass loggedTask = CreateScheduledTask(loggedDate, "Y");
             _savedTaskClass.Save(loggedTask, "Tasks");
         }
 
@@ -101,9 +122,7 @@ namespace StationLogApp.Handlers
 
                 else if (_taskVm.SelectedTaskClass.TaskSchedule == "Every two month")
                 {
-                    DateTime nextTuesdayDate = GetNexTuesdayDate(56);
-                    TaskClass newReSchedule = CreateScheduledTask(nextTuesdayDate);
-                    _savedTaskClass.Save(newReSchedule, "Tasks");
+                    DoRescheduleTask(56);
                 }
 
                 else if (_taskVm.SelectedTaskClass.TaskSchedule == "Every two month")
@@ -114,8 +133,9 @@ namespace StationLogApp.Handlers
         }
 
 
-        private TaskClass CreateScheduledTask( DateTime newDate)
+        private TaskClass CreateScheduledTask(DateTime newDate, string doneVariable)
         {
+
             TaskClass newReSchedule = new TaskClass(
                 _taskVm.SelectedTaskClass.TaskId,
                 _taskVm.SelectedTaskClass.TaskName,
@@ -124,7 +144,7 @@ namespace StationLogApp.Handlers
                 _taskVm.SelectedTaskClass.TaskType,
                 newDate,
                 _taskVm.SelectedTaskClass.Comment,
-                _taskVm.SelectedTaskClass.DoneVar,
+                doneVariable,
                 _taskVm.SelectedTaskClass.EquipmentID
             );
 
@@ -143,7 +163,7 @@ namespace StationLogApp.Handlers
         private void DoRescheduleTask(int periodicity)
         {
             DateTime nextTuesdayDate = GetNexTuesdayDate(periodicity);
-            TaskClass newReSchedule = CreateScheduledTask(nextTuesdayDate);
+            TaskClass newReSchedule = CreateScheduledTask(nextTuesdayDate, "N");
             _savedTaskClass.Save(newReSchedule, "Tasks");
         }
     }
