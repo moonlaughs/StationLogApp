@@ -28,20 +28,24 @@
 
             <RelativePanel Grid.Row="1" 
                        Grid.Column="1">
+                <RelativePanel.DataContext>
+                    <viewModel:ButtonsVm/>
+                </RelativePanel.DataContext>
+                
                 <TextBlock Text="Hej, " 
                        FontSize="30" 
                        Name="TextBlock1"
                        Margin="22,0,0,0"/>
                 <TextBlock FontSize="30" 
-                       RelativePanel.AlignRightWith="TextBlock1" 
-                       DataContext="LoginVM" 
-                       Text="{Binding CurrentUser.Username}"/>
+                       RelativePanel.AlignRightWith="TextBlock1"
+                       Text="{Binding UserName}"/>
                 <Button Name="TodoButton" 
                     RelativePanel.LeftOf="DoneButton" 
                     Content="TO DO" 
                     Background="Transparent" FontSize="30"
                     BorderThickness="2" BorderBrush="Black"
-                        Click="TodoButton_OnClick"/>
+                        Command="{Binding GoTask}">
+                </Button>
                 <Button Name="DoneButton" 
                     RelativePanel.LeftOf="ProfileButton"
                     Content="DONE" 
@@ -80,7 +84,7 @@
 
 
             <ListView Name="Tasks" 
-                  ItemsSource="{Binding TaskCatalog, Mode=TwoWay}" 
+                  ItemsSource="{Binding DoneCatalog, Mode=TwoWay}" 
                   Grid.Row="3" 
                   Grid.Column="1" 
                   Width="1400" 
@@ -103,7 +107,7 @@
                                            Margin="10,0,0,5"/>
                                     <StackPanel Orientation="Horizontal" Margin="5">
                                         <Image Source="../Assets/place.png" Width="30" Margin="10,0,10,0"/>
-                                        <TextBlock Text="Station 1" Foreground="Black" FontSize="20"/>
+                                        <TextBlock Text="{Binding StationName, Mode=TwoWay}" Foreground="Black" FontSize="20"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <StackPanel Margin="10">
@@ -111,13 +115,13 @@
                                             <TextBlock Text="Type:" Foreground="Black" FontSize="20"/>
                                         </StackPanel>
                                         <StackPanel Margin="10">
-                                            <TextBlock Text="{Binding DoneDate}" Foreground="Black" FontSize="20"/>
-                                            <TextBlock Text="{Binding TaskType}" Foreground="Black" FontSize="20"/>
+                                            <TextBlock Text="{Binding DoneDate, Mode=TwoWay}" Foreground="Black" FontSize="20"/>
+                                            <TextBlock Text="{Binding TaskType, Mode=TwoWay}" Foreground="Black" FontSize="20"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel >
                                 <TextBlock Text="COMMENT:" Grid.Column="1"/>
-                                <TextBlock Text="Couldn't finish with the whole task !!!" 
+                                <TextBlock Text="{Binding Comment, Mode=TwoWay}" 
                                            TextWrapping="Wrap" Foreground="DarkRed" FontSize="20"
                                            Grid.Column="1" Width="210" Height="110" Margin="-90,20,5,0"/>
                             </Grid>

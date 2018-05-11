@@ -25,7 +25,7 @@ namespace StationLogApp.ViewModel
         private bool LoginStatus { get; set; }
 
         public RelayCommandClass CheckCommand { get; set; }
-        
+
         public User CurrentUser
         {
             get => _currentUser;
@@ -61,6 +61,7 @@ namespace StationLogApp.ViewModel
                         _userSingleton.SetPerson(user);
                         LoginStatus = true;
                         _frame.ActivateFrameNavigation(typeof(MenuTreePage), user);
+                        CurrentUser = user;
                         break;
                     }
                 }

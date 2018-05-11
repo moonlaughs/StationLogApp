@@ -5,20 +5,24 @@
     xmlns:local="using:StationLogApp.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModel="using:StationLogApp.ViewModel"
     mc:Ignorable="d">
 
     <Grid>
+        <!--<Grid.DataContext>
+            <viewModel:LoginVM/>
+        </Grid.DataContext>-->
         <Grid.Background>
             <ImageBrush ImageSource="../Assets/1.jpg"  Stretch="Fill"/>
         </Grid.Background>
+        
+        <Grid.DataContext>
+            <viewModel:ButtonsVm/>
+        </Grid.DataContext>
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-            <Button Content="TASKS" FontSize="100" Foreground="Bisque" Background="#00000000" BorderBrush="#00000000" Height="300" Width="750" Click="SeeTasksButton">
-
-            </Button>
-            <Button Content="HISTORY" FontSize="100" Foreground="Bisque" Background="#00000000" BorderBrush="#00000000" Height="300" Width="750" Click="SeeHistoryButton">
-
-            </Button>
+            <Button Content="TASKS" FontSize="100" Foreground="Bisque" Background="#00000000" BorderBrush="#00000000" Height="300" Width="750" Command="{Binding GoTask}"/>
+            <Button Content="HISTORY" FontSize="100" Foreground="Bisque" Background="#00000000" BorderBrush="#00000000" Height="300" Width="750" Command="{Binding GoDone}"/>
         </StackPanel>
     </Grid>
 </Page>
