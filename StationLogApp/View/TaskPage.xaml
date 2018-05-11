@@ -48,7 +48,7 @@
                        Foreground="White"/>
 
             <TextBlock FontSize="30" 
-                       RelativePanel.AlignRightWith="TextBlock1"
+                       RelativePanel.RightOf="TextBlock1"
                        Text="{Binding UserName}"
                        Margin="32,0,0,0"
                        Foreground="White"/>
@@ -90,14 +90,14 @@
                 <ComboBoxItem Content="{Binding TaskCatalog[4].StationName}"  Foreground="White"/>
                 <ComboBoxItem Content="{Binding TaskCatalog[5].StationName}"  Foreground="White"/>
                 <ComboBoxItem Content="{Binding TaskCatalog[6].StationName}"  Foreground="White"/>
-                <ComboBoxItem Content="{Binding TaskCatalog[7].StationName}"  Foreground="Black"/>
-                <ComboBoxItem Content="{Binding TaskCatalog[8].StationName}"  Foreground="Black"/>
-                <ComboBoxItem Content="{Binding TaskCatalog[9].StationName}"  Foreground="Black"/>
+                <ComboBoxItem Content="{Binding TaskCatalog[7].StationName}"  Foreground="White"/>
+                <ComboBoxItem Content="{Binding TaskCatalog[8].StationName}"  Foreground="White"/>
+                <ComboBoxItem Content="{Binding TaskCatalog[9].StationName}"  Foreground="White"/>
             </ComboBox>
             <ComboBox Name="Date" Margin="20,0,0,0" Width="200">
-                <ComboBoxItem Content="Today" Foreground="Black"/>
-                <ComboBoxItem Content="This week" Foreground="Black"/>
-                <ComboBoxItem Content="This month" Foreground="Black"/>
+                <ComboBoxItem Content="Today" Foreground="White"/>
+                <ComboBoxItem Content="This week" Foreground="White"/>
+                <ComboBoxItem Content="This month" Foreground="White"/>
             </ComboBox>
         </StackPanel>
 
@@ -108,7 +108,8 @@
                   Grid.Row="3"
                   Grid.Column="1" 
                   Width="1100"
-                  HorizontalAlignment="Left">
+                  HorizontalAlignment="Left"
+                  Foreground="White">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border Margin="5"
@@ -122,29 +123,29 @@
                             </Grid.ColumnDefinitions>
                             <StackPanel Margin="0,0,20,0">
                                 <TextBlock Text="{Binding TaskName, Mode=TwoWay}" 
-                                           Foreground="Black"
+                                           Foreground="White"
                                            FontSize="25" 
                                            Margin="10,0,0,5"/>
                                 <StackPanel Orientation="Horizontal" Margin="5">
                                     <Image Source="../Assets/place.png" Width="30" Margin="10,0,10,0"/>
-                                    <TextBlock Text="{Binding StationName}" Foreground="Black" FontSize="20"/>
+                                    <TextBlock Text="{Binding StationName}" Foreground="White" FontSize="20"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <StackPanel Margin="10">
-                                        <TextBlock Text="Due to:" Foreground="Black" FontSize="20"/>
-                                        <TextBlock Text="Type:" Foreground="Black" FontSize="20"/>
+                                        <TextBlock Text="Due to:" Foreground="White" FontSize="20"/>
+                                        <TextBlock Text="Type:" Foreground="White" FontSize="20"/>
                                     </StackPanel>
                                     <StackPanel Margin="10">
-                                        <TextBlock Text="{Binding DoneDate}" Foreground="Black" FontSize="20"/>
-                                        <TextBlock Text="{Binding TaskType}" Foreground="Black" FontSize="20"/>
+                                        <TextBlock Text="{Binding DoneDate}" Foreground="White" FontSize="20"/>
+                                        <TextBlock Text="{Binding TaskType}" Foreground="White" FontSize="20"/>
                                     </StackPanel>
                                 </StackPanel>
                             </StackPanel >
-                            <TextBlock Text="Registrations:" Grid.Column="1"/>
+                            <TextBlock Text="Registrations:" Foreground="White" Grid.Column="1"/>
                             <TextBox Name="Registrations"
-                                     Text="{Binding Registration, Mode=TwoWay}" Grid.Column="1" Width="250" Height="110" Margin="0,20,5,0"/>
-                            <TextBlock Text="Add comment:" Grid.Column="2"/>
-                            <TextBox Name="Comment"
+                                     Text="{Binding Registration, Mode=TwoWay}" Foreground="White" Grid.Column="1" Width="250" Height="110" Margin="0,20,5,0"/>
+                            <TextBlock Text="Add comment:" Foreground="White" Grid.Column="2"/>
+                            <TextBox Name="Comment" Foreground="White"
                                      Text="{Binding Comment, Mode=TwoWay}"
                                      Grid.Column="2" 
                                      Width="250" 
@@ -161,31 +162,31 @@
             <!--<ListView.ItemTemplate>
              <DataTemplate>-->
             <StackPanel Background="DarkGreen" Opacity="0.7" Width="450" 
-                          BorderThickness="3" BorderBrush="Black"
+                          BorderThickness="3" BorderBrush="White"
                           HorizontalAlignment="Left">
                 <StackPanel Orientation="Horizontal" Margin="10">
-                    <TextBlock Text="Name:" Foreground="Black" FontSize="18"/>
+                    <TextBlock Text="Name:" Foreground="White" FontSize="18"/>
                     <TextBlock Text="Low battery" FontSize="18" Margin="10,0,0,0"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="10">
-                    <TextBlock Text="Due date:" Foreground="Black" FontSize="18"/>
+                    <TextBlock Text="Due date:" Foreground="White" FontSize="18"/>
                     <TextBlock Text="20th May 2018" Margin="10,0,0,0" FontSize="18"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="10">
-                    <TextBlock Text="Description:" Foreground="Black" FontSize="18"/>
+                    <TextBlock Text="Description:" Foreground="White" FontSize="18"/>
                     <TextBlock Margin="10,0,0,0"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="10">
-                    <TextBlock Text="Technician/Station:" Foreground="Black" FontSize="18"/>
+                    <TextBlock Text="Technician/Station:" Foreground="White" FontSize="18"/>
                     <TextBlock Text="X"  Margin="10,0,0,0" FontSize="18"/>
                 </StackPanel>
                 <Button Content="Add log" 
                         HorizontalAlignment="Center"
                         Width="200"
-                        Foreground="Black" 
+                        Foreground="White" 
                         FontSize="18" 
                         Background="Transparent" 
-                        BorderBrush="Black" 
+                        BorderBrush="White" 
                         BorderThickness="2" 
                         Margin="0,30,0,10"
                         Click="GoToNotesPage"/>
@@ -201,10 +202,10 @@
                 FontSize="40"
                 HorizontalAlignment="Center"
                 Background="DarkGreen"
-                BorderThickness="1" BorderBrush="Black">
+                BorderThickness="1" BorderBrush="White">
             <StackPanel Orientation="Horizontal">
                 <Image Source="../Assets/Done.png" Width="35"/>
-                <TextBlock Text="DONE" Margin="20,0,0,0"/>
+                <TextBlock Text="DONE" Foreground="White" Margin="20,0,0,0"/>
             </StackPanel>
         </Button>
     </Grid>
