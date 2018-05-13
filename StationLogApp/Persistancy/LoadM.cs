@@ -64,8 +64,7 @@ namespace StationLogApp.Persistancy
 
         public ObservableCollection<T> RetrieveCollection (string table)
         {
-            LoadM<T> retrivedTask = new LoadM<T>();
-            Task<ObservableCollection<T>> api = retrivedTask.Load(table);
+            Task<ObservableCollection<T>> api = this.Load(table);
             ObservableCollection<T> taskCollection = api.Result;
             return taskCollection;
         }
