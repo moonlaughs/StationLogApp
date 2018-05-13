@@ -83,6 +83,8 @@
                 <ComboBoxItem Content="This week" Foreground="Black"/>
                 <ComboBoxItem Content="This month" Foreground="Black"/>
             </ComboBox>
+            <Button Name = "Sort" Content="Sort" Foreground="White" Background="black" Command="{Binding SortCommand, Mode=TwoWay}"
+                   ></Button>
         </StackPanel>
 
 
@@ -142,8 +144,8 @@
 
         <ListView Grid.Row="3" Grid.Column="2" Name="Notes" HorizontalAlignment="Left">
             <ListView.Background>Transparent</ListView.Background>
-            <!--<ListView.ItemTemplate>
-             <DataTemplate>-->
+            <ListView.ItemTemplate>
+             <DataTemplate>
             <StackPanel Background="DarkGreen" Opacity="0.7" Width="450" 
                           BorderThickness="3" BorderBrush="Black"
                           HorizontalAlignment="Left">
@@ -173,8 +175,8 @@
                         BorderThickness="2" 
                         Margin="0,30,0,10"/>
             </StackPanel>
-            <!--</DataTemplate>
-            </ListView.ItemTemplate>-->
+            </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
         <Button Name="DoneCommandButton"
                 Command="{Binding SaveTaskClass, Mode=TwoWay}"

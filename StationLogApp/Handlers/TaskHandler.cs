@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Appointments.AppointmentsProvider;
 using StationLogApp.Interfaces;
 using StationLogApp.Model;
 using StationLogApp.Persistancy;
@@ -16,6 +17,7 @@ namespace StationLogApp.Handlers
     {
         private ISave<TaskClass> _savedTaskClass = new SaveM<TaskClass>();
         private TaskVm _taskVm;
+       
         
 
         public TaskClass SelectedTask
@@ -29,6 +31,7 @@ namespace StationLogApp.Handlers
             get { return LoadStation(); } 
         }
 
+        
 
         public TaskHandler(TaskVm taskVm)
         {
@@ -132,7 +135,6 @@ namespace StationLogApp.Handlers
             }
         }
 
-
         private TaskClass CreateScheduledTask(DateTime newDate, string doneVariable)
         {
 
@@ -159,12 +161,29 @@ namespace StationLogApp.Handlers
             return nextTuesdayDate;
         }
 
-
         private void DoRescheduleTask(int periodicity)
         {
             DateTime nextTuesdayDate = GetNexTuesdayDate(periodicity);
             TaskClass newReSchedule = CreateScheduledTask(nextTuesdayDate, "N");
             _savedTaskClass.Save(newReSchedule, "Tasks");
         }
+
+        public void SortTaskbyStation()
+        {
+            ObservableCollection<TaskEquipmentStation> sortedCollection = _taskVm.TaskCatalog;
+
+            foreach (var item in _taskVm.TaskCatalog)
+            {
+                if (item.StationName == _taskVm.SelectedItemStation.StationName)
+                {
+                   
+                    sortedCollection.Add(item);
+                }
+            }
+
+            _taskVm.TaskCatalog = sortedCollection;
+        }
+
+
     }
 }
