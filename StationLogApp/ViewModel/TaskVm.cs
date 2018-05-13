@@ -23,6 +23,7 @@ namespace StationLogApp.ViewModel
         private TaskClass _selectedTaskClass;
         private TaskHandler _taskHandler;
         private ObservableCollection<Station> _stationCatalog;
+        private Station _selectedItemStation;
 
         #endregion
 
@@ -67,6 +68,19 @@ namespace StationLogApp.ViewModel
         {
             get { return _taskHandler; }
             set { _taskHandler = value; }
+        }
+
+        public Station SelectedItemStation
+        {
+            get
+            {
+                return _selectedItemStation;
+            }
+            set
+            {
+                _selectedItemStation = value;
+                OnPropertyChanged(nameof(SelectedItemStation));
+            }
         }
 
         #endregion

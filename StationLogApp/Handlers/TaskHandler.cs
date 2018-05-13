@@ -83,7 +83,7 @@ namespace StationLogApp.Handlers
         // and save the logged task and add a task to the next date that it has to be made
         public void OperateTask()
         {
-            // SaveTaskClass();
+            SaveTaskClass();
             ReScheduleTask();
         }
 
