@@ -122,11 +122,15 @@
     <Compile Include="Singletons\TaskCatalogSingleton.cs" />
     <Compile Include="Singletons\UserSingleton.cs" />
     <Compile Include="ViewModel\ButtonsVm.cs" />
+    <Compile Include="ViewModel\CreateTaskVM.cs" />
     <Compile Include="ViewModel\LoginVM.cs" />
     <Compile Include="ViewModel\NoteVM.cs" />
     <Compile Include="ViewModel\TaskVm.cs" />
     <Compile Include="View\AddNotesPage.xaml.cs">
       <DependentUpon>AddNotesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CreateTaskPage.xaml.cs">
+      <DependentUpon>CreateTaskPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LogInPage.xaml.cs">
       <DependentUpon>LogInPage.xaml</DependentUpon>
@@ -173,6 +177,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="View\AddNotesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CreateTaskPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
