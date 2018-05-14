@@ -18,8 +18,12 @@
                     BorderThickness="3" BorderBrush="Black"
                     HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal" Margin="10">
+                <TextBlock Text="Note ID:" Foreground="Black" FontSize="18"/>
+                <TextBox Text="{Binding NotesID, Mode=TwoWay}" FontSize="18" Margin="10,0,0,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="10">
                 <TextBlock Text="Name:" Foreground="Black" FontSize="18"/>
-                <TextBox Text="{Binding Note, Mode=TwoWay}" FontSize="18" Margin="10,0,0,0"/>
+                <TextBox Text="{Binding NoteText, Mode=TwoWay}" FontSize="18" Margin="10,0,0,0"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10">

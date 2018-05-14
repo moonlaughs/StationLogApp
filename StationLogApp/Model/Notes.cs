@@ -11,7 +11,7 @@ namespace StationLogApp.Model
     {
         #region // Properties
         public int NotesID { get; set; }
-        public string Note { get; set; }
+        public string NoteText { get; set; }
         public int StationID { get; set; }
         public DateTimeOffset DueDate { get; set; }
         public int UserID { get; set; }
@@ -19,18 +19,18 @@ namespace StationLogApp.Model
 
         #region // Constructors 
 
-        public Notes(int notesID, string note, int stationID, DateTimeOffset dueDate, int userID)
+        public Notes(int notesID, string noteText, int stationID, DateTimeOffset dueDate, int userID)
         {
             NotesID = notesID;
-            Note = note;
+            NoteText = noteText;
             StationID = stationID;
             DueDate = dueDate;
             UserID = userID;
         }
 
-        public Notes(string note, int stationID, DateTimeOffset dueDate, int userID)
+        public Notes(string noteText, int stationID, DateTimeOffset dueDate, int userID)
         {
-            Note = note;
+            NoteText = noteText;
             StationID = stationID;
             DueDate = dueDate;
             UserID = userID;
@@ -46,7 +46,7 @@ namespace StationLogApp.Model
 
         public override string ToString()
         {
-            return $"{NotesID}, {Note}, {StationID}, {DueDate}, {UserID}";
+            return $"{NotesID}, {NoteText}, {StationID}, {DueDate}, {UserID}";
         }
         #endregion
     }

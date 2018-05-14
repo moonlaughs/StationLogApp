@@ -18,13 +18,13 @@ namespace StationLogApp.Persistancy
         private const string ServerUrl = "http://stationlogwebservice20180424112310.azurewebsites.net/";
 
         private string _serverURL;
-        private string _apiPrefix;
+        private string _apiPrefix = "api/";
         private string _apiID;
         private HttpClientHandler _httpClientHandler;
         private HttpClient _httpClient;
         #endregion
 
-        public async Task Create(T obj)
+        public async Task Create(T obj, string _apiID)
         {
             _httpClientHandler = new HttpClientHandler() { UseDefaultCredentials = true };
             using (_httpClient = new HttpClient(_httpClientHandler))

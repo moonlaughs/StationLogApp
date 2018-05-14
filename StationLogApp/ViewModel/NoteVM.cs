@@ -13,13 +13,15 @@ namespace StationLogApp.ViewModel
 {
     public class NoteVM : NotifyPropertyChangedClass
     {
-        private string _note;
+        private int _notesID;
+        private string _noteText;
         private int _stationID;
         private DateTimeOffset _dueDate;
         private int _userID;
         private ObservableCollection<Station> _stationCollection;
         private ButtonsVm _currentUser = new ButtonsVm();
         private Station _selectedNote;
+        private Notes _notes;
         
         public ObservableCollection<Station> StationCollection
         {
@@ -30,16 +32,26 @@ namespace StationLogApp.ViewModel
             set { _stationCollection = value; }
         }
 
-        public string Note
+        public int NotesID
+        {
+            get { return _notesID; }
+            set
+            {
+                _notesID = value;
+                OnPropertyChanged(nameof(NotesID));
+            }
+        }
+
+        public string NoteText
         {
             get
             {
-                return _note;
+                return _noteText;
             }
             set
             {
-                _note = value; 
-                OnPropertyChanged(nameof(Note));
+                _noteText = value; 
+                OnPropertyChanged(nameof(NoteText));
             }
         }
 

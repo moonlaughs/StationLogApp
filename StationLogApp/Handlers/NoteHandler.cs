@@ -16,7 +16,9 @@ namespace StationLogApp.Handlers
     {
         private NoteVM _noteVM; 
         private ISave<Notes> _savedNote = new SaveM<Notes>();
+        private ICreate<Notes> _createdNote = new CreateM<Notes>();
         private DateConverter _dateConverter = new DateConverter();
+        private Notes _note1;
         
         public NoteHandler(NoteVM noteVM)
         {
@@ -27,13 +29,19 @@ namespace StationLogApp.Handlers
         {
             DateTime convertedDate = _dateConverter.ConvertToDate(_noteVM.DueDate);
             int convertedStationName = _noteVM.SelectedNote.StationID;
-            Notes note1 = new Notes(_noteVM.Note, convertedStationName, convertedDate, _noteVM.UserID);
-            
+            _note1 = new Notes(_noteVM.NotesID, _noteVM.NoteText, convertedStationName, convertedDate, _noteVM.UserID);
+            _createdNote.Create(_note1, "Notes");
         }
 
-        public void SaveNote(Notes note1)
+        public void SaveNote()
         {
-            _savedNote.Save(note1, "Notes");
+            _savedNote.Save(_note1, "Notes");
+        }
+
+        public void CreateAndSaveNote()
+        {
+            CreateNote();
+            SaveNote();
         }
 
         public static ObservableCollection<Station> LoadStations()
