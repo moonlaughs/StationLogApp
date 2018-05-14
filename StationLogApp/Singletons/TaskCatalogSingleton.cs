@@ -6,6 +6,7 @@ using StationLogApp.Handlers;
 using StationLogApp.Interfaces;
 using StationLogApp.Model;
 using StationLogApp.Persistancy;
+using StationLogApp.ViewModel;
 
 namespace StationLogApp.Singletons
 {
@@ -13,20 +14,26 @@ namespace StationLogApp.Singletons
     {
         
         private static TaskCatalogSingleton _instance;
+
        
 
         // Properties
+
         public ObservableCollection<TaskEquipmentStation> TaskCatalog {get; set; }
-        public ObservableCollection<TaskEquipmentStation> DoneCatalog { get; set; }
+        
 
         // Constructor of the Singleton
+
         private TaskCatalogSingleton()
         {
-            TaskCatalog = TaskHandler.LoadToDo();
-            DoneCatalog = TaskHandler.LoadDone();
+            
+            TaskCatalog = TaskHandler.LoadTaskEquipmentStations();
         }
        
+
+       
         // Singleton Method
+
         public static TaskCatalogSingleton Instance
         {
             get

@@ -98,6 +98,7 @@
     <Compile Include="Common\FrameNavigateClass.cs" />
     <Compile Include="Common\NotifyPropertyChangedClass.cs" />
     <Compile Include="Common\RelayCommandClass.cs" />
+    <Compile Include="Converters\DateConverter.cs" />
     <Compile Include="Handlers\NoteHandler.cs" />
     <Compile Include="Handlers\TaskHandler.cs" />
     <Compile Include="Interfaces\ISave.cs" />
@@ -121,7 +122,7 @@
     <Compile Include="Model\TaskClass.cs" />
     <Compile Include="Singletons\TaskCatalogSingleton.cs" />
     <Compile Include="Singletons\UserSingleton.cs" />
-    <Compile Include="ViewModel\ButtonsVm.cs" />
+    <Compile Include="ViewModel\ButtonVm.cs" />
     <Compile Include="ViewModel\LoginVM.cs" />
     <Compile Include="ViewModel\NoteVM.cs" />
     <Compile Include="ViewModel\TaskVm.cs" />
@@ -150,9 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\1.jpg" />
-    <Content Include="Assets\2.jpg" />
     <Content Include="Assets\Done.png" />
-    <Content Include="Assets\forest.jpg" />
     <Content Include="Assets\Green.png" />
     <Content Include="Assets\place.png" />
     <Content Include="Assets\profile.png" />

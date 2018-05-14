@@ -51,7 +51,7 @@
                        RelativePanel.RightOf="TextBlock1"
                        Text="{Binding UserName}"
                        Margin="32,0,0,0"
-                       Foreground="White"/>
+                       Foreground="Black"/>
 
             <Button Name="TodoButton" 
                     RelativePanel.LeftOf="DoneButton" 
@@ -82,17 +82,12 @@
                        Foreground="White" 
                        FontSize="20"
                        Margin="15,0,10,0"/>
-            <ComboBox Name="Stations" Foreground="Black" Margin="20,0,0,0" Width="200">
-                <ComboBoxItem Content="{Binding TaskCatalog[0].StationName}"  Foreground="White"/>
-                <ComboBoxItem Content="{Binding TaskCatalog[1].StationName}"  Foreground="White"/>
-                <ComboBoxItem Content="{Binding TaskCatalog[2].StationName}"  Foreground="White"/>
-                <ComboBoxItem Content="{Binding TaskCatalog[3].StationName}"  Foreground="White"/>
-                <ComboBoxItem Content="{Binding TaskCatalog[4].StationName}"  Foreground="White"/>
-                <ComboBoxItem Content="{Binding TaskCatalog[5].StationName}"  Foreground="White"/>
-                <ComboBoxItem Content="{Binding TaskCatalog[6].StationName}"  Foreground="White"/>
-                <ComboBoxItem Content="{Binding TaskCatalog[7].StationName}"  Foreground="White"/>
-                <ComboBoxItem Content="{Binding TaskCatalog[8].StationName}"  Foreground="White"/>
-                <ComboBoxItem Content="{Binding TaskCatalog[9].StationName}"  Foreground="White"/>
+            <ComboBox ItemsSource="{Binding StationCatalog}" Height="40" Width="200">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding StationName, Mode=TwoWay}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
             </ComboBox>
             <ComboBox Name="Date" Margin="20,0,0,0" Width="200">
                 <ComboBoxItem Content="Today" Foreground="White"/>

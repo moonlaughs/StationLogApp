@@ -1,22 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Appointments.AppointmentsProvider;
 using StationLogApp.Common;
 using StationLogApp.Handlers;
+using StationLogApp.Model;
 
 namespace StationLogApp.ViewModel
 {
-    public class NoteVM :NotifyPropertyChangedClass
+    public class NoteVM : NotifyPropertyChangedClass
     {
         private string _note;
-        private string _description;
-        private DateTime _dueDate;
+        private int _stationID;
+        private DateTimeOffset _dueDate;
+        private int _userID;
+        private ObservableCollection<Station> _stationCollection;
+        
+        public ObservableCollection<Station> StationCollection
+        {
+            get
+            {
+                return _stationCollection;
+            }
+            set { _stationCollection = value; }
+        }
 
         public string Note
         {
-            get { return _note; }
+            get
+            {
+                return _note;
+            }
             set
             {
                 _note = value; 
@@ -24,17 +41,17 @@ namespace StationLogApp.ViewModel
             }
         }
 
-        public string Descrption
+        public int StationID
         {
-            get { return _description; }
+            get { return _stationID; }
             set
             {
-                _description = value;
-                OnPropertyChanged(nameof(Descrption));
+                _stationID = value;
+                OnPropertyChanged(nameof(StationID));
             }
         }
 
-        public DateTime DueDate
+        public DateTimeOffset DueDate
         {
             get { return _dueDate; }
             set
@@ -44,13 +61,27 @@ namespace StationLogApp.ViewModel
             }
         }
 
+        public int UserID
+        {
+            get { return _userID; }
+            set
+            {
+                _userID = value;
+                OnPropertyChanged(nameof(UserID));
+            }
+        }
+
         public RelayCommandClass SaveNote { get; set; }
+
+
         public NoteHandler NoteHandler { get; set; }
 
         public NoteVM()
         {
+            _dueDate = DateTimeOffset.Now;
+            _stationCollection = NoteHandler.LoadStations();
             NoteHandler = new NoteHandler(this);
-            SaveNote = new RelayCommandClass(NoteHandler.SaveNote);
+            SaveNote = new RelayCommandClass(NoteHandler.CreateNote);
         }
 
     }

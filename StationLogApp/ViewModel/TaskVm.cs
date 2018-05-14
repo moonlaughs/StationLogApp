@@ -20,9 +20,14 @@ namespace StationLogApp.ViewModel
 
         private TaskCatalogSingleton _catalogSingleton;
         private TaskClass _selectedTaskClass;
-        #endregion 
+        private TaskHandler _taskHandler;
+        private ObservableCollection<Station> _stationCatalog;
+
+        #endregion
+
 
         #region properties
+
         public ObservableCollection<TaskEquipmentStation> TaskCatalog
         {
             get
@@ -36,17 +41,9 @@ namespace StationLogApp.ViewModel
             } 
         }
 
-        public ObservableCollection<TaskEquipmentStation> DoneCatalog
+        public ObservableCollection<Station> StationCatalog
         {
-            get
-            {
-                return _catalogSingleton.DoneCatalog;
-            }
-            set
-            {
-                _catalogSingleton.DoneCatalog = value;
-                OnPropertyChanged(nameof(DoneCatalog));
-            }
+            get { return _stationCatalog; }
         }
 
         public TaskClass SelectedTaskClass
@@ -64,7 +61,13 @@ namespace StationLogApp.ViewModel
 
         public RelayCommandClass SaveTaskClass { get; set; }
 
-        public TaskHandler TaskHandler { get; set; }
+
+        public TaskHandler TaskHandler
+        {
+            get { return _taskHandler; }
+            set { _taskHandler = value; }
+        }
+
         #endregion
 
         #region constructor
@@ -72,9 +75,14 @@ namespace StationLogApp.ViewModel
         {
             _catalogSingleton = TaskCatalogSingleton.Instance;
             _selectedTaskClass = new TaskClass();
-            TaskHandler = new TaskHandler(this);
+            _taskHandler = new TaskHandler(this);
+            _stationCatalog = _taskHandler.LoadStation();
             SaveTaskClass = new RelayCommandClass(TaskHandler.OperateTask);
         }
+        #endregion
+
+        #region Methods
+        
         #endregion
     }
 }
