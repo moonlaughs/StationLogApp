@@ -19,37 +19,29 @@ namespace StationLogApp.Persistancy
 
         private string _serverURL;
         private string _apiPrefix = "api/";
-        private string _apiID;
+        private string _apiID = "Notes";
         private HttpClientHandler _httpClientHandler;
         private HttpClient _httpClient;
+        private string _url;
         #endregion
 
-        public async Task Create(T obj, string _apiID)
+        public CreateM()
         {
-            _httpClientHandler = new HttpClientHandler() { UseDefaultCredentials = true };
-            using (_httpClient = new HttpClient(_httpClientHandler))
-            {
-                _httpClient.BaseAddress = new Uri(ServerUrl);
-                _httpClient.DefaultRequestHeaders.Clear();
-                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                try
-                {
-                    string postitem = JsonConvert.SerializeObject(obj);
-                    Task<HttpResponseMessage> task3 = _httpClient.PostAsync($"{ServerUrl}/{_apiPrefix}/{_apiID}",
-                        new StringContent(postitem, Encoding.UTF8, "application/json"));
-                    if (task3 != null)
-                    {
-                        if (task3.Result.IsSuccessStatusCode)
-                        {
-                            task3.Result.Content.ReadAsAsync<T>();
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    await new MessageDialog(ex.Message).ShowAsync();
-                }
-            }
+            _httpClientHandler = new HttpClientHandler();
+            _httpClientHandler.UseDefaultCredentials = true;
+            _httpClient = new HttpClient(_httpClientHandler);
+            _httpClient.BaseAddress = new Uri(ServerUrl);
+            _httpClient.DefaultRequestHeaders.Clear();
+            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string url = String.Format("{0}{1}", _apiPrefix, _apiID);
+            _url = url;
+        }
+
+        public async Task Create(T obj)
+        {
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync(_url, obj);
+            response.EnsureSuccessStatusCode();
         }
     }
 }

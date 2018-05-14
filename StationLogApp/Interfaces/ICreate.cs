@@ -10,6 +10,6 @@ namespace StationLogApp.Interfaces
 {
    public interface ICreate<T>
    {
-       Task Create(T obj, string _apiID);
+       Task Create(T obj);
     }
 }

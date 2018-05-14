@@ -30,7 +30,7 @@ namespace StationLogApp.Handlers
             DateTime convertedDate = _dateConverter.ConvertToDate(_noteVM.DueDate);
             int convertedStationName = _noteVM.SelectedNote.StationID;
             _note1 = new Notes(_noteVM.NotesID, _noteVM.NoteText, convertedStationName, convertedDate, _noteVM.UserID);
-            _createdNote.Create(_note1, "Notes");
+            _createdNote.Create(_note1);
         }
 
         public void SaveNote()
