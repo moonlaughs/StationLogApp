@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
 using StationLogApp.Interfaces;
 using StationLogApp.Model;
 using StationLogApp.Persistancy;
@@ -15,11 +16,8 @@ namespace StationLogApp.Handlers
     public class TaskHandler 
     {
         private ISave<TaskClass> _savedTaskClass = new SaveM<TaskClass>();
-<<<<<<< HEAD
-        //private ICreate<TaskClass> _savedTaskClass = new CreateM<TaskClass>();
 
-=======
->>>>>>> ea1cdf4e87c2893b77f8af1b6fd74f4dbb9c6d56
+        //private ICreate<TaskClass> _savedTaskClass = new CreateM<TaskClass>();
         private TaskVm _taskVm;
         
 
@@ -96,16 +94,15 @@ namespace StationLogApp.Handlers
         public void SaveTaskClass()
         {
             DateTime loggedDate = DateTime.Now;
-<<<<<<< HEAD
-            TaskClass loggedTask = CreateScheduledTask(loggedDate);
-            await _savedTaskClass.Save(loggedTask, "Tasks");
-            //await _savedTaskClass.Create(loggedTask);
-            MessageDialog msg = new MessageDialog("Task saved");
-            await msg.ShowAsync();
-=======
+//<<<<<<< HEAD
+//            TaskClass loggedTask = CreateScheduledTask(loggedDate);
+//            await _savedTaskClass.Save(loggedTask, "Tasks");
+//            //await _savedTaskClass.Create(loggedTask);
+//            MessageDialog msg = new MessageDialog("Task saved");
+//            await msg.ShowAsync();
+//=======
             TaskClass loggedTask = CreateScheduledTask(loggedDate, "Y");
             _savedTaskClass.Save(loggedTask, "Tasks");
->>>>>>> ea1cdf4e87c2893b77f8af1b6fd74f4dbb9c6d56
         }
 
 
@@ -150,17 +147,6 @@ namespace StationLogApp.Handlers
         {
 
             TaskClass newReSchedule = new TaskClass(
-<<<<<<< HEAD
-                taskId: _taskVm.SelectedTaskClass.TaskId,                  //??????
-                taskName: _taskVm.SelectedTaskClass.TaskName,
-                taskSchedule: _taskVm.SelectedTaskClass.TaskSchedule,
-                registration: _taskVm.SelectedTaskClass.Registration,
-                taskType: _taskVm.SelectedTaskClass.TaskType,
-                doneDate: newDate,
-                comment: _taskVm.SelectedTaskClass.Comment,
-                doneVar: "Y",
-                equipmentID: _taskVm.SelectedTaskClass.EquipmentID
-=======
                 _taskVm.SelectedTaskClass.TaskId,
                 _taskVm.SelectedTaskClass.TaskName,
                 _taskVm.SelectedTaskClass.TaskSchedule,
@@ -170,7 +156,6 @@ namespace StationLogApp.Handlers
                 _taskVm.SelectedTaskClass.Comment,
                 doneVariable,
                 _taskVm.SelectedTaskClass.EquipmentID
->>>>>>> ea1cdf4e87c2893b77f8af1b6fd74f4dbb9c6d56
             );
 
             return newReSchedule;
