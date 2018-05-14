@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
 using StationLogApp.Common;
+using StationLogApp.Model;
 using StationLogApp.Singletons;
 using StationLogApp.View;
 
@@ -12,9 +14,11 @@ namespace StationLogApp.ViewModel
     public class ButtonsVm
     {
         private UserSingleton _currentUser;
-        private FrameNavigateClass _frameNavigation;
+        private readonly FrameNavigateClass _frameNavigation;
+
         public RelayCommandClass GoTask { get; set; }
         public RelayCommandClass GoDone { get; set; }
+
         public string UserName { get; set; }
 
         public UserSingleton CurrentUser

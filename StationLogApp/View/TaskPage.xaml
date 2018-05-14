@@ -104,7 +104,7 @@
 
         <ListView Name="Tasks"
                   ItemsSource="{Binding TaskCatalog, Mode=TwoWay}"
-                  SelectedItem="{Binding SelectedTaskClass, Mode= TwoWay}"
+                  SelectedItem="{Binding SelectedItem, Mode= TwoWay}"
                   Grid.Row="3"
                   Grid.Column="1" 
                   Width="1100"
@@ -137,7 +137,7 @@
                                         <TextBlock Text="Type:" Foreground="White" FontSize="20"/>
                                     </StackPanel>
                                     <StackPanel Margin="10">
-                                        <TextBlock Text="{Binding DoneDate}" Foreground="White" FontSize="20"/>
+                                        <TextBlock Text="{Binding DueDate, Mode=TwoWay}" Foreground="White" FontSize="20"/>
                                         <TextBlock Text="{Binding TaskType}" Foreground="White" FontSize="20"/>
                                     </StackPanel>
                                 </StackPanel>
@@ -160,8 +160,6 @@
 
         <ListView Grid.Row="3" Grid.Column="2" Name="Notes" HorizontalAlignment="Left">
             <ListView.Background>Transparent</ListView.Background>
-            <!--<ListView.ItemTemplate>
-             <DataTemplate>-->
             <StackPanel Background="#407c3a" Opacity="0.7" Width="450" 
                           BorderThickness="3" BorderBrush="White"
                           HorizontalAlignment="Left">
@@ -192,8 +190,6 @@
                         Margin="0,30,0,10"
                         Click="GoToNotesPage"/>
             </StackPanel>
-            <!--</DataTemplate>
-            </ListView.ItemTemplate>-->
         </ListView>
         <Button Name="DoneCommandButton"
                 Command="{Binding SaveTaskClass}"
@@ -209,5 +205,22 @@
                 <TextBlock Text="DONE" Foreground="White" Margin="20,0,0,0"/>
             </StackPanel>
         </Button>
+
+        <Button Name="InfoButton"
+                Command="{Binding DoInfo}"
+                Grid.Column="2"
+                Grid.Row="4"
+                Width="200"
+                FontSize="40"
+                HorizontalAlignment="Center"
+                Background="DarkGreen"
+                BorderThickness="1" BorderBrush="White"
+                Margin="50,0,0,0">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="../Assets/Done.png" Width="35"/>
+                <TextBlock Text="More info" Foreground="White" Margin="20,0,0,0"/>
+            </StackPanel>
+        </Button>
+        
     </Grid>
 </Page>

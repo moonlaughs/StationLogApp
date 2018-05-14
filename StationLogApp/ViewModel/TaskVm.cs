@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
+using StationLogApp.Annotations;
 using StationLogApp.Common;
 using StationLogApp.Handlers;
 using StationLogApp.Interfaces;
@@ -19,7 +21,10 @@ namespace StationLogApp.ViewModel
         #region instancefields
 
         private TaskCatalogSingleton _catalogSingleton;
-        private TaskClass _selectedTaskClass;
+        //private TaskClass _selectedTaskClass;
+
+        //Iza
+        private TaskEquipmentStation _selectedItem;
         #endregion 
 
         #region properties
@@ -49,20 +54,35 @@ namespace StationLogApp.ViewModel
             }
         }
 
-        public TaskClass SelectedTaskClass
+        //public TaskClass SelectedTaskClass
+        //{
+        //    get
+        //    {
+        //        return _selectedTaskClass;
+        //    }
+        //    set
+        //    {
+        //        _selectedTaskClass = value;
+        //        OnPropertyChanged(nameof(SelectedTaskClass));
+        //    }
+        //}
+
+        //Iza
+        public TaskEquipmentStation SelectedItem
         {
             get
             {
-                return _selectedTaskClass;
+                return _selectedItem;
             }
             set
             {
-                _selectedTaskClass = value;
-                OnPropertyChanged(nameof(SelectedTaskClass));
+                _selectedItem = value;
+                OnPropertyChanged(nameof(SelectedItem));
             }
         }
 
         public RelayCommandClass SaveTaskClass { get; set; }
+        public RelayCommandClass DoInfo { get; set; }
 
         public TaskHandler TaskHandler { get; set; }
         #endregion
@@ -71,10 +91,30 @@ namespace StationLogApp.ViewModel
         public TaskVm()
         {
             _catalogSingleton = TaskCatalogSingleton.Instance;
-            _selectedTaskClass = new TaskClass();
+            //_selectedTaskClass = new TaskClass();
             TaskHandler = new TaskHandler(this);
             SaveTaskClass = new RelayCommandClass(TaskHandler.OperateTask);
+            
+            DoInfo = new RelayCommandClass(Info);
+
+            _selectedItem = new TaskEquipmentStation();
         }
         #endregion
+
+        public async void Info()
+        {
+            if (SelectedItem.TaskId != 0)
+            {
+                string info =
+                    $"Equipment name: {SelectedItem.EquipmentName} \nTaskId: {SelectedItem.TaskId} \nEquipmentId: {SelectedItem.EquipmentID} \nTask Schedule: {SelectedItem.TaskSchedule}";
+                MessageDialog msg = new MessageDialog(info, "More Information");
+                await msg.ShowAsync();
+            }
+            else
+            {
+                MessageDialog msg = new MessageDialog("Select item to see the details");
+                await msg.ShowAsync();
+            }
+        }
     }
 }
