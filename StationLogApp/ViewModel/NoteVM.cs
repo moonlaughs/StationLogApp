@@ -18,6 +18,8 @@ namespace StationLogApp.ViewModel
         private DateTimeOffset _dueDate;
         private int _userID;
         private ObservableCollection<Station> _stationCollection;
+        private ButtonsVm _currentUser = new ButtonsVm();
+        private Station _selectedNote;
         
         public ObservableCollection<Station> StationCollection
         {
@@ -67,7 +69,18 @@ namespace StationLogApp.ViewModel
             set
             {
                 _userID = value;
-                OnPropertyChanged(nameof(UserID));
+                //OnPropertyChanged(nameof(UserID));
+            }
+        }
+
+        public Station SelectedNote
+        {
+            get { return _selectedNote; }
+            set
+            {
+                _selectedNote = value;
+                OnPropertyChanged();
+                SaveNote.RaiseCanExecuteChanged();
             }
         }
 
@@ -80,6 +93,8 @@ namespace StationLogApp.ViewModel
         {
             _dueDate = DateTimeOffset.Now;
             _stationCollection = NoteHandler.LoadStations();
+            _selectedNote = SelectedNote;
+            _userID = _currentUser.UserID;
             NoteHandler = new NoteHandler(this);
             SaveNote = new RelayCommandClass(NoteHandler.CreateNote);
         }

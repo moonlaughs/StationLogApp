@@ -23,6 +23,8 @@ namespace StationLogApp.ViewModel
 
         public string UserName { get; set; }
 
+        public int UserID { get; set; }
+
         public UserSingleton CurrentUser
 
         {
@@ -46,6 +48,8 @@ namespace StationLogApp.ViewModel
             GoDone = new RelayCommandClass(DoDone);
 
             UserName = _currentUser.GetUsername();
+
+            UserID = _currentUser.GetUserID();
 
         }
 

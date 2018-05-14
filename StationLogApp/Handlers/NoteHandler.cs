@@ -12,13 +12,12 @@ using StationLogApp.ViewModel;
 
 namespace StationLogApp.Handlers
 {
-    public class NoteHandler
+    public class NoteHandler 
     {
-        private NoteVM _noteVM;  
+        private NoteVM _noteVM; 
         private ISave<Notes> _savedNote = new SaveM<Notes>();
         private DateConverter _dateConverter = new DateConverter();
         
-
         public NoteHandler(NoteVM noteVM)
         {
             _noteVM = noteVM;
@@ -27,7 +26,8 @@ namespace StationLogApp.Handlers
         public void CreateNote()
         {
             DateTime convertedDate = _dateConverter.ConvertToDate(_noteVM.DueDate);
-            Notes note1 = new Notes(_noteVM.Note, _noteVM.StationID, convertedDate, _noteVM.UserID);
+            int convertedStationName = _noteVM.SelectedNote.StationID;
+            Notes note1 = new Notes(_noteVM.Note, convertedStationName, convertedDate, _noteVM.UserID);
             
         }
 
