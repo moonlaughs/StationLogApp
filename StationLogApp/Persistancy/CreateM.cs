@@ -15,7 +15,7 @@ namespace StationLogApp.Persistancy
     class CreateM<T> : ICreate<T> where T : class
     {
         #region instancefields
-        private const string ServerUrl = "http://stationlogwebservice20180424112310.azurewebsites.net/";
+        private const string ServerUrl = "http://stationlogdbwebservice20180514015122.azurewebsites.net/";
 
         private string _serverURL;
         private string _apiPrefix;

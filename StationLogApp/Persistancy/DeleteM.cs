@@ -13,7 +13,7 @@ namespace StationLogApp.Persistancy
     public class DeleteM<T> : IDelete<T> where T : class
     {
         #region
-        private const string ServerUrl = "http://stationlogwebservice20180424112310.azurewebsites.net/";
+        private const string ServerUrl = "http://stationlogdbwebservice20180514015122.azurewebsites.net/";
 
         private string _serverURL;
         private string _apiPrefix;

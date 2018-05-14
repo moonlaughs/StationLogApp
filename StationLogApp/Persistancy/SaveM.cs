@@ -14,7 +14,7 @@ namespace StationLogApp.Model
     class SaveM<T> : ISave<T> where T : class 
     {
         #region
-        private const string _serverUrl = "http://stationlogwebservice20180424112310.azurewebsites.net/";
+        private const string _serverUrl = "http://stationlogdbwebservice20180514015122.azurewebsites.net/";
 
         
         private string _apiPrefix = "api/";
