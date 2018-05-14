@@ -21,7 +21,7 @@ namespace StationLogApp.Persistancy
         private const string ServerUrl = "http://stationlogdbwebservice20180514015122.azurewebsites.net/";
         private string _serverURL;
         private string _apiPrefix = "api";
-        private string _apiID;
+        //private string _apiID;
         private HttpClientHandler _httpClientHandler;
         private HttpClient _httpClient;
         #endregion

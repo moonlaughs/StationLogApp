@@ -37,13 +37,13 @@ namespace StationLogApp.Persistancy
                     string postitem = JsonConvert.SerializeObject(obj);
                     Task<HttpResponseMessage> task3 = _httpClient.PostAsync($"{ServerUrl}/{_apiPrefix}/{_apiID}",
                         new StringContent(postitem, Encoding.UTF8, "application/json"));
-                    if (task3 != null)
-                    {
-                        if (task3.Result.IsSuccessStatusCode)
-                        {
-                            await task3.Result.Content.ReadAsAsync<T>();
-                        }
-                    }
+                    //if (task3 != null)
+                    //{
+                    //    if (task3.Result.IsSuccessStatusCode)
+                    //    {
+                    //        await task3.Result.Content.ReadAsAsync<T>();
+                    //    }
+                    //}
                 }
                 catch (Exception ex)
                 {

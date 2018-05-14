@@ -17,7 +17,7 @@ namespace StationLogApp.Model
         public string Registration { get; set; }
         public string TaskType { get; set; }
         public DateTime DueDate { get; set; }
-        public DateTime DoneDate { get; set; }
+        public DateTime? DoneDate { get; set; }
         public string Comment { get; set; }
         public string DoneVar { get; set; }
         public int EquipmentID { get; set; }
@@ -29,7 +29,7 @@ namespace StationLogApp.Model
             
         }
 
-        public TaskClass(int taskId, string taskName, string taskSchedule, string registration, string taskType, DateTime dueDate,  DateTime doneDate, string comment, string doneVar, int equipmentID)
+        public TaskClass(int taskId, string taskName, string taskSchedule, string registration, string taskType, DateTime dueDate,  DateTime? doneDate, string comment, string doneVar, int equipmentID)
         {
             TaskId = taskId;
             TaskName = taskName;

@@ -42,5 +42,10 @@ namespace StationLogApp.View
         {
             Frame.Navigate(typeof(AddNotesPage));
         }
+
+        private void Tasks_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
     }
 }

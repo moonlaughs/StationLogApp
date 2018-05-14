@@ -34,6 +34,8 @@ namespace StationLogApp.Handlers
         #endregion
 
         // Methods 
+
+        #region Loading methods
         public static ObservableCollection<TaskEquipmentStation> LoadToDo()
         {
             ObservableCollection<TaskEquipmentStation> ltes = new ObservableCollection<TaskEquipmentStation>();
@@ -97,23 +99,21 @@ namespace StationLogApp.Handlers
 
             return done;
         }
+        #endregion
 
         // This method is activated by the button of the relayCommand  
         // and save the logged task and add a task to the next date that it has to be made
         public void OperateTask()
         {
             SaveTaskClass();
-            ReScheduleTask();
+            //ReScheduleTask();
         }
 
 
         public async void SaveTaskClass()
         {
             DateTime loggedDate = DateTime.Now;
-            TaskClass loggedTask = CreateScheduledTask(loggedDate, "Y");
-            await _savedTaskClass.Save(loggedTask, "Tasks");
-            MessageDialog msg = new MessageDialog("Task saved");
-            await msg.ShowAsync();
+            TaskClass loggedTask = PostDoneTask(loggedDate, "Y");
         }
 
 
@@ -154,30 +154,70 @@ namespace StationLogApp.Handlers
         }
 
 
-        private TaskClass CreateScheduledTask(DateTime newDate, string doneVariable)
+        private TaskClass PostDoneTask(DateTime newDate, string doneVariable)
         {
+            if (SelectedTask.TaskId != 0)
+            {
+                TaskClass newReSchedule = new TaskClass(
+                    _taskVm.SelectedTaskClass.TaskId,
+                    _taskVm.SelectedTaskClass.TaskName,
+                    _taskVm.SelectedTaskClass.TaskSchedule,
+                    _taskVm.SelectedTaskClass.Registration,
+                    _taskVm.SelectedTaskClass.TaskType,
+                    _taskVm.SelectedTaskClass.DueDate,
+                    newDate,
+                    _taskVm.SelectedTaskClass.Comment,
+                    doneVariable,
+                    _taskVm.SelectedTaskClass.EquipmentID
+                );
 
-            TaskClass newReSchedule = new TaskClass(
-                _taskVm.SelectedTaskClass.TaskId,
-                _taskVm.SelectedTaskClass.TaskName,
-                _taskVm.SelectedTaskClass.TaskSchedule,
-                _taskVm.SelectedTaskClass.Registration,
-                _taskVm.SelectedTaskClass.TaskType,
-                _taskVm.SelectedTaskClass.DueDate,
-                newDate,
-                _taskVm.SelectedTaskClass.Comment,
-                doneVariable,
-                _taskVm.SelectedTaskClass.EquipmentID
-            );
+                _savedTaskClass.Save(newReSchedule, "Tasks");
+                MessageDialog msg = new MessageDialog("Task saved");
+                msg.ShowAsync();
 
-            return newReSchedule;
+                ReScheduleTask();
+
+                return newReSchedule;
+            }
+            else
+            {
+                MessageDialog msg = new MessageDialog("Please select the task!");
+                msg.ShowAsync();
+            }
+            return null;
+        }
+
+        private TaskClass CreateReScheduledTask(DateTime newDate, string doneVariable)
+        {
+            if (SelectedTask.TaskId != 0)
+            {
+                TaskClass newReSchedule = new TaskClass(
+                    _taskVm.SelectedTaskClass.TaskId,
+                    _taskVm.SelectedTaskClass.TaskName,
+                    _taskVm.SelectedTaskClass.TaskSchedule,
+                    _taskVm.SelectedTaskClass.Registration = null,
+                    _taskVm.SelectedTaskClass.TaskType,
+                    newDate,
+                    null,
+                    _taskVm.SelectedTaskClass.Comment = null,
+                    doneVariable,
+                    _taskVm.SelectedTaskClass.EquipmentID
+                );
+                return newReSchedule;
+            }
+            else
+            {
+                MessageDialog msg = new MessageDialog("Please select the task!");
+                msg.ShowAsync();
+            }
+            return null;
         }
 
         private DateTime GetNexTuesdayDate (int periodicity)
         {
             DateTime today = DateTime.Today;
-            int daysUntilNextTwoMonthlyTuesday = ((int)DayOfWeek.Tuesday - (int)today.DayOfWeek + periodicity) % periodicity;
-            DateTime nextTuesdayDate = today.AddDays(daysUntilNextTwoMonthlyTuesday);
+            //int daysUntilNextTwoMonthlyTuesday = ((int)DayOfWeek.Tuesday - (int)today.DayOfWeek + periodicity) % periodicity;
+            DateTime nextTuesdayDate = today.AddDays(periodicity);
             return nextTuesdayDate;
         }
 
@@ -185,7 +225,7 @@ namespace StationLogApp.Handlers
         private void DoRescheduleTask(int periodicity)
         {
             DateTime nextTuesdayDate = GetNexTuesdayDate(periodicity);
-            TaskClass newReSchedule = CreateScheduledTask(nextTuesdayDate, "N");
+            TaskClass newReSchedule = CreateReScheduledTask(nextTuesdayDate, "N");
             _savedTaskClass.Save(newReSchedule, "Tasks");
         }
     }

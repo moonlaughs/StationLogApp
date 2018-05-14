@@ -35,13 +35,13 @@ namespace StationLogApp.Persistancy
                 {
                     Task<HttpResponseMessage> task4 =
                         _httpClient.DeleteAsync($"{ServerUrl}/{_apiPrefix}/{_apiID}/{key}");
-                    if (task4 != null)
-                    {
-                        if (task4.Result.IsSuccessStatusCode)
-                        {
-                            await task4.Result.Content.ReadAsAsync<T>();
-                        }
-                    }
+                    //if (task4 != null)
+                    //{
+                    //    if (task4.Result.IsSuccessStatusCode)
+                    //    {
+                    //        await task4.Result.Content.ReadAsAsync<T>();
+                    //    }
+                    //}
                 }
                 catch (Exception ex)
                 {
