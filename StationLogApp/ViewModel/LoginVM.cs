@@ -60,7 +60,14 @@ namespace StationLogApp.ViewModel
                     {
                         _userSingleton.SetPerson(user);
                         LoginStatus = true;
-                        _frame.ActivateFrameNavigation(typeof(MenuTreePage), user);
+                        if (user.UserType == "admin" || user.UserType == "manager")
+                        {
+                            _frame.ActivateFrameNavigation(typeof(AddNotesPage), user);
+                        }
+                        else
+                        {
+                            _frame.ActivateFrameNavigation(typeof(MenuTreePage), user);
+                        }
                         CurrentUser = user;
                         break;
                     }
