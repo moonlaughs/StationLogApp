@@ -13,9 +13,8 @@ namespace StationLogApp.Model
 {
     class SaveM<T> : ISave<T> where T : class 
     {
-        #region
+        #region instancefields
         private const string _serverUrl = "http://stationlogwebservice20180424112310.azurewebsites.net/";
-
         
         private string _apiPrefix = "api/";
         private string _apiID;
@@ -24,7 +23,7 @@ namespace StationLogApp.Model
         #endregion
 
         public async Task<T> Save (T obj, string apiId)
-        {
+            {
             string url = String.Concat(_serverUrl,_apiPrefix,apiId);
             {
                 _httpClientHandler = new HttpClientHandler() { UseDefaultCredentials = true };
@@ -37,8 +36,15 @@ namespace StationLogApp.Model
                     try
                     {
                         string postBody = JsonConvert.SerializeObject(obj);
-                        var response = _httpClient.PostAsync(url, 
-                        new StringContent(postBody, Encoding.UTF8, "application/json")).Result;
+                        var rTask = _httpClient.PostAsJsonAsync(url, 
+                        new StringContent(postBody, Encoding.UTF8, "application/json"));
+                        if (rTask != null)
+                        {
+                            if (rTask.Result.IsSuccessStatusCode)
+                            {
+                                var response = rTask.Result.Content.ReadAsAsync<T>();
+                            }
+                        }
                     }
                     catch (Exception ex)
                     {

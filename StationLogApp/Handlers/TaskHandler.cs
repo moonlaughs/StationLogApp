@@ -17,6 +17,7 @@ namespace StationLogApp.Handlers
     {
         #region instance fields
         private ISave<TaskClass> _savedTaskClass = new SaveM<TaskClass>();
+        //private ICreate<TaskClass> _savedTaskClass = new CreateM<TaskClass>();
 
         private TaskVm _taskVm;
         #endregion
@@ -112,6 +113,7 @@ namespace StationLogApp.Handlers
             DateTime loggedDate = DateTime.Now;
             TaskClass loggedTask = CreateScheduledTask(loggedDate);
             await _savedTaskClass.Save(loggedTask, "Tasks");
+            //await _savedTaskClass.Create(loggedTask);
             MessageDialog msg = new MessageDialog("Task saved");
             await msg.ShowAsync();
         }
@@ -159,7 +161,7 @@ namespace StationLogApp.Handlers
         private TaskClass CreateScheduledTask(DateTime newDate)
         {
             TaskClass newReSchedule = new TaskClass(
-                taskId: _taskVm.SelectedTaskClass.TaskId + 100,                  //??????
+                taskId: _taskVm.SelectedTaskClass.TaskId,                  //??????
                 taskName: _taskVm.SelectedTaskClass.TaskName,
                 taskSchedule: _taskVm.SelectedTaskClass.TaskSchedule,
                 registration: _taskVm.SelectedTaskClass.Registration,

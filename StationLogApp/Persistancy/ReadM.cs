@@ -12,7 +12,7 @@ namespace StationLogApp.Persistancy
 {
     public class ReadM<T> : IRead<T> where T : class 
     {
-        #region
+        #region instancefields
         private const string ServerUrl = "http://stationlogwebservice20180424112310.azurewebsites.net/";
 
         private string _serverURL;

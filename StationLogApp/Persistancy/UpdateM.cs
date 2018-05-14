@@ -13,7 +13,7 @@ namespace StationLogApp.Persistancy
 {
     public class UpdateM<T> : IUpdate<T> where T : class
     {
-        #region
+        #region instancefields
 
         private const string ServerUrl = "http://stationlogwebservice20180424112310.azurewebsites.net/";
 
