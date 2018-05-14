@@ -56,5 +56,12 @@ namespace StationLogApp.Persistancy
                 return null;
             }
         }
+
+        public ObservableCollection<T> RetriveCollection(string table)
+        {
+            Task<ObservableCollection<T>> api = this.Load(table);
+            ObservableCollection<T> collection = api.Result;
+            return collection;
+        }
     }
 }

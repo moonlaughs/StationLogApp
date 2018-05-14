@@ -53,7 +53,7 @@ namespace StationLogApp.Handlers
             var query = (from t in taskCollection
                          join e in equipmentCollection on t.EquipmentID equals e.EquipmentID
                          join s in stationCollection on e.StationID equals s.StationID
-                         select new TaskEquipmentStation(){TaskId = t.TaskId, TaskName = t.TaskName, TaskSchedule = t.TaskSchedule, Registration = t.Registration, DoneDate = t.DoneDate, DoneVar = t.DoneVar, TaskType = t.TaskType, Comment = t.Comment, EquipmentID = t.EquipmentID, EquipmentName = e.EquipmentName, StationName = s.StationName }).ToList();
+                         select new TaskEquipmentStation(){TaskId = t.TaskId, TaskName = t.TaskName, TaskSchedule = t.TaskSchedule, Registration = t.Registration, DueDate = t.DueDate, DoneDate = t.DoneDate, DoneVar = t.DoneVar, TaskType = t.TaskType, Comment = t.Comment, EquipmentID = t.EquipmentID, EquipmentName = e.EquipmentName, StationName = s.StationName }).ToList();
 
             foreach (var item in query)
             {
@@ -70,9 +70,9 @@ namespace StationLogApp.Handlers
         {
             ObservableCollection<TaskEquipmentStation> done = new ObservableCollection<TaskEquipmentStation>();
 
-            LoadM<TaskClass> retrivedTask = new LoadM<TaskClass>();
-            Task<ObservableCollection<TaskClass>> api = retrivedTask.Load("Tasks");
-            ObservableCollection<TaskClass> taskCollection = api.Result;
+            ILoad<TaskClass> retrivedTask = new LoadM<TaskClass>();
+            //Task<ObservableCollection<TaskClass>> api = retrivedTask.Load("Tasks");
+            ObservableCollection<TaskClass> taskCollection = retrivedTask.RetriveCollection("Tasks");
 
             LoadM<Station> retrivedStation = new LoadM<Station>();
             Task<ObservableCollection<Station>> api2 = retrivedStation.Load("Stations");
@@ -85,7 +85,7 @@ namespace StationLogApp.Handlers
             var query = (from t in taskCollection
                 join e in equipmentCollection on t.EquipmentID equals e.EquipmentID
                 join s in stationCollection on e.StationID equals s.StationID
-                select new TaskEquipmentStation() { TaskId = t.TaskId, TaskName = t.TaskName, TaskSchedule = t.TaskSchedule, Registration = t.Registration, DoneDate = t.DoneDate, DoneVar = t.DoneVar, TaskType = t.TaskType, Comment = t.Comment, EquipmentID = t.EquipmentID, EquipmentName = e.EquipmentName, StationName = s.StationName }).ToList();
+                select new TaskEquipmentStation() { TaskId = t.TaskId, TaskName = t.TaskName, TaskSchedule = t.TaskSchedule, Registration = t.Registration, DueDate = t.DueDate, DoneDate = t.DoneDate, DoneVar = t.DoneVar, TaskType = t.TaskType, Comment = t.Comment, EquipmentID = t.EquipmentID, EquipmentName = e.EquipmentName, StationName = s.StationName }).ToList();
 
             foreach (var item in query)
             {
@@ -110,7 +110,7 @@ namespace StationLogApp.Handlers
         public async void SaveTaskClass()
         {
             DateTime loggedDate = DateTime.Now;
-            TaskClass loggedTask = CreateScheduledTask(loggedDate);
+            TaskClass loggedTask = CreateScheduledTask(loggedDate, "Y");
             await _savedTaskClass.Save(loggedTask, "Tasks");
             MessageDialog msg = new MessageDialog("Task saved");
             await msg.ShowAsync();
@@ -141,14 +141,12 @@ namespace StationLogApp.Handlers
                     DoRescheduleTask(28);
                 }
 
-                else if (_taskVm.SelectedTaskClass.TaskSchedule == "Every two month")
+                else if (_taskVm.SelectedTaskClass.TaskSchedule == "Every two months")
                 {
-                    DateTime nextTuesdayDate = GetNexTuesdayDate(56);
-                    TaskClass newReSchedule = CreateScheduledTask(nextTuesdayDate);
-                    _savedTaskClass.Save(newReSchedule, "Tasks");
+                    DoRescheduleTask(56);
                 }
 
-                else if (_taskVm.SelectedTaskClass.TaskSchedule == "Every two month")
+                else if (_taskVm.SelectedTaskClass.TaskSchedule == "Every Three months")
                 {
                     DoRescheduleTask(84);
                 }
@@ -156,18 +154,20 @@ namespace StationLogApp.Handlers
         }
 
 
-        private TaskClass CreateScheduledTask(DateTime newDate)
+        private TaskClass CreateScheduledTask(DateTime newDate, string doneVariable)
         {
+
             TaskClass newReSchedule = new TaskClass(
-                taskId: _taskVm.SelectedTaskClass.TaskId + 100,                  //??????
-                taskName: _taskVm.SelectedTaskClass.TaskName,
-                taskSchedule: _taskVm.SelectedTaskClass.TaskSchedule,
-                registration: _taskVm.SelectedTaskClass.Registration,
-                taskType: _taskVm.SelectedTaskClass.TaskType,
-                doneDate: newDate,
-                comment: _taskVm.SelectedTaskClass.Comment,
-                doneVar: "Y",
-                equipmentID: _taskVm.SelectedTaskClass.EquipmentID
+                _taskVm.SelectedTaskClass.TaskId,
+                _taskVm.SelectedTaskClass.TaskName,
+                _taskVm.SelectedTaskClass.TaskSchedule,
+                _taskVm.SelectedTaskClass.Registration,
+                _taskVm.SelectedTaskClass.TaskType,
+                _taskVm.SelectedTaskClass.DueDate,
+                newDate,
+                _taskVm.SelectedTaskClass.Comment,
+                doneVariable,
+                _taskVm.SelectedTaskClass.EquipmentID
             );
 
             return newReSchedule;
@@ -185,7 +185,7 @@ namespace StationLogApp.Handlers
         private void DoRescheduleTask(int periodicity)
         {
             DateTime nextTuesdayDate = GetNexTuesdayDate(periodicity);
-            TaskClass newReSchedule = CreateScheduledTask(nextTuesdayDate);
+            TaskClass newReSchedule = CreateScheduledTask(nextTuesdayDate, "N");
             _savedTaskClass.Save(newReSchedule, "Tasks");
         }
     }

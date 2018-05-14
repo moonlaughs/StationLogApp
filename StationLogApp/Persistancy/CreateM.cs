@@ -41,7 +41,7 @@ namespace StationLogApp.Persistancy
                     {
                         if (task3.Result.IsSuccessStatusCode)
                         {
-                            task3.Result.Content.ReadAsAsync<T>();
+                            await task3.Result.Content.ReadAsAsync<T>();
                         }
                     }
                 }
