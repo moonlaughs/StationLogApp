@@ -8,15 +8,14 @@ using System.Threading.Tasks;
 using Windows.Media.Capture.Frames;
 using Windows.UI.Popups;
 using Newtonsoft.Json;
-using StationLogApp.Factories;
 using StationLogApp.Interfaces;
 
 namespace StationLogApp.Persistancy
 {
     class CreateM<T> : ICreate<T> where T : class
     {
-        #region
-        private const string ServerUrl = "http://stationlogwebservice20180424112310.azurewebsites.net/";
+        #region instancefields
+        private const string ServerUrl = "http://stationlogdbwebservice20180514015122.azurewebsites.net/";
 
         private string _serverURL;
         private string _apiPrefix;
@@ -38,13 +37,13 @@ namespace StationLogApp.Persistancy
                     string postitem = JsonConvert.SerializeObject(obj);
                     Task<HttpResponseMessage> task3 = _httpClient.PostAsync($"{ServerUrl}/{_apiPrefix}/{_apiID}",
                         new StringContent(postitem, Encoding.UTF8, "application/json"));
-                    if (task3 != null)
-                    {
-                        if (task3.Result.IsSuccessStatusCode)
-                        {
-                            task3.Result.Content.ReadAsAsync<T>();
-                        }
-                    }
+                    //if (task3 != null)
+                    //{
+                    //    if (task3.Result.IsSuccessStatusCode)
+                    //    {
+                    //        await task3.Result.Content.ReadAsAsync<T>();
+                    //    }
+                    //}
                 }
                 catch (Exception ex)
                 {

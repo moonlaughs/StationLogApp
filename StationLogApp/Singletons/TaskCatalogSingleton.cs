@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Threading.Tasks;
-using StationLogApp.Factories;
+using StationLogApp.Handlers;
 using StationLogApp.Interfaces;
 using StationLogApp.Model;
 using StationLogApp.Persistancy;
@@ -16,47 +16,17 @@ namespace StationLogApp.Singletons
        
 
         // Properties
-
-        public ObservableCollection<TaskClass> TaskCatalog {get; set; }
-        
+        public ObservableCollection<TaskEquipmentStation> TaskCatalog {get; set; }
+        public ObservableCollection<TaskEquipmentStation> DoneCatalog { get; set; }
 
         // Constructor of the Singleton
-
         private TaskCatalogSingleton()
         {
-            TaskCatalog = LoadCatalog();
+            TaskCatalog = TaskHandler.LoadToDo();
+            DoneCatalog = TaskHandler.LoadDone();
         }
        
-
-        public static ObservableCollection<TaskClass> LoadCatalog()
-        {
-            LoadM<TaskClass> retrievedCatalog = new LoadM<TaskClass>();
-            Task<ObservableCollection<TaskClass>> sth = retrievedCatalog.Load("Tasks");
-            ObservableCollection<TaskClass> col = sth.Result;
-
-            //LoadM<Station> retrivedStationCatalog = new LoadM<Station>();
-            //Task<ObservableCollection<Station>> st = retrivedStationCatalog.Load("Stations");
-            //ObservableCollection<Station> stations = st.Result;
-
-            //LoadM<Equipment> retrivedEquipment = new LoadM<Equipment>();
-            //Task<ObservableCollection<Equipment>> eq = retrivedEquipment.Load("Equipments");
-            //ObservableCollection<Equipment> equipments = eq.Result;
-            return col;
-            //var query = (from t in col
-            //    join e in equipments
-            //        on t.EquipmentID equals e.EquipmentID
-            //    join s in stations
-            //        on e.StationID equals s.StationID
-            //    select new {t, e, s}).ToList();
-
-            //return query.;
-
-            //return ;
-        }
-
-
         // Singleton Method
-
         public static TaskCatalogSingleton Instance
         {
             get

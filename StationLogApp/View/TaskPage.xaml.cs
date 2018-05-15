@@ -31,5 +31,21 @@ namespace StationLogApp.View
         {
             Frame.Navigate(typeof(TaskHistoryTechnicianPage));
         }
+
+        private void MenuFlyoutItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(LogInPage));
+        }
+
+
+        private void GoToNotesPage(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(AddNotesPage));
+        }
+
+        private void Tasks_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
     }
 }
