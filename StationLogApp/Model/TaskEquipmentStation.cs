@@ -10,11 +10,13 @@ namespace StationLogApp.Model
     {
         public string EquipmentName { get; set; }
         public string StationName { get; set; }
+        public string UserName { get; set; }
 
-        public TaskEquipmentStation(string equipmentName, string stationName)
+        public TaskEquipmentStation(string equipmentName, string stationName, string userName)
         {
             EquipmentName = equipmentName;
             StationName = stationName;
+            UserName = userName;
         }
 
         public TaskEquipmentStation()
@@ -24,7 +26,7 @@ namespace StationLogApp.Model
         
         public override string ToString()
         {
-            return $"{EquipmentName}, {StationName}";
+            return $"{EquipmentName}, {StationName}, {UserName}";
         }
     }
 }
