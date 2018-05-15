@@ -29,14 +29,14 @@ namespace StationLogApp.ViewModel
         private string _equipmentName;
         private TaskCatalogSingleton _userTaskCatalogSingleton;
         private TaskEquipmentStation _selectedItem;
+        private TaskEquipmentStation _newItem;
         private ObservableCollection<TaskEquipmentStation> _taskCollection;
         #endregion
 
         #region Properties
-        public TaskEquipmentStation SelectItem { get; set; }
-        public RelayCommandClass CreateTask { get; set; }
-        public RelayCommandClass DeleteTask { get; set; }
-        public RelayCommandClass NextPage { get; set; }
+        public RelayCommandClass DoCreateTask { get; set; }
+        public RelayCommandClass DoDeleteTask { get; set; }
+        public RelayCommandClass DoNextPage { get; set; }
 
         public TaskEquipmentStation SelectTask
         {
@@ -45,6 +45,16 @@ namespace StationLogApp.ViewModel
             {
                 _selectedItem = value;
                 OnPropertyChanged(nameof(SelectTask));
+            }
+        }
+
+        public TaskEquipmentStation NewItem
+        {
+            get { return _newItem; }
+            set
+            {
+                _newItem = value;
+                OnPropertyChanged(nameof(NewItem));
             }
         }
 
@@ -146,12 +156,14 @@ namespace StationLogApp.ViewModel
                 OnPropertyChanged(nameof(EquipmentName));
             }
         }
+
+        public ManagerHandler ManagerHandler { get; set; }
 #endregion
 
         public CrudVM()
         {
-           
+            ManagerHandler = new ManagerHandler(this);
+           DoCreateTask = new RelayCommandClass(ManagerHandler.CreateTask);
         }
-        
     }
 }
