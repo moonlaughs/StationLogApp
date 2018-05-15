@@ -63,14 +63,22 @@ namespace StationLogApp.ViewModel
                         if (user.UserType == "admin" || user.UserType == "manager")
                         {
                             _frame.ActivateFrameNavigation(typeof(AddNotesPage), user);
+                            CurrentUser = user;
+                            break;
                         }
                         else
                         {
                             _frame.ActivateFrameNavigation(typeof(MenuTreePage), user);
+                            CurrentUser = user;
+                            break;
                         }
-                        CurrentUser = user;
-                        break;
                     }
+
+                }
+                if (LoginStatus == false)
+                {
+                    MessageDialog msg = new MessageDialog("No user found with that username and password!");
+                    await msg.ShowAsync();
                 }
             }
             else

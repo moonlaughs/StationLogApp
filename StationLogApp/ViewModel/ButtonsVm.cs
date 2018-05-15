@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
 using StationLogApp.Common;
+using StationLogApp.Handlers;
 using StationLogApp.Model;
 using StationLogApp.Singletons;
 using StationLogApp.View;
@@ -34,7 +36,7 @@ namespace StationLogApp.ViewModel
             GoTask = new RelayCommandClass(DoTask);
             GoDone = new RelayCommandClass(DoDone);
             UserName = _currentUser.GetUsername();
-        }
+    }
 
         public void DoTask()
         {
