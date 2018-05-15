@@ -169,5 +169,6 @@ namespace StationLogApp.ViewModel
         {
             _managerHandler.CreateTask();
         }
+        
     }
 }
