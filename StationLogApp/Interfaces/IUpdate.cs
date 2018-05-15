@@ -8,6 +8,6 @@ namespace StationLogApp.Interfaces
 {
    public interface IUpdate<T>
     {
-        Task Update(int key, T obj);
+        Task Update(T obj, string apiID, int key);
     }
 }

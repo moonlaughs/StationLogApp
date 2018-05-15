@@ -17,38 +17,31 @@ namespace StationLogApp.Persistancy
 
         private const string ServerUrl = "http://stationlogdbwebservice20180514015122.azurewebsites.net/";
 
-        private string _serverURL;
-        private string _apiPrefix;
-        private string _apiID;
+        private string ApiPrefix = "api/";
         private HttpClientHandler _httpClientHandler;
         private HttpClient _httpClient;
 
         #endregion
 
-        public async Task Update(int key, T obj)
+        public async Task Update(T obj, string apiId, int key)
         {
-            _httpClientHandler = new HttpClientHandler() {UseDefaultCredentials = true};
-            using (_httpClient = new HttpClient(_httpClientHandler))
+            string url = String.Concat(ServerUrl, ApiPrefix, $"{apiId}/", key);
             {
-                _httpClient.BaseAddress = new Uri(ServerUrl);
-                _httpClient.DefaultRequestHeaders.Clear();
-                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                try
+                _httpClientHandler = new HttpClientHandler() { UseDefaultCredentials = true };
+                using (_httpClient = new HttpClient(_httpClientHandler))
                 {
-                    string putitem = JsonConvert.SerializeObject(obj);
-                    Task<HttpResponseMessage> task2 = _httpClient.PutAsync($"{ServerUrl}/{_apiPrefix}/{_apiID}/{key}",
-                        new StringContent(putitem, Encoding.UTF8, "application/json"));
-                    if (task2 != null)
+                    _httpClient.BaseAddress = new Uri(ServerUrl);
+                    _httpClient.DefaultRequestHeaders.Clear();
+                    _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    try
                     {
-                        if (task2.Result.IsSuccessStatusCode)
-                        {
-                            await task2.Result.Content.ReadAsStringAsync();
-                        }
+                        string putitem = JsonConvert.SerializeObject(obj);
+                        Task<HttpResponseMessage> task2 = _httpClient.PutAsync(url, new StringContent(putitem, Encoding.UTF8, "application/json"));
                     }
-                }
-                catch (Exception ex)
-                {
-                    await new MessageDialog(ex.Message).ShowAsync();
+                    catch (Exception ex)
+                    {
+                        await new MessageDialog(ex.Message).ShowAsync();
+                    }
                 }
             }
         }

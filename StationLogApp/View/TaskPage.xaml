@@ -208,17 +208,16 @@
 
         <Button Name="InfoButton"
                 Command="{Binding DoInfo}"
-                Grid.Column="2"
+                Grid.Column="1"
                 Grid.Row="4"
                 Width="200"
-                FontSize="40"
-                HorizontalAlignment="Center"
+                FontSize="20"
+                HorizontalAlignment="Right"
                 Background="DarkGreen"
                 BorderThickness="1" BorderBrush="White"
                 Margin="50,0,0,0">
             <StackPanel Orientation="Horizontal">
-                <Image Source="../Assets/Done.png" Width="35"/>
-                <TextBlock Text="More info" Foreground="White" Margin="20,0,0,0"/>
+                <TextBlock Text="More info" Foreground="White"/>
             </StackPanel>
         </Button>
         
