@@ -152,10 +152,6 @@ namespace StationLogApp.ViewModel
         {
            
         }
-
-        public void ToDelete()
-        {
-            
-        }
+        
     }
 }
