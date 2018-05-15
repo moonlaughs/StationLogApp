@@ -15,8 +15,6 @@ namespace StationLogApp.Model
     {
         #region
         private const string _serverUrl = "http://stationlogdbwebservice20180514015122.azurewebsites.net/";
-
-        
         private string _apiPrefix = "api/";
         private string _apiID;
         private HttpClientHandler _httpClientHandler;
@@ -37,7 +35,7 @@ namespace StationLogApp.Model
                     try
                     {
                         string postBody = JsonConvert.SerializeObject(obj);
-                        var response = _httpClient.PostAsync(url, new StringContent(postBody, Encoding.UTF8, "application/json"));
+                        var response = _httpClient.PostAsync(url, new StringContent(postBody, Encoding.UTF8, "application/json")).Result;
                     }
                     catch (Exception ex)
                     {

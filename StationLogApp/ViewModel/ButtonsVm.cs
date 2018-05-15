@@ -16,6 +16,7 @@ namespace StationLogApp.ViewModel
         public RelayCommandClass GoTask { get; set; }
         public RelayCommandClass GoDone { get; set; }
         public string UserName { get; set; }
+        public int UserID { get; set; }
 
         public UserSingleton CurrentUser
         {
@@ -30,6 +31,7 @@ namespace StationLogApp.ViewModel
             GoTask = new RelayCommandClass(DoTask);
             GoDone = new RelayCommandClass(DoDone);
             UserName = _currentUser.GetUsername();
+            UserID = _currentUser.GetUserID();
         }
 
         public void DoTask()
