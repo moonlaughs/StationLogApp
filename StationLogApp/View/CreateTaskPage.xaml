@@ -14,9 +14,9 @@
         </Grid.Background>
         
         <Grid.DataContext>
-            <viewModel:CreateTaskVM/>
+            <viewModel:CrudVM/>
         </Grid.DataContext>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
@@ -31,18 +31,20 @@
         
         <StackPanel Grid.Row="1" Grid.Column="1">
             <TextBlock Text="Task description" FontSize="20" Foreground="White" />
-            <TextBox x:Name="TaskDescription" Text="{Binding TaskName}" FontSize="20" Foreground="White" Width="200" Height="30" Margin="0,0,700,0"/>
+            <TextBox x:Name="TaskDescription" Text="{Binding TaskName, Mode=TwoWay}" FontSize="20" Foreground="White" Width="200" Height="30" Margin="0,0,700,0"/>
             <TextBlock Text="Schedule" FontSize="20" Foreground="White"/>
-            <TextBox Name="Schedule" FontSize="20" Foreground="White" Width="200" Height="30" Margin="0,0,700,0"/>
+            <TextBox Name="Schedule" FontSize="20" Text="{Binding TaskSchedule, Mode=TwoWay}" Foreground="White" Width="200" Height="30" Margin="0,0,700,0"/>
             <TextBlock Text="Task type" Foreground="White" FontSize="20"/>
             <ComboBox Name="Tasktype" Foreground="White" FontSize="20" Width="200" Height="30" Margin="0,0,700,0">
             <ComboBoxItem Content="Registration" Foreground="White"/>
             <ComboBoxItem Content="Check" Foreground="White"/>
             </ComboBox>
             <TextBlock Text="Due date:" Foreground="White" FontSize="20"/>
-            <DatePicker Width="200" Height="30"/>
+            <DatePicker Width="200" Height="30" Date="{Binding DueDate, Mode=TwoWay}"/>
             <TextBlock Text="Equipment name" Foreground="White" FontSize="20"/>
-            <TextBox Name="Equipmentname" Foreground="White" FontSize="20" Width="200" Height="30" Margin="0,0,700,0"/>
+            <TextBox Name="Equipmentname" Text="{Binding EquipmentName, Mode=TwoWay}" Foreground="White" FontSize="20" Width="200" Height="30" Margin="0,0,700,0"/>
+            <TextBlock Text="Station name" Foreground="White" FontSize="20"/>
+            <TextBox Name="Stationname" Text="{Binding StationName, Mode=TwoWay}" Foreground="White" FontSize="20" Width="200" Height="30" Margin="0,0,700,0"/>
 
             <Button Content="CREATE" FontSize="20" Foreground="White" BorderBrush="White" BorderThickness="2" Margin="0,50,0,0"/>
         </StackPanel>

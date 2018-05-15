@@ -11,7 +11,7 @@ using StationLogApp.Singletons;
 
 namespace StationLogApp.ViewModel
 {
-    public class CreateTaskVM : NotifyPropertyChangedClass
+    public class CrudVM : NotifyPropertyChangedClass
     {
         #region Instance fields
         private int _taskID;
@@ -25,21 +25,46 @@ namespace StationLogApp.ViewModel
         private string _doneVar;
         private int _equipmentID;
         private int _stationID;
+        private string _stationName;
+        private string _equipmentName;
         private TaskCatalogSingleton _userTaskCatalogSingleton;
-        private TaskHandler _taskHandler;
-        private Task _selectedItem;
-        private ObservableCollection<TaskClass> _taskCollection;
-        #endregion 
+        private TaskEquipmentStation _selectedItem;
+        private ObservableCollection<TaskEquipmentStation> _taskCollection;
+        #endregion
 
-        //  public Task NewItem { get; set; }
-        //public RelayCommand CreateTask { get; set; }
-        //public RelayCommand DeleteTask { get; set; }
-        //public RelayCommand NextPage { get; set; }
         #region Properties
-        public ObservableCollection<TaskClass> TaskCollection
+        public TaskEquipmentStation SelectItem { get; set; }
+        public RelayCommandClass CreateTask { get; set; }
+        public RelayCommandClass DeleteTask { get; set; }
+        public RelayCommandClass NextPage { get; set; }
+
+        public TaskEquipmentStation SelectTask
+        {
+            get { return _selectedItem; }
+            set
+            {
+                _selectedItem = value;
+                OnPropertyChanged(nameof(SelectTask));
+            }
+        }
+
+        public TaskCatalogSingleton TaskSingleton
+        {
+            get { return _userTaskCatalogSingleton; }
+            set
+            {
+                _userTaskCatalogSingleton = value;
+                OnPropertyChanged(nameof(TaskSingleton));
+            }
+        }
+
+        public ObservableCollection<TaskEquipmentStation> TasksCollection
         {
             get { return _taskCollection; }
-            set { _taskCollection = value; }
+            set
+            {
+                _taskCollection = value;
+            }
         }
 
         public string TaskName
@@ -87,7 +112,7 @@ namespace StationLogApp.ViewModel
             get { return _equipmentID; }
             set
             {
-                _equipmentID = value; 
+                _equipmentID = value;
                 OnPropertyChanged(nameof(EquipmentID));
             }
         }
@@ -102,15 +127,30 @@ namespace StationLogApp.ViewModel
             }
         }
 
-        public Task SelectedTask
+        public string StationName
         {
-            get => _selectedItem;
+            get { return _stationName; }
             set
             {
-                _selectedItem = value;
-                OnPropertyChanged(nameof(SelectedTask));
+                _stationName = value;
+                OnPropertyChanged(nameof(StationName));
+            }
+        }
+
+        public string EquipmentName
+        {
+            get { return _equipmentName; }
+            set
+            {
+                _equipmentName = value;
+                OnPropertyChanged(nameof(EquipmentName));
             }
         }
 #endregion
+
+        public CrudVM()
+        {
+           
+        }
     }
 }
