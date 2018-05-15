@@ -51,7 +51,7 @@
                     <Image Source="../Assets/profile.png"/>
                     <Button.Flyout>
                         <MenuFlyout>
-                            <MenuFlyoutItem Text="Log out"/>
+                            <!--<MenuFlyoutItem Text="Log out"/>-->
                         </MenuFlyout>
                     </Button.Flyout>
 
