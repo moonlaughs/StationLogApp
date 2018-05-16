@@ -28,7 +28,7 @@ namespace StationLogApp.Singletons
         private TaskCatalogSingleton()
         {
             
-            TaskCatalog = TaskHandler.LoadTaskEquipmentStations();
+            //TaskCatalog = TaskHandler.LoadTaskEquipmentStations();
         }
        
 

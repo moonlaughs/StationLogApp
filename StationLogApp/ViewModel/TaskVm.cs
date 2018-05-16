@@ -20,29 +20,41 @@ namespace StationLogApp.ViewModel
     {
         #region instancefields
 
-        private TaskCatalogSingleton _catalogSingleton;
+        // private TaskCatalogSingleton _catalogSingleton;
+
         private TaskClass _selectedTaskClass;
         private TaskHandler _taskHandler;
+        private ObservableCollection<TaskEquipmentStation> _taskCollection;
         private ObservableCollection<Station> _stationCatalog;
         private Station _selectedItemStation;
+        
 
         #endregion
-
 
         #region properties
 
         public ObservableCollection<TaskEquipmentStation> TaskCatalog
         {
-            get
-            {
-                return _catalogSingleton.TaskCatalog;
-            }
+            get { return _taskHandler.LoadedCollection; }
             set
             {
-                _catalogSingleton.TaskCatalog = value;
+                _taskHandler.LoadedCollection = value;
                 OnPropertyChanged(nameof(TaskCatalog));
-            } 
+            }
         }
+
+        //public ObservableCollection<TaskEquipmentStation> TaskCatalog
+        //{
+        //    get
+        //    {
+        //        return _catalogSingleton.TaskCatalog;
+        //    }
+        //    set
+        //    {
+        //        _catalogSingleton.TaskCatalog = value;
+        //        OnPropertyChanged(nameof(TaskCatalog));
+        //    } 
+        //}
 
         
         public ObservableCollection<Station> StationCatalog
@@ -64,8 +76,8 @@ namespace StationLogApp.ViewModel
         }
 
         public RelayCommandClass SaveTaskClass { get; set; }
-        public RelayCommandClass SortCommand { get; set; }
-
+        public RelayCommandClass SortStationCommand { get; set; }
+        
 
         public TaskHandler TaskHandler
         {
@@ -91,13 +103,15 @@ namespace StationLogApp.ViewModel
         #region constructor
         public TaskVm()
         {
-            _catalogSingleton = TaskCatalogSingleton.Instance;
+            //_catalogSingleton = TaskCatalogSingleton.Instance;
+           
             _selectedTaskClass = new TaskClass();
             _selectedItemStation = new Station();
             _taskHandler = new TaskHandler(this);
+            _taskCollection = _taskHandler.LoadCollection();
             _stationCatalog = _taskHandler.LoadStation();
-            SaveTaskClass = new RelayCommandClass(TaskHandler.OperateTask);
-            SortCommand = new RelayCommandClass(TaskHandler.SortTaskbyStation);
+            SaveTaskClass = new RelayCommandClass(_taskHandler.OperateTask);
+            SortStationCommand = new RelayCommandClass(_taskHandler.SortCollection);
         }
         #endregion
 

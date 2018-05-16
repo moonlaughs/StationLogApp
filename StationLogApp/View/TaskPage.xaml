@@ -79,7 +79,7 @@
             <ComboBox Name="Date" Margin="20,0,0,0" Width="200"/>
             <Button Name = "Sort" Content="Sort" Foreground="White" 
                     Background="black" 
-                    Command="{Binding SortCommand, Mode=TwoWay}"
+                    Command="{Binding SortStationCommand, Mode=TwoWay}"
                    ></Button>
         </StackPanel>
 
