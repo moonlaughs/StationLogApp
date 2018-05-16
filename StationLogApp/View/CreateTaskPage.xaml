@@ -12,11 +12,12 @@
         <Grid.Background>
             <ImageBrush ImageSource="ms-appx:///Assets/2.jpg"/>
         </Grid.Background>
+        
         <Grid.DataContext>
             <viewModel:CrudVM/>
         </Grid.DataContext>
-        
-        <Grid.RowDefinitions>
+    
+            <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="100"/>

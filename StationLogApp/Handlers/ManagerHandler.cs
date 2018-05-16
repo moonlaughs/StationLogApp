@@ -17,9 +17,9 @@ namespace StationLogApp.Handlers
         private ISave<TaskClass> _savedTaskClass = new SaveM<TaskClass>();
         private IUpdate<TaskClass> _updateTaskClass = new UpdateM<TaskClass>();
 
-        public ManagerHandler()
+        public ManagerHandler(CrudVM crudVm)
         {
-            _crudVm = new CrudVM();
+            _crudVm = crudVm;
         }
         public async void CreateTask()
         {

@@ -31,7 +31,6 @@ namespace StationLogApp.ViewModel
         private TaskEquipmentStation _selectedItem;
         private TaskEquipmentStation _newItem;
         private ObservableCollection<TaskEquipmentStation> _taskCollection;
-        private ManagerHandler _managerHandler;
         #endregion
 
         #region Properties
@@ -157,18 +156,14 @@ namespace StationLogApp.ViewModel
                 OnPropertyChanged(nameof(EquipmentName));
             }
         }
+
+        public ManagerHandler ManagerHandler { get; set; }
 #endregion
 
         public CrudVM()
         {
-           DoCreateTask = new RelayCommandClass(Create);
-            _managerHandler = new ManagerHandler();
+            ManagerHandler = new ManagerHandler(this);
+           DoCreateTask = new RelayCommandClass(ManagerHandler.CreateTask);
         }
-
-        public void Create()
-        {
-            _managerHandler.CreateTask();
-        }
-        
     }
 }
