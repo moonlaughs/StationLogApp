@@ -32,20 +32,40 @@
         <StackPanel Grid.Row="1" Grid.Column="1">
             <TextBlock Text="Task description" FontSize="20" Foreground="White" />
             <TextBox x:Name="TaskDescription" Text="{Binding NewItem.TaskName, Mode=TwoWay}" FontSize="20" Foreground="White" Width="200" Height="30" Margin="0,0,700,0"/>
-            <TextBlock Text="Schedule" FontSize="20" Foreground="White"/>
-            <TextBox Name="Schedule" FontSize="20" Text="{Binding NewItem.TaskSchedule, Mode=TwoWay}" Foreground="White" Width="200" Height="30" Margin="0,0,700,0"/>
-            <TextBlock Text="Task type" Foreground="White" FontSize="20"/>
-            <ComboBox Name="Tasktype" Foreground="White" FontSize="20" Width="200" Height="30" Margin="0,0,700,0">
-            <ComboBoxItem Content="Registration" Foreground="White"/>
-            <ComboBoxItem Content="Check" Foreground="White"/>
+            <TextBlock Text="Schedule" Foreground="White" FontSize="20"/>
+            <ComboBox Name="TaskSchedule" Foreground="White" ItemsSource="{Binding TaskSchedules}" SelectedItem="{Binding NewItem.TaskSchedule, Mode=TwoWay}" FontSize="20" Width="200" Height="30" Margin="0,0,700,0">
+                <ComboBoxItem Content="{Binding TaskSchedules[0]}" Foreground="Black"/>
+                <ComboBoxItem Content="{Binding TaskSchedules[1]}" Foreground="Black"/>
+                <ComboBoxItem Content="{Binding TaskSchedules[2]}" Foreground="Black"/>
+                <ComboBoxItem Content="{Binding TaskSchedules[3]}" Foreground="Black"/>
+                <ComboBoxItem Content="{Binding TaskSchedules[4]}" Foreground="Black"/>
+                <ComboBoxItem Content="{Binding TaskSchedules[5]}" Foreground="Black"/>
+                <ComboBoxItem Content="{Binding TaskSchedules[6]}" Foreground="Black"/>
+                <ComboBoxItem Content="{Binding TaskSchedules[7]}" Foreground="Black"/>
+            </ComboBox>                                                     
+            <TextBlock Text="Station Name" Foreground="White" FontSize="20"/>
+            <ComboBox Name="Station" Foreground="White" ItemsSource="{Binding Stations}" SelectedItem="{Binding NewItem.StationName, Mode=TwoWay}" FontSize="20" Width="200" Height="30" Margin="0,0,700,0">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                        <TextBlock Text="{Binding StationName, Mode=TwoWay}" Foreground="black" FontSize="20"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
             </ComboBox>
             <TextBlock Text="Due date:" Foreground="White" FontSize="20"/>
             <DatePicker Width="200" Height="30" Date="{Binding NewItem.DueDate, Mode=TwoWay}"/>
-            <TextBlock Text="Equipment name" Foreground="White" FontSize="20"/>
-            <TextBox Name="Equipmentname" Text="{Binding NewItem.EquipmentName, Mode=TwoWay}" Foreground="White" FontSize="20" Width="200" Height="30" Margin="0,0,700,0"/>
-            <TextBlock Text="Station name" Foreground="White" FontSize="20"/>
-            <TextBox Name="Stationname" Text="{Binding NewItem.StationName, Mode=TwoWay}" Foreground="White" FontSize="20" Width="200" Height="30" Margin="0,0,700,0"/>
-
+            <TextBlock Text="Equipment Name" Foreground="White" FontSize="20"/>
+            <ComboBox Name="EquipmentName" Foreground="White" ItemsSource="{Binding Equipments}" SelectedItem="{Binding NewItem.EquipmentID, Mode=TwoWay}" FontSize="20" Width="200" Height="30" Margin="0,0,700,0">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding EquipmentID, Mode=TwoWay}" Foreground="black" FontSize="20"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBlock Text="Task type" Foreground="White" FontSize="20"/>
+            <ComboBox Name="TaskType" Foreground="White" ItemsSource="{Binding TaskTypes}" SelectedItem="{Binding NewItem.TaskType, Mode=TwoWay}" FontSize="20" Width="200" Height="30" Margin="0,0,700,0">
+                <ComboBoxItem Content="{Binding TaskTypes[0]}" Foreground="Black"/>
+                <ComboBoxItem Content="{Binding TaskTypes[1]}" Foreground="Black"/>
+            </ComboBox>
             <Button Content="CREATE" Command="{Binding DoCreateTask}" FontSize="20" Foreground="White" BorderBrush="White" BorderThickness="2" Margin="0,50,0,0"/>
         </StackPanel>
 

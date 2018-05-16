@@ -31,6 +31,8 @@ namespace StationLogApp.ViewModel
         private TaskEquipmentStation _selectedItem;
         private TaskEquipmentStation _newItem;
         private ObservableCollection<TaskEquipmentStation> _taskCollection;
+
+        private TaskVm _collection;
         #endregion
 
         #region Properties
@@ -76,6 +78,13 @@ namespace StationLogApp.ViewModel
                 _taskCollection = value;
             }
         }
+
+        public ObservableCollection<Station> Stations { get; set; }
+        public ObservableCollection<Equipment> Equipments { get; set; }
+        public ObservableCollection<TaskClass> Tasks { get; set; }
+
+        public string[] TaskTypes { get; set; }
+        public string[] TaskSchedules { get; set; }
 
         public string TaskName
         {
@@ -163,7 +172,12 @@ namespace StationLogApp.ViewModel
         public CrudVM()
         {
             ManagerHandler = new ManagerHandler(this);
-           DoCreateTask = new RelayCommandClass(ManagerHandler.CreateTask);
+            DoCreateTask = new RelayCommandClass(ManagerHandler.CreateTask);
+            NewItem = new TaskEquipmentStation();
+            Stations = ManagerHandler.StationCollection();
+            Equipments = ManagerHandler.EquipmentsCollection();
+            TaskTypes = ManagerHandler.typeArray;
+            TaskSchedules = ManagerHandler.scheduleArray;
         }
     }
 }
