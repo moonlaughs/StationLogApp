@@ -101,16 +101,18 @@
     <Compile Include="Common\RelayCommandClass.cs" />
     <Compile Include="Convertor\DateTimeConvertor.cs" />
     <Compile Include="Handlers\CreateTaskHandler.cs" />
-    <Compile Include="Handlers\DeleteClassHandler.cs" />
+    <Compile Include="Handlers\DeleteTaskHandler.cs" />
     <Compile Include="Handlers\InfoHandler.cs" />
     <Compile Include="Handlers\NoteHandler.cs" />
     <Compile Include="Handlers\TaskHandler.cs" />
+    <Compile Include="Handlers\UpdateTaskHandler.cs" />
     <Compile Include="Interfaces\ICreateTask.cs" />
     <Compile Include="Interfaces\IDeleteTask.cs" />
     <Compile Include="Interfaces\ISave.cs" />
     <Compile Include="Interfaces\IDelete.cs" />
     <Compile Include="Interfaces\ILoad.cs" />
     <Compile Include="Interfaces\IUpdate.cs" />
+    <Compile Include="Interfaces\IUpdateTask.cs" />
     <Compile Include="Model\Equipment.cs" />
     <Compile Include="Model\Notes.cs" />
     <Compile Include="Model\TaskEquipmentStation.cs" />
@@ -130,6 +132,7 @@
     <Compile Include="ViewModel\LoginVM.cs" />
     <Compile Include="ViewModel\NoteVM.cs" />
     <Compile Include="ViewModel\TaskVm.cs" />
+    <Compile Include="ViewModel\UpdateTaskVm.cs" />
     <Compile Include="View\AddNotesPage.xaml.cs">
       <DependentUpon>AddNotesPage.xaml</DependentUpon>
     </Compile>

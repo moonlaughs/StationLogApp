@@ -20,7 +20,7 @@ namespace StationLogApp.ViewModel
 
         public DeleteTaskVm()
         {
-            DeleteTaskHandler = new DeleteClassHandler(this);
+            DeleteTaskHandler = new DeleteTaskHandler(this);
             SelectedItem = new TaskEquipmentStation();
             DoDeleteTask = new RelayCommandClass(DeleteTaskHandler.DeleteTask);
 

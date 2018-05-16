@@ -11,7 +11,7 @@ using StationLogApp.ViewModel;
 
 namespace StationLogApp.Handlers
 {
-    public class DeleteClassHandler : IDeleteTask
+    public class DeleteTaskHandler : IDeleteTask
     {
         private readonly DeleteTaskVm _deleteVm;
         private readonly IDelete<TaskClass> _delete = new DeleteM<TaskClass>();
@@ -32,7 +32,7 @@ namespace StationLogApp.Handlers
             }
         }
 
-        public DeleteClassHandler(DeleteTaskVm deleteVm)
+        public DeleteTaskHandler(DeleteTaskVm deleteVm)
         {
             _deleteVm = deleteVm;
         }

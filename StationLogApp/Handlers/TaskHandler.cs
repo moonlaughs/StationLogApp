@@ -17,10 +17,10 @@ namespace StationLogApp.Handlers
     public class TaskHandler
     {
         #region instance fields
-        private ISave<TaskClass> _savedTaskClass = new SaveM<TaskClass>();
-        private IUpdate<TaskClass> _updateTaskClass = new UpdateM<TaskClass>();
+        private readonly ISave<TaskClass> _savedTaskClass = new SaveM<TaskClass>();
+        private readonly IUpdate<TaskClass> _updateTaskClass = new UpdateM<TaskClass>();
 
-        private TaskVm _taskVm;
+        private readonly TaskVm _taskVm;
         private readonly FrameNavigateClass _frameNavigation;
         #endregion
 
@@ -34,7 +34,7 @@ namespace StationLogApp.Handlers
         {
             _taskVm = taskVm;
             _frameNavigation = new FrameNavigateClass();
-    }
+        }
         #endregion
         
         #region SaveAsDoneTask
@@ -70,7 +70,6 @@ namespace StationLogApp.Handlers
                 );
 
                 _savedTaskClass.Save(newReSchedule, "Tasks");
-                
 
                 ReScheduleTask();
 
@@ -129,11 +128,6 @@ namespace StationLogApp.Handlers
                 else if (_taskVm.SelectedItem.TaskSchedule == "Every year")
                 {
                     DoRescheduleTask(436);
-                }
-                else
-                {
-                    MessageDialog msg = new MessageDialog("Something went wrong, please try again");
-                    msg.ShowAsync();
                 }
             }
         }
