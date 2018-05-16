@@ -69,21 +69,16 @@
                     Orientation="Horizontal" 
                     Margin="5">
             <TextBlock Text="Filters" 
-                       Foreground="Black" 
+                       Foreground="Black"
                        FontSize="20"
                        Margin="15,0,10,0"/>
             <ComboBox Name="Stations" Foreground="Black" Margin="20,0,0,0" Width="200"
                       ItemsSource="{Binding StationCatalog, Mode=TwoWay}"  SelectedItem="{Binding SelectedItemStation, Mode=TwoWay}">
-                <ComboBoxItem Content="Sation1"  Foreground="Black"/>
-                <ComboBoxItem Content="Station2" Foreground="Black"/>
-                <ComboBoxItem Content="Station3" Foreground="Black"/>
             </ComboBox>
-            <ComboBox Name="Date" Margin="20,0,0,0" Width="200">
-                <ComboBoxItem Content="Today" Foreground="Black"/>
-                <ComboBoxItem Content="This week" Foreground="Black"/>
-                <ComboBoxItem Content="This month" Foreground="Black"/>
-            </ComboBox>
-            <Button Name = "Sort" Content="Sort" Foreground="White" Background="black" Command="{Binding SortCommand, Mode=TwoWay}"
+            <ComboBox Name="Date" Margin="20,0,0,0" Width="200"/>
+            <Button Name = "Sort" Content="Sort" Foreground="White" 
+                    Background="black" 
+                    Command="{Binding SortCommand, Mode=TwoWay}"
                    ></Button>
         </StackPanel>
 

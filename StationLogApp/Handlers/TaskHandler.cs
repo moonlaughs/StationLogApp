@@ -144,14 +144,14 @@ namespace StationLogApp.Handlers
                 _taskVm.SelectedTaskClass.TaskSchedule,
                 _taskVm.SelectedTaskClass.Registration,
                 _taskVm.SelectedTaskClass.TaskType,
+                _taskVm.SelectedTaskClass.DueDate,
                 newDate,
                 _taskVm.SelectedTaskClass.Comment,
                 doneVariable,
                 _taskVm.SelectedTaskClass.EquipmentID
-            );
+         );
 
-            return newReSchedule;
-        }
+            return newReSchedule;}
 
         private DateTime GetNexTuesdayDate (int periodicity)
         {
@@ -170,20 +170,16 @@ namespace StationLogApp.Handlers
 
         public void SortTaskbyStation()
         {
-            ObservableCollection<TaskEquipmentStation> sortedCollection = _taskVm.TaskCatalog;
+            ObservableCollection<TaskEquipmentStation> sortedCollection = new ObservableCollection<TaskEquipmentStation>();
 
             foreach (var item in _taskVm.TaskCatalog)
             {
                 if (item.StationName == _taskVm.SelectedItemStation.StationName)
                 {
-                   
                     sortedCollection.Add(item);
                 }
             }
-
             _taskVm.TaskCatalog = sortedCollection;
         }
-
-
     }
 }
