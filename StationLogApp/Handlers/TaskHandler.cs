@@ -150,6 +150,36 @@ namespace StationLogApp.Handlers
 
             return sortList;
         }
+
+        public ObservableCollection<TaskEquipmentStation> LoadCollection()
+        {
+            _newLoadedCollection = new ObservableCollection<TaskEquipmentStation>();
+
+            _newLoadedCollection.Clear();
+
+
+            ILoad<TaskClass> retrivedTask = new LoadM<TaskClass>();
+            ObservableCollection<TaskClass> taskCollection = retrivedTask.RetriveCollection("Tasks");
+
+            ILoad<Station> retrivedStation = new LoadM<Station>();
+            ObservableCollection<Station> stationCollection = retrivedStation.RetriveCollection("Stations");
+
+            ILoad<Equipment> retrivedEquipmnet = new LoadM<Equipment>();
+            ObservableCollection<Equipment> equipmentCollection = retrivedEquipmnet.RetriveCollection("Equipments");
+
+            var query = (from t in taskCollection
+                join e in equipmentCollection on t.EquipmentID equals e.EquipmentID
+                join s in stationCollection on e.StationID equals s.StationID
+                select new TaskEquipmentStation() { TaskName = t.TaskName, TaskType = t.TaskType, EquipmentName = e.EquipmentName, StationName = s.StationName, TaskSchedule = t.TaskSchedule, EquipmentID = e.EquipmentID }).ToList();
+
+            foreach (var item in query)
+            {
+                _newLoadedCollection.Add(item);
+            }
+
+            _loadedCollection = _newLoadedCollection;
+            return _loadedCollection;
+        }
         #endregion
 
         #region SaveAsDoneTask
