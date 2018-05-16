@@ -22,6 +22,8 @@ namespace StationLogApp.ViewModel
 
         private readonly TaskCatalogSingleton _catalogSingleton;
 
+        private readonly Collections col;
+
         private TaskEquipmentStation _selectedItem;
         #endregion 
 
@@ -30,11 +32,12 @@ namespace StationLogApp.ViewModel
         {
             get
             {
-                return _catalogSingleton.TaskCatalog;
+                return col.LoadToDo();
             }
             set
             {
-                _catalogSingleton.TaskCatalog = value;
+                var loadToDo = col.LoadToDo();
+                loadToDo = value;
                 OnPropertyChanged(nameof(TaskCatalog));
             } 
         }
@@ -43,11 +46,12 @@ namespace StationLogApp.ViewModel
         {
             get
             {
-                return _catalogSingleton.DoneCatalog;
+                return col.LoadDone();
             }
             set
             {
-                _catalogSingleton.DoneCatalog = value;
+                var loadDone = col.LoadDone();
+                loadDone = value;
                 OnPropertyChanged(nameof(DoneCatalog));
             }
         }
@@ -81,6 +85,8 @@ namespace StationLogApp.ViewModel
             DoInfo = new RelayCommandClass(Info);
 
             _selectedItem = new TaskEquipmentStation();
+
+            col = new Collections();
         }
         #endregion
 

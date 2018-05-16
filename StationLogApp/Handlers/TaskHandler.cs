@@ -37,98 +37,6 @@ namespace StationLogApp.Handlers
     }
         #endregion
         
-        #region Loading methods
-        public static ObservableCollection<TaskEquipmentStation> LoadToDo()
-        {
-            ObservableCollection<TaskEquipmentStation> ltes = new ObservableCollection<TaskEquipmentStation>();
-
-            ILoad<TaskClass> retrivedTask = new LoadM<TaskClass>();
-            ObservableCollection<TaskClass> taskCollection = retrivedTask.RetriveCollection("Tasks");
-
-            ILoad<Station> retrivedStation = new LoadM<Station>();
-            ObservableCollection<Station> stationCollection = retrivedStation.RetriveCollection("Stations");
-
-            ILoad<Equipment> retrivedEquipmnet = new LoadM<Equipment>();
-            ObservableCollection<Equipment> equipmentCollection = retrivedEquipmnet.RetriveCollection("Equipments");
-
-            var query = (from t in taskCollection
-                         join e in equipmentCollection on t.EquipmentID equals e.EquipmentID
-                         join s in stationCollection on e.StationID equals s.StationID
-                         select new TaskEquipmentStation(){TaskId = t.TaskId, TaskName = t.TaskName, TaskSchedule = t.TaskSchedule, Registration = t.Registration, DueDate = t.DueDate, DoneDate = t.DoneDate, DoneVar = t.DoneVar, TaskType = t.TaskType, Comment = t.Comment, EquipmentID = t.EquipmentID, EquipmentName = e.EquipmentName, StationName = s.StationName }).ToList();
-
-            foreach (var item in query)
-            {
-                if (item.DoneVar == "N")
-                {
-                    ltes.Add(item);
-                }
-            }
-
-            return ltes;
-        }
-
-        public static ObservableCollection<TaskEquipmentStation> LoadDone()
-        {
-            ObservableCollection<TaskEquipmentStation> done = new ObservableCollection<TaskEquipmentStation>();
-
-            ILoad<TaskClass> retrivedTask = new LoadM<TaskClass>();
-            ObservableCollection<TaskClass> taskCollection = retrivedTask.RetriveCollection("Tasks");
-
-            ILoad<Station> retrivedStation = new LoadM<Station>();
-            ObservableCollection<Station> stationCollection = retrivedStation.RetriveCollection("Stations");
-
-            ILoad<Equipment> retrivedEquipmnet = new LoadM<Equipment>();
-            ObservableCollection<Equipment> equipmentCollection = retrivedEquipmnet.RetriveCollection("Equipments");
-
-            ILoad<User> retrivedUser = new LoadM<User>();
-            ObservableCollection<User> userCollection = retrivedUser.RetriveCollection("Users");
-
-            var query = (from t in taskCollection
-                join e in equipmentCollection on t.EquipmentID equals e.EquipmentID
-                join s in stationCollection on e.StationID equals s.StationID
-                select new TaskEquipmentStation() { TaskId = t.TaskId, TaskName = t.TaskName, TaskSchedule = t.TaskSchedule, Registration = t.Registration, DueDate = t.DueDate, DoneDate = t.DoneDate, DoneVar = t.DoneVar, TaskType = t.TaskType, Comment = t.Comment, EquipmentID = t.EquipmentID, EquipmentName = e.EquipmentName, StationName = s.StationName }).ToList();
-
-            foreach (var item in query)
-            {
-                if (item.DoneVar == "Y")
-                {
-                    done.Add(item);
-                }
-            }
-
-            return done;
-        }
-
-        public static ObservableCollection<TaskEquipmentStation> SortedCollection()
-        {
-            ObservableCollection<TaskEquipmentStation> sortList = new ObservableCollection<TaskEquipmentStation>();
-
-            ILoad<TaskClass> retrivedTask = new LoadM<TaskClass>();
-            ObservableCollection<TaskClass> taskCollection = retrivedTask.RetriveCollection("Tasks");
-
-            ILoad<Station> retrivedStation = new LoadM<Station>();
-            ObservableCollection<Station> stationCollection = retrivedStation.RetriveCollection("Stations");
-
-            ILoad<Equipment> retrivedEquipmnet = new LoadM<Equipment>();
-            ObservableCollection<Equipment> equipmentCollection = retrivedEquipmnet.RetriveCollection("Equipments");
-
-            var query = (from t in taskCollection
-                join e in equipmentCollection on t.EquipmentID equals e.EquipmentID
-                join s in stationCollection on e.StationID equals s.StationID
-                select new TaskEquipmentStation() { TaskId = t.TaskId, TaskName = t.TaskName, TaskSchedule = t.TaskSchedule, Registration = t.Registration, DueDate = t.DueDate, DoneDate = t.DoneDate, DoneVar = t.DoneVar, TaskType = t.TaskType, Comment = t.Comment, EquipmentID = t.EquipmentID, EquipmentName = e.EquipmentName, StationName = s.StationName }).ToList();
-
-            //foreach (var item in query)
-            //{
-            //    if (LoadToDo().Contains(item.StationName))
-            //    {
-            //        sortList.Add(item);
-            //    }
-            //}
-
-            return sortList;
-        }
-        #endregion
-
         #region SaveAsDoneTask
         // This method is activated by the button of the relayCommand  
         // and save the logged task and add a task to the next date that it has to be made
@@ -214,6 +122,14 @@ namespace StationLogApp.Handlers
                 {
                     DoRescheduleTask(84);
                 }
+                else if (_taskVm.SelectedItem.TaskSchedule == "Every six months")
+                {
+                    DoRescheduleTask(168);
+                }
+                else if (_taskVm.SelectedItem.TaskSchedule == "Every year")
+                {
+                    DoRescheduleTask(436);
+                }
                 else
                 {
                     MessageDialog msg = new MessageDialog("Something went wrong, please try again");
@@ -232,7 +148,6 @@ namespace StationLogApp.Handlers
         private DateTime GetNextDate(int periodicity)
         {
             DateTime today = DateTime.Today;
-            //int daysUntilNextTwoMonthlyTuesday = ((int)DayOfWeek.Tuesday - (int)today.DayOfWeek + periodicity) % periodicity;
             DateTime nextTuesdayDate = today.AddDays(periodicity + 1);
             return nextTuesdayDate;
         }
