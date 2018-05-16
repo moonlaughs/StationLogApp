@@ -14,7 +14,7 @@
         </Grid.Background>
         
         <Grid.DataContext>
-            <viewModel:CrudVM/>
+            <viewModel:CreateVm/>
         </Grid.DataContext>
     
             <Grid.RowDefinitions>
@@ -30,6 +30,8 @@
         </Grid.ColumnDefinitions>
         
         <StackPanel Grid.Row="1" Grid.Column="1">
+            <TextBlock Text="Equipment Name" Foreground="White" FontSize="20"/>
+            <ComboBox Name="EquipmentName" Foreground="White" ItemsSource="{Binding EquipmentStations}" SelectedItem="{Binding NewItem, Mode=TwoWay}" FontSize="20" Width="200" Height="30" Margin="0,0,700,0"/>
             <TextBlock Text="Task description" FontSize="20" Foreground="White" />
             <TextBox x:Name="TaskDescription" Text="{Binding NewItem.TaskName, Mode=TwoWay}" FontSize="20" Foreground="White" Width="200" Height="30" Margin="0,0,700,0"/>
             <TextBlock Text="Schedule" Foreground="White" FontSize="20"/>
@@ -42,16 +44,14 @@
                 <ComboBoxItem Content="{Binding TaskSchedules[5]}" Foreground="Black"/>
                 <ComboBoxItem Content="{Binding TaskSchedules[6]}" Foreground="Black"/>
                 <ComboBoxItem Content="{Binding TaskSchedules[7]}" Foreground="Black"/>
-            </ComboBox>                                                     
-            <TextBlock Text="Due date:" Foreground="White" FontSize="20"/>
-            <DatePicker Width="200" Height="30" Date="{Binding DueDate, Mode=TwoWay}"/>
-            <TextBlock Text="Equipment Name" Foreground="White" FontSize="20"/>
-            <ComboBox Name="EquipmentName" Foreground="White" ItemsSource="{Binding EquipmentStations}" SelectedItem="{Binding NewItem, Mode=TwoWay}" FontSize="20" Width="200" Height="30" Margin="0,0,700,0"/>
+            </ComboBox>                                        
             <TextBlock Text="Task type" Foreground="White" FontSize="20"/>
             <ComboBox Name="TaskType" Foreground="White" ItemsSource="{Binding TaskTypes}" SelectedItem="{Binding NewItem.TaskType, Mode=TwoWay}" FontSize="20" Width="200" Height="30" Margin="0,0,700,0">
                 <ComboBoxItem Content="{Binding TaskTypes[0]}" Foreground="Black"/>
                 <ComboBoxItem Content="{Binding TaskTypes[1]}" Foreground="Black"/>
             </ComboBox>
+            <TextBlock Text="Due date:" Foreground="White" FontSize="20"/>
+            <DatePicker Width="200" Height="30" Date="{Binding DueDate, Mode=TwoWay}"/>
             <Button Content="CREATE" Command="{Binding DoCreateTask}" FontSize="20" Foreground="White" BorderBrush="White" BorderThickness="2" Margin="0,50,0,0"/>
         </StackPanel>
 

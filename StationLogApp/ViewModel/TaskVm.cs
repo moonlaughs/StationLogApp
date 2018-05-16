@@ -20,10 +20,8 @@ namespace StationLogApp.ViewModel
     {
         #region instancefields
 
-        private TaskCatalogSingleton _catalogSingleton;
-        //private TaskClass _selectedTaskClass;
+        private readonly TaskCatalogSingleton _catalogSingleton;
 
-        //Iza
         private TaskEquipmentStation _selectedItem;
         #endregion 
 
@@ -54,20 +52,6 @@ namespace StationLogApp.ViewModel
             }
         }
 
-        //public TaskClass SelectedTaskClass
-        //{
-        //    get
-        //    {
-        //        return _selectedTaskClass;
-        //    }
-        //    set
-        //    {
-        //        _selectedTaskClass = value;
-        //        OnPropertyChanged(nameof(SelectedTaskClass));
-        //    }
-        //}
-
-        //Iza
         public TaskEquipmentStation SelectedItem
         {
             get
@@ -91,7 +75,6 @@ namespace StationLogApp.ViewModel
         public TaskVm()
         {
             _catalogSingleton = TaskCatalogSingleton.Instance;
-            //_selectedTaskClass = new TaskClass();
             TaskHandler = new TaskHandler(this);
             SaveTaskClass = new RelayCommandClass(TaskHandler.OperateTask);
             
@@ -106,7 +89,7 @@ namespace StationLogApp.ViewModel
             if (SelectedItem.TaskId != 0)
             {
                 string info =
-                    $"Equipment name: {SelectedItem.EquipmentName} \nTaskId: {SelectedItem.TaskId} \nEquipmentId: {SelectedItem.EquipmentID} \nTask Schedule: {SelectedItem.TaskSchedule}";
+                    $"Equipment name: {SelectedItem.EquipmentName} \nTaskId: {SelectedItem.TaskId} \nEquipmentId: {SelectedItem.EquipmentID} \nTask Schedule: {SelectedItem.TaskSchedule} \nStation name: {SelectedItem.StationName}";
                 MessageDialog msg = new MessageDialog(info, "More Information");
                 await msg.ShowAsync();
             }

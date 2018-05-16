@@ -6,44 +6,53 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
+using StationLogApp.Common;
 using StationLogApp.Convertor;
 using StationLogApp.Interfaces;
 using StationLogApp.Model;
 using StationLogApp.Persistancy;
+using StationLogApp.View;
 using StationLogApp.ViewModel;
 
 namespace StationLogApp.Handlers
 {
     public class ManagerHandler
     {
-        private CrudVM _crudVm;
-        private ISave<TaskClass> _savedTaskClass = new SaveM<TaskClass>();
-        //private IUpdate<TaskClass> _updateTaskClass = new UpdateM<TaskClass>();
+        #region instancefields
+        private CreateVm _createVm;
+        private readonly ISave<TaskClass> _savedTaskClass = new SaveM<TaskClass>();
+        private readonly FrameNavigateClass _frameNavigateClass;
+        #endregion
 
-        public ManagerHandler(CrudVM crudVm)
+        #region Constructor
+        public ManagerHandler(CreateVm createVm)
         {
-            _crudVm = crudVm;
+            _createVm = createVm;
+            _frameNavigateClass = new FrameNavigateClass();
         }
+        #endregion
 
+        #region Methods
         public async void CreateTask()
         {
-            if (_crudVm.NewItem.TaskName != null && _crudVm.NewItem.TaskSchedule != null && _crudVm.NewItem.TaskType != null && _crudVm.NewItem.EquipmentID != 0)
+            if (_createVm.NewItem.TaskName != null && _createVm.NewItem.TaskSchedule != null && _createVm.NewItem.TaskType != null && _createVm.NewItem.EquipmentID != 0)
             {
-                DateTime date = DateTimeConvertor.DateTimeOffsetAndTimeSetToDateTime(_crudVm.DueDate, TimeSpan.Zero);
                 await _savedTaskClass.Save(new TaskClass(
-                    _crudVm.NewItem.TaskId,
-                    _crudVm.NewItem.TaskName,
-                    _crudVm.NewItem.TaskSchedule,
+                    _createVm.NewItem.TaskId,
+                    _createVm.NewItem.TaskName,
+                    _createVm.NewItem.TaskSchedule,
                     null,
-                    _crudVm.NewItem.TaskType,
-                    date,
+                    _createVm.NewItem.TaskType,
+                    DateTimeConvertor.DateTimeOffsetAndTimeSetToDateTime(_createVm.DueDate, TimeSpan.Zero),
                     null,
                     null,
-                    _crudVm.NewItem.DoneVar = "N",
-                    _crudVm.NewItem.EquipmentID), "Tasks");
+                    _createVm.NewItem.DoneVar = "N",
+                    _createVm.NewItem.EquipmentID), "Tasks");
 
                 MessageDialog msg = new MessageDialog("Task created");
                 await msg.ShowAsync();
+
+                _frameNavigateClass.ActivateFrameNavigation(typeof(LogInPage));
             }
             else
             {
@@ -51,48 +60,9 @@ namespace StationLogApp.Handlers
                 await msg.ShowAsync();
             }
         }
-
-        public ObservableCollection<Station> StationCollection()
-        {
-            ObservableCollection<Station> list = new ObservableCollection<Station>();
-
-            ILoad<Station> retrievedStations = new LoadM<Station>();
-            ObservableCollection<Station> stationCollection = retrievedStations.RetriveCollection("Stations");
-
-            var query = (from s in stationCollection
-                select new Station(){StationAddress = s.StationAddress, StationID = s.StationID, StationName = s.StationName}).ToList();
-
-            foreach (var item in query)
-            {
-                list.Add(item);
-            }
-
-            return list;
-        }
-
-        #region MyRegion
-
-        //public ObservableCollection<Equipment> EquipmentsCollection()
-        //{
-        //    ObservableCollection<Equipment> list = new ObservableCollection<Equipment>();
-
-        //    ILoad<Equipment> retrievedEquipments = new LoadM<Equipment>();
-        //    ObservableCollection<Equipment> equipmentsCollection = retrievedEquipments.RetriveCollection("Equipments");
-
-        //    var query = (from e in equipmentsCollection
-        //        select new Equipment() { EquipmentName = e.EquipmentName, EquipmentID = e.EquipmentID}).ToList();
-
-        //    foreach (var item in query)
-        //    {
-        //        list.Add(item);
-        //    }
-
-        //    return list;
-        //}
-
         #endregion
 
-
+        #region Collections
         public ObservableCollection<TaskEquipmentStation> EquipmentStationsCollection()
         {
             ObservableCollection<TaskEquipmentStation> list = new ObservableCollection<TaskEquipmentStation>();
@@ -115,8 +85,9 @@ namespace StationLogApp.Handlers
             return list;
         }
 
-        public string[] typeArray = new string[] { "check", "register" };
+        public string[] TypeArray = new string[] { "check", "register" };
 
-        public string[] scheduleArray = new string[]{"Every week", "Every two weeks", "Every three weeks", "Every month", "Every two months", "Every three months", "Every six months", "Every year"};
+        public string[] ScheduleArray = new string[]{"Every week", "Every two weeks", "Every three weeks", "Every month", "Every two months", "Every three months", "Every six months", "Every year"};
+        #endregion
     }
 }
