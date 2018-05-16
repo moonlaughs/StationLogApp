@@ -91,9 +91,10 @@
                 <ComboBoxItem Content="This week" Foreground="White"/>
                 <ComboBoxItem Content="This month" Foreground="White"/>
             </ComboBox>
-            <Button >
-                
-            </Button>
+            <Button Name = "Sort" Content="Sort" Foreground="White" 
+                    Background="black" 
+                    Command="{Binding SortCommand, Mode=TwoWay}"
+            ></Button>
         </StackPanel>
 
 

@@ -22,7 +22,7 @@ namespace StationLogApp.Singletons
         // Constructor of the Singleton
         private TaskCatalogSingleton()
         {
-            TaskCatalog = TaskHandler.LoadToDo();
+            //TaskCatalog = TaskHandler.LoadToDo();
             DoneCatalog = TaskHandler.LoadDone();
         }
        
