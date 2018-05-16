@@ -14,7 +14,7 @@ using StationLogApp.ViewModel;
 
 namespace StationLogApp.Handlers
 {
-    public class TaskHandler
+    public class TaskHandler:NotifyPropertyChangedClass
     {
         #region instance fields
         private ISave<TaskClass> _savedTaskClass = new SaveM<TaskClass>();
@@ -41,9 +41,19 @@ namespace StationLogApp.Handlers
         {
             _taskVm = taskVm;
             _frameNavigation = new FrameNavigateClass();
-    }
+        }
+
+        public ObservableCollection<TaskEquipmentStation> LoadedCollection
+        {
+            get { return _loadedCollection; }
+            set
+            {
+                _loadedCollection = value;
+                OnPropertyChanged(nameof(LoadedCollection));
+            }
+        }
         #endregion
-        
+
         #region Loading methods
         public static ObservableCollection<TaskEquipmentStation> LoadToDo()
         {

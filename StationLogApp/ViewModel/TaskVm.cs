@@ -30,11 +30,11 @@ namespace StationLogApp.ViewModel
         {
             get
             {
-                return _catalogSingleton.TaskCatalog;
+                return _taskHandler.LoadedCollection;
             }
             set
             {
-                _catalogSingleton.TaskCatalog = value;
+                _taskHandler.LoadedCollection = value;
                 OnPropertyChanged(nameof(TaskCatalog));
             } 
         }
