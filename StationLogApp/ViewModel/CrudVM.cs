@@ -82,6 +82,7 @@ namespace StationLogApp.ViewModel
         public ObservableCollection<Station> Stations { get; set; }
         public ObservableCollection<Equipment> Equipments { get; set; }
         public ObservableCollection<TaskClass> Tasks { get; set; }
+        public ObservableCollection<TaskEquipmentStation> EquipmentStations { get; set; }
 
         public string[] TaskTypes { get; set; }
         public string[] TaskSchedules { get; set; }
@@ -178,6 +179,7 @@ namespace StationLogApp.ViewModel
             Equipments = ManagerHandler.EquipmentsCollection();
             TaskTypes = ManagerHandler.typeArray;
             TaskSchedules = ManagerHandler.scheduleArray;
+            EquipmentStations = ManagerHandler.EquipmentStationsCollection();
         }
     }
 }

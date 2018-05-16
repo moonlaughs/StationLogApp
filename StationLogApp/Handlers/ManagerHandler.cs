@@ -34,7 +34,7 @@ namespace StationLogApp.Handlers
                     _crudVm.NewItem.Registration,
                     _crudVm.NewItem.TaskType,
                     _crudVm.NewItem.DueDate,
-                    _crudVm.NewItem.DueDate,
+                    null,
                     _crudVm.NewItem.Comment,
                     _crudVm.NewItem.DoneVar = "N",
                     _crudVm.NewItem.EquipmentID), "Tasks");
@@ -82,6 +82,28 @@ namespace StationLogApp.Handlers
                 list.Add(item);
             }
 
+            return list;
+        }
+
+        public ObservableCollection<TaskEquipmentStation> EquipmentStationsCollection()
+        {
+            ObservableCollection<TaskEquipmentStation> list = new ObservableCollection<TaskEquipmentStation>();
+
+            ILoad<Equipment> retrievedEquipments = new LoadM<Equipment>();
+            ObservableCollection<Equipment> equipmentsCollection = retrievedEquipments.RetriveCollection("Equipments");
+
+            ILoad<Station> retrivedStations = new LoadM<Station>();
+            ObservableCollection<Station> stationsCollection = retrivedStations.RetriveCollection("Stations");
+
+            var query = (from e in equipmentsCollection
+                join s in stationsCollection on e.StationID equals s.StationID
+                select new TaskEquipmentStation(){EquipmentID = e.EquipmentID, EquipmentName = e.EquipmentName, StationName = s.StationName}).ToList();
+
+            foreach (var item in query)
+            {
+                list.Add(item);
+            }
+            
             return list;
         }
 
