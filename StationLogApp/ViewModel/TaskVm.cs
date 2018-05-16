@@ -42,6 +42,9 @@ namespace StationLogApp.ViewModel
             } 
         }
 
+        public ObservableCollection<TaskEquipmentStation> EquipmentStations { get; set; }
+        public string[] ScheduleArray { get; set; }
+
         public ObservableCollection<TaskEquipmentStation> DoneCatalog
         {
             get
@@ -87,6 +90,8 @@ namespace StationLogApp.ViewModel
             _selectedItem = new TaskEquipmentStation();
 
             col = new Collections();
+            EquipmentStations = col.EquipmentStationsCollection();
+            ScheduleArray = col.ScheduleArray;
         }
         #endregion
 
