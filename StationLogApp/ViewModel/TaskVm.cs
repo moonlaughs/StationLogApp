@@ -21,9 +21,7 @@ namespace StationLogApp.ViewModel
         #region instancefields
 
         private TaskCatalogSingleton _catalogSingleton;
-        //private TaskClass _selectedTaskClass;
-
-        //Iza
+        private TaskHandler _taskHandler;
         private TaskEquipmentStation _selectedItem;
         #endregion 
 
@@ -54,18 +52,6 @@ namespace StationLogApp.ViewModel
             }
         }
 
-        //public TaskClass SelectedTaskClass
-        //{
-        //    get
-        //    {
-        //        return _selectedTaskClass;
-        //    }
-        //    set
-        //    {
-        //        _selectedTaskClass = value;
-        //        OnPropertyChanged(nameof(SelectedTaskClass));
-        //    }
-        //}
 
         //Iza
         public TaskEquipmentStation SelectedItem
@@ -83,21 +69,18 @@ namespace StationLogApp.ViewModel
 
         public RelayCommandClass SaveTaskClass { get; set; }
         public RelayCommandClass DoInfo { get; set; }
-
         public TaskHandler TaskHandler { get; set; }
+        
         #endregion
 
         #region constructor
         public TaskVm()
         {
             _catalogSingleton = TaskCatalogSingleton.Instance;
-            //_selectedTaskClass = new TaskClass();
-            TaskHandler = new TaskHandler(this);
-            SaveTaskClass = new RelayCommandClass(TaskHandler.OperateTask);
-            
-            DoInfo = new RelayCommandClass(Info);
-
+            _taskHandler = new TaskHandler(this);
             _selectedItem = new TaskEquipmentStation();
+            SaveTaskClass = new RelayCommandClass(TaskHandler.OperateTask);
+            DoInfo = new RelayCommandClass(Info);
         }
         #endregion
 

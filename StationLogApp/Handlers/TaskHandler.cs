@@ -63,9 +63,9 @@ namespace StationLogApp.Handlers
                     ltes.Add(item);
                 }
             }
-
             return ltes;
         }
+
 
         public static ObservableCollection<TaskEquipmentStation> LoadDone()
         {
@@ -95,9 +95,9 @@ namespace StationLogApp.Handlers
                     done.Add(item);
                 }
             }
-
             return done;
         }
+
 
         public static ObservableCollection<TaskEquipmentStation> SortedCollection()
         {
@@ -253,6 +253,12 @@ namespace StationLogApp.Handlers
             );
             return newReSchedule;
         }
+        #endregion
+
+        #region SortingMethods
+
+
+
         #endregion
     }
 }
