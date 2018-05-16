@@ -23,6 +23,7 @@ namespace StationLogApp.ViewModel
         private TaskCatalogSingleton _catalogSingleton;
         private TaskHandler _taskHandler;
         private TaskEquipmentStation _selectedItem;
+        private ObservableCollection<TaskEquipmentStation> _taskCollection;
         #endregion 
 
         #region properties
@@ -67,6 +68,8 @@ namespace StationLogApp.ViewModel
             }
         }
 
+
+
         public RelayCommandClass SaveTaskClass { get; set; }
         public RelayCommandClass DoInfo { get; set; }
         public RelayCommandClass SortCommand { get; set; }
@@ -79,7 +82,7 @@ namespace StationLogApp.ViewModel
         {
             _catalogSingleton = TaskCatalogSingleton.Instance;
             _taskHandler = new TaskHandler(this);
-            TaskCatalog = _taskHandler.LoadedCollection;
+            _taskCollection = _taskHandler.LoadCollection();
             _selectedItem = new TaskEquipmentStation();
             SaveTaskClass = new RelayCommandClass(_taskHandler.OperateTask);
             DoInfo = new RelayCommandClass(Info);
