@@ -46,13 +46,7 @@
             <TextBlock Text="Due date:" Foreground="White" FontSize="20"/>
             <DatePicker Width="200" Height="30" Date="{Binding DueDate, Mode=TwoWay}"/>
             <TextBlock Text="Equipment Name" Foreground="White" FontSize="20"/>
-            <ComboBox Name="EquipmentName" Foreground="White" ItemsSource="{Binding EquipmentStations}" SelectedItem="{Binding NewItem.EquipmentID, Mode=TwoWay}" FontSize="20" Width="200" Height="30" Margin="0,0,700,0">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding EquipmentName, Mode=TwoWay}" Foreground="black" FontSize="20"/>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
+            <ComboBox Name="EquipmentName" Foreground="White" ItemsSource="{Binding EquipmentStations}" SelectedItem="{Binding NewItem, Mode=TwoWay}" FontSize="20" Width="200" Height="30" Margin="0,0,700,0"/>
             <TextBlock Text="Task type" Foreground="White" FontSize="20"/>
             <ComboBox Name="TaskType" Foreground="White" ItemsSource="{Binding TaskTypes}" SelectedItem="{Binding NewItem.TaskType, Mode=TwoWay}" FontSize="20" Width="200" Height="30" Margin="0,0,700,0">
                 <ComboBoxItem Content="{Binding TaskTypes[0]}" Foreground="Black"/>
