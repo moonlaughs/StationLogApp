@@ -18,7 +18,7 @@ namespace StationLogApp.Handlers
     {
         private CrudVM _crudVm;
         private ISave<TaskClass> _savedTaskClass = new SaveM<TaskClass>();
-        private IUpdate<TaskClass> _updateTaskClass = new UpdateM<TaskClass>();
+        //private IUpdate<TaskClass> _updateTaskClass = new UpdateM<TaskClass>();
 
         public ManagerHandler(CrudVM crudVm)
         {
@@ -27,18 +27,18 @@ namespace StationLogApp.Handlers
 
         public async void CreateTask()
         {
-            if (_crudVm.NewItem.TaskName != null)
+            if (_crudVm.NewItem.TaskName != null && _crudVm.NewItem.TaskSchedule != null && _crudVm.NewItem.TaskType != null && _crudVm.NewItem.EquipmentID != 0)
             {
                 DateTime date = DateTimeConvertor.DateTimeOffsetAndTimeSetToDateTime(_crudVm.DueDate, TimeSpan.Zero);
                 await _savedTaskClass.Save(new TaskClass(
                     _crudVm.NewItem.TaskId,
                     _crudVm.NewItem.TaskName,
                     _crudVm.NewItem.TaskSchedule,
-                    _crudVm.NewItem.Registration,
+                    null,
                     _crudVm.NewItem.TaskType,
                     date,
                     null,
-                    _crudVm.NewItem.Comment,
+                    null,
                     _crudVm.NewItem.DoneVar = "N",
                     _crudVm.NewItem.EquipmentID), "Tasks");
 
@@ -70,23 +70,28 @@ namespace StationLogApp.Handlers
             return list;
         }
 
-        public ObservableCollection<Equipment> EquipmentsCollection()
-        {
-            ObservableCollection<Equipment> list = new ObservableCollection<Equipment>();
+        #region MyRegion
 
-            ILoad<Equipment> retrievedEquipments = new LoadM<Equipment>();
-            ObservableCollection<Equipment> equipmentsCollection = retrievedEquipments.RetriveCollection("Equipments");
+        //public ObservableCollection<Equipment> EquipmentsCollection()
+        //{
+        //    ObservableCollection<Equipment> list = new ObservableCollection<Equipment>();
 
-            var query = (from e in equipmentsCollection
-                select new Equipment() { EquipmentName = e.EquipmentName, EquipmentID = e.EquipmentID}).ToList();
+        //    ILoad<Equipment> retrievedEquipments = new LoadM<Equipment>();
+        //    ObservableCollection<Equipment> equipmentsCollection = retrievedEquipments.RetriveCollection("Equipments");
 
-            foreach (var item in query)
-            {
-                list.Add(item);
-            }
+        //    var query = (from e in equipmentsCollection
+        //        select new Equipment() { EquipmentName = e.EquipmentName, EquipmentID = e.EquipmentID}).ToList();
 
-            return list;
-        }
+        //    foreach (var item in query)
+        //    {
+        //        list.Add(item);
+        //    }
+
+        //    return list;
+        //}
+
+        #endregion
+
 
         public ObservableCollection<TaskEquipmentStation> EquipmentStationsCollection()
         {
