@@ -22,6 +22,13 @@ namespace StationLogApp.Handlers
 
         private TaskVm _taskVm;
         private readonly FrameNavigateClass _frameNavigation;
+
+
+        // Collections for Sorting Purposes
+
+        private ObservableCollection<TaskEquipmentStation> _newLoadedCollection;
+
+        private ObservableCollection<TaskEquipmentStation> _loadedCollection;
         #endregion
 
         #region properties
