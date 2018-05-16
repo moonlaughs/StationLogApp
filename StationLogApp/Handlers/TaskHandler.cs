@@ -180,6 +180,21 @@ namespace StationLogApp.Handlers
             _loadedCollection = _newLoadedCollection;
             return _loadedCollection;
         }
+
+        public ObservableCollection<Station> LoadStation()
+        {
+            ILoad<Station> retrivedStation = new LoadM<Station>();
+            ObservableCollection<Station> stationCollection = retrivedStation.RetriveCollection("Stations");
+
+            var query = (from s in stationCollection
+                select new Station() { StationName = s.StationName, StationID = s.StationID }).ToList();
+
+            foreach (var item in query)
+            {
+                stationCollection.Add(item);
+            }
+            return stationCollection;
+        }
         #endregion
 
         #region SaveAsDoneTask
@@ -312,10 +327,11 @@ namespace StationLogApp.Handlers
 
         public void SortCollection()
         {
+
             _newLoadedCollection = new ObservableCollection<TaskEquipmentStation>();
             _newLoadedCollection.Clear();
 
-            if (_taskVm.SelectedItem != null)
+            if (_taskVm.SelectedItemStation != null)
             {
                 ILoad<TaskClass> retrivedTask = new LoadM<TaskClass>();
                 ObservableCollection<TaskClass> taskCollection = retrivedTask.RetriveCollection("Tasks");
@@ -333,7 +349,7 @@ namespace StationLogApp.Handlers
 
                 foreach (var item in query)
                 {
-                    if (item.StationName == _taskVm.SelectedItem.StationName)
+                    if (item.StationName == _taskVm.SelectedItemStation.StationName)
                     {
                         _newLoadedCollection.Add(item);
                     }
@@ -342,6 +358,34 @@ namespace StationLogApp.Handlers
                 _loadedCollection = _newLoadedCollection;
                 _taskVm.TaskCatalog = _loadedCollection;
             }
+
+            else if (_taskVm.SelectedItemPeriodicity != null)
+            {
+                ILoad<TaskClass> retrivedTask = new LoadM<TaskClass>();
+                ObservableCollection<TaskClass> taskCollection = retrivedTask.RetriveCollection("Tasks");
+
+                ILoad<Station> retrivedStation = new LoadM<Station>();
+                ObservableCollection<Station> stationCollection = retrivedStation.RetriveCollection("Stations");
+
+                ILoad<Equipment> retrivedEquipmnet = new LoadM<Equipment>();
+                ObservableCollection<Equipment> equipmentCollection = retrivedEquipmnet.RetriveCollection("Equipments");
+
+                var query = (from t in taskCollection
+                    join e in equipmentCollection on t.EquipmentID equals e.EquipmentID
+                    join s in stationCollection on e.StationID equals s.StationID
+                    select new TaskEquipmentStation() { TaskName = t.TaskName, TaskType = t.TaskType, EquipmentName = e.EquipmentName, StationName = s.StationName, TaskSchedule = t.TaskSchedule, EquipmentID = e.EquipmentID }).ToList();
+
+                foreach (var item in query)
+                {
+                    if (item.TaskSchedule == _taskVm.SelectedItemPeriodicity)
+                    {
+                        _newLoadedCollection.Add(item);
+                    }
+                }
+                _loadedCollection = _newLoadedCollection;
+                _taskVm.TaskCatalog = _loadedCollection;
+            }
+
         }
 
         #endregion
