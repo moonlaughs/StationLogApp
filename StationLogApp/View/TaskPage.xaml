@@ -73,7 +73,8 @@
                        FontSize="20"
                        Margin="15,0,10,0"/>
             <ComboBox Name="Stations" Foreground="Black" Margin="20,0,0,0" Width="200"
-                      ItemsSource="{Binding StationCatalog, Mode=TwoWay}"  SelectedItem="{Binding SelectedItemStation, Mode=TwoWay}">
+                      ItemsSource="{Binding StationCatalog, Mode=TwoWay}"  
+                      SelectedItem="{Binding SelectedItemStation, Mode=TwoWay}">
             </ComboBox>
             <ComboBox Name="Date" Margin="20,0,0,0" Width="200"/>
             <Button Name = "Sort" Content="Sort" Foreground="White" 

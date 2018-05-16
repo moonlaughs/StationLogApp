@@ -15,6 +15,7 @@ using StationLogApp.View;
 
 namespace StationLogApp.ViewModel
 {
+
     public class TaskVm : NotifyPropertyChangedClass
     {
         #region instancefields

@@ -8,6 +8,7 @@ using Windows.ApplicationModel.Appointments.AppointmentsProvider;
 using StationLogApp.Interfaces;
 using StationLogApp.Model;
 using StationLogApp.Persistancy;
+using StationLogApp.Singletons;
 using StationLogApp.View;
 using StationLogApp.ViewModel;
 
@@ -17,8 +18,6 @@ namespace StationLogApp.Handlers
     {
         private ISave<TaskClass> _savedTaskClass = new SaveM<TaskClass>();
         private TaskVm _taskVm;
-       
-        
 
         public TaskClass SelectedTask
         {
@@ -72,7 +71,7 @@ namespace StationLogApp.Handlers
            ObservableCollection<Station> stationCollection = loadedStationClass.RetrieveCollection("Stations");
 
             var query = (from s in stationCollection
-                select new Station() { StationName = s.StationName, StationID = s.StationID}).ToList();
+                        select new Station() { StationName = s.StationName, StationID = s.StationID}).ToList();
 
             foreach (var item in query)
             {
