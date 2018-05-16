@@ -182,7 +182,6 @@ namespace StationLogApp.ViewModel
             DoCreateTask = new RelayCommandClass(ManagerHandler.CreateTask);
             NewItem = new TaskEquipmentStation();
             Stations = ManagerHandler.StationCollection();
-            Equipments = ManagerHandler.EquipmentsCollection();
             TaskTypes = ManagerHandler.typeArray;
             TaskSchedules = ManagerHandler.scheduleArray;
             EquipmentStations = ManagerHandler.EquipmentStationsCollection();
