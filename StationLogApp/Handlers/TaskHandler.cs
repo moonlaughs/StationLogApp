@@ -37,11 +37,6 @@ namespace StationLogApp.Handlers
             get { return _taskVm.SelectedItem; }
         }
 
-        public TaskHandler(TaskVm taskVm)
-        {
-            _taskVm = taskVm;
-            _frameNavigation = new FrameNavigateClass();
-        }
 
         public ObservableCollection<TaskEquipmentStation> LoadedCollection
         {
@@ -52,6 +47,17 @@ namespace StationLogApp.Handlers
                 OnPropertyChanged(nameof(LoadedCollection));
             }
         }
+
+        #region Constructor
+
+        public TaskHandler(TaskVm taskVm)
+        {
+            _taskVm = taskVm;
+            _frameNavigation = new FrameNavigateClass();
+        }
+
+        #endregion
+
         #endregion
 
         #region Loading methods
@@ -152,7 +158,7 @@ namespace StationLogApp.Handlers
         public void OperateTask()
         {
             SaveTaskClass();
-            _frameNavigation.ActivateFrameNavigation(typeof(TaskPage));
+            //_frameNavigation.ActivateFrameNavigation(typeof(TaskPage));
         }
         
         public void SaveTaskClass()
@@ -274,7 +280,39 @@ namespace StationLogApp.Handlers
 
         #region SortingMethods
 
+        public void SortCollection()
+        {
+            _newLoadedCollection = new ObservableCollection<TaskEquipmentStation>();
+            _newLoadedCollection.Clear();
 
+            if (_taskVm.SelectedItem != null)
+            {
+                ILoad<TaskClass> retrivedTask = new LoadM<TaskClass>();
+                ObservableCollection<TaskClass> taskCollection = retrivedTask.RetriveCollection("Tasks");
+
+                ILoad<Station> retrivedStation = new LoadM<Station>();
+                ObservableCollection<Station> stationCollection = retrivedStation.RetriveCollection("Stations");
+
+                ILoad<Equipment> retrivedEquipmnet = new LoadM<Equipment>();
+                ObservableCollection<Equipment> equipmentCollection = retrivedEquipmnet.RetriveCollection("Equipments");
+
+                var query = (from t in taskCollection
+                    join e in equipmentCollection on t.EquipmentID equals e.EquipmentID
+                    join s in stationCollection on e.StationID equals s.StationID
+                    select new TaskEquipmentStation() { TaskName = t.TaskName, TaskType = t.TaskType, EquipmentName = e.EquipmentName, StationName = s.StationName, TaskSchedule = t.TaskSchedule, EquipmentID = e.EquipmentID }).ToList();
+
+                foreach (var item in query)
+                {
+                    if (item.StationName == _taskVm.SelectedItem.StationName)
+                    {
+                        _newLoadedCollection.Add(item);
+                    }
+                }
+
+                _loadedCollection = _newLoadedCollection;
+                _taskVm.TaskCatalog = _loadedCollection;
+            }
+        }
 
         #endregion
     }
