@@ -22,6 +22,7 @@ namespace StationLogApp.Handlers
 
         private TaskVm _taskVm;
         private readonly FrameNavigateClass _frameNavigation;
+        private Collections _collectionsClass = new Collections();
 
 
         // Collections for Sorting Purposes
@@ -37,6 +38,13 @@ namespace StationLogApp.Handlers
             get { return _taskVm.SelectedItem; }
         }
 
+        public string[] PeriodicityItems
+        {
+            get { return _collectionsClass.ScheduleArray; }
+            set {_collectionsClass.ScheduleArray = value; }
+        }
+
+        public string SelectedPeriodicityItem { get; set; }
 
         public ObservableCollection<TaskEquipmentStation> LoadedCollection
         {

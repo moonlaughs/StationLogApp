@@ -74,8 +74,26 @@ namespace StationLogApp.ViewModel
         }
 
         public Station SelectedItemStation { get; set; }
-        
-        public string SelectedItemPeriodicity { get; set; }
+
+        public string[] PeriodicityItems
+        {
+            get { return _taskHandler.PeriodicityItems; }
+            set { _taskHandler.PeriodicityItems = value; }
+        }
+
+        public string SelectedItemPeriodicity
+        {
+            get
+            {
+                return _taskHandler.SelectedPeriodicityItem;
+            }
+            set
+            {
+                _taskHandler.SelectedPeriodicityItem = value;
+                OnPropertyChanged(nameof(SelectedItemPeriodicity));
+                
+            }
+        }
 
 
 

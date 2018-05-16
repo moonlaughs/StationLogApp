@@ -86,7 +86,8 @@
                       ItemsSource="{Binding StationCatalog, Mode=TwoWay}"  
                       SelectedItem="{Binding SelectedItemStation, Mode=TwoWay}">
             </ComboBox>
-            <ComboBox Name="Date" Margin="20,0,0,0" Width="200" ItemsSource="{Binding}">
+            <ComboBox Name="TaskPeriodicityPicker" Margin="20,0,0,0" Width="200" 
+                      ItemsSource="{Binding PeriodicityItems}" SelectedItem="{Binding SelectedItemPeriodicity, Mode=TwoWay}">
             </ComboBox>
             <Button Name = "Sort" Content="Sort" Foreground="White" 
                     Background="black" 

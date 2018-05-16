@@ -95,6 +95,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\Collections.cs" />
     <Compile Include="Common\FrameNavigateClass.cs" />
     <Compile Include="Common\NotifyPropertyChangedClass.cs" />
     <Compile Include="Common\RelayCommandClass.cs" />
