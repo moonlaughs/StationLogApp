@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
+using StationLogApp.Convertor;
 using StationLogApp.Interfaces;
 using StationLogApp.Model;
 using StationLogApp.Persistancy;
@@ -27,13 +29,14 @@ namespace StationLogApp.Handlers
         {
             if (_crudVm.NewItem.TaskName != null)
             {
+                DateTime date = DateTimeConvertor.DateTimeOffsetAndTimeSetToDateTime(_crudVm.DueDate, TimeSpan.Zero);
                 await _savedTaskClass.Save(new TaskClass(
                     _crudVm.NewItem.TaskId,
                     _crudVm.NewItem.TaskName,
                     _crudVm.NewItem.TaskSchedule,
                     _crudVm.NewItem.Registration,
                     _crudVm.NewItem.TaskType,
-                    _crudVm.NewItem.DueDate,
+                    date,
                     null,
                     _crudVm.NewItem.Comment,
                     _crudVm.NewItem.DoneVar = "N",

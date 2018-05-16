@@ -98,6 +98,7 @@
     <Compile Include="Common\FrameNavigateClass.cs" />
     <Compile Include="Common\NotifyPropertyChangedClass.cs" />
     <Compile Include="Common\RelayCommandClass.cs" />
+    <Compile Include="Convertor\DateTimeConvertor.cs" />
     <Compile Include="Handlers\ManagerHandler.cs" />
     <Compile Include="Handlers\NoteHandler.cs" />
     <Compile Include="Handlers\TaskHandler.cs" />

@@ -37,18 +37,24 @@ namespace StationLogApp.ViewModel
 
         #region Properties
         public RelayCommandClass DoCreateTask { get; set; }
-        public RelayCommandClass DoDeleteTask { get; set; }
-        public RelayCommandClass DoNextPage { get; set; }
 
-        public TaskEquipmentStation SelectTask
-        {
-            get { return _selectedItem; }
-            set
-            {
-                _selectedItem = value;
-                OnPropertyChanged(nameof(SelectTask));
-            }
-        }
+        #region MyRegion
+
+        //public RelayCommandClass DoDeleteTask { get; set; }
+        //public RelayCommandClass DoNextPage { get; set; }
+
+        //public TaskEquipmentStation SelectTask
+        //{
+        //    get { return _selectedItem; }
+        //    set
+        //    {
+        //        _selectedItem = value;
+        //        OnPropertyChanged(nameof(SelectTask));
+        //    }
+        //}
+
+        #endregion
+
 
         public TaskEquipmentStation NewItem
         {
