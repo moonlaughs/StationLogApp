@@ -102,6 +102,7 @@
     <Compile Include="Convertor\DateTimeConvertor.cs" />
     <Compile Include="Handlers\CreateTaskHandler.cs" />
     <Compile Include="Handlers\DeleteClassHandler.cs" />
+    <Compile Include="Handlers\InfoHandler.cs" />
     <Compile Include="Handlers\NoteHandler.cs" />
     <Compile Include="Handlers\TaskHandler.cs" />
     <Compile Include="Interfaces\ICreateTask.cs" />
@@ -121,7 +122,7 @@
     <Compile Include="Persistancy\UpdateM.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Model\TaskClass.cs" />
-    <Compile Include="Singletons\TaskCatalogSingleton.cs" />
+    <Compile Include="Singletons\TaskEquipmentStationSingleton.cs" />
     <Compile Include="Singletons\UserSingleton.cs" />
     <Compile Include="ViewModel\ButtonsVm.cs" />
     <Compile Include="ViewModel\CreateTaskVm.cs" />

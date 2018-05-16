@@ -19,15 +19,20 @@ namespace StationLogApp.ViewModel
     public class TaskVm : NotifyPropertyChangedClass
     {
         #region instancefields
-
-        private readonly TaskCatalogSingleton _catalogSingleton;
-
+        private readonly TaskEquipmentStationSingleton _singleton;
         private readonly Collections col;
-
         private TaskEquipmentStation _selectedItem;
         #endregion 
 
         #region properties
+        public RelayCommandClass SaveTaskClass { get; set; }
+        public RelayCommandClass DoInfo { get; set; }
+
+        public TaskHandler TaskHandler { get; set; }
+
+        public string[] ScheduleArray { get; set; }
+        public ObservableCollection<TaskEquipmentStation> EquipmentStations { get; set; }
+        
         public ObservableCollection<TaskEquipmentStation> TaskCatalog
         {
             get
@@ -41,10 +46,7 @@ namespace StationLogApp.ViewModel
                 OnPropertyChanged(nameof(TaskCatalog));
             } 
         }
-
-        public ObservableCollection<TaskEquipmentStation> EquipmentStations { get; set; }
-        public string[] ScheduleArray { get; set; }
-
+        
         public ObservableCollection<TaskEquipmentStation> DoneCatalog
         {
             get
@@ -71,44 +73,26 @@ namespace StationLogApp.ViewModel
                 OnPropertyChanged(nameof(SelectedItem));
             }
         }
-
-        public RelayCommandClass SaveTaskClass { get; set; }
-        public RelayCommandClass DoInfo { get; set; }
-
-        public TaskHandler TaskHandler { get; set; }
         #endregion
+
+        private InfoHandler infoHandler { get; set; }
 
         #region constructor
         public TaskVm()
         {
-            _catalogSingleton = TaskCatalogSingleton.Instance;
+            _singleton = TaskEquipmentStationSingleton.GetInstance();
             TaskHandler = new TaskHandler(this);
             SaveTaskClass = new RelayCommandClass(TaskHandler.OperateTask);
             
-            DoInfo = new RelayCommandClass(Info);
-
             _selectedItem = new TaskEquipmentStation();
 
             col = new Collections();
             EquipmentStations = col.EquipmentStationsCollection();
             ScheduleArray = col.ScheduleArray;
+
+            infoHandler = new InfoHandler(this);
+            DoInfo = new RelayCommandClass(infoHandler.Info);
         }
         #endregion
-
-        public async void Info()
-        {
-            if (SelectedItem.TaskId != 0)
-            {
-                string info =
-                    $"Equipment name: {SelectedItem.EquipmentName} \nTaskId: {SelectedItem.TaskId} \nEquipmentId: {SelectedItem.EquipmentID} \nTask Schedule: {SelectedItem.TaskSchedule} \nStation name: {SelectedItem.StationName}";
-                MessageDialog msg = new MessageDialog(info, "More Information");
-                await msg.ShowAsync();
-            }
-            else
-            {
-                MessageDialog msg = new MessageDialog("Select item to see the details");
-                await msg.ShowAsync();
-            }
-        }
     }
 }
