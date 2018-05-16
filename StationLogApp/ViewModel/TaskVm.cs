@@ -20,7 +20,7 @@ namespace StationLogApp.ViewModel
     {
         #region instancefields
         private readonly TaskEquipmentStationSingleton _singleton;
-        private readonly Collections col;
+        private readonly Collections _col;
         private TaskEquipmentStation _selectedItem;
         #endregion 
 
@@ -37,11 +37,11 @@ namespace StationLogApp.ViewModel
         {
             get
             {
-                return col.LoadToDo();
+                return _col.LoadToDo();
             }
             set
             {
-                var loadToDo = col.LoadToDo();
+                var loadToDo = _col.LoadToDo();
                 loadToDo = value;
                 OnPropertyChanged(nameof(TaskCatalog));
             } 
@@ -51,11 +51,11 @@ namespace StationLogApp.ViewModel
         {
             get
             {
-                return col.LoadDone();
+                return _col.LoadDone();
             }
             set
             {
-                var loadDone = col.LoadDone();
+                var loadDone = _col.LoadDone();
                 loadDone = value;
                 OnPropertyChanged(nameof(DoneCatalog));
             }
@@ -74,9 +74,7 @@ namespace StationLogApp.ViewModel
             }
         }
         #endregion
-
-        private InfoHandler infoHandler { get; set; }
-
+        
         #region constructor
         public TaskVm()
         {
@@ -86,11 +84,11 @@ namespace StationLogApp.ViewModel
             
             _selectedItem = new TaskEquipmentStation();
 
-            col = new Collections();
-            EquipmentStations = col.EquipmentStationsCollection();
-            ScheduleArray = col.ScheduleArray;
+            _col = new Collections();
+            EquipmentStations = _col.EquipmentStationsCollection();
+            ScheduleArray = _col.ScheduleArray;
 
-            infoHandler = new InfoHandler(this);
+            var infoHandler = new InfoHandler(this);
             DoInfo = new RelayCommandClass(infoHandler.Info);
         }
         #endregion
