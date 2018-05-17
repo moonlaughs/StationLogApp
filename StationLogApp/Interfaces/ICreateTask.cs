@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace StationLogApp.Interfaces
 {
-    public interface IRead<T>
+    public interface ICreateTask
     {
-        Task<T> Read(int key);
+        void CreateTask();
     }
 }

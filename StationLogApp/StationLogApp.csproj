@@ -95,39 +95,44 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\Collections.cs" />
     <Compile Include="Common\FrameNavigateClass.cs" />
     <Compile Include="Common\NotifyPropertyChangedClass.cs" />
     <Compile Include="Common\RelayCommandClass.cs" />
     <Compile Include="Convertor\DateTimeConvertor.cs" />
-    <Compile Include="Handlers\ManagerHandler.cs" />
+    <Compile Include="Handlers\CreateTaskHandler.cs" />
+    <Compile Include="Handlers\DeleteTaskHandler.cs" />
+    <Compile Include="Handlers\InfoHandler.cs" />
     <Compile Include="Handlers\NoteHandler.cs" />
     <Compile Include="Handlers\TaskHandler.cs" />
+    <Compile Include="Handlers\UpdateTaskHandler.cs" />
+    <Compile Include="Interfaces\ICreateTask.cs" />
+    <Compile Include="Interfaces\IDeleteTask.cs" />
     <Compile Include="Interfaces\ISave.cs" />
-    <Compile Include="Interfaces\ICreate.cs" />
     <Compile Include="Interfaces\IDelete.cs" />
     <Compile Include="Interfaces\ILoad.cs" />
-    <Compile Include="Interfaces\IRead.cs" />
     <Compile Include="Interfaces\IUpdate.cs" />
+    <Compile Include="Interfaces\IUpdateTask.cs" />
     <Compile Include="Model\Equipment.cs" />
     <Compile Include="Model\Notes.cs" />
     <Compile Include="Model\TaskEquipmentStation.cs" />
     <Compile Include="Persistancy\SaveM.cs" />
     <Compile Include="Model\Station.cs" />
     <Compile Include="Model\User.cs" />
-    <Compile Include="Persistancy\CreateM.cs" />
     <Compile Include="Persistancy\DeleteM.cs" />
     <Compile Include="Persistancy\LoadM.cs" />
-    <Compile Include="Persistancy\ReadM.cs" />
     <Compile Include="Persistancy\UpdateM.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Model\TaskClass.cs" />
-    <Compile Include="Singletons\TaskCatalogSingleton.cs" />
+    <Compile Include="Singletons\TaskEquipmentStationSingleton.cs" />
     <Compile Include="Singletons\UserSingleton.cs" />
     <Compile Include="ViewModel\ButtonsVm.cs" />
-    <Compile Include="ViewModel\CreateVm.cs" />
+    <Compile Include="ViewModel\CreateTaskVm.cs" />
+    <Compile Include="ViewModel\DeleteTaskVm%3b.cs" />
     <Compile Include="ViewModel\LoginVM.cs" />
     <Compile Include="ViewModel\NoteVM.cs" />
     <Compile Include="ViewModel\TaskVm.cs" />
+    <Compile Include="ViewModel\UpdateTaskVm.cs" />
     <Compile Include="View\AddNotesPage.xaml.cs">
       <DependentUpon>AddNotesPage.xaml</DependentUpon>
     </Compile>
