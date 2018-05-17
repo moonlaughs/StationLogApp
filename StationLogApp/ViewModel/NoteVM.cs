@@ -19,8 +19,12 @@ namespace StationLogApp.ViewModel
         private int _userID;
         private ObservableCollection<Station> _stationCollection;
         private ButtonsVm _currentUser = new ButtonsVm();
-        private Station _selectedNote;
+        private Station _selectedStationItem;
         private Notes _notes;
+        private Notes _selectedNote;
+
+
+        public ObservableCollection<Notes> NotesCatalog { get; set; }
 
         public ObservableCollection<Station> StationCollection
         {
@@ -84,30 +88,47 @@ namespace StationLogApp.ViewModel
             }
         }
 
-        public Station SelectedNote
+        public Station SelectedStationItem
         {
-            get { return _selectedNote; }
+            get { return _selectedStationItem; }
             set
             {
-                _selectedNote = value;
+                _selectedStationItem = value;
                 OnPropertyChanged();
                 SaveNote.RaiseCanExecuteChanged();
             }
         }
 
+        public Notes SelectedNote
+        {
+            get
+            {
+                return _selectedNote;
+            }
+            set
+            {
+                _selectedNote = value;
+                OnPropertyChanged(nameof(SelectedNote));
+            }
+        }
+
         public RelayCommandClass SaveNote { get; set; }
+        public RelayCommandClass RemoveNote { get; set; }
 
 
         public NoteHandler NoteHandler { get; set; }
 
         public NoteVM()
         {
+            NoteHandler = new NoteHandler(this);
+            NotesCatalog = NoteHandler.LoadNotes();
             _dueDate = DateTimeOffset.Now;
             _stationCollection = NoteHandler.LoadStations();
-            _selectedNote = SelectedNote;
+            _selectedStationItem = SelectedStationItem;
             _userID = _currentUser.UserID;
-            NoteHandler = new NoteHandler(this);
             SaveNote = new RelayCommandClass(NoteHandler.CreateAndSaveNote);
+            SelectedNote = new Notes();
+            RemoveNote = new RelayCommandClass(NoteHandler.RemoveNote);
         }
 
     }

@@ -16,7 +16,6 @@ namespace StationLogApp.Model
         #region
         private const string _serverUrl = "http://stationlogdbwebservice20180514015122.azurewebsites.net/";
         private string _apiPrefix = "api/";
-        private string _apiID;
         private HttpClientHandler _httpClientHandler;
         private HttpClient _httpClient;
         #endregion
@@ -31,7 +30,6 @@ namespace StationLogApp.Model
                     _httpClient.BaseAddress = new Uri(_serverUrl);
                     _httpClient.DefaultRequestHeaders.Clear();
                     _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
                     try
                     {
                         string postBody = JsonConvert.SerializeObject(obj);

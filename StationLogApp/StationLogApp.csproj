@@ -127,6 +127,7 @@
     <Compile Include="ViewModel\LoginVM.cs" />
     <Compile Include="ViewModel\NoteVM.cs" />
     <Compile Include="ViewModel\TaskVm.cs" />
+    <Compile Include="ViewModel\VMContainer.cs" />
     <Compile Include="View\AddNotesPage.xaml.cs">
       <DependentUpon>AddNotesPage.xaml</DependentUpon>
     </Compile>

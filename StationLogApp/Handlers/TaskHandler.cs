@@ -99,6 +99,22 @@ namespace StationLogApp.Handlers
 
             return done;
         }
+
+        public ObservableCollection<Station> LoadStation()
+        {
+            ILoad<Station> loadedStationClass = new LoadM<Station>();
+            ObservableCollection<Station> stationCollection = loadedStationClass.RetriveCollection("Stations");
+
+            var query = (from s in stationCollection
+                select new Station() {StationName = s.StationName, StationID = s.StationID}).ToList();
+            foreach (var item in query)
+            {
+                stationCollection.Add(item);
+            }
+
+            return stationCollection;
+        }
+
         #endregion
 
         // This method is activated by the button of the relayCommand  

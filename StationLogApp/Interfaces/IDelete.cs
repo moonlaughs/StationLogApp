@@ -8,6 +8,6 @@ namespace StationLogApp.Interfaces
 {
     public interface IDelete<T>
     {
-        Task Delete(int key);
+        Task Delete(string _apiID, int key);
     }
 }
