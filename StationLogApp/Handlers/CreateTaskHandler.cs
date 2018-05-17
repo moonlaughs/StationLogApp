@@ -16,16 +16,16 @@ using StationLogApp.ViewModel;
 
 namespace StationLogApp.Handlers
 {
-    public class ManagerHandler
+    public class CreateTaskHandler : ICreateTask
     {
         #region instancefields
-        private CreateVm _createVm;
+        private readonly CreateTaskVm _createVm;
         private readonly ISave<TaskClass> _savedTaskClass = new SaveM<TaskClass>();
         private readonly FrameNavigateClass _frameNavigateClass;
         #endregion
 
         #region Constructor
-        public ManagerHandler(CreateVm createVm)
+        public CreateTaskHandler(CreateTaskVm createVm)
         {
             _createVm = createVm;
             _frameNavigateClass = new FrameNavigateClass();
@@ -60,34 +60,6 @@ namespace StationLogApp.Handlers
                 await msg.ShowAsync();
             }
         }
-        #endregion
-
-        #region Collections
-        public ObservableCollection<TaskEquipmentStation> EquipmentStationsCollection()
-        {
-            ObservableCollection<TaskEquipmentStation> list = new ObservableCollection<TaskEquipmentStation>();
-
-            ILoad<Equipment> retrievedEquipments = new LoadM<Equipment>();
-            ObservableCollection<Equipment> equipmentsCollection = retrievedEquipments.RetriveCollection("Equipments");
-
-            ILoad<Station> retrivedStations = new LoadM<Station>();
-            ObservableCollection<Station> stationsCollection = retrivedStations.RetriveCollection("Stations");
-
-            var query = (from e in equipmentsCollection
-                join s in stationsCollection on e.StationID equals s.StationID
-                select new TaskEquipmentStation(){EquipmentID = e.EquipmentID, EquipmentName = e.EquipmentName, StationName = s.StationName}).ToList();
-
-            foreach (var item in query)
-            {
-                list.Add(item);
-            }
-            
-            return list;
-        }
-
-        public string[] TypeArray = new string[] { "check", "register" };
-
-        public string[] ScheduleArray = new string[]{"Every week", "Every two weeks", "Every three weeks", "Every month", "Every two months", "Every three months", "Every six months", "Every year"};
         #endregion
     }
 }

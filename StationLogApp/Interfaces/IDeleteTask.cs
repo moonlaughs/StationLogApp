@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace StationLogApp.Interfaces
 {
-    public interface IDelete<T>
+    public interface IDeleteTask
     {
-        Task Delete(string apiId, int key);
+        void DeleteTask();
     }
 }

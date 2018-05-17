@@ -6,25 +6,23 @@ using System.Text;
 using System.Threading.Tasks;
 using StationLogApp.Common;
 using StationLogApp.Handlers;
+using StationLogApp.Interfaces;
 using StationLogApp.Model;
 using StationLogApp.Singletons;
 
 namespace StationLogApp.ViewModel
 {
-    public class CreateVm : NotifyPropertyChangedClass
+    public class CreateTaskVm : NotifyPropertyChangedClass
     {
         #region instancefields
-
         private DateTimeOffset _dueDate;
         private TaskEquipmentStation _newItem;
-
         #endregion
 
         #region properties
+        private ICreateTask CreateTaskHandler { get; }
 
         public RelayCommandClass DoCreateTask { get; set; }
-
-        public ManagerHandler ManagerHandler { get; set; }
 
         public ObservableCollection<TaskClass> Tasks { get; set; }
         public ObservableCollection<TaskEquipmentStation> EquipmentStations { get; set; }
@@ -55,15 +53,16 @@ namespace StationLogApp.ViewModel
         #endregion
 
         #region constructor
-
-        public CreateVm()
+        
+        public CreateTaskVm()
         {
-            ManagerHandler = new ManagerHandler(this);
-            DoCreateTask = new RelayCommandClass(ManagerHandler.CreateTask);
+            CreateTaskHandler = new CreateTaskHandler(this);
+            DoCreateTask = new RelayCommandClass(CreateTaskHandler.CreateTask);
             NewItem = new TaskEquipmentStation();
-            TaskTypes = ManagerHandler.TypeArray;
-            TaskSchedules = ManagerHandler.ScheduleArray;
-            EquipmentStations = ManagerHandler.EquipmentStationsCollection();
+            var col = new Collections();
+            TaskTypes = col.TypeArray;
+            TaskSchedules = col.ScheduleArray;
+            EquipmentStations = col.EquipmentStationsCollection();
         }
 
         #endregion
