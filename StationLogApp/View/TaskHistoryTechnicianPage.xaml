@@ -87,6 +87,16 @@
             <ComboBox Name="Date" ItemsSource="{Binding ScheduleArray}" SelectedItem="{Binding SelectedItem.TaskSchedule}" Margin="20,0,0,0" Width="200" Foreground="Black"/>
         </StackPanel>
 
+                <!--<ComboBox Name="Stations" Foreground="Black" Margin="20,0,0,0" Width="200"
+                          ItemsSource="{Binding StationCatalog, Mode=TwoWay}" SelectedItem="{Binding SelectedItemsStation, Mode=TwoWay}"/>
+                <ComboBox Name="Date" Margin="20,0,0,0" Width="200">
+                    <ComboBoxItem Content="Today" Foreground="Black"/>
+                    <ComboBoxItem Content="This week" Foreground="Black"/>
+                    <ComboBoxItem Content="This month" Foreground="Black"/>
+                </ComboBox>
+            </StackPanel>-->
+
+
         <ListView Name="Tasks" 
                   ItemsSource="{Binding DoneCatalog, Mode=TwoWay}" 
                   Grid.Row="3" 

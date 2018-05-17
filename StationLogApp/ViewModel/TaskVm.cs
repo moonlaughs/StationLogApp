@@ -37,6 +37,38 @@ namespace StationLogApp.ViewModel
         //public string[] PeriodicityItems { get; set; }
         //public ObservableCollection<TaskEquipmentStation> EquipmentStations { get; set; }
         public ObservableCollection<Station> StationCollection { get; set; }
+//=======
+
+//        private TaskHandler _taskHandler;
+//        private TaskCatalogSingleton _catalogSingleton;
+//        private TaskClass _selectedTaskClass;
+//        private ObservableCollection<Station> _stationCatalog;
+//        private Station _selectedItemsStation;
+//        #endregion
+
+//        #region properties
+
+//        public ObservableCollection<Station> StationCatalog
+//        {
+//            get
+//            {
+//                return _stationCatalog;
+//            }
+//        }
+
+//        public Station SelectedItemsStation
+//        {
+//            get
+//            {
+//                return _selectedItemsStation;
+//            }
+//            set
+//            {
+//                _selectedItemsStation = value;
+//                OnPropertyChanged(nameof(SelectedItemsStation));
+//            }
+//        }
+//>>>>>>> f117f382991babb3d267a9384210680e1940944b
 
         public ObservableCollection<TaskEquipmentStation> TaskCatalog
         {
@@ -88,9 +120,7 @@ namespace StationLogApp.ViewModel
                 OnPropertyChanged(nameof(SelectedItemStation));
             }
         }
-
-
-
+        
         public string SelectedItemPeriodicity
         {
             get => TaskHandler.SelectedPeriodicityItem;
@@ -101,6 +131,12 @@ namespace StationLogApp.ViewModel
 
             }
         }
+//=======
+//        public TaskHandler TaskHandler
+//        {
+//            get { return _taskHandler;}
+//            set { _taskHandler = value; } }
+//>>>>>>> f117f382991babb3d267a9384210680e1940944b
         #endregion
 
         #region constructor
@@ -108,6 +144,12 @@ namespace StationLogApp.ViewModel
         {
             _singleton = TaskEquipmentStationSingleton.GetInstance();
             TaskHandler = new TaskHandler(this);
+//=======
+//            _catalogSingleton = TaskCatalogSingleton.Instance;
+//            _selectedTaskClass = new TaskClass();
+//            _taskHandler = new TaskHandler(this);
+//            _stationCatalog = _taskHandler.LoadStation();
+//>>>>>>> f117f382991babb3d267a9384210680e1940944b
             SaveTaskClass = new RelayCommandClass(TaskHandler.OperateTask);
             
             //_selectedItem = new TaskEquipmentStation();

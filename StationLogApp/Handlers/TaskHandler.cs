@@ -65,6 +65,22 @@ namespace StationLogApp.Handlers
             _taskVm = taskVm;
             _frameNavigation = new FrameNavigateClass();
         }
+
+        public ObservableCollection<Station> LoadStation()
+        {
+            ILoad<Station> loadedStationClass = new LoadM<Station>();
+            ObservableCollection<Station> stationCollection = loadedStationClass.RetriveCollection("Stations");
+
+            var query = (from s in stationCollection
+                select new Station() {StationName = s.StationName, StationID = s.StationID}).ToList();
+            foreach (var item in query)
+            {
+                stationCollection.Add(item);
+            }
+
+            return stationCollection;
+        }
+
         #endregion
 
         

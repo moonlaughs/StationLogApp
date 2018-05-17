@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using StationLogApp.ViewModel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -25,6 +26,7 @@ namespace StationLogApp.View
         public TaskPage()
         {
             this.InitializeComponent();
+            this.DataContext = typeof(VMContainer);
         }
 
         private void DoneButton_Click(object sender, RoutedEventArgs e)
@@ -41,11 +43,6 @@ namespace StationLogApp.View
         private void GoToNotesPage(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(AddNotesPage));
-        }
-
-        private void Tasks_ItemClick(object sender, ItemClickEventArgs e)
-        {
-
         }
     }
 }

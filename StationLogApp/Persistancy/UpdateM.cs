@@ -14,13 +14,11 @@ namespace StationLogApp.Persistancy
     public class UpdateM<T> : IUpdate<T> where T : class
     {
         #region
-
         private const string ServerUrl = "http://stationlogdbwebservice20180514015122.azurewebsites.net/";
 
         private string ApiPrefix = "api/";
         private HttpClientHandler _httpClientHandler;
         private HttpClient _httpClient;
-
         #endregion
 
         public async Task Update(T obj, string apiId, int key)

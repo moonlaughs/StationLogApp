@@ -14,7 +14,7 @@
         </Grid.Background>
 
         <Grid.DataContext>
-            <viewModel:TaskVm/>
+            <viewModel:VMContainer/>
         </Grid.DataContext>
 
         <Grid.RowDefinitions>
@@ -83,27 +83,26 @@
                        FontSize="20"
                        Margin="15,0,10,0"/>
             <ComboBox Name="Stations" Foreground="Black" Margin="20,0,0,0" Width="200"
-                      ItemsSource="{Binding StationCollection, Mode=TwoWay}"  
-                      SelectedItem="{Binding SelectedItemStation, Mode=TwoWay}">
+                      ItemsSource="{Binding TVm.StationCollection, Mode=TwoWay}"  
+                      SelectedItem="{Binding TVm.SelectedItemStation, Mode=TwoWay}">
             </ComboBox>
             <ComboBox Name="TaskPeriodicityPicker" Margin="20,0,0,0" Width="200" 
-                      ItemsSource="{Binding ScheduleArray}" SelectedItem="{Binding SelectedItemPeriodicity, Mode=TwoWay}">
+                      ItemsSource="{Binding TVm.ScheduleArray}" SelectedItem="{Binding TVm.SelectedItemPeriodicity, Mode=TwoWay}">
             </ComboBox>
             <Button Name = "Sort" Content="Sort" Foreground="White" 
                     Background="black" 
-                    Command="{Binding SortCommand, Mode=TwoWay}"
+                    Command="{Binding TVm.SortCommand, Mode=TwoWay}"
             ></Button>
         </StackPanel>
 
 
         <ListView Name="Tasks"
-                  ItemsSource="{Binding TaskCatalog, Mode=TwoWay}"
-                  SelectedItem="{Binding SelectedItem, Mode= TwoWay}"
+                  ItemsSource="{Binding TVm.TaskCatalog, Mode=TwoWay}"
+                  SelectedItem="{Binding TVm.SelectedItem, Mode= TwoWay}"
                   Grid.Row="3"
                   Grid.Column="1" 
                   Width="1100"
                   HorizontalAlignment="Left"
-                  Foreground="White" ItemClick="Tasks_ItemClick"
                   >
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -152,28 +151,31 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <ListView Grid.Row="3" Grid.Column="2" Name="Notes" HorizontalAlignment="Left">
+        <ListView ItemsSource="{Binding NVm.NotesCatalog, Mode=TwoWay}" SelectedItem="{Binding NVm.SelectedNote, Mode=TwoWay}" Grid.Row="3" Grid.Column="2" Name="Notes" HorizontalAlignment="Left">
             <ListView.Background>Transparent</ListView.Background>
-            <StackPanel Background="#407c3a" Opacity="0.7" Width="450" 
+            <!--<ListView.DataContext>
+                <viewModel:NoteVM/>
+            </ListView.DataContext>-->
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Background="#407c3a" Opacity="0.7" Width="450" 
                           BorderThickness="3" BorderBrush="White"
                           HorizontalAlignment="Left">
-                <StackPanel Orientation="Horizontal" Margin="10">
-                    <TextBlock Text="Name:" Foreground="White" FontSize="18"/>
-                    <TextBlock Text="Low battery" Foreground="White" FontSize="18" Margin="10,0,0,0"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="10">
-                    <TextBlock Text="Due date:" Foreground="White" FontSize="18"/>
-                    <TextBlock Text="20th May 2018" Margin="10,0,0,0" Foreground="White" FontSize="18"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="10">
-                    <TextBlock Text="Description:" Foreground="White" FontSize="18"/>
-                    <TextBlock Margin="10,0,0,0"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="10">
-                    <TextBlock Text="Technician/Station:" Foreground="White" FontSize="18"/>
-                    <TextBlock Text="X" Foreground="White" Margin="10,0,0,0" FontSize="18"/>
-                </StackPanel>
-                <Button Content="Add log" 
+
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <TextBlock Text="Name:" Foreground="White" FontSize="18"/>
+                            <TextBlock Text="{Binding Note1, Mode=TwoWay}" Foreground="White" FontSize="18" Margin="10,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <TextBlock Text="Due date:" Foreground="White" FontSize="18"/>
+                            <TextBlock Text="{Binding DueDate, Mode=TwoWay}" Margin="10,0,0,0" Foreground="White" FontSize="18"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <TextBlock Text="Station:" Foreground="White" FontSize="18"/>
+                            <TextBlock Text="{Binding StationID, Mode=TwoWay}" Margin="10,0,0,0"/>
+                        </StackPanel>
+
+                        <!--<Button Content="Add log" 
                         HorizontalAlignment="Center"
                         Width="200"
                         Foreground="White" 
@@ -182,11 +184,18 @@
                         BorderBrush="White" 
                         BorderThickness="2" 
                         Margin="0,30,0,10"
-                        Click="GoToNotesPage"/>
-            </StackPanel>
+                        Click="GoToNotesPage"/>-->
+                    </StackPanel>
+
+                    <!--<StackPanel Orientation="Horizontal" Margin="10">
+                        <TextBlock Text="Technician/Station:" Foreground="White" FontSize="18"/>
+                        <TextBlock Text="{Binding UserID, Mode=TwoWay}" Foreground="White" Margin="10,0,0,0" FontSize="18"/>
+                    </StackPanel>-->
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
         <Button Name="DoneCommandButton"
-                Command="{Binding SaveTaskClass}"
+                Command="{Binding TVm.SaveTaskClass}"
                 Grid.Column="1"
                 Grid.Row="4"
                 Width="200"
@@ -199,9 +208,9 @@
                 <TextBlock Text="DONE" Foreground="White" Margin="20,0,0,0"/>
             </StackPanel>
         </Button>
-
+        
         <Button Name="InfoButton"
-                Command="{Binding DoInfo}"
+                Command="{Binding TVm.DoInfo}"
                 Grid.Column="1"
                 Grid.Row="4"
                 Width="200"
@@ -214,6 +223,26 @@
                 <TextBlock Text="More info" Foreground="White"/>
             </StackPanel>
         </Button>
-        
+
+        <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="4">
+            <Button Content="ADD NOTE" 
+                    Width="200"
+                    Foreground="White" 
+                    FontSize="18" 
+                    Background="Transparent" 
+                    BorderBrush="White" 
+                    BorderThickness="2" 
+                    Margin="0,30,0,10"
+                    Click="GoToNotesPage"/>
+            <Button Content="REMOVE"
+                    Width="200"
+                    Foreground="White" 
+                    FontSize="18" 
+                    Background="Transparent" 
+                    BorderBrush="White" 
+                    BorderThickness="2" 
+                    Margin="0,30,0,10"
+                    Command="{Binding NVm.RemoveNote}"/>
+        </StackPanel>
     </Grid>
 </Page>
