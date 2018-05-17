@@ -21,12 +21,12 @@ namespace StationLogApp.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class CreateTaskPage : Page
+    public sealed partial class UpdatePage : Page
     {
-        public CreateTaskPage()
+        public UpdatePage()
         {
             this.InitializeComponent();
-            this.DataContext = new CreateTaskVm();
+            this.DataContext = new UpdateTaskVm();
         }
     }
 }

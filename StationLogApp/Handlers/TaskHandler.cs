@@ -29,14 +29,13 @@ namespace StationLogApp.Handlers
         {
             get { return _taskVm.SelectedItem; }
         }
-
+        #endregion
         public TaskHandler(TaskVm taskVm)
         {
             _taskVm = taskVm;
             _frameNavigation = new FrameNavigateClass();
         }
-        #endregion
-        
+
         #region SaveAsDoneTask
         // This method is activated by the button of the relayCommand  
         // and save the logged task and add a task to the next date that it has to be made

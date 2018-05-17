@@ -29,6 +29,7 @@ namespace StationLogApp.ViewModel
         public RelayCommandClass DoInfo { get; set; }
 
         public TaskHandler TaskHandler { get; set; }
+        public UpdateTaskVm UpdateTaskHandler { get; set; }
 
         public string[] ScheduleArray { get; set; }
         public ObservableCollection<TaskEquipmentStation> EquipmentStations { get; set; }
@@ -73,6 +74,7 @@ namespace StationLogApp.ViewModel
                 OnPropertyChanged(nameof(SelectedItem));
             }
         }
+
         #endregion
         
         #region constructor
@@ -90,6 +92,8 @@ namespace StationLogApp.ViewModel
 
             var infoHandler = new InfoHandler(this);
             DoInfo = new RelayCommandClass(infoHandler.Info);
+
+            UpdateTaskHandler = new UpdateTaskVm();
         }
         #endregion
     }

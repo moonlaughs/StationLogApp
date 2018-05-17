@@ -60,6 +60,7 @@ namespace StationLogApp.ViewModel
             DoCreateTask = new RelayCommandClass(CreateTaskHandler.CreateTask);
             NewItem = new TaskEquipmentStation();
             var col = new Collections();
+            _dueDate = DateTimeOffset.Now;
             TaskTypes = col.TypeArray;
             TaskSchedules = col.ScheduleArray;
             EquipmentStations = col.EquipmentStationsCollection();
