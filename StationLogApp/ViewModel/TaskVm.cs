@@ -21,18 +21,23 @@ namespace StationLogApp.ViewModel
         #region instancefields
         private readonly TaskEquipmentStationSingleton _singleton;
         private readonly Collections _col;
+        
         private TaskEquipmentStation _selectedItem;
+        //private ObservableCollection<Station> _stationCatalog { get; }              //M
         #endregion 
 
         #region properties
         public RelayCommandClass SaveTaskClass { get; set; }
         public RelayCommandClass DoInfo { get; set; }
+        public RelayCommandClass SortCommand { get; set; }
 
         public TaskHandler TaskHandler { get; set; }
 
         public string[] ScheduleArray { get; set; }
-        public ObservableCollection<TaskEquipmentStation> EquipmentStations { get; set; }
-        
+        //public string[] PeriodicityItems { get; set; }
+        //public ObservableCollection<TaskEquipmentStation> EquipmentStations { get; set; }
+        public ObservableCollection<Station> StationCollection { get; set; }
+
         public ObservableCollection<TaskEquipmentStation> TaskCatalog
         {
             get
@@ -73,8 +78,31 @@ namespace StationLogApp.ViewModel
                 OnPropertyChanged(nameof(SelectedItem));
             }
         }
+
+        public Station SelectedItemStation
+        {
+            get { return TaskHandler.SelectedStation; }
+            set
+            {
+                TaskHandler.SelectedStation = value;
+                OnPropertyChanged(nameof(SelectedItemStation));
+            }
+        }
+
+
+
+        public string SelectedItemPeriodicity
+        {
+            get => TaskHandler.SelectedPeriodicityItem;
+            set
+            {
+                TaskHandler.SelectedPeriodicityItem = value;
+                OnPropertyChanged(nameof(SelectedItemPeriodicity));
+
+            }
+        }
         #endregion
-        
+
         #region constructor
         public TaskVm()
         {
@@ -82,14 +110,25 @@ namespace StationLogApp.ViewModel
             TaskHandler = new TaskHandler(this);
             SaveTaskClass = new RelayCommandClass(TaskHandler.OperateTask);
             
-            _selectedItem = new TaskEquipmentStation();
+            //_selectedItem = new TaskEquipmentStation();
 
-            _col = new Collections();
-            EquipmentStations = _col.EquipmentStationsCollection();
-            ScheduleArray = _col.ScheduleArray;
+            //_taskHandler = new TaskHandler(this);                                   //think
+            //_taskHandler.LoadCollection();
+            
+            _selectedItem = new TaskEquipmentStation();
 
             var infoHandler = new InfoHandler(this);
             DoInfo = new RelayCommandClass(infoHandler.Info);
+
+            _col = new Collections();
+            StationCollection = _col.LoadStation();
+            //EquipmentStations = _col.EquipmentStationsCollection();
+            ScheduleArray = _col.ScheduleArray;
+
+            //SortCommand = new RelayCommandClass(TaskHandler.SortCollection());
+
+            //TaskCatalog = _col.LoadToDo();
+            //PeriodicityItems = _col.ScheduleArray;
         }
         #endregion
     }

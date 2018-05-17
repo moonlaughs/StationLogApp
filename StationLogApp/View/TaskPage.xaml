@@ -82,23 +82,17 @@
                        Foreground="White" 
                        FontSize="20"
                        Margin="15,0,10,0"/>
-            <ComboBox Name="Stations" Foreground="Black" Margin="20,0,0,0" Width="200">
-                <ComboBoxItem Content="{Binding TaskCatalog[0].StationName}"  Foreground="White"/>
-                <ComboBoxItem Content="{Binding TaskCatalog[1].StationName}"  Foreground="White"/>
-                <ComboBoxItem Content="{Binding TaskCatalog[2].StationName}"  Foreground="White"/>
-                <ComboBoxItem Content="{Binding TaskCatalog[3].StationName}"  Foreground="White"/>
-                <ComboBoxItem Content="{Binding TaskCatalog[4].StationName}"  Foreground="White"/>
-                <ComboBoxItem Content="{Binding TaskCatalog[5].StationName}"  Foreground="White"/>
-                <ComboBoxItem Content="{Binding TaskCatalog[6].StationName}"  Foreground="White"/>
-                <ComboBoxItem Content="{Binding TaskCatalog[7].StationName}"  Foreground="White"/>
-                <ComboBoxItem Content="{Binding TaskCatalog[8].StationName}"  Foreground="White"/>
-                <ComboBoxItem Content="{Binding TaskCatalog[9].StationName}"  Foreground="White"/>
+            <ComboBox Name="Stations" Foreground="Black" Margin="20,0,0,0" Width="200"
+                      ItemsSource="{Binding StationCollection, Mode=TwoWay}"  
+                      SelectedItem="{Binding SelectedItemStation, Mode=TwoWay}">
             </ComboBox>
-            <ComboBox Name="Date" Margin="20,0,0,0" Width="200">
-                <ComboBoxItem Content="Today" Foreground="White"/>
-                <ComboBoxItem Content="This week" Foreground="White"/>
-                <ComboBoxItem Content="This month" Foreground="White"/>
+            <ComboBox Name="TaskPeriodicityPicker" Margin="20,0,0,0" Width="200" 
+                      ItemsSource="{Binding ScheduleArray}" SelectedItem="{Binding SelectedItemPeriodicity, Mode=TwoWay}">
             </ComboBox>
+            <Button Name = "Sort" Content="Sort" Foreground="White" 
+                    Background="black" 
+                    Command="{Binding SortCommand, Mode=TwoWay}"
+            ></Button>
         </StackPanel>
 
 
