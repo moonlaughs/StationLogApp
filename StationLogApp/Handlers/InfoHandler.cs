@@ -10,7 +10,7 @@ namespace StationLogApp.Handlers
 {
     public class InfoHandler
     {
-        private TaskVm _taskVm;
+        private readonly TaskVm _taskVm;
 
         public InfoHandler(TaskVm taskVm)
         {
