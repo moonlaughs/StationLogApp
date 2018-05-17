@@ -30,8 +30,8 @@ namespace StationLogApp.Persistancy
                 _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 try
                 {
-                    Task<HttpResponseMessage> task4 =
-                        _httpClient.DeleteAsync($"{_serverUrl}{_apiPrefix}{_apiID}/{key}");
+                    HttpResponseMessage task4 =
+                        _httpClient.DeleteAsync($"{_serverUrl}{_apiPrefix}{_apiID}/{key}").Result;
                     //if (task4 != null)
                     //{
                     //    if (task4.Result.IsSuccessStatusCode)

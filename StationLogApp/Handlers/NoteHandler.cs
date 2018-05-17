@@ -25,51 +25,31 @@ namespace StationLogApp.Handlers
         private DateConverter _dateConverter = new DateConverter();
         private Notes _noteObj;
 
-        //public Notes SelectedNote
-        //{
-        //    get { return _noteVM.SelectedNote; }
-        //}
-
         public NoteHandler(NoteVM noteVM)
         {
             _noteVM = noteVM;
         }
 
-        public void CreateAndSaveNote()
+        public async void CreateAndSaveNote()
         {
             DateTime convertedDate = _dateConverter.ConvertToDate(_noteVM.DueDate);
             int convertedStationName = _noteVM.SelectedStationItem.StationID;
             _noteObj = new Notes(_noteVM.NotesID, _noteVM.Note1, convertedDate, convertedStationName, _noteVM.UserID);
-            _savedNote.Save(_noteObj, "Notes");
+            await _savedNote.Save(_noteObj, "Notes");
+            FrameNavigateClass _frame = new FrameNavigateClass();
+            _frame.ActivateFrameNavigation(typeof(TaskPage));
+            MessageDialog msg = new MessageDialog("You just created a note!");
+            await msg.ShowAsync();
         }
 
-        public void RemoveNote()
+        public async void RemoveNote()
         {
-            _deleteNote.Delete("Notes", _noteVM.SelectedNote.NotesID);
+            await _deleteNote.Delete("Notes", _noteVM.SelectedNote.NotesID);
+            FrameNavigateClass _frame = new FrameNavigateClass();
+            _frame.ActivateFrameNavigation(typeof(TaskPage));
+            MessageDialog msg = new MessageDialog("Note deleted!");
+            await msg.ShowAsync();
         }
-
-        //public async void RefreshPage()
-        //{
-        //    FrameNavigateClass _frame = new FrameNavigateClass();
-        //    _frame.ActivateFrameNavigation(typeof(TaskPage));
-        //    MessageDialog msg = new MessageDialog("Note deleted!");
-        //    await msg.ShowAsync();
-        //}
-
-        //public async void Wait()
-        //{
-        //    await System.Threading.Tasks.Task.Delay(TimeSpan.FromSeconds(20));
-        //    FrameNavigateClass _frame = new FrameNavigateClass();
-        //    _frame.ActivateFrameNavigation(typeof(TaskPage));
-        //    MessageDialog msg = new MessageDialog("Note deleted!");
-        //    await msg.ShowAsync();
-        //}
-
-        //public void Final()
-        //{
-        //    RemoveNote();
-        //    Wait();
-        //}
 
         public static ObservableCollection<Station> LoadStations()
         {
