@@ -25,6 +25,7 @@ namespace StationLogApp.ViewModel
 
         public string UserName { get; set; }
         public int UserID { get; set; }
+        //public string UserType { get; set; }
 
         public string TaskName { get; set; }
 
@@ -50,6 +51,7 @@ namespace StationLogApp.ViewModel
             DoGoCreate = new RelayCommandClass(GoCreate);
             UserName = _currentUser.GetUsername();
             UserID = _currentUser.GetUserID();
+            //UserType = _currentUser.GetUserType();
         }
 
         public void DoTask()

@@ -23,10 +23,16 @@ namespace StationLogApp.View
     /// </summary>
     public sealed partial class TaskPage : Page
     {
+        private ButtonsVm Bvm { get; set; }
         public TaskPage()
         {
             this.InitializeComponent();
             this.DataContext = new VMContainer();
+            CreateButonM.Visibility = Visibility.Collapsed;
+            DeleteButtonM.Visibility = Visibility.Collapsed;
+            UpdateButtonM.Visibility = Visibility.Collapsed;
+            Bvm = new ButtonsVm();
+            CheckIfManager();
         }
 
         private void DoneButton_Click(object sender, RoutedEventArgs e)
@@ -43,6 +49,16 @@ namespace StationLogApp.View
         private void GoToNotesPage(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(AddNotesPage));
+        }
+
+        public void CheckIfManager()
+        {
+            if (Bvm.CurrentUser.GetUserType() == "manager" || Bvm.CurrentUser.GetUserType() == "admin")
+            {
+                CreateButonM.Visibility = Visibility.Visible;
+                DeleteButtonM.Visibility = Visibility.Visible;
+                UpdateButtonM.Visibility = Visibility.Visible;
+            }
         }
     }
 }
