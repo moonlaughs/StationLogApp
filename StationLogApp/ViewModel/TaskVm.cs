@@ -167,6 +167,7 @@ namespace StationLogApp.ViewModel
             //EquipmentStations = _col.EquipmentStationsCollection();
             ScheduleArray = _col.ScheduleArray;
 
+            _singleton.SetTaskEquipmentStation(SelectedItem);
             //SortCommand = new RelayCommandClass(TaskHandler.SortCollection());
 
             //TaskCatalog = _col.LoadToDo();

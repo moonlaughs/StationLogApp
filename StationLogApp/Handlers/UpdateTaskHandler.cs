@@ -32,15 +32,15 @@ namespace StationLogApp.Handlers
             {
                 TaskClass updatedItem = new TaskClass(
                     _updateVm.SelectedItem.TaskId,
-                    _updateVm.SelectedItem.TaskName,
-                    _updateVm.SelectedItem.TaskSchedule,
+                    _updateVm.SelectedItem.TaskName = _updateVm.TaskName,
+                    _updateVm.SelectedItem.TaskSchedule = _updateVm.TaskSchedule,
                     _updateVm.SelectedItem.Registration = null,
-                    _updateVm.SelectedItem.TaskType,
+                    _updateVm.SelectedItem.TaskType = _updateVm.TaskType,           //????????????
                     DateTimeConvertor.DateTimeOffsetAndTimeSetToDateTime(_updateVm.DueDate, TimeSpan.Zero),
                     null,
                     _updateVm.SelectedItem.Comment = null,
                     _updateVm.SelectedItem.DoneVar = "N",
-                    _updateVm.SelectedItem.EquipmentID
+                    _updateVm.SelectedItem.EquipmentID = _updateVm.EquipmentID
                     );
 
                 await _update.Update(updatedItem, "Tasks", _updateVm.SelectedItem.TaskId);

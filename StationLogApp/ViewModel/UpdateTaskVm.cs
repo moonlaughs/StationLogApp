@@ -16,15 +16,42 @@ namespace StationLogApp.ViewModel
         private TaskEquipmentStationSingleton _singleton;
         private TaskVm _taskVm;
 
-        public ObservableCollection<TaskEquipmentStation> EquipmentStations { get; set; }
+        public Collections col { get; set; }
+        public ObservableCollection<TaskEquipmentStation> EquipmentStations
+        {
+            get { return col.EquipmentStationsCollection(); }
+            set
+            {
+                var equipmentStationsCollection = col.EquipmentStationsCollection();
+                equipmentStationsCollection = value;
+                OnPropertyChanged(nameof(EquipmentStations));
+            }
+        }
 
-        public string[] TaskTypes { get; set; }
-        public string[] TaskSchedules { get; set; }
+        public string[] TaskTypes
+        {
+            get { return col.TypeArray; }
+            set
+            {
+                col.TypeArray = value;
+                OnPropertyChanged(nameof(TaskTypes));
+            }
+        }
+
+        public string[] TaskSchedules
+        {
+            get { return col.ScheduleArray; }
+            set
+            {
+                col.ScheduleArray = value;
+                OnPropertyChanged(nameof(TaskSchedules));
+            }
+        }
 
         public UpdateTaskVm()
         {
             _taskVm = new TaskVm();
-            var col = new Collections();
+            col = new Collections();
             TaskTypes = col.TypeArray;
             TaskSchedules = col.ScheduleArray;
             EquipmentStations = col.EquipmentStationsCollection();
@@ -56,11 +83,52 @@ namespace StationLogApp.ViewModel
 
         public string TaskName
         {
-            get { return _taskVm.SelectedItem.TaskName; }
+            get { return _singleton.GetTaskName(); }
             set
             {
-                _taskVm.SelectedItem.TaskName = value;
+                var taskName = _singleton.GetTaskName();
+                taskName = value;
                 OnPropertyChanged(nameof(TaskName));
+            }
+        }
+
+        public string EquipmentName
+        {
+            get { return _taskVm.SelectedItem.EquipmentName; }
+            set
+            {
+                _taskVm.SelectedItem.EquipmentName = value;
+                OnPropertyChanged(nameof(EquipmentName));
+            }
+        }
+
+        public int EquipmentID
+        {
+            get { return _taskVm.SelectedItem.EquipmentID; }
+            set
+            {
+                _taskVm.SelectedItem.EquipmentID = value; 
+                OnPropertyChanged(nameof(EquipmentID));
+            }
+        }
+
+        public string TaskType
+        {
+            get { return _taskVm.SelectedItem.TaskType; }
+            set
+            {
+                _taskVm.SelectedItem.TaskType = value;
+                OnPropertyChanged(nameof(TaskType));
+            }
+        }
+
+        public string TaskSchedule
+        {
+            get { return _taskVm.SelectedItem.TaskSchedule; }
+            set
+            {
+                _taskVm.SelectedItem.TaskSchedule = value;
+                OnPropertyChanged(nameof(TaskSchedule));
             }
         }
     }

@@ -16,6 +16,7 @@ namespace StationLogApp.ViewModel
     public class ButtonsVm
     {
         private UserSingleton _currentUser;
+        private TaskEquipmentStationSingleton _taskSingleton;
         private readonly FrameNavigateClass _frameNavigation;
 
         public RelayCommandClass GoTask { get; set; }
@@ -26,15 +27,24 @@ namespace StationLogApp.ViewModel
         public string UserName { get; set; }
         public int UserID { get; set; }
 
+        public string TaskName { get; set; }
+
         public UserSingleton CurrentUser
         {
             get => _currentUser;
             set => _currentUser = value;
         }
 
+        public TaskEquipmentStationSingleton TaskSingleton
+        {
+            get{ return _taskSingleton; }
+            set { _taskSingleton = value; }
+        }
+
         public ButtonsVm()
         {
             _currentUser = UserSingleton.GetInstance();
+            _taskSingleton = TaskEquipmentStationSingleton.GetInstance();
             _frameNavigation = new FrameNavigateClass();
             GoTask = new RelayCommandClass(DoTask);
             GoDone = new RelayCommandClass(DoDone);
@@ -42,6 +52,7 @@ namespace StationLogApp.ViewModel
             DoGoUpdate = new RelayCommandClass(GoUpdate);
             UserName = _currentUser.GetUsername();
             UserID = _currentUser.GetUserID();
+            TaskName = _taskSingleton.GetTaskName();
         }
 
         public void DoTask()
@@ -61,7 +72,7 @@ namespace StationLogApp.ViewModel
 
         public void GoUpdate()
         {
-            _frameNavigation.ActivateFrameNavigation(typeof(UpdatePage), _currentUser);
+            _frameNavigation.ActivateFrameNavigation(typeof(UpdatePage), _taskSingleton);
         }
     }
 }
