@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Automation.Peers;
 using StationLogApp.Common;
+using StationLogApp.Converters;
 using StationLogApp.Convertor;
 using StationLogApp.Interfaces;
 using StationLogApp.Model;
@@ -19,17 +21,17 @@ namespace StationLogApp.Handlers
     {
         private readonly UpdateTaskVm _updateVm;
         private readonly IUpdate<TaskClass> _update = new UpdateM<TaskClass>();
-        private readonly FrameNavigateClass _frameNavigateClass;
-
-        public RelayCommandClass DoGoTask { get; set; }
         private ButtonsVm Bvm { get; }
+
+        public DateConverter Dc { get; }
+        public RelayCommandClass DoGoTask { get; set; }
 
         public UpdateTaskHandler(UpdateTaskVm updateVm)
         {
             _updateVm = updateVm;
-            _frameNavigateClass = new FrameNavigateClass();
             Bvm = new ButtonsVm();
             DoGoTask = new RelayCommandClass(GoTask);
+            Dc = new DateConverter();
         }
         
         public async void UpdateTask()
@@ -42,7 +44,7 @@ namespace StationLogApp.Handlers
                 _updateVm.TaskSchedule,
                 _updateVm.Registration,
                 _updateVm.TaskType,
-                DateTimeConvertor.DateTimeOffsetAndTimeSetToDateTime(_updateVm.DueDate, TimeSpan.Zero),
+                Dc.ConvertToDate(_updateVm.DueDate),
                 null,
                 _updateVm.Comment,
                 _updateVm.DoneVar,

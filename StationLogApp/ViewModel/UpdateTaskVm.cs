@@ -38,7 +38,6 @@ namespace StationLogApp.ViewModel
             {
                 var equipmentStationsCollection = col.EquipmentStationsCollection();
                 equipmentStationsCollection = value;
-                OnPropertyChanged(nameof(EquipmentStations));
             }
         }
 
@@ -48,7 +47,6 @@ namespace StationLogApp.ViewModel
             set
             {
                 col.TypeArray = value;
-                //OnPropertyChanged(nameof(TaskTypes));
             }
         }
 
@@ -58,7 +56,6 @@ namespace StationLogApp.ViewModel
             set
             {
                 col.ScheduleArray = value;
-                OnPropertyChanged(nameof(TaskSchedules));
             }
         }
 

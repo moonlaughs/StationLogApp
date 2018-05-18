@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
 using StationLogApp.Common;
+using StationLogApp.Converters;
 using StationLogApp.Convertor;
 using StationLogApp.Interfaces;
 using StationLogApp.Model;
@@ -21,19 +22,19 @@ namespace StationLogApp.Handlers
         #region instancefields
         private readonly CreateTaskVm _createVm;
         private readonly ISave<TaskClass> _savedTaskClass = new SaveM<TaskClass>();
-        private readonly FrameNavigateClass _frameNavigateClass;
         #endregion
 
         public RelayCommandClass DoGoTask { get; set; }
         private ButtonsVm Bvm { get; }
+        public DateConverter Dc { get; }
 
         #region Constructor
         public CreateTaskHandler(CreateTaskVm createVm)
         {
             _createVm = createVm;
-            _frameNavigateClass = new FrameNavigateClass();
             Bvm = new ButtonsVm();
             DoGoTask = new RelayCommandClass(GoTask);
+            Dc = new DateConverter();
         }
         #endregion
 
@@ -48,7 +49,7 @@ namespace StationLogApp.Handlers
                     _createVm.NewItem.TaskSchedule,
                     null,
                     _createVm.NewItem.TaskType,
-                    DateTimeConvertor.DateTimeOffsetAndTimeSetToDateTime(_createVm.DueDate, TimeSpan.Zero),
+                    Dc.ConvertToDate(_createVm.DueDate),
                     null,
                     null,
                     _createVm.NewItem.DoneVar = "N",

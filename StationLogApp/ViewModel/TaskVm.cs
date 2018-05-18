@@ -33,7 +33,7 @@ namespace StationLogApp.ViewModel
         public RelayCommandClass DoClear { get; set; }
 
         public TaskHandler TaskHandler { get; set; }
-        public DeleteTaskHandler DeleteTaskHandler { get; set; }
+        public IDeleteTask DeleteTaskHandler { get; set; }
 
         public string[] ScheduleArray { get; set; }
         public ObservableCollection<Station> StationCollection { get; set; }
