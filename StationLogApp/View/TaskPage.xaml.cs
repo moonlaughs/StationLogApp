@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Networking.ServiceDiscovery.Dnssd;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -23,7 +25,8 @@ namespace StationLogApp.View
     /// </summary>
     public sealed partial class TaskPage : Page
     {
-        private ButtonsVm Bvm { get; set; }
+        private ButtonsVm Bvm { get; }
+        
         public TaskPage()
         {
             this.InitializeComponent();
@@ -33,11 +36,6 @@ namespace StationLogApp.View
             UpdateButtonM.Visibility = Visibility.Collapsed;
             Bvm = new ButtonsVm();
             CheckIfManager();
-        }
-
-        private void DoneButton_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(TaskHistoryTechnicianPage));
         }
 
         private void MenuFlyoutItem_OnClick(object sender, RoutedEventArgs e)

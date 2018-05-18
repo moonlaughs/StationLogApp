@@ -13,10 +13,18 @@ namespace StationLogApp.ViewModel
 {
     public class UpdateTaskVm : NotifyPropertyChangedClass
     {
+        private string _taskName;
+        private string _taskSchedule;
+        private string _registration;
+        private string _taskType;
         private DateTimeOffset _dueDate;
-        private TaskEquipmentStationSingleton _singleton;
-        private TaskVm _taskVm;
+        //private DateTimeOffset? _doneDate;
+        private string _comment;
+        private string _doneVar;
 
+        private TaskEquipmentStationSingleton _singleton;
+        private readonly TaskVm _taskVm;
+        
         public UpdateTaskHandler Uph { get; set; }
 
         public RelayCommandClass DoUpdate { get; set; }
@@ -40,7 +48,7 @@ namespace StationLogApp.ViewModel
             set
             {
                 col.TypeArray = value;
-                OnPropertyChanged(nameof(TaskTypes));
+                //OnPropertyChanged(nameof(TaskTypes));
             }
         }
 
@@ -61,21 +69,32 @@ namespace StationLogApp.ViewModel
             TaskTypes = col.TypeArray;
             TaskSchedules = col.ScheduleArray;
             EquipmentStations = col.EquipmentStationsCollection();
-            SelectedItem = new TaskEquipmentStation();
             _singleton = TaskEquipmentStationSingleton.GetInstance();
 
             TaskId = _singleton.GetTaskId();
             TaskName = _singleton.GetTaskName();
             TaskSchedule = _singleton.GetTaskSchedule();
             TaskType = _singleton.GetTaskType();
-            EquipmentID = _singleton.GetEquipmentId();
-            EquipmentName = _singleton.GetEquipmentName();
+            EquipmentId = _singleton.GetEquipmentId();
             DueDate = _singleton.GetDueDate();
+            //DoneDate = _singleton.GetDoneDate();
+            EquipmentName = _singleton.GetEquipmentName();
+            StationName = _singleton.GetStationName();
+            Registration = _singleton.GetRegistration();
+            Comment = _singleton.GetComment();
+            DoneVar = _singleton.GetDoneVar();
 
             Uph = new UpdateTaskHandler(this);
             DoUpdate = new RelayCommandClass(Uph.UpdateTask);
         }
 
+        //props without ability to change
+        public int TaskId { get; set; }
+        public int EquipmentId { get; set; }
+        public string EquipmentName { get; set; }
+        public string StationName { get; set; }
+
+        //props that can be changed
         public DateTimeOffset DueDate
         {
             get { return _dueDate; }
@@ -86,66 +105,73 @@ namespace StationLogApp.ViewModel
             }
         }
 
-        public TaskEquipmentStation SelectedItem
-        {
-            get { return _taskVm.SelectedItem; }
-            set
-            {
-                _taskVm.SelectedItem = value;
-                OnPropertyChanged(nameof(SelectedItem));
-            }
-        }
-
-        public int TaskId { get; set; }
-
+        //public DateTimeOffset? DoneDate
+        //{
+        //    get { return _doneDate; }
+        //    set
+        //    {
+        //        _doneDate = value;
+        //        OnPropertyChanged(nameof(DoneDate));
+        //    }
+        //}
+        
         public string TaskName
         {
-            get { return _singleton.GetTaskName(); }
+            get { return _taskName; }
             set
             {
-                var taskName = _singleton.GetTaskName();
-                taskName = value;
+                _taskName = value;
                 OnPropertyChanged(nameof(TaskName));
             }
         }
-
-        public string EquipmentName
-        {
-            get { return _taskVm.SelectedItem.EquipmentName; }
-            set
-            {
-                _taskVm.SelectedItem.EquipmentName = value;
-                OnPropertyChanged(nameof(EquipmentName));
-            }
-        }
-
-        public int EquipmentID
-        {
-            get { return _taskVm.SelectedItem.EquipmentID; }
-            set
-            {
-                _taskVm.SelectedItem.EquipmentID = value; 
-                OnPropertyChanged(nameof(EquipmentID));
-            }
-        }
-
+        
         public string TaskType
         {
-            get { return _taskVm.SelectedItem.TaskType; }
+            get { return _taskType; }
             set
             {
-                _taskVm.SelectedItem.TaskType = value;
+                _taskType = value;
                 OnPropertyChanged(nameof(TaskType));
             }
         }
 
         public string TaskSchedule
         {
-            get { return _taskVm.SelectedItem.TaskSchedule; }
+            get { return _taskSchedule; }
             set
             {
-                _taskVm.SelectedItem.TaskSchedule = value;
+                _taskSchedule = value;
                 OnPropertyChanged(nameof(TaskSchedule));
+            }
+        }
+
+        public string Registration
+        {
+            get { return _registration; }
+            set
+            {
+                _registration = value;
+                OnPropertyChanged(nameof(Registration));
+            }
+        }
+
+        public string DoneVar
+        {
+            get { return _doneVar; }
+            set
+            {
+                _doneVar = value;
+                OnPropertyChanged(nameof(DoneVar));
+            }
+        }
+
+        public string Comment
+        {
+            get { return _comment; }
+            set
+            {
+                _comment = value;
+                OnPropertyChanged(nameof(Comment));
             }
         }
     }
