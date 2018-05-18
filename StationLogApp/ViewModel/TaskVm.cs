@@ -122,11 +122,19 @@ namespace StationLogApp.ViewModel
         }
         #endregion
 
-        public void GoUpdate()
+        public async void GoUpdate()
         {
-            _singleton.SetTaskEquipmentStation(SelectedItem);
-            FrameNavigateClass frame = new FrameNavigateClass();
-            frame.ActivateFrameNavigation(typeof(UpdatePage), SelectedItem);
+            if (SelectedItem.TaskId != 0)
+            {
+                _singleton.SetTaskEquipmentStation(SelectedItem);
+                FrameNavigateClass frame = new FrameNavigateClass();
+                frame.ActivateFrameNavigation(typeof(UpdatePage), SelectedItem);
+            }
+            else
+            {
+                MessageDialog msg = new MessageDialog("Please select the task.");
+                await msg.ShowAsync();
+            }
         }
 
         public void Clear()
@@ -134,10 +142,18 @@ namespace StationLogApp.ViewModel
             TaskCatalog = TaskHandler.LoadCollection();
         }
 
-        public void Delete()
+        public async void Delete()
         {
-            _singleton.SetTaskEquipmentStation(SelectedItem);
-            DeleteTaskHandler.DeleteTask(SelectedItem.TaskId);
+            if (SelectedItem.TaskId != 0)
+            {
+                _singleton.SetTaskEquipmentStation(SelectedItem);
+                DeleteTaskHandler.DeleteTask(SelectedItem.TaskId);
+            }
+            else
+            {
+                MessageDialog msg = new MessageDialog("Please select the task.");
+                await msg.ShowAsync();
+            }
         }
     }
 }

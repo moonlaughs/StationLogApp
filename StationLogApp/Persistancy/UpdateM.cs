@@ -34,7 +34,7 @@ namespace StationLogApp.Persistancy
                     try
                     {
                         string putitem = JsonConvert.SerializeObject(obj);
-                        Task<HttpResponseMessage> task2 = _httpClient.PutAsync(url, new StringContent(putitem, Encoding.UTF8, "application/json"));
+                        HttpResponseMessage task2 = _httpClient.PutAsync(url, new StringContent(putitem, Encoding.UTF8, "application/json")).Result;
                     }
                     catch (Exception ex)
                     {
