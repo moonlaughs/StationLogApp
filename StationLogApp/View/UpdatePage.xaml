@@ -30,8 +30,8 @@
                 <ImageBrush ImageSource="../Assets/fuck.png" Opacity="0.6"/>
             </StackPanel.Background>
             <TextBlock Text="Update task" Foreground="White" FontSize="50" HorizontalAlignment="Center"/>
-            <TextBlock Text="Equipment Name" Foreground="White" FontSize="20" Margin="100,30,0,0"/>
-            <ComboBox Name="EquipmentName"  Foreground="White" ItemsSource="{Binding EquipmentStations}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" FontSize="20" Width="200" Height="30" Margin="350,-30,0,0"/>
+            <!--<TextBlock Text="Equipment Name" Foreground="White" FontSize="20" Margin="100,30,0,0"/>
+            <ComboBox Name="EquipmentName"  Foreground="White" ItemsSource="{Binding EquipmentStations}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" FontSize="20" Width="200" Height="30" Margin="350,-30,0,0"/>-->
             <TextBlock Text="Task description" FontSize="20" Foreground="White" Margin="100,30,0,0"/>
             <TextBox x:Name="TaskDescription" Text="{Binding TaskName, Mode=TwoWay}" FontSize="20" Foreground="White" Width="200" Height="30" Margin="0,-30,0,0"/>
             <TextBlock Text="Task type" Foreground="White" FontSize="20" Margin="100,30,0,0"/>
@@ -40,7 +40,7 @@
             <ComboBox Name="TaskSchedule" Foreground="White" ItemsSource="{Binding TaskSchedules}" SelectedItem="{Binding SelectedItem.TaskSchedule, Mode=TwoWay}" FontSize="20" Width="200" Height="30" Margin="350,-30,0,0"/>
             <TextBlock Text="Due date:" Foreground="White" FontSize="20" Margin="100,30,0,0"/>
             <DatePicker Width="200" Height="32" Margin="350,-30,0,0" Date="{Binding DueDate, Mode=TwoWay}"/>
-            <Button Content="UPDATE" Command="{Binding DoGoUpdate}" FontSize="20" Foreground="White" BorderBrush="White" BorderThickness="1" HorizontalAlignment="Center" Width="150" Margin="0,50,0,0"/>
+            <Button Content="UPDATE" Command="{Binding DoUpdate}" FontSize="20" Foreground="White" BorderBrush="White" BorderThickness="1" HorizontalAlignment="Center" Width="150" Margin="0,50,0,0"/>
 
         </StackPanel>
     </Grid>

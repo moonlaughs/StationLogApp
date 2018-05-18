@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StationLogApp.Common;
+using StationLogApp.Handlers;
 using StationLogApp.Model;
 using StationLogApp.Singletons;
 
@@ -16,7 +17,12 @@ namespace StationLogApp.ViewModel
         private TaskEquipmentStationSingleton _singleton;
         private TaskVm _taskVm;
 
+        public UpdateTaskHandler Uph { get; set; }
+
+        public RelayCommandClass DoUpdate { get; set; }
+
         public Collections col { get; set; }
+
         public ObservableCollection<TaskEquipmentStation> EquipmentStations
         {
             get { return col.EquipmentStationsCollection(); }
@@ -58,7 +64,16 @@ namespace StationLogApp.ViewModel
             SelectedItem = new TaskEquipmentStation();
             _singleton = TaskEquipmentStationSingleton.GetInstance();
 
+            TaskId = _singleton.GetTaskId();
             TaskName = _singleton.GetTaskName();
+            TaskSchedule = _singleton.GetTaskSchedule();
+            TaskType = _singleton.GetTaskType();
+            EquipmentID = _singleton.GetEquipmentId();
+            EquipmentName = _singleton.GetEquipmentName();
+            DueDate = _singleton.GetDueDate();
+
+            Uph = new UpdateTaskHandler(this);
+            DoUpdate = new RelayCommandClass(Uph.UpdateTask);
         }
 
         public DateTimeOffset DueDate
@@ -80,6 +95,8 @@ namespace StationLogApp.ViewModel
                 OnPropertyChanged(nameof(SelectedItem));
             }
         }
+
+        public int TaskId { get; set; }
 
         public string TaskName
         {
