@@ -10,7 +10,7 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="ms-appx:///Assets/smokeGreen2.jpg"/>
+            <ImageBrush ImageSource="ms-appx:///Assets/smokeGreen.png"/>
         </Grid.Background>
 
         <Grid.DataContext>
