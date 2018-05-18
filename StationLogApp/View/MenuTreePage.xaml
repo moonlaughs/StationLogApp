@@ -13,12 +13,12 @@
             <viewModel:LoginVM/>
         </Grid.DataContext>-->
         <Grid.Background>
-            <ImageBrush ImageSource="../Assets/2.jpg"  Stretch="Fill"/>
+            <ImageBrush ImageSource="../Assets/2.jpg" Stretch="Fill"/>
         </Grid.Background>
 
-        <Grid.DataContext>
+        <!--<Grid.DataContext>
             <viewModel:ButtonsVm/>
-        </Grid.DataContext>
+        </Grid.DataContext>-->
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Height="798" Margin="0,154,-1,48">
             <StackPanel.Background>

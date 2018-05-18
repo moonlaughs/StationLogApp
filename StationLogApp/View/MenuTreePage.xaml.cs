@@ -28,6 +28,7 @@ namespace StationLogApp.View
         public MenuTreePage()
         {
             this.InitializeComponent();
+            this.DataContext = new ButtonsVm();
         }
     }
 }

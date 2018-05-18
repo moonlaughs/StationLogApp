@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StationLogApp.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace StationLogApp.View
         public CreateTaskPage()
         {
             this.InitializeComponent();
+            this.DataContext = new CreateTaskVm();
         }
     }
 }
