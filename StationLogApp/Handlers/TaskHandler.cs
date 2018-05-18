@@ -22,14 +22,9 @@ namespace StationLogApp.Handlers
 
         private readonly TaskVm _taskVm;
         private readonly FrameNavigateClass _frameNavigation;
-        private Collections _collectionsClass = new Collections();                            //to change?
+        private Collections _collectionsClass = new Collections();
 
-
-        // Collections for Sorting Purposes
-
-        //private ObservableCollection<TaskEquipmentStation> _newLoadedCollection;            //think
-
-        //private ObservableCollection<TaskEquipmentStation> _loadedCollection;
+        private ObservableCollection<TaskEquipmentStation> _loadedCollection;
         #endregion
 
         #region properties
@@ -37,29 +32,22 @@ namespace StationLogApp.Handlers
         {
             get { return _taskVm.SelectedItem; }
         }
-
-        //public string[] PeriodicityItems             //????????????????
-        //{
-        //    get { return _collectionsClass.ScheduleArray; }
-        //    set => _collectionsClass.ScheduleArray = value;
-        //}
-
+        
         public string SelectedPeriodicityItem { get; set; }
         public Station SelectedStation { get; set; }
 
-        //public ObservableCollection<TaskEquipmentStation> LoadedCollection                 //?????????????
-        //{
-        //    get { return _loadedCollection; }
-        //    set
-        //    {
-        //        _loadedCollection = value;
-        //        OnPropertyChanged(nameof(LoadedCollection));
-        //    }
-        //}
+        public ObservableCollection<TaskEquipmentStation> LoadedCollection
+        {
+            get { return _loadedCollection; }
+            set
+            {
+                _loadedCollection = value;
+                OnPropertyChanged(nameof(LoadedCollection));
+            }
+        }
         #endregion
 
         #region Constructor
-
         public TaskHandler(TaskVm taskVm)
         {
             _taskVm = taskVm;
@@ -80,7 +68,6 @@ namespace StationLogApp.Handlers
 
             return stationCollection;
         }
-
         #endregion
 
         
@@ -217,24 +204,10 @@ namespace StationLogApp.Handlers
         {
 
             ObservableCollection<TaskEquipmentStation> newLoadedCollection = new ObservableCollection<TaskEquipmentStation>();
-            //newLoadedCollection.Clear();
+            newLoadedCollection.Clear();
 
             if (_taskVm.SelectedItemStation != null)
             {
-            //    ILoad<TaskClass> retrivedTask = new LoadM<TaskClass>();
-            //    ObservableCollection<TaskClass> taskCollection = retrivedTask.RetriveCollection("Tasks");
-
-            //    ILoad<Station> retrivedStation = new LoadM<Station>();
-            //    ObservableCollection<Station> stationCollection = retrivedStation.RetriveCollection("Stations");
-
-            //    ILoad<Equipment> retrivedEquipmnet = new LoadM<Equipment>();
-            //    ObservableCollection<Equipment> equipmentCollection = retrivedEquipmnet.RetriveCollection("Equipments");
-
-            //    var query = (from t in taskCollection
-            //                 join e in equipmentCollection on t.EquipmentID equals e.EquipmentID
-            //                 join s in stationCollection on e.StationID equals s.StationID
-            //                 select new TaskEquipmentStation() { TaskName = t.TaskName, TaskType = t.TaskType, EquipmentName = e.EquipmentName, StationName = s.StationName, TaskSchedule = t.TaskSchedule, EquipmentID = e.EquipmentID }).ToList();
-
 
                 foreach (var item in _collectionsClass.LoadToDo())
                 {
@@ -243,30 +216,16 @@ namespace StationLogApp.Handlers
                         newLoadedCollection.Add(item);
                     }
                 }
-
-                if (_taskVm.SelectedItemPeriodicity == null)
-                {
-                    _taskVm.TaskCatalog = newLoadedCollection;
-                }
             }
-            else if (_taskVm.SelectedItemPeriodicity != null)
+            if (_taskVm.SelectedItemPeriodicity == null)
+            {
+                _loadedCollection = newLoadedCollection;
+                _taskVm.TaskCatalog = _loadedCollection;
+            }
+            if (_taskVm.SelectedItemPeriodicity != null)
             {
                 ObservableCollection<TaskEquipmentStation> newList = new ObservableCollection<TaskEquipmentStation>();
-                //ILoad<TaskClass> retrivedTask = new LoadM<TaskClass>();
-                //ObservableCollection<TaskClass> taskCollection = retrivedTask.RetriveCollection("Tasks");
-
-                //ILoad<Station> retrivedStation = new LoadM<Station>();
-                //ObservableCollection<Station> stationCollection = retrivedStation.RetriveCollection("Stations");
-
-                //ILoad<Equipment> retrivedEquipmnet = new LoadM<Equipment>();
-                //ObservableCollection<Equipment> equipmentCollection = retrivedEquipmnet.RetriveCollection("Equipments");
-
-                //var query = (from t in taskCollection
-                //             join e in equipmentCollection on t.EquipmentID equals e.EquipmentID
-                //             join s in stationCollection on e.StationID equals s.StationID
-                //             select new TaskEquipmentStation() { TaskName = t.TaskName, TaskType = t.TaskType, EquipmentName = e.EquipmentName, StationName = s.StationName, TaskSchedule = t.TaskSchedule, EquipmentID = e.EquipmentID }).ToList();
-
-
+                
 
                 if (newLoadedCollection.Count == 0)
                 {
@@ -277,7 +236,8 @@ namespace StationLogApp.Handlers
                             newLoadedCollection.Add(item);
                         }
                     }
-                    _taskVm.TaskCatalog = newLoadedCollection;
+                    _loadedCollection = newLoadedCollection;
+                    _taskVm.TaskCatalog = _loadedCollection;
                 }
                 else
                 {
@@ -288,16 +248,17 @@ namespace StationLogApp.Handlers
                             newList.Add(item);
                         }
                     }
-                    _taskVm.TaskCatalog = newList;
+                    _loadedCollection = newList;
+                    _taskVm.TaskCatalog = _loadedCollection;
                 }
             }
-            else if(_taskVm.SelectedItemStation == null && _taskVm.SelectedItemPeriodicity == null)
-            {
-                _taskVm.TaskCatalog = _collectionsClass.LoadToDo();
-            }
-            //return _taskVm.TaskCatalog;
         }
-
         #endregion
+
+        public ObservableCollection<TaskEquipmentStation> LoadCollection()
+        {
+            _loadedCollection = _collectionsClass.LoadToDo();
+            return _loadedCollection;
+        }
     }
 }

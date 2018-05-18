@@ -20,10 +20,15 @@ namespace StationLogApp.Handlers
         private readonly IUpdate<TaskClass> _update = new UpdateM<TaskClass>();
         private readonly FrameNavigateClass _frameNavigateClass;
 
+        public RelayCommandClass DoGoTask { get; set; }
+        private ButtonsVm Bvm { get; }
+
         public UpdateTaskHandler(UpdateTaskVm updateVm)
         {
             _updateVm = updateVm;
             _frameNavigateClass = new FrameNavigateClass();
+            Bvm = new ButtonsVm();
+            DoGoTask = new RelayCommandClass(GoTask);
         }
         
         public async void UpdateTask()
@@ -45,16 +50,21 @@ namespace StationLogApp.Handlers
 
                 await _update.Update(updatedItem, "Tasks", _updateVm.SelectedItem.TaskId);
 
+                GoTask();
+
                 MessageDialog msg = new MessageDialog("Task updated");
                 await msg.ShowAsync();
-
-                _frameNavigateClass.ActivateFrameNavigation(typeof(TaskPage));
             }
             else
             {
                 MessageDialog msg = new MessageDialog("Please select item");
                 await msg.ShowAsync();
             }
+        }
+
+        public void GoTask()
+        {
+            Bvm.DoTask();
         }
     }
 }

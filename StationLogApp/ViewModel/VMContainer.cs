@@ -10,6 +10,7 @@ namespace StationLogApp.ViewModel
    {
        private TaskVm _tVm = new TaskVm();
        private NoteVM _nVm = new NoteVM();
+       private ButtonsVm _bVm = new ButtonsVm();
 
        public TaskVm TVm
        {
@@ -27,6 +28,12 @@ namespace StationLogApp.ViewModel
            {
                _nVm = value;
            }
+       }
+
+       public ButtonsVm BVm
+       {
+            get { return _bVm; }
+            set { _bVm = value; }
        }
     }
 }

@@ -22,7 +22,6 @@ namespace StationLogApp.ViewModel
         public RelayCommandClass GoTask { get; set; }
         public RelayCommandClass GoDone { get; set; }
         public RelayCommandClass DoGoCreate { get; set; }
-        public RelayCommandClass DoGoUpdate { get; set; }
 
         public string UserName { get; set; }
         public int UserID { get; set; }
@@ -49,10 +48,8 @@ namespace StationLogApp.ViewModel
             GoTask = new RelayCommandClass(DoTask);
             GoDone = new RelayCommandClass(DoDone);
             DoGoCreate = new RelayCommandClass(GoCreate);
-            DoGoUpdate = new RelayCommandClass(GoUpdate);
             UserName = _currentUser.GetUsername();
             UserID = _currentUser.GetUserID();
-            TaskName = _taskSingleton.GetTaskName();
         }
 
         public void DoTask()
@@ -68,11 +65,6 @@ namespace StationLogApp.ViewModel
         public void GoCreate()
         {
             _frameNavigation.ActivateFrameNavigation(typeof(CreateTaskPage), _currentUser);
-        }
-
-        public void GoUpdate()
-        {
-            _frameNavigation.ActivateFrameNavigation(typeof(UpdatePage), _taskSingleton);
         }
     }
 }

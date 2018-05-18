@@ -24,11 +24,16 @@ namespace StationLogApp.Handlers
         private readonly FrameNavigateClass _frameNavigateClass;
         #endregion
 
+        public RelayCommandClass DoGoTask { get; set; }
+        private ButtonsVm Bvm { get; }
+
         #region Constructor
         public CreateTaskHandler(CreateTaskVm createVm)
         {
             _createVm = createVm;
             _frameNavigateClass = new FrameNavigateClass();
+            Bvm = new ButtonsVm();
+            DoGoTask = new RelayCommandClass(GoTask);
         }
         #endregion
 
@@ -49,10 +54,11 @@ namespace StationLogApp.Handlers
                     _createVm.NewItem.DoneVar = "N",
                     _createVm.NewItem.EquipmentID), "Tasks");
 
+
+                GoTask();
+
                 MessageDialog msg = new MessageDialog("Task created");
                 await msg.ShowAsync();
-
-                _frameNavigateClass.ActivateFrameNavigation(typeof(LogInPage));
             }
             else
             {
@@ -61,5 +67,10 @@ namespace StationLogApp.Handlers
             }
         }
         #endregion
+
+        public void GoTask()
+        {
+            Bvm.DoTask();
+        }
     }
 }
