@@ -145,6 +145,38 @@ namespace StationLogApp.Common
             }
             return stationCollection;
         }
+
+        public ObservableCollection<Notes> LoadNotes()
+        {
+
+            ObservableCollection<Notes> list = new ObservableCollection<Notes>();
+
+            ILoad<Notes> loadedNotes = new LoadM<Notes>();
+            ObservableCollection<Notes> notesCollection = loadedNotes.RetriveCollection("Notes");
+
+            ILoad<Station> retrivedStation = new LoadM<Station>();
+            ObservableCollection<Station> stationCollection = retrivedStation.RetriveCollection("Stations");
+
+            var query = (from n in notesCollection
+                join s in stationCollection on n.StationID equals s.StationID
+                select new Notes()
+                {
+                    NotesID = n.NotesID,
+                    Note1 = n.Note1,
+                    UserID = n.UserID,
+                    DueDate = n.DueDate,
+                    StationName = s.StationName,
+                    StationID = s.StationID
+                }).ToList();
+
+
+            foreach (var item in query)
+            {
+                list.Add(item);
+            }
+
+            return list;
+        }
         #endregion
 
     }
