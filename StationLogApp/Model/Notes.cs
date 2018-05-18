@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StationLogApp.Model
 {
-    public class Notes
+    public class Notes : Station
     {
         #region // Properties
         public int NotesID { get; set; }

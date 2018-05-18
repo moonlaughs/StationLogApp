@@ -25,9 +25,16 @@ namespace StationLogApp.Handlers
         private DateConverter _dateConverter = new DateConverter();
         private Notes _noteObj;
 
+        public Collections Col { get; set; }
+        public ObservableCollection<Station> StationCollection { get; set; }
+        public ObservableCollection<Notes> NotesCollection { get; set; }
+
         public NoteHandler(NoteVM noteVM)
         {
             _noteVM = noteVM;
+            Col = new Collections();
+            StationCollection = Col.LoadStation();
+            NotesCollection = Col.LoadNotes();
         }
 
         public async void CreateAndSaveNote()
@@ -49,32 +56,6 @@ namespace StationLogApp.Handlers
             _frame.ActivateFrameNavigation(typeof(TaskPage));
             MessageDialog msg = new MessageDialog("Note deleted!");
             await msg.ShowAsync();
-        }
-
-        public static ObservableCollection<Station> LoadStations()
-        {
-            LoadM<Station> retrievedCatalog = new LoadM<Station>();
-            Task<ObservableCollection<Station>> retrievedStationsTask = retrievedCatalog.Load("Stations");
-            ObservableCollection<Station> collectionOfStations = retrievedStationsTask.Result;
-            return collectionOfStations;
-        }
-
-        public ObservableCollection<Notes> LoadNotes()
-        {
-
-            ObservableCollection<Notes> list = new ObservableCollection<Notes>();
-
-            ILoad<Notes> loadedNotes = new LoadM<Notes>();
-            ObservableCollection<Notes> notesCollection = loadedNotes.RetriveCollection("Notes");
-
-            var query = (from n in notesCollection
-                select n).ToList();
-            foreach (var item in query)
-            {
-                list.Add(item);
-            }
-
-            return list;
         }
     }
 }
