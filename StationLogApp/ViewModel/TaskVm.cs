@@ -21,7 +21,6 @@ namespace StationLogApp.ViewModel
         #region instancefields
         private readonly TaskEquipmentStationSingleton _singleton;
         private readonly Collections _col;
-        
         private TaskEquipmentStation _selectedItem;
         #endregion 
 
@@ -29,17 +28,15 @@ namespace StationLogApp.ViewModel
         public RelayCommandClass SaveTaskClass { get; set; }
         public RelayCommandClass DoInfo { get; set; }
         public RelayCommandClass SortCommand { get; set; }
-
         public RelayCommandClass DoGoUpdate { get; set; }
-
+        public RelayCommandClass DoDelete { get; set; }
         public RelayCommandClass DoClear { get; set; }
 
         public TaskHandler TaskHandler { get; set; }
+        public DeleteTaskHandler DeleteTaskHandler { get; set; }
 
         public string[] ScheduleArray { get; set; }
         public ObservableCollection<Station> StationCollection { get; set; }
-
-        private ObservableCollection<TaskEquipmentStation> _catalog;
 
         public ObservableCollection<TaskEquipmentStation> TaskCatalog
         {
@@ -104,22 +101,24 @@ namespace StationLogApp.ViewModel
         public TaskVm()
         {
             _singleton = TaskEquipmentStationSingleton.GetInstance();
+
             TaskHandler = new TaskHandler(this);
-            TaskHandler.LoadCollection();
-            SaveTaskClass = new RelayCommandClass(TaskHandler.OperateTask);
-            
-            _selectedItem = new TaskEquipmentStation();
-
+            DeleteTaskHandler = new DeleteTaskHandler(this);
             var infoHandler = new InfoHandler(this);
-            DoInfo = new RelayCommandClass(infoHandler.Info);
 
+            TaskHandler.LoadCollection();
             _col = new Collections();
             StationCollection = _col.LoadStation();
             ScheduleArray = _col.ScheduleArray;
 
+            SaveTaskClass = new RelayCommandClass(TaskHandler.OperateTask);
             SortCommand = new RelayCommandClass(TaskHandler.SortCollection);
             DoGoUpdate = new RelayCommandClass(GoUpdate);
             DoClear = new RelayCommandClass(Clear);
+            DoDelete = new RelayCommandClass(Delete);
+            DoInfo = new RelayCommandClass(infoHandler.Info);
+
+            _selectedItem = new TaskEquipmentStation();
         }
         #endregion
 
@@ -133,6 +132,12 @@ namespace StationLogApp.ViewModel
         public void Clear()
         {
             TaskCatalog = TaskHandler.LoadCollection();
+        }
+
+        public void Delete()
+        {
+            _singleton.SetTaskEquipmentStation(SelectedItem);
+            DeleteTaskHandler.DeleteTask(SelectedItem.TaskId);
         }
     }
 }

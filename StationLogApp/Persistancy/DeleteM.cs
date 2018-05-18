@@ -13,7 +13,6 @@ namespace StationLogApp.Persistancy
     public class DeleteM<T> : IDelete<T> where T : class
     {
         #region
-
         private const string _serverUrl = "http://stationlogdbwebservice20180514015122.azurewebsites.net/";
         private string _apiPrefix = "api/";
         private HttpClientHandler _httpClientHandler;
@@ -32,13 +31,6 @@ namespace StationLogApp.Persistancy
                 {
                     HttpResponseMessage task4 =
                         _httpClient.DeleteAsync($"{_serverUrl}{_apiPrefix}{_apiID}/{key}").Result;
-                    //if (task4 != null)
-                    //{
-                    //    if (task4.Result.IsSuccessStatusCode)
-                    //    {
-                    //        await task4.Result.Content.ReadAsAsync<T>();
-                    //    }
-                    //}
                 }
                 catch (Exception ex)
                 {

@@ -189,10 +189,10 @@
                 Grid.Row="4" HorizontalAlignment="Left" Margin="0,0,0,0" Content="Create" Command="{Binding BVm.DoGoCreate}" FontSize="18" Foreground="White" BorderBrush="White" BorderThickness="1"/>
             <Button Name="UpdateButtonM" Grid.Column="1"
                 Grid.Row="4" HorizontalAlignment="Left" Margin="100,0,0,0" Content="Update" Command="{Binding TVm.DoGoUpdate}" FontSize="18" Foreground="White" BorderBrush="White" BorderThickness="1" />
-        <Button Name="DeleteButtonM" Grid.Column="1"
+        <Button Name="DeleteButtonM" Grid.Column="1" Command="{Binding TVm.DoDelete}"
                 Grid.Row="4" HorizontalAlignment="Left" Margin="200,0,0,0" Content="Delete" FontSize="18" Foreground="White" BorderBrush="White" BorderThickness="1" />
 
-        <Button Name="DoneCommandButton"
+            <Button Name="DoneCommandButton"
                 Command="{Binding TVm.SaveTaskClass}"
                 Grid.Column="1"
                 Grid.Row="4"

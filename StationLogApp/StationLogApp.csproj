@@ -129,7 +129,6 @@
     <Compile Include="Singletons\UserSingleton.cs" />
     <Compile Include="ViewModel\ButtonsVm.cs" />
     <Compile Include="ViewModel\CreateTaskVm.cs" />
-    <Compile Include="ViewModel\DeleteTaskVm%3b.cs" />
     <Compile Include="ViewModel\LoginVM.cs" />
     <Compile Include="ViewModel\NoteVM.cs" />
     <Compile Include="ViewModel\TaskVm.cs" />
