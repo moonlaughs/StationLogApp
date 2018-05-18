@@ -23,7 +23,6 @@ namespace StationLogApp.ViewModel
         private readonly Collections _col;
         
         private TaskEquipmentStation _selectedItem;
-        //private ObservableCollection<Station> _stationCatalog { get; }              //M
         #endregion 
 
         #region properties
@@ -31,68 +30,26 @@ namespace StationLogApp.ViewModel
         public RelayCommandClass DoInfo { get; set; }
         public RelayCommandClass SortCommand { get; set; }
 
+        public RelayCommandClass DoGoUpdate { get; set; }
+
+        public RelayCommandClass DoClear { get; set; }
+
         public TaskHandler TaskHandler { get; set; }
 
         public string[] ScheduleArray { get; set; }
-        //public string[] PeriodicityItems { get; set; }
-        //public ObservableCollection<TaskEquipmentStation> EquipmentStations { get; set; }
         public ObservableCollection<Station> StationCollection { get; set; }
-//=======
-
-//        private TaskHandler _taskHandler;
-//        private TaskCatalogSingleton _catalogSingleton;
-//        private TaskClass _selectedTaskClass;
-//        private ObservableCollection<Station> _stationCatalog;
-//        private Station _selectedItemsStation;
-//        #endregion
-
-//        #region properties
-
-//        public ObservableCollection<Station> StationCatalog
-//        {
-//            get
-//            {
-//                return _stationCatalog;
-//            }
-//        }
-
-//        public Station SelectedItemsStation
-//        {
-//            get
-//            {
-//                return _selectedItemsStation;
-//            }
-//            set
-//            {
-//                _selectedItemsStation = value;
-//                OnPropertyChanged(nameof(SelectedItemsStation));
-//            }
-//        }
-//>>>>>>> f117f382991babb3d267a9384210680e1940944b
 
         private ObservableCollection<TaskEquipmentStation> _catalog;
 
         public ObservableCollection<TaskEquipmentStation> TaskCatalog
         {
-            get { return _catalog; }
+            get { return TaskHandler.LoadedCollection; }
             set
             {
-                _catalog = value;
+                TaskHandler.LoadedCollection = value;
                 OnPropertyChanged(nameof(TaskCatalog));
             }
         }
-        //{
-        //    get
-        //    {
-        //        return _col.LoadToDo();
-        //    }
-        //    set
-        //    {
-        //        var loadToDo = _col.LoadToDo();
-        //        loadToDo = value;
-        //        OnPropertyChanged(nameof(TaskCatalog));
-        //    } 
-        //}
         
         public ObservableCollection<TaskEquipmentStation> DoneCatalog
         {
@@ -141,12 +98,6 @@ namespace StationLogApp.ViewModel
 
             }
         }
-//=======
-//        public TaskHandler TaskHandler
-//        {
-//            get { return _taskHandler;}
-//            set { _taskHandler = value; } }
-//>>>>>>> f117f382991babb3d267a9384210680e1940944b
         #endregion
 
         #region constructor
@@ -154,18 +105,8 @@ namespace StationLogApp.ViewModel
         {
             _singleton = TaskEquipmentStationSingleton.GetInstance();
             TaskHandler = new TaskHandler(this);
-//=======
-//            _catalogSingleton = TaskCatalogSingleton.Instance;
-//            _selectedTaskClass = new TaskClass();
-//            _taskHandler = new TaskHandler(this);
-//            _stationCatalog = _taskHandler.LoadStation();
-//>>>>>>> f117f382991babb3d267a9384210680e1940944b
+            TaskHandler.LoadCollection();
             SaveTaskClass = new RelayCommandClass(TaskHandler.OperateTask);
-            
-            //_selectedItem = new TaskEquipmentStation();
-
-            //_taskHandler = new TaskHandler(this);                                   //think
-            //_taskHandler.LoadCollection();
             
             _selectedItem = new TaskEquipmentStation();
 
@@ -174,17 +115,24 @@ namespace StationLogApp.ViewModel
 
             _col = new Collections();
             StationCollection = _col.LoadStation();
-            //EquipmentStations = _col.EquipmentStationsCollection();
             ScheduleArray = _col.ScheduleArray;
 
             SortCommand = new RelayCommandClass(TaskHandler.SortCollection);
-
-
-            TaskCatalog = _col.LoadToDo();
-            //PeriodicityItems = _col.ScheduleArray;
+            DoGoUpdate = new RelayCommandClass(GoUpdate);
+            DoClear = new RelayCommandClass(Clear);
         }
         #endregion
 
-       
+        public void GoUpdate()
+        {
+            _singleton.SetTaskEquipmentStation(SelectedItem);
+            FrameNavigateClass frame = new FrameNavigateClass();
+            frame.ActivateFrameNavigation(typeof(UpdatePage), SelectedItem);
+        }
+
+        public void Clear()
+        {
+            TaskCatalog = TaskHandler.LoadCollection();
+        }
     }
 }
