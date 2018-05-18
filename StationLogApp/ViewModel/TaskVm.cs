@@ -70,19 +70,29 @@ namespace StationLogApp.ViewModel
 //        }
 //>>>>>>> f117f382991babb3d267a9384210680e1940944b
 
+        private ObservableCollection<TaskEquipmentStation> _catalog;
+
         public ObservableCollection<TaskEquipmentStation> TaskCatalog
         {
-            get
-            {
-                return _col.LoadToDo();
-            }
+            get { return _catalog; }
             set
             {
-                var loadToDo = _col.LoadToDo();
-                loadToDo = value;
+                _catalog = value;
                 OnPropertyChanged(nameof(TaskCatalog));
-            } 
+            }
         }
+        //{
+        //    get
+        //    {
+        //        return _col.LoadToDo();
+        //    }
+        //    set
+        //    {
+        //        var loadToDo = _col.LoadToDo();
+        //        loadToDo = value;
+        //        OnPropertyChanged(nameof(TaskCatalog));
+        //    } 
+        //}
         
         public ObservableCollection<TaskEquipmentStation> DoneCatalog
         {
@@ -167,12 +177,14 @@ namespace StationLogApp.ViewModel
             //EquipmentStations = _col.EquipmentStationsCollection();
             ScheduleArray = _col.ScheduleArray;
 
-            _singleton.SetTaskEquipmentStation(SelectedItem);
-            //SortCommand = new RelayCommandClass(TaskHandler.SortCollection());
+            SortCommand = new RelayCommandClass(TaskHandler.SortCollection);
 
-            //TaskCatalog = _col.LoadToDo();
+
+            TaskCatalog = _col.LoadToDo();
             //PeriodicityItems = _col.ScheduleArray;
         }
         #endregion
+
+       
     }
 }

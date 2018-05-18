@@ -295,7 +295,7 @@ namespace StationLogApp.Handlers
             {
                 _taskVm.TaskCatalog = _collectionsClass.LoadToDo();
             }
-            
+            //return _taskVm.TaskCatalog;
         }
 
         #endregion
