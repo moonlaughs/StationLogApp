@@ -184,7 +184,7 @@ namespace StationLogApp.Handlers
         #region SortingMethods
         public async void SortCollection()
         {
-            if (_taskVm.SelectedItemPeriodicity != null || _taskVm.SelectedItemStation != null)
+            if (_taskVm.SelectedItemStation != null || _taskVm.SelectedItemPeriodicity != null)
             {
                 var newLoadedCollection = new ObservableCollection<TaskEquipmentStation>();
                 newLoadedCollection.Clear();
@@ -204,7 +204,7 @@ namespace StationLogApp.Handlers
                     _loadedCollection = newLoadedCollection;
                     _taskVm.TaskCatalog = _loadedCollection;
                 }
-                if (_taskVm.SelectedItemPeriodicity != null) 
+                if (_taskVm.SelectedItemPeriodicity == null) return;
                 {
                     var newList = new ObservableCollection<TaskEquipmentStation>();
 
