@@ -12,13 +12,15 @@
         <Grid.Background>
             <ImageBrush ImageSource="ms-appx:///Assets/yas.jpg"/>
         </Grid.Background>
+        
         <Grid.DataContext>
-            <viewModel:LoginVM/>
+            <viewModel:LoginVm/>
         </Grid.DataContext>
+        
         <Grid.ColumnDefinitions>
-
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        
         <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical" Width="400" Height="1100">
             <StackPanel.Background>
                 <SolidColorBrush Color="Black" Opacity="0.7" />

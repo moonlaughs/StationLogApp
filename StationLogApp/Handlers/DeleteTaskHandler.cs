@@ -16,7 +16,7 @@ namespace StationLogApp.Handlers
     public class DeleteTaskHandler : IDeleteTask
     {
         private readonly TaskVm _deleteVm;
-        private FrameNavigateClass _frame;
+        private readonly FrameNavigateClass _frame;
         private readonly IDelete<TaskClass> _delete = new DeleteM<TaskClass>();
 
         public async void DeleteTask(int key)

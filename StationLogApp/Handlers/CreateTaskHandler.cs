@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Windows.UI.Popups;
 using StationLogApp.Common;
 using StationLogApp.Converters;
-using StationLogApp.Convertor;
 using StationLogApp.Interfaces;
 using StationLogApp.Model;
 using StationLogApp.Persistancy;
@@ -41,7 +40,7 @@ namespace StationLogApp.Handlers
         #region Methods
         public async void CreateTask()
         {
-            if (_createVm.NewItem.TaskName != null && _createVm.NewItem.TaskSchedule != null && _createVm.NewItem.TaskType != null && _createVm.NewItem.EquipmentID != 0)
+            if (_createVm.NewItem.TaskName != null && _createVm.NewItem.TaskSchedule != null && _createVm.NewItem.TaskType != null && _createVm.NewItem.EquipmentId != 0)
             {
                 await _savedTaskClass.Save(new TaskClass(
                     _createVm.NewItem.TaskId,
@@ -53,9 +52,8 @@ namespace StationLogApp.Handlers
                     null,
                     null,
                     _createVm.NewItem.DoneVar = "N",
-                    _createVm.NewItem.EquipmentID), "Tasks");
-
-
+                    _createVm.NewItem.EquipmentId), "Tasks");
+                
                 GoTask();
 
                 MessageDialog msg = new MessageDialog("Task created");

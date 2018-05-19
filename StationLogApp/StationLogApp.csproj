@@ -99,7 +99,6 @@
     <Compile Include="Common\FrameNavigateClass.cs" />
     <Compile Include="Common\NotifyPropertyChangedClass.cs" />
     <Compile Include="Common\RelayCommandClass.cs" />
-    <Compile Include="Convertor\DateTimeConvertor.cs" />
     <Compile Include="Handlers\CreateTaskHandler.cs" />
     <Compile Include="Handlers\DeleteTaskHandler.cs" />
     <Compile Include="Handlers\InfoHandler.cs" />
@@ -129,8 +128,8 @@
     <Compile Include="Singletons\UserSingleton.cs" />
     <Compile Include="ViewModel\ButtonsVm.cs" />
     <Compile Include="ViewModel\CreateTaskVm.cs" />
-    <Compile Include="ViewModel\LoginVM.cs" />
-    <Compile Include="ViewModel\NoteVM.cs" />
+    <Compile Include="ViewModel\LoginVm.cs" />
+    <Compile Include="ViewModel\NoteVm.cs" />
     <Compile Include="ViewModel\TaskVm.cs" />
     <Compile Include="ViewModel\UpdateTaskVm.cs" />
     <Compile Include="ViewModel\VMContainer.cs" />

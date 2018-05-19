@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Newtonsoft.Json;
 using StationLogApp.Interfaces;
+using static System.String;
 
 namespace StationLogApp.Persistancy
 {
@@ -16,14 +17,14 @@ namespace StationLogApp.Persistancy
         #region
         private const string ServerUrl = "http://stationlogdbwebservice20180514015122.azurewebsites.net/";
 
-        private string ApiPrefix = "api/";
+        public readonly string ApiPrefix = "api/";
         private HttpClientHandler _httpClientHandler;
         private HttpClient _httpClient;
         #endregion
 
         public async Task Update(T obj, string apiId, int key)
         {
-            string url = String.Concat(ServerUrl, ApiPrefix, $"{apiId}/", key);
+            var url = Concat(ServerUrl, ApiPrefix, $"{apiId}/", key);
             {
                 _httpClientHandler = new HttpClientHandler() { UseDefaultCredentials = true };
                 using (_httpClient = new HttpClient(_httpClientHandler))
@@ -33,8 +34,8 @@ namespace StationLogApp.Persistancy
                     _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     try
                     {
-                        string putitem = JsonConvert.SerializeObject(obj);
-                        HttpResponseMessage task2 = _httpClient.PutAsync(url, new StringContent(putitem, Encoding.UTF8, "application/json")).Result;
+                        var putitem = JsonConvert.SerializeObject(obj);
+                        var task2 = _httpClient.PutAsync(url, new StringContent(putitem, Encoding.UTF8, "application/json")).Result;
                     }
                     catch (Exception ex)
                     {

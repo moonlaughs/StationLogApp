@@ -30,7 +30,7 @@ namespace StationLogApp.View
         public TaskPage()
         {
             this.InitializeComponent();
-            this.DataContext = new VMContainer();
+            this.DataContext = new VmContainer();
             CreateButonM.Visibility = Visibility.Collapsed;
             DeleteButtonM.Visibility = Visibility.Collapsed;
             UpdateButtonM.Visibility = Visibility.Collapsed;
@@ -42,8 +42,7 @@ namespace StationLogApp.View
         {
             Frame.Navigate(typeof(LogInPage));
         }
-
-
+        
         private void GoToNotesPage(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(AddNotesPage));
@@ -51,12 +50,10 @@ namespace StationLogApp.View
 
         public void CheckIfManager()
         {
-            if (Bvm.CurrentUser.GetUserType() == "manager" || Bvm.CurrentUser.GetUserType() == "admin")
-            {
-                CreateButonM.Visibility = Visibility.Visible;
-                DeleteButtonM.Visibility = Visibility.Visible;
-                UpdateButtonM.Visibility = Visibility.Visible;
-            }
+            if (Bvm.CurrentUser.GetUserType() != "manager" && Bvm.CurrentUser.GetUserType() != "admin") return;
+            CreateButonM.Visibility = Visibility.Visible;
+            DeleteButtonM.Visibility = Visibility.Visible;
+            UpdateButtonM.Visibility = Visibility.Visible;
         }
     }
 }

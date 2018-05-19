@@ -40,7 +40,7 @@ namespace StationLogApp.ViewModel
 
         public ObservableCollection<TaskEquipmentStation> TaskCatalog
         {
-            get { return TaskHandler.LoadedCollection; }
+            get => TaskHandler.LoadedCollection;
             set
             {
                 TaskHandler.LoadedCollection = value;
@@ -50,24 +50,17 @@ namespace StationLogApp.ViewModel
         
         public ObservableCollection<TaskEquipmentStation> DoneCatalog
         {
-            get
-            {
-                return _col.LoadDone();
-            }
+            get => _col.LoadDone();
             set
             {
-                var loadDone = _col.LoadDone();
-                loadDone = value;
+                _col.LoadDone();
                 OnPropertyChanged(nameof(DoneCatalog));
             }
         }
 
         public TaskEquipmentStation SelectedItem
         {
-            get
-            {
-                return _selectedItem;
-            }
+            get => _selectedItem;
             set
             {
                 _selectedItem = value;
@@ -77,7 +70,7 @@ namespace StationLogApp.ViewModel
 
         public Station SelectedItemStation
         {
-            get { return TaskHandler.SelectedStation; }
+            get => TaskHandler.SelectedStation;
             set
             {
                 TaskHandler.SelectedStation = value;
@@ -127,12 +120,12 @@ namespace StationLogApp.ViewModel
             if (SelectedItem.TaskId != 0)
             {
                 _singleton.SetTaskEquipmentStation(SelectedItem);
-                FrameNavigateClass frame = new FrameNavigateClass();
+                var frame = new FrameNavigateClass();
                 frame.ActivateFrameNavigation(typeof(UpdatePage), SelectedItem);
             }
             else
             {
-                MessageDialog msg = new MessageDialog("Please select the task.");
+                var msg = new MessageDialog("Please select the task.");
                 await msg.ShowAsync();
             }
         }
@@ -140,6 +133,8 @@ namespace StationLogApp.ViewModel
         public void Clear()
         {
             TaskCatalog = TaskHandler.LoadCollection();
+            SelectedItemPeriodicity = null;
+            SelectedItemStation = null;
         }
 
         public async void Delete()
@@ -151,7 +146,7 @@ namespace StationLogApp.ViewModel
             }
             else
             {
-                MessageDialog msg = new MessageDialog("Please select the task.");
+                var msg = new MessageDialog("Please select the task.");
                 await msg.ShowAsync();
             }
         }

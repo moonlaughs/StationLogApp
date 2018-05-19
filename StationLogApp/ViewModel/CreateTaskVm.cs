@@ -42,18 +42,16 @@ namespace StationLogApp.ViewModel
 
         public DateTimeOffset DueDate
         {
-            get { return _dueDate; }
+            get => _dueDate;
             set
             {
                 _dueDate = value;
                 OnPropertyChanged(nameof(DueDate));
             }
         }
-
         #endregion
 
         #region constructor
-        
         public CreateTaskVm()
         {
             CreateTaskHandler = new CreateTaskHandler(this);
@@ -65,7 +63,6 @@ namespace StationLogApp.ViewModel
             TaskSchedules = col.ScheduleArray;
             EquipmentStations = col.EquipmentStationsCollection();
         }
-
         #endregion
     }
 }

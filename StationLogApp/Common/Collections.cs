@@ -26,9 +26,9 @@ namespace StationLogApp.Common
             ObservableCollection<Equipment> equipmentCollection = retrivedEquipmnet.RetriveCollection("Equipments");
 
             var query = (from t in taskCollection
-                join e in equipmentCollection on t.EquipmentID equals e.EquipmentID
-                join s in stationCollection on e.StationID equals s.StationID
-                select new TaskEquipmentStation() { TaskId = t.TaskId, TaskName = t.TaskName, TaskSchedule = t.TaskSchedule, Registration = t.Registration, DueDate = t.DueDate, DoneDate = t.DoneDate, DoneVar = t.DoneVar, TaskType = t.TaskType, Comment = t.Comment, EquipmentID = t.EquipmentID, EquipmentName = e.EquipmentName, StationName = s.StationName }).ToList();
+                join e in equipmentCollection on t.EquipmentId equals e.EquipmentId
+                join s in stationCollection on e.StationId equals s.StationId
+                select new TaskEquipmentStation() { TaskId = t.TaskId, TaskName = t.TaskName, TaskSchedule = t.TaskSchedule, Registration = t.Registration, DueDate = t.DueDate, DoneDate = t.DoneDate, DoneVar = t.DoneVar, TaskType = t.TaskType, Comment = t.Comment, EquipmentId = t.EquipmentId, EquipmentName = e.EquipmentName, StationName = s.StationName }).ToList();
 
             foreach (var item in query)
             {
@@ -58,9 +58,9 @@ namespace StationLogApp.Common
             ObservableCollection<User> userCollection = retrivedUser.RetriveCollection("Users");
 
             var query = (from t in taskCollection
-                join e in equipmentCollection on t.EquipmentID equals e.EquipmentID
-                join s in stationCollection on e.StationID equals s.StationID
-                select new TaskEquipmentStation() { TaskId = t.TaskId, TaskName = t.TaskName, TaskSchedule = t.TaskSchedule, Registration = t.Registration, DueDate = t.DueDate, DoneDate = t.DoneDate, DoneVar = t.DoneVar, TaskType = t.TaskType, Comment = t.Comment, EquipmentID = t.EquipmentID, EquipmentName = e.EquipmentName, StationName = s.StationName }).ToList();
+                join e in equipmentCollection on t.EquipmentId equals e.EquipmentId
+                join s in stationCollection on e.StationId equals s.StationId
+                select new TaskEquipmentStation() { TaskId = t.TaskId, TaskName = t.TaskName, TaskSchedule = t.TaskSchedule, Registration = t.Registration, DueDate = t.DueDate, DoneDate = t.DoneDate, DoneVar = t.DoneVar, TaskType = t.TaskType, Comment = t.Comment, EquipmentId = t.EquipmentId, EquipmentName = e.EquipmentName, StationName = s.StationName }).ToList();
 
             foreach (var item in query)
             {
@@ -84,8 +84,8 @@ namespace StationLogApp.Common
             ObservableCollection<Station> stationsCollection = retrivedStations.RetriveCollection("Stations");
 
             var query = (from e in equipmentsCollection
-                join s in stationsCollection on e.StationID equals s.StationID
-                select new TaskEquipmentStation() { EquipmentID = e.EquipmentID, EquipmentName = e.EquipmentName, StationName = s.StationName }).ToList();
+                join s in stationsCollection on e.StationId equals s.StationId
+                select new TaskEquipmentStation() { EquipmentId = e.EquipmentId, EquipmentName = e.EquipmentName, StationName = s.StationName }).ToList();
 
             foreach (var item in query)
             {
@@ -98,46 +98,14 @@ namespace StationLogApp.Common
         public string[] TypeArray = new string[] { "check", "register" };
 
         public string[] ScheduleArray = new string[] { "Every week", "Every two weeks", "Every three weeks", "Every month", "Every two months", "Every three months", "Every six months", "Every year" };
-
-
-        #region
-        //public ObservableCollection<TaskEquipmentStation> LoadCollection()
-        //{
-        //    _newLoadedCollection = new ObservableCollection<TaskEquipmentStation>();
-
-        //    _newLoadedCollection.Clear();
-
-
-        //    ILoad<TaskClass> retrivedTask = new LoadM<TaskClass>();
-        //    ObservableCollection<TaskClass> taskCollection = retrivedTask.RetriveCollection("Tasks");
-
-        //    ILoad<Station> retrivedStation = new LoadM<Station>();
-        //    ObservableCollection<Station> stationCollection = retrivedStation.RetriveCollection("Stations");
-
-        //    ILoad<Equipment> retrivedEquipmnet = new LoadM<Equipment>();
-        //    ObservableCollection<Equipment> equipmentCollection = retrivedEquipmnet.RetriveCollection("Equipments");
-
-        //    var query = (from t in taskCollection
-        //                 join e in equipmentCollection on t.EquipmentID equals e.EquipmentID
-        //                 join s in stationCollection on e.StationID equals s.StationID
-        //                 select new TaskEquipmentStation() { TaskName = t.TaskName, TaskType = t.TaskType, EquipmentName = e.EquipmentName, StationName = s.StationName, TaskSchedule = t.TaskSchedule, EquipmentID = e.EquipmentID }).ToList();
-
-        //    foreach (var item in query)
-        //    {
-        //        _newLoadedCollection.Add(item);
-        //    }
-
-        //    _loadedCollection = _newLoadedCollection;
-        //    return _loadedCollection;
-        //}
-
+        
         public ObservableCollection<Station> LoadStation()
         {
             ILoad<Station> retrivedStation = new LoadM<Station>();
             ObservableCollection<Station> stationCollection = retrivedStation.RetriveCollection("Stations");
 
             var query = (from s in stationCollection
-                         select new Station() { StationName = s.StationName, StationID = s.StationID }).ToList();
+                select new Station() { StationName = s.StationName, StationId = s.StationId }).ToList();
 
             foreach (var item in query)
             {
@@ -148,7 +116,6 @@ namespace StationLogApp.Common
 
         public ObservableCollection<Notes> LoadNotes()
         {
-
             ObservableCollection<Notes> list = new ObservableCollection<Notes>();
 
             ILoad<Notes> loadedNotes = new LoadM<Notes>();
@@ -158,18 +125,17 @@ namespace StationLogApp.Common
             ObservableCollection<Station> stationCollection = retrivedStation.RetriveCollection("Stations");
 
             var query = (from n in notesCollection
-                join s in stationCollection on n.StationID equals s.StationID
+                join s in stationCollection on n.StationId equals s.StationId
                 select new Notes()
                 {
-                    NotesID = n.NotesID,
+                    NotesId = n.NotesId,
                     Note1 = n.Note1,
-                    UserID = n.UserID,
+                    UserId = n.UserId,
                     DueDate = n.DueDate,
                     StationName = s.StationName,
-                    StationID = s.StationID
+                    StationId = s.StationId
                 }).ToList();
-
-
+            
             foreach (var item in query)
             {
                 list.Add(item);
@@ -177,7 +143,5 @@ namespace StationLogApp.Common
 
             return list;
         }
-        #endregion
-
     }
 }

@@ -22,64 +22,50 @@ namespace StationLogApp.ViewModel
         private string _comment;
         private string _doneVar;
 
-        private TaskEquipmentStationSingleton _singleton;
-        private readonly TaskVm _taskVm;
-        
         public UpdateTaskHandler Uph { get; set; }
 
         public RelayCommandClass DoUpdate { get; set; }
 
-        public Collections col { get; set; }
+        public Collections Col { get; set; }
 
         public ObservableCollection<TaskEquipmentStation> EquipmentStations
         {
-            get { return col.EquipmentStationsCollection(); }
-            set
-            {
-                var equipmentStationsCollection = col.EquipmentStationsCollection();
-                equipmentStationsCollection = value;
-            }
+            get => Col.EquipmentStationsCollection();
+            set => Col.EquipmentStationsCollection();
         }
 
         public string[] TaskTypes
         {
-            get { return col.TypeArray; }
-            set
-            {
-                col.TypeArray = value;
-            }
+            get => Col.TypeArray;
+            set => Col.TypeArray = value;
         }
 
         public string[] TaskSchedules
         {
-            get { return col.ScheduleArray; }
-            set
-            {
-                col.ScheduleArray = value;
-            }
+            get => Col.ScheduleArray;
+            set => Col.ScheduleArray = value;
         }
 
         public UpdateTaskVm()
         {
-            _taskVm = new TaskVm();
-            col = new Collections();
-            TaskTypes = col.TypeArray;
-            TaskSchedules = col.ScheduleArray;
-            EquipmentStations = col.EquipmentStationsCollection();
-            _singleton = TaskEquipmentStationSingleton.GetInstance();
+            Col = new Collections();
+            TaskTypes = Col.TypeArray;
+            TaskSchedules = Col.ScheduleArray;
+            EquipmentStations = Col.EquipmentStationsCollection();
+            var singleton = TaskEquipmentStationSingleton.GetInstance();
 
-            TaskId = _singleton.GetTaskId();
-            TaskName = _singleton.GetTaskName();
-            TaskSchedule = _singleton.GetTaskSchedule();
-            TaskType = _singleton.GetTaskType();
-            EquipmentId = _singleton.GetEquipmentId();
-            DueDate = _singleton.GetDueDate();
+            TaskId = singleton.GetTaskId();
+            TaskName = singleton.GetTaskName();
+            TaskSchedule = singleton.GetTaskSchedule();
+            TaskType = singleton.GetTaskType();
+            EquipmentId = singleton.GetEquipmentId();
+            DueDate = singleton.GetDueDate();
             //DoneDate = _singleton.GetDoneDate();
-            EquipmentName = _singleton.GetEquipmentName();
-            StationName = _singleton.GetStationName();
-            Registration = _singleton.GetRegistration();
-            Comment = _singleton.GetComment();
-            DoneVar = _singleton.GetDoneVar();
+            EquipmentName = singleton.GetEquipmentName();
+            StationName = singleton.GetStationName();
+            Registration = singleton.GetRegistration();
+            Comment = singleton.GetComment();
+            DoneVar = singleton.GetDoneVar();
 
             Uph = new UpdateTaskHandler(this);
             DoUpdate = new RelayCommandClass(Uph.UpdateTask);

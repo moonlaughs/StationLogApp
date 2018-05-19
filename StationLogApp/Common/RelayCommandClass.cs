@@ -70,5 +70,4 @@ namespace StationLogApp.Common
             }
         }
     }
-
 }

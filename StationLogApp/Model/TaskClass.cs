@@ -9,7 +9,6 @@ namespace StationLogApp.Model
 {
     public class TaskClass
     {
-
         #region // Properties
         public int TaskId { get; set; }
         public string TaskName { get; set; }
@@ -20,7 +19,7 @@ namespace StationLogApp.Model
         public DateTime? DoneDate { get; set; }
         public string Comment { get; set; }
         public string DoneVar { get; set; }
-        public int EquipmentID { get; set; }
+        public int EquipmentId { get; set; }
         #endregion
 
         #region // Constructors
@@ -29,7 +28,7 @@ namespace StationLogApp.Model
             
         }
 
-        public TaskClass(int taskId, string taskName, string taskSchedule, string registration, string taskType, DateTime dueDate,  DateTime? doneDate, string comment, string doneVar, int equipmentID)
+        public TaskClass(int taskId, string taskName, string taskSchedule, string registration, string taskType, DateTime dueDate,  DateTime? doneDate, string comment, string doneVar, int equipmentId)
         {
             TaskId = taskId;
             TaskName = taskName;
@@ -40,17 +39,14 @@ namespace StationLogApp.Model
             DoneDate = doneDate;
             Comment = comment;
             DoneVar = doneVar;
-            EquipmentID = equipmentID;
+            EquipmentId = equipmentId;
         }
-
-
         #endregion
-
-
+        
         #region // ToString() Method
         public override string ToString()
         {
-            return $"{TaskId}, {TaskName}, {TaskSchedule}, {Registration}, {TaskType}, {DueDate}, {DoneDate}, {Comment}, {DoneVar}, {EquipmentID}";
+            return $"{TaskId}, {TaskName}, {TaskSchedule}, {Registration}, {TaskType}, {DueDate}, {DoneDate}, {Comment}, {DoneVar}, {EquipmentId}";
         }
         #endregion
     }

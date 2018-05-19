@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace StationLogApp.Interfaces
 {
-   public interface IUpdate<T>
+   public interface IUpdate<in T>   //contravariant
     {
-        Task Update(T obj, string apiID, int key);
+        Task Update(T obj, string apiId, int key);
     }
 }

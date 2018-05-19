@@ -8,7 +8,6 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml.Automation.Peers;
 using StationLogApp.Common;
 using StationLogApp.Converters;
-using StationLogApp.Convertor;
 using StationLogApp.Interfaces;
 using StationLogApp.Model;
 using StationLogApp.Persistancy;
@@ -21,9 +20,10 @@ namespace StationLogApp.Handlers
     {
         private readonly UpdateTaskVm _updateVm;
         private readonly IUpdate<TaskClass> _update = new UpdateM<TaskClass>();
-        private ButtonsVm Bvm { get; }
 
+        public ButtonsVm Bvm { get; }
         public DateConverter Dc { get; }
+
         public RelayCommandClass DoGoTask { get; set; }
 
         public UpdateTaskHandler(UpdateTaskVm updateVm)
@@ -38,7 +38,7 @@ namespace StationLogApp.Handlers
         {
             if (_updateVm.TaskId != 0)
             {
-                TaskClass updatedItem = new TaskClass(
+                var updatedItem = new TaskClass(
                 _updateVm.TaskId,
                 _updateVm.TaskName,
                 _updateVm.TaskSchedule,
@@ -55,12 +55,12 @@ namespace StationLogApp.Handlers
 
                 GoTask();
 
-                MessageDialog msg = new MessageDialog("Task updated");
+                var msg = new MessageDialog("Task updated");
                 await msg.ShowAsync();
             }
             else
             {
-                MessageDialog msg = new MessageDialog("Please select item");
+                var msg = new MessageDialog("Please select item");
                 await msg.ShowAsync();
             }
         }

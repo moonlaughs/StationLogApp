@@ -19,19 +19,19 @@ namespace StationLogApp.Handlers
 {
     public class NoteHandler
     {
-        private NoteVM _noteVM;
-        private ISave<Notes> _savedNote = new SaveM<Notes>();
-        private IDelete<Notes> _deleteNote = new DeleteM<Notes>();
-        private DateConverter _dateConverter = new DateConverter();
+        private readonly NoteVm _noteVm;
+        private readonly ISave<Notes> _savedNote = new SaveM<Notes>();
+        private readonly IDelete<Notes> _deleteNote = new DeleteM<Notes>();
+        private readonly DateConverter _dateConverter = new DateConverter();
         private Notes _noteObj;
 
         public Collections Col { get; set; }
         public ObservableCollection<Station> StationCollection { get; set; }
         public ObservableCollection<Notes> NotesCollection { get; set; }
 
-        public NoteHandler(NoteVM noteVM)
+        public NoteHandler(NoteVm noteVm)
         {
-            _noteVM = noteVM;
+            _noteVm = noteVm;
             Col = new Collections();
             StationCollection = Col.LoadStation();
             NotesCollection = Col.LoadNotes();
@@ -39,23 +39,39 @@ namespace StationLogApp.Handlers
 
         public async void CreateAndSaveNote()
         {
-            DateTime convertedDate = _dateConverter.ConvertToDate(_noteVM.DueDate);
-            int convertedStationName = _noteVM.SelectedStationItem.StationID;
-            _noteObj = new Notes(_noteVM.NotesID, _noteVM.Note1, convertedDate, convertedStationName, _noteVM.UserID);
-            await _savedNote.Save(_noteObj, "Notes");
-            FrameNavigateClass _frame = new FrameNavigateClass();
-            _frame.ActivateFrameNavigation(typeof(TaskPage));
-            MessageDialog msg = new MessageDialog("You just created a note!");
-            await msg.ShowAsync();
+            if (!string.IsNullOrEmpty(_noteVm.Note1) && _noteVm.SelectedStationItem.StationName != null)
+            {
+                DateTime convertedDate = _dateConverter.ConvertToDate(_noteVm.DueDate);
+                int convertedStationName = _noteVm.SelectedStationItem.StationId;
+                _noteObj = new Notes(_noteVm.NotesId, _noteVm.Note1, convertedDate, convertedStationName, _noteVm.UserId);
+                await _savedNote.Save(_noteObj, "Notes");
+                FrameNavigateClass _frame = new FrameNavigateClass();
+                _frame.ActivateFrameNavigation(typeof(TaskPage));
+                MessageDialog msg = new MessageDialog("You just created a note!");
+                await msg.ShowAsync();
+            }
+            else
+            {
+                var msg = new MessageDialog("Please fill in the information");
+                await msg.ShowAsync();
+            }
         }
 
         public async void RemoveNote()
         {
-            await _deleteNote.Delete("Notes", _noteVM.SelectedNote.NotesID);
-            FrameNavigateClass _frame = new FrameNavigateClass();
-            _frame.ActivateFrameNavigation(typeof(TaskPage));
-            MessageDialog msg = new MessageDialog("Note deleted!");
-            await msg.ShowAsync();
+            if (_noteVm.SelectedNote.NotesId != 0)
+            {
+                await _deleteNote.Delete("Notes", _noteVm.SelectedNote.NotesId);
+                FrameNavigateClass _frame = new FrameNavigateClass();
+                _frame.ActivateFrameNavigation(typeof(TaskPage));
+                MessageDialog msg = new MessageDialog("Note deleted!");
+                await msg.ShowAsync();
+            }
+            else
+            {
+                MessageDialog msg = new MessageDialog("Please select the note.");
+                await msg.ShowAsync();
+            }
         }
     }
 }

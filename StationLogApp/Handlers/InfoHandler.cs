@@ -22,7 +22,7 @@ namespace StationLogApp.Handlers
             if (_taskVm.SelectedItem.TaskId != 0)
             {
                 string info =
-                    $"Equipment name: {_taskVm.SelectedItem.EquipmentName} \nTaskId: {_taskVm.SelectedItem.TaskId} \nEquipmentId: {_taskVm.SelectedItem.EquipmentID} \nTask Schedule: {_taskVm.SelectedItem.TaskSchedule} \nStation name: {_taskVm.SelectedItem.StationName}";
+                    $"Equipment name: {_taskVm.SelectedItem.EquipmentName} \nTaskId: {_taskVm.SelectedItem.TaskId} \nEquipmentId: {_taskVm.SelectedItem.EquipmentId} \nTask Schedule: {_taskVm.SelectedItem.TaskSchedule} \nStation name: {_taskVm.SelectedItem.StationName}";
                 MessageDialog msg = new MessageDialog(info, "More Information");
                 await msg.ShowAsync();
             }

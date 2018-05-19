@@ -10,7 +10,7 @@ namespace StationLogApp.Model
     public class User
     {
         #region Properties
-        public int UserID { get; set; }
+        public int UserId { get; set; }
         public string Firstname { get; set; }
         public string Surname { get; set; }
         public string Username { get; set; }
@@ -19,9 +19,9 @@ namespace StationLogApp.Model
         #endregion
 
         #region Constructors
-        public User(int userID, string firstname, string surname, string username, string userPassword, string userType)
+        public User(int userId, string firstname, string surname, string username, string userPassword, string userType)
         {
-            UserID = userID;
+            UserId = userId;
             Firstname = firstname;
             Surname = surname;
             Username = username;
@@ -36,12 +36,10 @@ namespace StationLogApp.Model
         #endregion
 
         #region Methods
-
         public override string ToString()
         {
-            return $"{UserID}, {Firstname}, {Surname}, {Username}, {UserPassword}, {UserType}";
+            return $"{UserId}, {Firstname}, {Surname}, {Username}, {UserPassword}, {UserType}";
         }
-
         #endregion
     }
 }

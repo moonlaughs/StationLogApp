@@ -8,20 +8,22 @@ using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Newtonsoft.Json;
 using StationLogApp.Interfaces;
+using static System.String;
 
 namespace StationLogApp.Model
 {
-    class SaveM<T> : ISave<T> where T : class
+    public class SaveM<T> : ISave<T> where T : class
     {
         #region
         private const string _serverUrl = "http://stationlogdbwebservice20180514015122.azurewebsites.net/";
-        private string _apiPrefix = "api/";
+        public readonly string ApiPrefix = "api/";
         private HttpClientHandler _httpClientHandler;
         private HttpClient _httpClient;
         #endregion
+
         public async Task<T> Save(T obj, string apiId)
         {
-            string url = String.Concat(_serverUrl, _apiPrefix, apiId);
+            var url = Concat(_serverUrl, ApiPrefix, apiId);
             {
                 _httpClientHandler = new HttpClientHandler() { UseDefaultCredentials = true };
                 using (_httpClient = new HttpClient(_httpClientHandler))
@@ -31,12 +33,12 @@ namespace StationLogApp.Model
                     _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     try
                     {
-                        string postBody = JsonConvert.SerializeObject(obj);
+                        var postBody = JsonConvert.SerializeObject(obj);
                         var response = _httpClient.PostAsync(url, new StringContent(postBody, Encoding.UTF8, "application/json")).Result;
                     }
                     catch (Exception ex)
                     {
-                        new MessageDialog(ex.Message).ShowAsync();
+                        await new MessageDialog(ex.Message).ShowAsync();
                     }
                 }
             }
