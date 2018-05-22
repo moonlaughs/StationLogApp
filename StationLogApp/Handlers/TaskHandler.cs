@@ -19,12 +19,12 @@ namespace StationLogApp.Handlers
         #region instance fields
         private readonly ISave<TaskClass> _savedTaskClass = new SaveM<TaskClass>();
         private readonly IUpdate<TaskClass> _updateTaskClass = new UpdateM<TaskClass>();
-
-        private readonly TaskVm _taskVm;
+        private  TaskVm _taskVm;
         private readonly FrameNavigateClass _frameNavigation;
         private readonly Collections _collectionsClass;
+        private SortingHandler _sortingHandler;
 
-        private ObservableCollection<TaskEquipmentStation> _loadedCollection;
+        
         #endregion
 
         #region properties
@@ -33,15 +33,18 @@ namespace StationLogApp.Handlers
         public string SelectedPeriodicityItem { get; set; }
         public Station SelectedStation { get; set; }
 
-        public ObservableCollection<TaskEquipmentStation> LoadedCollection
+
+        // Load a Collection Of TaskEquipmentStation that has to be connected to the TaskVM for showing in the TaskListView
+
+        public ObservableCollection<TaskEquipmentStation> LoadedCollection { get; set; }
+
+
+        public TaskVm TaskVm
         {
-            get => _loadedCollection;
-            set
-            {
-                _loadedCollection = value;
-                OnPropertyChanged(nameof(LoadedCollection));
-            }
+            get { return _taskVm; }
+            set { _taskVm = value; }
         }
+
         #endregion
 
         #region Constructor
@@ -50,12 +53,14 @@ namespace StationLogApp.Handlers
             _taskVm = taskVm;
             _frameNavigation = new FrameNavigateClass();
             _collectionsClass = new Collections();
+            _sortingHandler = new SortingHandler(this);
         }
         #endregion
         
         #region SaveAsDoneTask
         // This method is activated by the button of the relayCommand  
         // and save the logged task and add a task to the next date that it has to be made
+
         public void OperateTask()
         {
             SaveTaskClass();
@@ -72,16 +77,16 @@ namespace StationLogApp.Handlers
             if (SelectedTask.TaskId != 0)
             {
                 TaskClass newReSchedule = new TaskClass(
-                    _taskVm.SelectedItem.TaskId,
-                    _taskVm.SelectedItem.TaskName,
-                    _taskVm.SelectedItem.TaskSchedule,
-                    _taskVm.SelectedItem.Registration,
-                    _taskVm.SelectedItem.TaskType,
-                    _taskVm.SelectedItem.DueDate,
+                    TaskVm.SelectedItem.TaskId,
+                    TaskVm.SelectedItem.TaskName,
+                    TaskVm.SelectedItem.TaskSchedule,
+                    TaskVm.SelectedItem.Registration,
+                    TaskVm.SelectedItem.TaskType,
+                    TaskVm.SelectedItem.DueDate,
                     newDate,
-                    _taskVm.SelectedItem.Comment,
+                    TaskVm.SelectedItem.Comment,
                     doneVariable,
-                    _taskVm.SelectedItem.EquipmentId
+                    TaskVm.SelectedItem.EquipmentId
                 );
 
                 _savedTaskClass.Save(newReSchedule, "Tasks");
@@ -107,42 +112,42 @@ namespace StationLogApp.Handlers
         #region RescheduleTask
         public void ReScheduleTask()
         {
-            if (_taskVm.SelectedItem.TaskSchedule != null)
+            if (TaskVm.SelectedItem.TaskSchedule != null)
             {
-                if (_taskVm.SelectedItem.TaskSchedule == "Every week")
+                if (TaskVm.SelectedItem.TaskSchedule == "Every week")
                 {
                     DoRescheduleTask(7);
                 }
 
-                else if (_taskVm.SelectedItem.TaskSchedule == "Every two weeks")
+                else if (TaskVm.SelectedItem.TaskSchedule == "Every two weeks")
                 {
                     DoRescheduleTask(14);
                 }
 
-                else if (_taskVm.SelectedItem.TaskSchedule == "Every three weeks")
+                else if (TaskVm.SelectedItem.TaskSchedule == "Every three weeks")
                 {
                     DoRescheduleTask(21);
                 }
 
-                else if (_taskVm.SelectedItem.TaskSchedule == "Every month")
+                else if (TaskVm.SelectedItem.TaskSchedule == "Every month")
                 {
                     DoRescheduleTask(28);
                 }
 
-                else if (_taskVm.SelectedItem.TaskSchedule == "Every two months")
+                else if (TaskVm.SelectedItem.TaskSchedule == "Every two months")
                 {
                     DoRescheduleTask(56);
                 }
 
-                else if (_taskVm.SelectedItem.TaskSchedule == "Every three months")
+                else if (TaskVm.SelectedItem.TaskSchedule == "Every three months")
                 {
                     DoRescheduleTask(84);
                 }
-                else if (_taskVm.SelectedItem.TaskSchedule == "Every six months")
+                else if (TaskVm.SelectedItem.TaskSchedule == "Every six months")
                 {
                     DoRescheduleTask(168);
                 }
-                else if (_taskVm.SelectedItem.TaskSchedule == "Every year")
+                else if (TaskVm.SelectedItem.TaskSchedule == "Every year")
                 {
                     DoRescheduleTask(436);
                 }
@@ -153,7 +158,7 @@ namespace StationLogApp.Handlers
         {
             var nextTuesdayDate = GetNextDate(periodicity);
             var newReSchedule = CreateReScheduledTask(nextTuesdayDate, "N");
-            _updateTaskClass.Update(newReSchedule, "Tasks", _taskVm.SelectedItem.TaskId);
+            _updateTaskClass.Update(newReSchedule, "Tasks", TaskVm.SelectedItem.TaskId);
         }
         
         private DateTime GetNextDate(int periodicity)
@@ -166,91 +171,33 @@ namespace StationLogApp.Handlers
         private TaskClass CreateReScheduledTask(DateTime newDate, string doneVariable)
         {
             var newReSchedule = new TaskClass(
-                _taskVm.SelectedItem.TaskId,
-                _taskVm.SelectedItem.TaskName,
-                _taskVm.SelectedItem.TaskSchedule,
-                _taskVm.SelectedItem.Registration = null,
-                _taskVm.SelectedItem.TaskType,
+                TaskVm.SelectedItem.TaskId,
+                TaskVm.SelectedItem.TaskName,
+                TaskVm.SelectedItem.TaskSchedule,
+                TaskVm.SelectedItem.Registration = null,
+                TaskVm.SelectedItem.TaskType,
                 newDate,
                 null,
-                _taskVm.SelectedItem.Comment = null,
+                TaskVm.SelectedItem.Comment = null,
                 doneVariable,
-                _taskVm.SelectedItem.EquipmentId
+                TaskVm.SelectedItem.EquipmentId
             );
             return newReSchedule;
         }
         #endregion
 
         #region SortingMethods
-        public async void SortCollection()
+
+        public void SortCollection()
         {
-            if (_taskVm.SelectedItemStation != null || _taskVm.SelectedItemPeriodicity != null)
-            {
-                var newLoadedCollection = new ObservableCollection<TaskEquipmentStation>();
-                newLoadedCollection.Clear();
-
-                if (_taskVm.SelectedItemStation != null)
-                {
-                    foreach (var item in _collectionsClass.LoadToDo())
-                    {
-                        if (item.StationName == _taskVm.SelectedItemStation.StationName)
-                        {
-                            newLoadedCollection.Add(item);
-                        }
-                    }
-                }
-                if (_taskVm.SelectedItemPeriodicity == null)
-                {
-                    _loadedCollection = newLoadedCollection;
-                    _taskVm.TaskCatalog = _loadedCollection;
-                }
-                if (_taskVm.SelectedItemPeriodicity == null) return;
-                {
-                    var newList = new ObservableCollection<TaskEquipmentStation>();
-
-                    if (newLoadedCollection.Count == 0)
-                    {
-                        foreach (var item in _collectionsClass.LoadToDo())
-                        {
-                            if (item.TaskSchedule == _taskVm.SelectedItemPeriodicity)
-                            {
-                                newLoadedCollection.Add(item);
-                            }
-                        }
-                        _loadedCollection = newLoadedCollection;
-                        _taskVm.TaskCatalog = _loadedCollection;
-                    }
-                    else
-                    {
-                        foreach (var item in newLoadedCollection)
-                        {
-                            if (item.TaskSchedule == _taskVm.SelectedItemPeriodicity)
-                            {
-                                newList.Add(item);
-                            }
-                        }
-                        _loadedCollection = newList;
-                        _taskVm.TaskCatalog = _loadedCollection;
-                    }
-                }
-                if (_taskVm.TaskCatalog.Count == 0)
-                {
-                    var msg = new MessageDialog("No such object.");
-                    await msg.ShowAsync();
-                }
-            }
-            else
-            {
-                var msg = new MessageDialog("In order to sort please pick a filter.");
-                await msg.ShowAsync();
-            }
-        }
+            _sortingHandler.SortCollection();
+        }        
         #endregion
 
         public ObservableCollection<TaskEquipmentStation> LoadCollection()
         {
-            _loadedCollection = _collectionsClass.LoadToDo();
-            return _loadedCollection;
+            LoadedCollection = _collectionsClass.LoadToDo();
+            return LoadedCollection;
         }
     }
 }

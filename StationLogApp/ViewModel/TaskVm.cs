@@ -38,6 +38,8 @@ namespace StationLogApp.ViewModel
         public string[] ScheduleArray { get; set; }
         public ObservableCollection<Station> StationCollection { get; set; }
 
+        // public ObservableCollection<TaskEquipmentStation> TaskCatalog { get; set; }
+
         public ObservableCollection<TaskEquipmentStation> TaskCatalog
         {
             get => TaskHandler.LoadedCollection;
@@ -47,7 +49,7 @@ namespace StationLogApp.ViewModel
                 OnPropertyChanged(nameof(TaskCatalog));
             }
         }
-        
+
         public ObservableCollection<TaskEquipmentStation> DoneCatalog
         {
             get => _col.LoadDone();
@@ -64,7 +66,7 @@ namespace StationLogApp.ViewModel
             set
             {
                 _selectedItem = value;
-                OnPropertyChanged(nameof(SelectedItem));
+                //OnPropertyChanged(nameof(SelectedItem));
             }
         }
 
@@ -94,7 +96,6 @@ namespace StationLogApp.ViewModel
         public TaskVm()
         {
             _singleton = TaskEquipmentStationSingleton.GetInstance();
-
             TaskHandler = new TaskHandler(this);
             DeleteTaskHandler = new DeleteTaskHandler(this);
             var infoHandler = new InfoHandler(this);

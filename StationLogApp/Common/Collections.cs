@@ -54,9 +54,6 @@ namespace StationLogApp.Common
             ILoad<Equipment> retrivedEquipmnet = new LoadM<Equipment>();
             ObservableCollection<Equipment> equipmentCollection = retrivedEquipmnet.RetriveCollection("Equipments");
 
-            ILoad<User> retrivedUser = new LoadM<User>();
-            ObservableCollection<User> userCollection = retrivedUser.RetriveCollection("Users");
-
             var query = (from t in taskCollection
                 join e in equipmentCollection on t.EquipmentId equals e.EquipmentId
                 join s in stationCollection on e.StationId equals s.StationId
