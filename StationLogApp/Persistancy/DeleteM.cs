@@ -13,17 +13,13 @@ namespace StationLogApp.Persistancy
     public class DeleteM<T> : IDelete<T> where T : class
     {
         #region
-        private const string ServerUrl = "http://stationlogwebservice20180424112310.azurewebsites.net/";
-
-        private string _serverURL;
-        private string _apiPrefix;
-        private string _apiID;
+        private const string ServerUrl = "http://stationlogdbwebservice20180514015122.azurewebsites.net/";
+        public readonly string ApiPrefix = "api/";
         private HttpClientHandler _httpClientHandler;
         private HttpClient _httpClient;
         #endregion
 
-
-        public async Task Delete(int key)
+        public async Task Delete(string apiId, int key)
         {
             _httpClientHandler = new HttpClientHandler() { UseDefaultCredentials = true };
             using (_httpClient = new HttpClient(_httpClientHandler))
@@ -33,15 +29,8 @@ namespace StationLogApp.Persistancy
                 _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 try
                 {
-                    Task<HttpResponseMessage> task4 =
-                        _httpClient.DeleteAsync($"{ServerUrl}/{_apiPrefix}/{_apiID}/{key}");
-                    if (task4 != null)
-                    {
-                        if (task4.Result.IsSuccessStatusCode)
-                        {
-                            await task4.Result.Content.ReadAsAsync<T>();
-                        }
-                    }
+                    HttpResponseMessage task4 =
+                        _httpClient.DeleteAsync($"{ServerUrl}{ApiPrefix}{apiId}/{key}").Result;
                 }
                 catch (Exception ex)
                 {

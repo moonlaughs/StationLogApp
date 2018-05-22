@@ -11,7 +11,7 @@ namespace StationLogApp.Singletons
     public class UserSingleton
     {
         #region Instance fields
-        public static User _user;
+        public static User User;
         #endregion
 
         #region Properties
@@ -21,7 +21,7 @@ namespace StationLogApp.Singletons
         #region Constructor
         public UserSingleton()
         {
-            _user = new User();
+            User = new User();
         }
         #endregion
 
@@ -37,39 +37,38 @@ namespace StationLogApp.Singletons
 
         public void SetPerson(User user)
         {
-            _user = user;
+            User = user;
         }
 
-        public string GetUserID()
+        public int GetUserID()
         {
-            return _user.UserID;
+            return User.UserId;
         }
 
         public string GetFirstname()
         {
-            return _user.Firstname;
+            return User.Firstname;
         }
 
         public string GetSurname()
         {
-            return _user.Surname;
+            return User.Surname;
         }
 
         public string GetUsername()
         {
-            return _user.Username;
+            return User.Username;
         }
 
-        public string GetUserPassword()
+        public int GetUserPassword()
         {
-            return _user.UserID;
+            return User.UserId;
         }
 
         public string GetUserType()
         {
-            return _user.UserType;
+            return User.UserType;
         }
         #endregion
     }
 }
- 

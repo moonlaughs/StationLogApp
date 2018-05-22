@@ -27,9 +27,9 @@ namespace StationLogApp.View
             this.InitializeComponent();
         }
 
-        private void TodoButton_OnClick(object sender, RoutedEventArgs e)
+        private void MenuFlyoutItem_OnClick(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(TaskPage));
+            Frame.Navigate(typeof(LogInPage));
         }
     }
 }

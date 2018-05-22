@@ -16,22 +16,15 @@ namespace StationLogApp.Persistancy
 {
     public class LoadM<T> : ILoad<T> where T : class
     {
-        
-        #region
-
-        private const string ServerUrl = "http://stationlogwebservice20180424112310.azurewebsites.net/";
-        private string _serverURL;
-        private string _apiPrefix = "api";
-        private string _apiID;
+        #region instance fields
+        private const string ServerUrl = "http://stationlogdbwebservice20180514015122.azurewebsites.net/";
+        public readonly string ApiPrefix = "api";
         private HttpClientHandler _httpClientHandler;
         private HttpClient _httpClient;
-        
         #endregion
-
-
-        public async Task<ObservableCollection<T>> Load(string _apiID)
+        
+        public async Task<ObservableCollection<T>> Load(string apiId)
         {
-
             _httpClientHandler = new HttpClientHandler() { UseDefaultCredentials = true };
 
             using (_httpClient = new HttpClient(_httpClientHandler))
@@ -39,10 +32,9 @@ namespace StationLogApp.Persistancy
                 _httpClient.BaseAddress = new Uri(ServerUrl);
                 _httpClient.DefaultRequestHeaders.Clear();
                 _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
                 try
                 {
-                    Task<HttpResponseMessage> task5 = _httpClient.GetAsync($"{ServerUrl}/{_apiPrefix}/{_apiID}");
+                    Task<HttpResponseMessage> task5 = _httpClient.GetAsync($"{ServerUrl}/{ApiPrefix}/{apiId}");
                     if (task5 != null)
                     {
                         if (task5.Result.IsSuccessStatusCode)
@@ -53,7 +45,6 @@ namespace StationLogApp.Persistancy
                         }
                     }
                 }
-
                 catch (Exception ex)
                 {
                     await new MessageDialog(ex.Message).ShowAsync();
@@ -62,13 +53,11 @@ namespace StationLogApp.Persistancy
             }
         }
 
-        //private static ObservableCollection<User> DeserialiseUser(string json)
-        //{
-        //    UserConverter userConverter = new UserConverter();
-        //    var settings = new JsonSerializerSettings();
-        //    settings.Converters.Add(new UserConverter());
-        //    ObservableCollection<User> userConverted = JsonConvert.DeserializeObject<ObservableCollection<User>>(json, settings);
-        //    return userConverted;
-        //}
+        public ObservableCollection<T> RetriveCollection(string table)
+        {
+            Task<ObservableCollection<T>> api = this.Load(table);
+            ObservableCollection<T> collection = api.Result;
+            return collection;
+        }
     }
 }

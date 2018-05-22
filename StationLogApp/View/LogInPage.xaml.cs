@@ -35,6 +35,5 @@ namespace StationLogApp
             CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.ExtendViewIntoTitleBar = true;
         }
-
     }
 }
