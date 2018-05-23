@@ -21,7 +21,6 @@ namespace StationLogApp.ViewModel
         #region instancefields
         private readonly TaskEquipmentStationSingleton _singleton;
         private readonly Collections _col;
-
         #endregion 
 
         #region properties
@@ -33,7 +32,7 @@ namespace StationLogApp.ViewModel
         public RelayCommandClass DoClear { get; set; }
 
         public TaskHandler TaskHandler { get; set; }
-        public IDeleteTask DeleteTaskHandler { get; set; }
+        public DeleteTaskHandler DeleteTaskHandler { get; set; }
 
         public string[] ScheduleArray { get; set; }
         public ObservableCollection<Station> StationCollection { get; set; }

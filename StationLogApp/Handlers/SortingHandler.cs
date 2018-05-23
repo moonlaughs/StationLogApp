@@ -14,7 +14,7 @@ namespace StationLogApp.Handlers
     {
         private readonly TaskHandler _taskHandler;
         private readonly Collections _collectionsClass = new Collections();
-        private ObservableCollection<TaskEquipmentStation> _loadedCollection ;
+        private ObservableCollection<TaskEquipmentStation> _loadedCollection;
         
         public ObservableCollection<TaskEquipmentStation> LoadedCollection
         {

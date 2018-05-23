@@ -107,13 +107,10 @@
     <Compile Include="Handlers\SortingHandler.cs" />
     <Compile Include="Handlers\TaskHandler.cs" />
     <Compile Include="Handlers\UpdateTaskHandler.cs" />
-    <Compile Include="Interfaces\ICreateTask.cs" />
-    <Compile Include="Interfaces\IDeleteTask.cs" />
     <Compile Include="Interfaces\ISave.cs" />
     <Compile Include="Interfaces\IDelete.cs" />
     <Compile Include="Interfaces\ILoad.cs" />
     <Compile Include="Interfaces\IUpdate.cs" />
-    <Compile Include="Interfaces\IUpdateTask.cs" />
     <Compile Include="Model\Equipment.cs" />
     <Compile Include="Model\Notes.cs" />
     <Compile Include="Model\TaskEquipmentStation.cs" />
