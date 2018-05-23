@@ -21,7 +21,7 @@ namespace StationLogApp.ViewModel
         #region instancefields
         private readonly TaskEquipmentStationSingleton _singleton;
         private readonly Collections _col;
-        private TaskEquipmentStation _selectedItem;
+
         #endregion 
 
         #region properties
@@ -37,8 +37,6 @@ namespace StationLogApp.ViewModel
 
         public string[] ScheduleArray { get; set; }
         public ObservableCollection<Station> StationCollection { get; set; }
-
-        // public ObservableCollection<TaskEquipmentStation> TaskCatalog { get; set; }
 
         public ObservableCollection<TaskEquipmentStation> TaskCatalog
         {
@@ -60,15 +58,7 @@ namespace StationLogApp.ViewModel
             }
         }
 
-        public TaskEquipmentStation SelectedItem
-        {
-            get => _selectedItem;
-            set
-            {
-                _selectedItem = value;
-                //OnPropertyChanged(nameof(SelectedItem));
-            }
-        }
+        public TaskEquipmentStation SelectedItem { get; set; }
 
         public Station SelectedItemStation
         {
@@ -87,7 +77,6 @@ namespace StationLogApp.ViewModel
             {
                 TaskHandler.SelectedPeriodicityItem = value;
                 OnPropertyChanged(nameof(SelectedItemPeriodicity));
-
             }
         }
         #endregion
@@ -112,7 +101,7 @@ namespace StationLogApp.ViewModel
             DoDelete = new RelayCommandClass(Delete);
             DoInfo = new RelayCommandClass(infoHandler.Info);
 
-            _selectedItem = new TaskEquipmentStation();
+            SelectedItem = new TaskEquipmentStation();
         }
         #endregion
 
