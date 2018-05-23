@@ -16,7 +16,7 @@ using StationLogApp.ViewModel;
 
 namespace StationLogApp.Handlers
 {
-    public class CreateTaskHandler : ICreateTask
+    public class CreateTaskHandler
     {
         #region instancefields
         private readonly CreateTaskVm _createVm;

@@ -71,7 +71,7 @@ namespace StationLogApp.Handlers
 
             if (_loadedCollection.Count == 0)
             {
-                var msg = new MessageDialog("No task found");
+                var msg = new MessageDialog("No task found.");
                 await msg.ShowAsync();
             }
             else

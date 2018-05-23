@@ -13,7 +13,7 @@ using StationLogApp.ViewModel;
 
 namespace StationLogApp.Handlers
 {
-    public class DeleteTaskHandler : IDeleteTask
+    public class DeleteTaskHandler
     {
         private readonly TaskVm _deleteVm;
         private readonly FrameNavigateClass _frame;
@@ -27,12 +27,12 @@ namespace StationLogApp.Handlers
 
                 _frame.ActivateFrameNavigation(typeof(TaskPage));
 
-                MessageDialog msg = new MessageDialog("Task deleted");
+                var msg = new MessageDialog("Task deleted");
                 await msg.ShowAsync();
             }
             else
             {
-                MessageDialog msg = new MessageDialog("Please select the task");
+                var msg = new MessageDialog("Please select the task");
                 await msg.ShowAsync();
             }
         }

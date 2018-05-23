@@ -16,7 +16,7 @@ using StationLogApp.ViewModel;
 
 namespace StationLogApp.Handlers
 {
-    public class UpdateTaskHandler : IUpdateTask
+    public class UpdateTaskHandler
     {
         private readonly UpdateTaskVm _updateVm;
         private readonly IUpdate<TaskClass> _update = new UpdateM<TaskClass>();

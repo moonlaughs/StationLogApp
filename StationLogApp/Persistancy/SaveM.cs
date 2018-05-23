@@ -15,7 +15,7 @@ namespace StationLogApp.Model
     public class SaveM<T> : ISave<T> where T : class
     {
         #region
-        private const string _serverUrl = "http://stationlogdbwebservice20180514015122.azurewebsites.net/";
+        private const string ServerUrl = "http://stationlogdbwebservice20180514015122.azurewebsites.net/";
         public readonly string ApiPrefix = "api/";
         private HttpClientHandler _httpClientHandler;
         private HttpClient _httpClient;
@@ -23,12 +23,12 @@ namespace StationLogApp.Model
 
         public async Task<T> Save(T obj, string apiId)
         {
-            var url = Concat(_serverUrl, ApiPrefix, apiId);
+            var url = Concat(ServerUrl, ApiPrefix, apiId);
             {
                 _httpClientHandler = new HttpClientHandler() { UseDefaultCredentials = true };
                 using (_httpClient = new HttpClient(_httpClientHandler))
                 {
-                    _httpClient.BaseAddress = new Uri(_serverUrl);
+                    _httpClient.BaseAddress = new Uri(ServerUrl);
                     _httpClient.DefaultRequestHeaders.Clear();
                     _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     try
