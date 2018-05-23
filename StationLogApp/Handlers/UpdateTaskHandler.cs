@@ -16,12 +16,12 @@ using StationLogApp.ViewModel;
 
 namespace StationLogApp.Handlers
 {
-    public class UpdateTaskHandler : IUpdateTask
+    public class UpdateTaskHandler
     {
         private readonly UpdateTaskVm _updateVm;
         private readonly IUpdate<TaskClass> _update = new UpdateM<TaskClass>();
 
-        public ButtonsVm Bvm { get; }
+        public NavigationHelperVm Bvm { get; }
         public DateConverter Dc { get; }
 
         public RelayCommandClass DoGoTask { get; set; }
@@ -29,7 +29,7 @@ namespace StationLogApp.Handlers
         public UpdateTaskHandler(UpdateTaskVm updateVm)
         {
             _updateVm = updateVm;
-            Bvm = new ButtonsVm();
+            Bvm = new NavigationHelperVm();
             DoGoTask = new RelayCommandClass(GoTask);
             Dc = new DateConverter();
         }

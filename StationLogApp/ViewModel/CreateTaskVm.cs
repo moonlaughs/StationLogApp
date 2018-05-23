@@ -20,7 +20,7 @@ namespace StationLogApp.ViewModel
         #endregion
 
         #region properties
-        private ICreateTask CreateTaskHandler { get; }
+        private CreateTaskHandler CreateTaskHandler { get; }
 
         public RelayCommandClass DoCreateTask { get; set; }
 

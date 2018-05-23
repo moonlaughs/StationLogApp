@@ -16,7 +16,7 @@ using StationLogApp.ViewModel;
 
 namespace StationLogApp.Handlers
 {
-    public class CreateTaskHandler : ICreateTask
+    public class CreateTaskHandler
     {
         #region instancefields
         private readonly CreateTaskVm _createVm;
@@ -24,14 +24,14 @@ namespace StationLogApp.Handlers
         #endregion
 
         public RelayCommandClass DoGoTask { get; set; }
-        private ButtonsVm Bvm { get; }
+        private NavigationHelperVm Bvm { get; }
         public DateConverter Dc { get; }
 
         #region Constructor
         public CreateTaskHandler(CreateTaskVm createVm)
         {
             _createVm = createVm;
-            Bvm = new ButtonsVm();
+            Bvm = new NavigationHelperVm();
             DoGoTask = new RelayCommandClass(GoTask);
             Dc = new DateConverter();
         }

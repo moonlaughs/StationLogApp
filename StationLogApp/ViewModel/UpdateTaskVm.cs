@@ -80,7 +80,7 @@ namespace StationLogApp.ViewModel
         //props that can be changed
         public DateTimeOffset DueDate
         {
-            get { return _dueDate; }
+            get => _dueDate;
             set
             {
                 _dueDate = value;
@@ -100,7 +100,7 @@ namespace StationLogApp.ViewModel
         
         public string TaskName
         {
-            get { return _taskName; }
+            get => _taskName;
             set
             {
                 _taskName = value;
@@ -110,7 +110,7 @@ namespace StationLogApp.ViewModel
         
         public string TaskType
         {
-            get { return _taskType; }
+            get => _taskType;
             set
             {
                 _taskType = value;
@@ -120,7 +120,7 @@ namespace StationLogApp.ViewModel
 
         public string TaskSchedule
         {
-            get { return _taskSchedule; }
+            get => _taskSchedule;
             set
             {
                 _taskSchedule = value;
@@ -130,7 +130,7 @@ namespace StationLogApp.ViewModel
 
         public string Registration
         {
-            get { return _registration; }
+            get => _registration;
             set
             {
                 _registration = value;
@@ -140,7 +140,7 @@ namespace StationLogApp.ViewModel
 
         public string DoneVar
         {
-            get { return _doneVar; }
+            get => _doneVar;
             set
             {
                 _doneVar = value;
@@ -150,7 +150,7 @@ namespace StationLogApp.ViewModel
 
         public string Comment
         {
-            get { return _comment; }
+            get => _comment;
             set
             {
                 _comment = value;

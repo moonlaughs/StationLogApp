@@ -34,7 +34,7 @@
                        Grid.ColumnSpan="2">
 
             <RelativePanel.DataContext>
-                <viewModel:ButtonsVm/>
+                <viewModel:NavigationHelperVm/>
             </RelativePanel.DataContext>
 
             <TextBlock Text="Hej, " 

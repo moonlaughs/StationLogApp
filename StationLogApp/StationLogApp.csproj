@@ -104,15 +104,13 @@
     <Compile Include="Handlers\InfoHandler.cs" />
     <Compile Include="Converters\DateConverter.cs" />
     <Compile Include="Handlers\NoteHandler.cs" />
+    <Compile Include="Handlers\SortingHandler.cs" />
     <Compile Include="Handlers\TaskHandler.cs" />
     <Compile Include="Handlers\UpdateTaskHandler.cs" />
-    <Compile Include="Interfaces\ICreateTask.cs" />
-    <Compile Include="Interfaces\IDeleteTask.cs" />
     <Compile Include="Interfaces\ISave.cs" />
     <Compile Include="Interfaces\IDelete.cs" />
     <Compile Include="Interfaces\ILoad.cs" />
     <Compile Include="Interfaces\IUpdate.cs" />
-    <Compile Include="Interfaces\IUpdateTask.cs" />
     <Compile Include="Model\Equipment.cs" />
     <Compile Include="Model\Notes.cs" />
     <Compile Include="Model\TaskEquipmentStation.cs" />
@@ -126,7 +124,7 @@
     <Compile Include="Model\TaskClass.cs" />
     <Compile Include="Singletons\TaskEquipmentStationSingleton.cs" />
     <Compile Include="Singletons\UserSingleton.cs" />
-    <Compile Include="ViewModel\ButtonsVm.cs" />
+    <Compile Include="ViewModel\NavigationHelperVm.cs" />
     <Compile Include="ViewModel\CreateTaskVm.cs" />
     <Compile Include="ViewModel\LoginVm.cs" />
     <Compile Include="ViewModel\NoteVm.cs" />

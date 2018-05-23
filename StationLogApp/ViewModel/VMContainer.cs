@@ -12,6 +12,6 @@ namespace StationLogApp.ViewModel
 
        public NoteVm Nvm { get; set; } = new NoteVm();
 
-       public ButtonsVm Bvm { get; set; } = new ButtonsVm();
+       public NavigationHelperVm Bvm { get; set; } = new NavigationHelperVm();
    }
 }

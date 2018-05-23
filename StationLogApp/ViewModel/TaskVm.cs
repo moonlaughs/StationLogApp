@@ -21,7 +21,6 @@ namespace StationLogApp.ViewModel
         #region instancefields
         private readonly TaskEquipmentStationSingleton _singleton;
         private readonly Collections _col;
-        private TaskEquipmentStation _selectedItem;
         #endregion 
 
         #region properties
@@ -33,7 +32,7 @@ namespace StationLogApp.ViewModel
         public RelayCommandClass DoClear { get; set; }
 
         public TaskHandler TaskHandler { get; set; }
-        public IDeleteTask DeleteTaskHandler { get; set; }
+        public DeleteTaskHandler DeleteTaskHandler { get; set; }
 
         public string[] ScheduleArray { get; set; }
         public ObservableCollection<Station> StationCollection { get; set; }
@@ -47,7 +46,7 @@ namespace StationLogApp.ViewModel
                 OnPropertyChanged(nameof(TaskCatalog));
             }
         }
-        
+
         public ObservableCollection<TaskEquipmentStation> DoneCatalog
         {
             get => _col.LoadDone();
@@ -58,15 +57,7 @@ namespace StationLogApp.ViewModel
             }
         }
 
-        public TaskEquipmentStation SelectedItem
-        {
-            get => _selectedItem;
-            set
-            {
-                _selectedItem = value;
-                OnPropertyChanged(nameof(SelectedItem));
-            }
-        }
+        public TaskEquipmentStation SelectedItem { get; set; }
 
         public Station SelectedItemStation
         {
@@ -85,7 +76,6 @@ namespace StationLogApp.ViewModel
             {
                 TaskHandler.SelectedPeriodicityItem = value;
                 OnPropertyChanged(nameof(SelectedItemPeriodicity));
-
             }
         }
         #endregion
@@ -94,7 +84,6 @@ namespace StationLogApp.ViewModel
         public TaskVm()
         {
             _singleton = TaskEquipmentStationSingleton.GetInstance();
-
             TaskHandler = new TaskHandler(this);
             DeleteTaskHandler = new DeleteTaskHandler(this);
             var infoHandler = new InfoHandler(this);
@@ -111,7 +100,7 @@ namespace StationLogApp.ViewModel
             DoDelete = new RelayCommandClass(Delete);
             DoInfo = new RelayCommandClass(infoHandler.Info);
 
-            _selectedItem = new TaskEquipmentStation();
+            SelectedItem = new TaskEquipmentStation();
         }
         #endregion
 

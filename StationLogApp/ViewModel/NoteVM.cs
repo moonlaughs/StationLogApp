@@ -18,7 +18,7 @@ namespace StationLogApp.ViewModel
         private string _stationName;
         private DateTimeOffset _dueDate;
         private int _userId;
-        private readonly ButtonsVm _currentUser = new ButtonsVm();
+        private readonly NavigationHelperVm _currentUser = new NavigationHelperVm();
         private Station _selectedStationItem;
         private Notes _selectedNote;
 
