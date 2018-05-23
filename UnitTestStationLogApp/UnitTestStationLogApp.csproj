@@ -114,6 +114,23 @@
     <None Include="UnitTestStationLogApp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\1.jpg" />
+    <Content Include="Assets\2.jpg" />
+    <Content Include="Assets\BigLogo.png" />
+    <Content Include="Assets\Done.png" />
+    <Content Include="Assets\forest.jpg" />
+    <Content Include="Assets\fuck.png" />
+    <Content Include="Assets\gr.png" />
+    <Content Include="Assets\Green.png" />
+    <Content Include="Assets\mm.png" />
+    <Content Include="Assets\place.png" />
+    <Content Include="Assets\profile.png" />
+    <Content Include="Assets\s.png" />
+    <Content Include="Assets\sign.png" />
+    <Content Include="Assets\smokeGreen.png" />
+    <Content Include="Assets\SplashScreenLogo.png" />
+    <Content Include="Assets\StationLogLogo.png" />
+    <Content Include="Assets\yas.jpg" />
     <Content Include="Properties\UnitTestApp.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
