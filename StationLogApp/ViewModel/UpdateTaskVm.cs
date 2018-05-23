@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StationLogApp.Common;
+using StationLogApp.Converters;
 using StationLogApp.Handlers;
 using StationLogApp.Model;
 using StationLogApp.Singletons;
@@ -23,6 +24,7 @@ namespace StationLogApp.ViewModel
         private string _doneVar;
 
         public UpdateTaskHandler Uph { get; set; }
+        private DateConverter DC { get; set; }
 
         public RelayCommandClass DoUpdate { get; set; }
 
@@ -53,13 +55,14 @@ namespace StationLogApp.ViewModel
             TaskSchedules = Col.ScheduleArray;
             EquipmentStations = Col.EquipmentStationsCollection();
             var singleton = TaskEquipmentStationSingleton.GetInstance();
+            DC = new DateConverter();
 
             TaskId = singleton.GetTaskId();
             TaskName = singleton.GetTaskName();
             TaskSchedule = singleton.GetTaskSchedule();
             TaskType = singleton.GetTaskType();
             EquipmentId = singleton.GetEquipmentId();
-            DueDate = singleton.GetDueDate();
+            DueDate = DateTimeOffset.Now;
             //DoneDate = _singleton.GetDoneDate();
             EquipmentName = singleton.GetEquipmentName();
             StationName = singleton.GetStationName();

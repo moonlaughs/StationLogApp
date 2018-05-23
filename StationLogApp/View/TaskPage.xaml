@@ -33,10 +33,6 @@
                        Grid.Column="1"
                        Grid.ColumnSpan="2">
 
-            <RelativePanel.DataContext>
-                <viewModel:NavigationHelperVm/>
-            </RelativePanel.DataContext>
-
             <TextBlock Text="Hej, " 
                        FontSize="30" 
                        Name="TextBlock1"
@@ -45,7 +41,7 @@
 
             <TextBlock FontSize="30" 
                        RelativePanel.RightOf="TextBlock1"
-                       Text="{Binding UserName}"
+                       Text="{Binding Bvm.UserName}"
                        Margin="32,0,0,0"
                        Foreground="White"/>
 
@@ -59,12 +55,12 @@
                     RelativePanel.LeftOf="ProfileButton"
                     Content="DONE" 
                     Background="Transparent" FontSize="30" Foreground="White"
-                    BorderThickness="2" BorderBrush="White" VerticalAlignment="Bottom" Command="{Binding GoDone}"/>
+                    BorderThickness="2" BorderBrush="White" VerticalAlignment="Bottom" Command="{Binding Bvm.GoDone}"/>
             <Button Name="ProfileButton" Background="Transparent" Foreground="White" RelativePanel.AlignRightWithPanel="True">
                 <Image Source="../Assets/profile.png"/>
                 <Button.Flyout>
                     <MenuFlyout>
-                        <MenuFlyoutItem Text="Log out" Click="MenuFlyoutItem_OnClick" Foreground="White"/>
+                        <MenuFlyoutItem Text="Log out" Click="MenuFlyoutItem_OnClick" Foreground="Black"/>
                     </MenuFlyout>
                 </Button.Flyout>
             </Button>

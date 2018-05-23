@@ -69,14 +69,17 @@ namespace StationLogApp.Handlers
 
             _loadedCollection = newLoadedCollection;
 
-            if (_loadedCollection.Count == 0)
+            if (_taskHandler.SelectedStation != null || _taskHandler.SelectedPeriodicityItem != null)
             {
-                var msg = new MessageDialog("No task found.");
-                await msg.ShowAsync();
-            }
-            else
-            {
-                _taskHandler.TaskVm.TaskCatalog = _loadedCollection;
+                if (_loadedCollection.Count == 0)
+                {
+                    var msg = new MessageDialog("No task found.");
+                    await msg.ShowAsync();
+                }
+                else
+                {
+                    _taskHandler.TaskVm.TaskCatalog = _loadedCollection;
+                }
             }
         }
     }

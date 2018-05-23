@@ -61,24 +61,24 @@ namespace StationLogApp.ViewModel
                     LoginStatus = true;
                     if (user.UserType == "admin" || user.UserType == "manager")
                     {
-                        _frame.ActivateFrameNavigation(typeof(MenuTreePage), user);
+                        _frame.ActivateFrameNavigation(typeof(TaskPage), user);
                         CurrentUser = user;
                         break;
                     }
                     else
                     {
-                        _frame.ActivateFrameNavigation(typeof(MenuTreePage), user);
+                        _frame.ActivateFrameNavigation(typeof(TaskPage), user);
                         CurrentUser = user;
                         break;
                     }
                 }
                 if (LoginStatus != false) return;
-                var msg = new MessageDialog("No user found with that username and password!");
+                var msg = new MessageDialog("Incorrect username or password.");
                 await msg.ShowAsync();
             }
             else
             {
-                var msg = new MessageDialog("No user found with that username and password!");
+                var msg = new MessageDialog("Incorrect username or password.");
                 await msg.ShowAsync();
             }
         }

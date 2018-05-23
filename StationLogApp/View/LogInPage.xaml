@@ -13,10 +13,6 @@
             <ImageBrush ImageSource="ms-appx:///Assets/yas.jpg"/>
         </Grid.Background>
         
-        <Grid.DataContext>
-            <viewModel:LoginVm/>
-        </Grid.DataContext>
-        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
@@ -27,16 +23,16 @@
             </StackPanel.Background>
             <TextBlock Text="USERNAME" FontSize="15"  Margin="100,300,43,0" Foreground="#407c3a" />
             <Border CornerRadius="13" BorderBrush="White" BorderThickness="2" Height="50" Width="200">
-            <TextBox FontSize="23" Height="40" Width="200" Background="Transparent" Text="{Binding CurrentUser.Username, Mode=TwoWay}"/>
+            <TextBox FontSize="23" Height="40" Width="200" Background="Transparent" Text="{Binding Lvm.CurrentUser.Username, Mode=TwoWay}"/>
             </Border>
             <TextBlock Text="PASSWORD" FontSize="15" Margin="100,20,43,0" Foreground="#407c3a"/>
             <Border CornerRadius="13" BorderBrush="White" BorderThickness="2" Height="50" Width="200">
-            <PasswordBox FontSize="23" Height="40" Width="200" Background="Transparent" Password="{Binding CurrentUser.UserPassword, Mode=TwoWay}"/>
+            <PasswordBox FontSize="23" Height="40" Width="200" Background="Transparent" Password="{Binding Lvm.CurrentUser.UserPassword, Mode=TwoWay}"/>
             </Border>
             <Border CornerRadius="13" BorderBrush="White" BorderThickness="2" Height="50" Width="200" Margin="0,50,0,40">
                 <Button Content="LOG IN" FontSize="20" HorizontalAlignment="Center"
                     Height="50" Width="100" 
-                    Foreground="#407c3a" Command="{Binding CheckCommand}"/>
+                    Foreground="#407c3a" Command="{Binding Lvm.CheckCommand}"/>
             </Border>
         </StackPanel>
     </Grid>

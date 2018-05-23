@@ -26,7 +26,7 @@ namespace StationLogApp.View
         public AddNotesPage()
         {
             this.InitializeComponent();
-            this.DataContext = new NoteVm();
+            this.DataContext = new VmContainer();
         }
     }
 }

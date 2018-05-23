@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using StationLogApp.ViewModel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -25,6 +26,7 @@ namespace StationLogApp.View
         public TaskHistoryTechnicianPage()
         {
             this.InitializeComponent();
+            this.DataContext = new VmContainer();
         }
 
         private void MenuFlyoutItem_OnClick(object sender, RoutedEventArgs e)
