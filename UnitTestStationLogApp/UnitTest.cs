@@ -12,4 +12,13 @@ namespace UnitTestStationLogApp
         {
         }
     }
+
+    [TestClass]
+    public class CollectionsTest
+    {
+        [TestMethod]
+        public void TestMethod1()
+        {
+        }
+    }
 }
