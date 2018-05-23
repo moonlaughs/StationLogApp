@@ -12,4 +12,13 @@ namespace UnitTestStationLogApp
         {
         }
     }
+
+    [TestClass]
+    public class UnitTestDeleteTaskHandler
+    {
+        [TestMethod]
+        public void TestDeleteTask()
+        {
+        }
+    }
 }
