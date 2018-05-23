@@ -15,8 +15,6 @@ namespace StationLogApp.ViewModel
 {
     public class ButtonsVm
     {
-        private UserSingleton _currentUser;
-        private TaskEquipmentStationSingleton _taskSingleton;
         private readonly FrameNavigateClass _frameNavigation;
 
         public RelayCommandClass GoTask { get; set; }
@@ -24,47 +22,39 @@ namespace StationLogApp.ViewModel
         public RelayCommandClass DoGoCreate { get; set; }
 
         public string UserName { get; set; }
-        public int UserID { get; set; }
+        public int UserId { get; set; }
 
         public string TaskName { get; set; }
 
-        public UserSingleton CurrentUser
-        {
-            get => _currentUser;
-            set => _currentUser = value;
-        }
+        public UserSingleton CurrentUser { get; set; }
 
-        public TaskEquipmentStationSingleton TaskSingleton
-        {
-            get{ return _taskSingleton; }
-            set { _taskSingleton = value; }
-        }
+        public TaskEquipmentStationSingleton TaskSingleton { get; set; }
 
         public ButtonsVm()
         {
-            _currentUser = UserSingleton.GetInstance();
-            _taskSingleton = TaskEquipmentStationSingleton.GetInstance();
+            CurrentUser = UserSingleton.GetInstance();
+            TaskSingleton = TaskEquipmentStationSingleton.GetInstance();
             _frameNavigation = new FrameNavigateClass();
             GoTask = new RelayCommandClass(DoTask);
             GoDone = new RelayCommandClass(DoDone);
             DoGoCreate = new RelayCommandClass(GoCreate);
-            UserName = _currentUser.GetUsername();
-            UserID = _currentUser.GetUserID();
+            UserName = CurrentUser.GetUsername();
+            UserId = CurrentUser.GetUserID();
         }
 
         public void DoTask()
         {
-            _frameNavigation.ActivateFrameNavigation(typeof(TaskPage), _currentUser);
+            _frameNavigation.ActivateFrameNavigation(typeof(TaskPage), CurrentUser);
         }
 
         public void DoDone()
         {
-            _frameNavigation.ActivateFrameNavigation(typeof(TaskHistoryTechnicianPage), _currentUser);
+            _frameNavigation.ActivateFrameNavigation(typeof(TaskHistoryTechnicianPage), CurrentUser);
         }
 
         public void GoCreate()
         {
-            _frameNavigation.ActivateFrameNavigation(typeof(CreateTaskPage), _currentUser);
+            _frameNavigation.ActivateFrameNavigation(typeof(CreateTaskPage), CurrentUser);
         }
     }
 }

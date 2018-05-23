@@ -16,18 +16,14 @@ namespace StationLogApp.Persistancy
 {
     public class LoadM<T> : ILoad<T> where T : class
     {
-        
         #region instance fields
         private const string ServerUrl = "http://stationlogdbwebservice20180514015122.azurewebsites.net/";
-        private string _serverURL;
-        private string _apiPrefix = "api";
-        //private string _apiID;
+        public readonly string ApiPrefix = "api";
         private HttpClientHandler _httpClientHandler;
         private HttpClient _httpClient;
         #endregion
-
-
-        public async Task<ObservableCollection<T>> Load(string _apiID)
+        
+        public async Task<ObservableCollection<T>> Load(string apiId)
         {
             _httpClientHandler = new HttpClientHandler() { UseDefaultCredentials = true };
 
@@ -38,7 +34,7 @@ namespace StationLogApp.Persistancy
                 _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 try
                 {
-                    Task<HttpResponseMessage> task5 = _httpClient.GetAsync($"{ServerUrl}/{_apiPrefix}/{_apiID}");
+                    Task<HttpResponseMessage> task5 = _httpClient.GetAsync($"{ServerUrl}/{ApiPrefix}/{apiId}");
                     if (task5 != null)
                     {
                         if (task5.Result.IsSuccessStatusCode)

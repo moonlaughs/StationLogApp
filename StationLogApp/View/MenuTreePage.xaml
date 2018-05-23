@@ -9,17 +9,11 @@
     mc:Ignorable="d">
 
     <Grid>
-        <!--<Grid.DataContext>
-            <viewModel:LoginVM/>
-        </Grid.DataContext>-->
+        
         <Grid.Background>
             <ImageBrush ImageSource="../Assets/2.jpg" Stretch="Fill"/>
         </Grid.Background>
-
-        <!--<Grid.DataContext>
-            <viewModel:ButtonsVm/>
-        </Grid.DataContext>-->
-
+        
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Height="798" Margin="0,154,-1,48">
             <StackPanel.Background>
                 <ImageBrush ImageSource="ms-appx:///Assets/sign.png" Stretch="Uniform"/>

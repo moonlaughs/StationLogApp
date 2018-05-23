@@ -10,12 +10,8 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="ms-appx:///Assets/2.jpg"/>
+            <ImageBrush ImageSource="ms-appx:///Assets/smokeGreen.png"/>
         </Grid.Background>
-
-        <Grid.DataContext>
-            <viewModel:VMContainer/>
-        </Grid.DataContext>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -83,26 +79,26 @@
                        FontSize="20"
                        Margin="15,0,10,0"/>
             <ComboBox Name="Stations" Foreground="Black" Margin="20,0,0,0" Width="200"
-                      ItemsSource="{Binding TVm.StationCollection, Mode=TwoWay}"  
-                      SelectedItem="{Binding TVm.SelectedItemStation, Mode=TwoWay}">
+                      ItemsSource="{Binding Tvm.StationCollection, Mode=TwoWay}"  
+                      SelectedItem="{Binding Tvm.SelectedItemStation, Mode=TwoWay}">
             </ComboBox>
             <ComboBox Name="TaskPeriodicityPicker" Margin="20,0,0,0" Width="200" 
-                      ItemsSource="{Binding TVm.ScheduleArray}" SelectedItem="{Binding TVm.SelectedItemPeriodicity, Mode=TwoWay}">
+                      ItemsSource="{Binding Tvm.ScheduleArray}" SelectedItem="{Binding Tvm.SelectedItemPeriodicity, Mode=TwoWay}">
             </ComboBox>
             <Button Name = "Sort" Content="Sort" Foreground="White" 
                     Background="black" 
-                    Command="{Binding TVm.SortCommand, Mode=TwoWay}"
+                    Command="{Binding Tvm.SortCommand, Mode=TwoWay}"
             ></Button>
             <Button Name = "Clear" Content="Clear" Foreground="White" 
                     Background="black" 
-                    Command="{Binding TVm.DoClear, Mode=TwoWay}"
+                    Command="{Binding Tvm.DoClear, Mode=TwoWay}"
             ></Button>
         </StackPanel>
 
 
         <ListView Name="Tasks"
-                  ItemsSource="{Binding TVm.TaskCatalog, Mode=TwoWay}"
-                  SelectedItem="{Binding TVm.SelectedItem, Mode= TwoWay}"
+                  ItemsSource="{Binding Tvm.TaskCatalog, Mode=TwoWay}"
+                  SelectedItem="{Binding Tvm.SelectedItem, Mode= TwoWay}"
                   Grid.Row="3"
                   Grid.Column="1" 
                   Width="1100"
@@ -135,7 +131,7 @@
                                     </StackPanel>
                                     <StackPanel Margin="10">
                                         <TextBlock Text="{Binding DueDate, Mode=TwoWay}" Foreground="White" FontSize="20"/>
-                                        <TextBlock Text="{Binding TaskType}" Foreground="White" FontSize="20"/>
+                                        <TextBlock Name="TypeBlock" Text="{Binding TaskType}" Foreground="White" FontSize="20"/>
                                     </StackPanel>
                                 </StackPanel>
                             </StackPanel >
@@ -155,7 +151,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <ListView ItemsSource="{Binding NVm.NotesCatalog, Mode=TwoWay}" SelectedItem="{Binding NVm.SelectedNote, Mode=TwoWay}" Grid.Row="3" Grid.Column="2" Name="Notes" HorizontalAlignment="Left">
+        <ListView ItemsSource="{Binding Nvm.NotesCatalog, Mode=TwoWay}" SelectedItem="{Binding Nvm.SelectedNote, Mode=TwoWay}" Grid.Row="3" Grid.Column="2" Name="Notes" HorizontalAlignment="Left">
             <ListView.Background>Transparent</ListView.Background>
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -173,27 +169,26 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <TextBlock Text="Station:" Foreground="White" FontSize="18"/>
-                            <TextBlock Text="{Binding StationID, Mode=TwoWay}" Margin="10,0,0,0"/>
+                            <TextBlock Text="{Binding StationName, Mode=TwoWay}" Margin="10,0,0,0"/>
                         </StackPanel>
-
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <TextBlock Text="Technician/Station:" Foreground="White" FontSize="18"/>
-                            <TextBlock Text="{Binding UserID, Mode=TwoWay}" Foreground="White" Margin="10,0,0,0" FontSize="18"/>
-                        </StackPanel>
+                            <TextBlock Text="{Binding UserId, Mode=TwoWay}" Foreground="White" Margin="10,0,0,0" FontSize="18"/>
+                    </StackPanel>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
         <Button Name="CreateButonM" Grid.Column="1"
-                Grid.Row="4" HorizontalAlignment="Left" Margin="0,0,0,0" Content="Create" Command="{Binding BVm.DoGoCreate}" FontSize="18" Foreground="White" BorderBrush="White" BorderThickness="1"/>
+                Grid.Row="4" HorizontalAlignment="Left" Margin="0,0,0,0" Content="Create" Command="{Binding Bvm.DoGoCreate}" FontSize="18" Foreground="White" BorderBrush="White" BorderThickness="1"/>
             <Button Name="UpdateButtonM" Grid.Column="1"
-                Grid.Row="4" HorizontalAlignment="Left" Margin="100,0,0,0" Content="Update" Command="{Binding TVm.DoGoUpdate}" FontSize="18" Foreground="White" BorderBrush="White" BorderThickness="1" />
-        <Button Name="DeleteButtonM" Grid.Column="1"
+                Grid.Row="4" HorizontalAlignment="Left" Margin="100,0,0,0" Content="Update" Command="{Binding Tvm.DoGoUpdate}" FontSize="18" Foreground="White" BorderBrush="White" BorderThickness="1" />
+        <Button Name="DeleteButtonM" Grid.Column="1" Command="{Binding Tvm.DoDelete}"
                 Grid.Row="4" HorizontalAlignment="Left" Margin="200,0,0,0" Content="Delete" FontSize="18" Foreground="White" BorderBrush="White" BorderThickness="1" />
 
-        <Button Name="DoneCommandButton"
-                Command="{Binding TVm.SaveTaskClass}"
+            <Button Name="DoneCommandButton"
+                Command="{Binding Tvm.SaveTaskClass}"
                 Grid.Column="1"
                 Grid.Row="4"
                 Width="200"
@@ -208,7 +203,7 @@
         </Button>
         
         <Button Name="InfoButton"
-                Command="{Binding TVm.DoInfo}"
+                Command="{Binding Tvm.DoInfo}"
                 Grid.Column="1"
                 Grid.Row="4"
                 Width="200"
@@ -240,7 +235,7 @@
                     BorderBrush="White" 
                     BorderThickness="2" 
                     Margin="0,30,0,10"
-                    Command="{Binding NVm.RemoveNote}"/>
+                    Command="{Binding Nvm.RemoveNote}"/>
         </StackPanel>
     </Grid>
 </Page>

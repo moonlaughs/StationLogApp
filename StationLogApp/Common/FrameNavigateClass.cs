@@ -18,10 +18,10 @@ namespace StationLogApp.Common
             Window.Current.Activate();
         }
 
-        public void ActivateFrameNavigation(Type type, Object currentUser)
+        public void ActivateFrameNavigation(Type type, Object obj)
         {
             var frame = (Frame)Window.Current.Content;
-            frame.Navigate(type, currentUser);
+            frame.Navigate(type, obj);
             Window.Current.Content = frame;
             Window.Current.Activate();
         }

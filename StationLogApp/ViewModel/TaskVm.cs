@@ -21,7 +21,6 @@ namespace StationLogApp.ViewModel
         #region instancefields
         private readonly TaskEquipmentStationSingleton _singleton;
         private readonly Collections _col;
-        
         private TaskEquipmentStation _selectedItem;
         #endregion 
 
@@ -29,21 +28,19 @@ namespace StationLogApp.ViewModel
         public RelayCommandClass SaveTaskClass { get; set; }
         public RelayCommandClass DoInfo { get; set; }
         public RelayCommandClass SortCommand { get; set; }
-
         public RelayCommandClass DoGoUpdate { get; set; }
-
+        public RelayCommandClass DoDelete { get; set; }
         public RelayCommandClass DoClear { get; set; }
 
         public TaskHandler TaskHandler { get; set; }
+        public IDeleteTask DeleteTaskHandler { get; set; }
 
         public string[] ScheduleArray { get; set; }
         public ObservableCollection<Station> StationCollection { get; set; }
 
-        private ObservableCollection<TaskEquipmentStation> _catalog;
-
         public ObservableCollection<TaskEquipmentStation> TaskCatalog
         {
-            get { return TaskHandler.LoadedCollection; }
+            get => TaskHandler.LoadedCollection;
             set
             {
                 TaskHandler.LoadedCollection = value;
@@ -53,24 +50,17 @@ namespace StationLogApp.ViewModel
         
         public ObservableCollection<TaskEquipmentStation> DoneCatalog
         {
-            get
-            {
-                return _col.LoadDone();
-            }
+            get => _col.LoadDone();
             set
             {
-                var loadDone = _col.LoadDone();
-                loadDone = value;
+                _col.LoadDone();
                 OnPropertyChanged(nameof(DoneCatalog));
             }
         }
 
         public TaskEquipmentStation SelectedItem
         {
-            get
-            {
-                return _selectedItem;
-            }
+            get => _selectedItem;
             set
             {
                 _selectedItem = value;
@@ -80,7 +70,7 @@ namespace StationLogApp.ViewModel
 
         public Station SelectedItemStation
         {
-            get { return TaskHandler.SelectedStation; }
+            get => TaskHandler.SelectedStation;
             set
             {
                 TaskHandler.SelectedStation = value;
@@ -104,42 +94,61 @@ namespace StationLogApp.ViewModel
         public TaskVm()
         {
             _singleton = TaskEquipmentStationSingleton.GetInstance();
+
             TaskHandler = new TaskHandler(this);
-            TaskHandler.LoadCollection();
-            SaveTaskClass = new RelayCommandClass(TaskHandler.OperateTask);
-            
-            _selectedItem = new TaskEquipmentStation();
-
+            DeleteTaskHandler = new DeleteTaskHandler(this);
             var infoHandler = new InfoHandler(this);
-            DoInfo = new RelayCommandClass(infoHandler.Info);
 
+            TaskHandler.LoadCollection();
             _col = new Collections();
             StationCollection = _col.LoadStation();
             ScheduleArray = _col.ScheduleArray;
 
-            _singleton.SetTaskEquipmentStation(SelectedItem);
-            //SortCommand = new RelayCommandClass(TaskHandler.SortCollection());
-
-            SortCommand = new RelayCommandClass(TaskHandler.SortCollection);
-
-            TaskCatalog = _col.LoadToDo();
-            //PeriodicityItems = _col.ScheduleArray;
+            SaveTaskClass = new RelayCommandClass(TaskHandler.OperateTask);
             SortCommand = new RelayCommandClass(TaskHandler.SortCollection);
             DoGoUpdate = new RelayCommandClass(GoUpdate);
             DoClear = new RelayCommandClass(Clear);
+            DoDelete = new RelayCommandClass(Delete);
+            DoInfo = new RelayCommandClass(infoHandler.Info);
+
+            _selectedItem = new TaskEquipmentStation();
         }
         #endregion
 
-        public void GoUpdate()
+        public async void GoUpdate()
         {
-            _singleton.SetTaskEquipmentStation(SelectedItem);
-            FrameNavigateClass frame = new FrameNavigateClass();
-            frame.ActivateFrameNavigation(typeof(UpdatePage), SelectedItem);
+            if (SelectedItem.TaskId != 0)
+            {
+                _singleton.SetTaskEquipmentStation(SelectedItem);
+                var frame = new FrameNavigateClass();
+                frame.ActivateFrameNavigation(typeof(UpdatePage), SelectedItem);
+            }
+            else
+            {
+                var msg = new MessageDialog("Please select the task.");
+                await msg.ShowAsync();
+            }
         }
 
         public void Clear()
         {
             TaskCatalog = TaskHandler.LoadCollection();
+            SelectedItemPeriodicity = null;
+            SelectedItemStation = null;
+        }
+
+        public async void Delete()
+        {
+            if (SelectedItem.TaskId != 0)
+            {
+                _singleton.SetTaskEquipmentStation(SelectedItem);
+                DeleteTaskHandler.DeleteTask(SelectedItem.TaskId);
+            }
+            else
+            {
+                var msg = new MessageDialog("Please select the task.");
+                await msg.ShowAsync();
+            }
         }
     }
 }

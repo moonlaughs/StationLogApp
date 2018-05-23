@@ -9,19 +9,19 @@ namespace StationLogApp.Model
     public class Equipment
     {
         #region // properties
-        public int EquipmentID { get; set; }
+        public int EquipmentId { get; set; }
         public string EquipmentName { get; set; }
         public string EquipmentType { get; set; }
-        public int StationID { get; set; }
+        public int StationId { get; set; }
         #endregion
 
         #region // constructors
-        public Equipment(int equipmentID, string equipmentName, string equipmentType, int stationID)
+        public Equipment(int equipmentId, string equipmentName, string equipmentType, int stationId)
         {
-            EquipmentID = equipmentID;
+            EquipmentId = equipmentId;
             EquipmentName = equipmentName;
             EquipmentType = equipmentType;
-            StationID = stationID;
+            StationId = stationId;
         }
 
         public Equipment()
@@ -34,9 +34,8 @@ namespace StationLogApp.Model
 
         public override string ToString()
         {
-            return $"{EquipmentID}, {EquipmentName}, {EquipmentType}, {StationID}";
+            return $"{EquipmentId}, {EquipmentName}, {EquipmentType}, {StationId}";
         }
-
         #endregion
     }
 }

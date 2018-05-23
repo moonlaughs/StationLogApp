@@ -9,9 +9,7 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.DataContext>
-            <viewModel:NoteVM/>
-        </Grid.DataContext>
+        
         <StackPanel Background="DarkGreen" Opacity="0.7" Width="450" 
                     BorderThickness="3" BorderBrush="Black"
                     HorizontalAlignment="Center">
@@ -41,8 +39,7 @@
                     Background="Transparent" 
                     BorderBrush="Black" 
                     BorderThickness="2" 
-                    Margin="122,30,122,10"
-                    Command="{Binding SaveNote}">
+                    Margin="122,30,122,10" Command="{Binding Path=SaveNote}">
             </Button>
         </StackPanel>
 

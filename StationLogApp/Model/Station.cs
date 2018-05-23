@@ -9,14 +9,15 @@ namespace StationLogApp.Model
     public class Station
     {
         #region // Properties
-        public int StationID { get; set; }
+        public int StationId { get; set; }
         public string StationName { get; set; }
         public string StationAddress { get; set; }
         #endregion
+
         #region // Constructors 
-        public Station(int stationID, string stationName, string stationAddress)
+        public Station(int stationId, string stationName, string stationAddress)
         {
-            StationID = stationID;
+            StationId = stationId;
             StationName = stationName;
             StationAddress = stationAddress;
         }
@@ -26,11 +27,11 @@ namespace StationLogApp.Model
             
         }
         #endregion
-        #region // ToString() method
 
+        #region // ToString() method
         public override string ToString()
         {
-            return $"{StationID}, {StationName}, {StationAddress}";
+            return $"{StationId}, {StationName}, {StationAddress}";
         }
         #endregion
     }

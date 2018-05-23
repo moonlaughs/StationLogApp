@@ -13,7 +13,6 @@ namespace StationLogApp.Singletons
 {
     public class TaskEquipmentStationSingleton
     {
-        
         private static TaskEquipmentStation _taskEquipmentStation;
 
         private static TaskEquipmentStationSingleton Instance { get; set; }
@@ -25,11 +24,7 @@ namespace StationLogApp.Singletons
 
         public static TaskEquipmentStationSingleton GetInstance()
         {
-            if (Instance == null)
-            {
-                Instance = new TaskEquipmentStationSingleton();
-            }
-            return Instance;
+            return Instance ?? (Instance = new TaskEquipmentStationSingleton());
         }
 
         public void SetTaskEquipmentStation(TaskEquipmentStation tes)
@@ -84,7 +79,7 @@ namespace StationLogApp.Singletons
 
         public int GetEquipmentId()
         {
-            return _taskEquipmentStation.EquipmentID;
+            return _taskEquipmentStation.EquipmentId;
         }
 
         public string GetEquipmentName()

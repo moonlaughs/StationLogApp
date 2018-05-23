@@ -99,7 +99,6 @@
     <Compile Include="Common\FrameNavigateClass.cs" />
     <Compile Include="Common\NotifyPropertyChangedClass.cs" />
     <Compile Include="Common\RelayCommandClass.cs" />
-    <Compile Include="Convertor\DateTimeConvertor.cs" />
     <Compile Include="Handlers\CreateTaskHandler.cs" />
     <Compile Include="Handlers\DeleteTaskHandler.cs" />
     <Compile Include="Handlers\InfoHandler.cs" />
@@ -129,9 +128,8 @@
     <Compile Include="Singletons\UserSingleton.cs" />
     <Compile Include="ViewModel\ButtonsVm.cs" />
     <Compile Include="ViewModel\CreateTaskVm.cs" />
-    <Compile Include="ViewModel\DeleteTaskVm%3b.cs" />
-    <Compile Include="ViewModel\LoginVM.cs" />
-    <Compile Include="ViewModel\NoteVM.cs" />
+    <Compile Include="ViewModel\LoginVm.cs" />
+    <Compile Include="ViewModel\NoteVm.cs" />
     <Compile Include="ViewModel\TaskVm.cs" />
     <Compile Include="ViewModel\UpdateTaskVm.cs" />
     <Compile Include="ViewModel\VMContainer.cs" />
@@ -162,6 +160,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="Assets\smokeGreen2" />
     <None Include="StationLogApp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +176,7 @@
     <Content Include="Assets\profile.png" />
     <Content Include="Assets\s.png" />
     <Content Include="Assets\sign.png" />
+    <Content Include="Assets\smokeGreen.png" />
     <Content Include="Assets\yas.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

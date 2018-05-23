@@ -22,23 +22,20 @@ namespace StationLogApp.Handlers
 
         private readonly TaskVm _taskVm;
         private readonly FrameNavigateClass _frameNavigation;
-        private Collections _collectionsClass = new Collections();
+        private readonly Collections _collectionsClass;
 
         private ObservableCollection<TaskEquipmentStation> _loadedCollection;
         #endregion
 
         #region properties
-        public TaskClass SelectedTask
-        {
-            get { return _taskVm.SelectedItem; }
-        }
-        
+        public TaskClass SelectedTask => _taskVm.SelectedItem;
+
         public string SelectedPeriodicityItem { get; set; }
         public Station SelectedStation { get; set; }
 
         public ObservableCollection<TaskEquipmentStation> LoadedCollection
         {
-            get { return _loadedCollection; }
+            get => _loadedCollection;
             set
             {
                 _loadedCollection = value;
@@ -52,25 +49,9 @@ namespace StationLogApp.Handlers
         {
             _taskVm = taskVm;
             _frameNavigation = new FrameNavigateClass();
-        }
-
-        public ObservableCollection<Station> LoadStation()
-        {
-            ILoad<Station> loadedStationClass = new LoadM<Station>();
-            ObservableCollection<Station> stationCollection = loadedStationClass.RetriveCollection("Stations");
-
-            var query = (from s in stationCollection
-                select new Station() {StationName = s.StationName, StationID = s.StationID}).ToList();
-            foreach (var item in query)
-            {
-                stationCollection.Add(item);
-            }
-
-            return stationCollection;
+            _collectionsClass = new Collections();
         }
         #endregion
-
-        
         
         #region SaveAsDoneTask
         // This method is activated by the button of the relayCommand  
@@ -78,7 +59,6 @@ namespace StationLogApp.Handlers
         public void OperateTask()
         {
             SaveTaskClass();
-            _frameNavigation.ActivateFrameNavigation(typeof(TaskPage));
         }
         
         public void SaveTaskClass()
@@ -101,21 +81,23 @@ namespace StationLogApp.Handlers
                     newDate,
                     _taskVm.SelectedItem.Comment,
                     doneVariable,
-                    _taskVm.SelectedItem.EquipmentID
+                    _taskVm.SelectedItem.EquipmentId
                 );
 
                 _savedTaskClass.Save(newReSchedule, "Tasks");
 
                 ReScheduleTask();
 
-                MessageDialog msg = new MessageDialog("Task saved");
-                msg.ShowAsync();
+                _frameNavigation.ActivateFrameNavigation(typeof(TaskPage));
 
+                var msg = new MessageDialog("Task saved");
+                msg.ShowAsync();
+                
                 return newReSchedule;
             }
             else
             {
-                MessageDialog msg = new MessageDialog("Please select the task!");
+                var msg = new MessageDialog("Please select the task!");
                 msg.ShowAsync();
             }
             return null;
@@ -169,21 +151,21 @@ namespace StationLogApp.Handlers
 
         private void DoRescheduleTask(int periodicity)
         {
-            DateTime nextTuesdayDate = GetNextDate(periodicity);
-            TaskClass newReSchedule = CreateReScheduledTask(nextTuesdayDate, "N");
+            var nextTuesdayDate = GetNextDate(periodicity);
+            var newReSchedule = CreateReScheduledTask(nextTuesdayDate, "N");
             _updateTaskClass.Update(newReSchedule, "Tasks", _taskVm.SelectedItem.TaskId);
         }
         
         private DateTime GetNextDate(int periodicity)
         {
-            DateTime today = DateTime.Today;
-            DateTime nextTuesdayDate = today.AddDays(periodicity + 1);
+            var today = DateTime.Today;
+            var nextTuesdayDate = today.AddDays(periodicity + 1);
             return nextTuesdayDate;
         }
 
         private TaskClass CreateReScheduledTask(DateTime newDate, string doneVariable)
         {
-            TaskClass newReSchedule = new TaskClass(
+            var newReSchedule = new TaskClass(
                 _taskVm.SelectedItem.TaskId,
                 _taskVm.SelectedItem.TaskName,
                 _taskVm.SelectedItem.TaskSchedule,
@@ -193,64 +175,74 @@ namespace StationLogApp.Handlers
                 null,
                 _taskVm.SelectedItem.Comment = null,
                 doneVariable,
-                _taskVm.SelectedItem.EquipmentID
+                _taskVm.SelectedItem.EquipmentId
             );
             return newReSchedule;
         }
         #endregion
 
         #region SortingMethods
-        public void SortCollection()
+        public async void SortCollection()
         {
-
-            ObservableCollection<TaskEquipmentStation> newLoadedCollection = new ObservableCollection<TaskEquipmentStation>();
-            newLoadedCollection.Clear();
-
-            if (_taskVm.SelectedItemStation != null)
+            if (_taskVm.SelectedItemStation != null || _taskVm.SelectedItemPeriodicity != null)
             {
+                var newLoadedCollection = new ObservableCollection<TaskEquipmentStation>();
+                newLoadedCollection.Clear();
 
-                foreach (var item in _collectionsClass.LoadToDo())
-                {
-                    if (item.StationName == _taskVm.SelectedItemStation.StationName)
-                    {
-                        newLoadedCollection.Add(item);
-                    }
-                }
-            }
-            if (_taskVm.SelectedItemPeriodicity == null)
-            {
-                _loadedCollection = newLoadedCollection;
-                _taskVm.TaskCatalog = _loadedCollection;
-            }
-            if (_taskVm.SelectedItemPeriodicity != null)
-            {
-                ObservableCollection<TaskEquipmentStation> newList = new ObservableCollection<TaskEquipmentStation>();
-                
-
-                if (newLoadedCollection.Count == 0)
+                if (_taskVm.SelectedItemStation != null)
                 {
                     foreach (var item in _collectionsClass.LoadToDo())
                     {
-                        if (item.TaskSchedule == _taskVm.SelectedItemPeriodicity)
+                        if (item.StationName == _taskVm.SelectedItemStation.StationName)
                         {
                             newLoadedCollection.Add(item);
                         }
                     }
+                }
+                if (_taskVm.SelectedItemPeriodicity == null)
+                {
                     _loadedCollection = newLoadedCollection;
                     _taskVm.TaskCatalog = _loadedCollection;
                 }
-                else
+                if (_taskVm.SelectedItemPeriodicity == null) return;
                 {
-                    foreach (var item in newLoadedCollection)
+                    var newList = new ObservableCollection<TaskEquipmentStation>();
+
+                    if (newLoadedCollection.Count == 0)
                     {
-                        if (item.TaskSchedule == _taskVm.SelectedItemPeriodicity)
+                        foreach (var item in _collectionsClass.LoadToDo())
                         {
-                            newList.Add(item);
+                            if (item.TaskSchedule == _taskVm.SelectedItemPeriodicity)
+                            {
+                                newLoadedCollection.Add(item);
+                            }
                         }
+                        _loadedCollection = newLoadedCollection;
+                        _taskVm.TaskCatalog = _loadedCollection;
                     }
-                    _loadedCollection = newList;
-                    _taskVm.TaskCatalog = _loadedCollection;
+                    else
+                    {
+                        foreach (var item in newLoadedCollection)
+                        {
+                            if (item.TaskSchedule == _taskVm.SelectedItemPeriodicity)
+                            {
+                                newList.Add(item);
+                            }
+                        }
+                        _loadedCollection = newList;
+                        _taskVm.TaskCatalog = _loadedCollection;
+                    }
                 }
+                if (_taskVm.TaskCatalog.Count == 0)
+                {
+                    var msg = new MessageDialog("No such object.");
+                    await msg.ShowAsync();
+                }
+            }
+            else
+            {
+                var msg = new MessageDialog("In order to sort please pick a filter.");
+                await msg.ShowAsync();
             }
         }
         #endregion

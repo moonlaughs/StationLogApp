@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
 using StationLogApp.Common;
-using StationLogApp.Convertor;
+using StationLogApp.Converters;
 using StationLogApp.Interfaces;
 using StationLogApp.Model;
 using StationLogApp.Persistancy;
@@ -21,26 +21,26 @@ namespace StationLogApp.Handlers
         #region instancefields
         private readonly CreateTaskVm _createVm;
         private readonly ISave<TaskClass> _savedTaskClass = new SaveM<TaskClass>();
-        private readonly FrameNavigateClass _frameNavigateClass;
         #endregion
 
         public RelayCommandClass DoGoTask { get; set; }
         private ButtonsVm Bvm { get; }
+        public DateConverter Dc { get; }
 
         #region Constructor
         public CreateTaskHandler(CreateTaskVm createVm)
         {
             _createVm = createVm;
-            _frameNavigateClass = new FrameNavigateClass();
             Bvm = new ButtonsVm();
             DoGoTask = new RelayCommandClass(GoTask);
+            Dc = new DateConverter();
         }
         #endregion
 
         #region Methods
         public async void CreateTask()
         {
-            if (_createVm.NewItem.TaskName != null && _createVm.NewItem.TaskSchedule != null && _createVm.NewItem.TaskType != null && _createVm.NewItem.EquipmentID != 0)
+            if (_createVm.NewItem.TaskName != null && _createVm.NewItem.TaskSchedule != null && _createVm.NewItem.TaskType != null && _createVm.NewItem.EquipmentId != 0)
             {
                 await _savedTaskClass.Save(new TaskClass(
                     _createVm.NewItem.TaskId,
@@ -48,13 +48,12 @@ namespace StationLogApp.Handlers
                     _createVm.NewItem.TaskSchedule,
                     null,
                     _createVm.NewItem.TaskType,
-                    DateTimeConvertor.DateTimeOffsetAndTimeSetToDateTime(_createVm.DueDate, TimeSpan.Zero),
+                    Dc.ConvertToDate(_createVm.DueDate),
                     null,
                     null,
                     _createVm.NewItem.DoneVar = "N",
-                    _createVm.NewItem.EquipmentID), "Tasks");
-
-
+                    _createVm.NewItem.EquipmentId), "Tasks");
+                
                 GoTask();
 
                 MessageDialog msg = new MessageDialog("Task created");

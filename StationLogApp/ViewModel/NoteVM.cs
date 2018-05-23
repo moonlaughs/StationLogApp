@@ -10,47 +10,40 @@ using StationLogApp.Model;
 
 namespace StationLogApp.ViewModel
 {
-    public class NoteVM :NotifyPropertyChangedClass
+    public class NoteVm :NotifyPropertyChangedClass
     {
-        private int _notesID;
+        private int _notesId;
         private string _note1;
-        private int _stationID;
+        private int _stationId;
+        private string _stationName;
         private DateTimeOffset _dueDate;
-        private int _userID;
-        private ObservableCollection<Station> _stationCollection;
-        private ButtonsVm _currentUser = new ButtonsVm();
+        private int _userId;
+        private readonly ButtonsVm _currentUser = new ButtonsVm();
         private Station _selectedStationItem;
-        private Notes _notes;
         private Notes _selectedNote;
 
+        public RelayCommandClass SaveNote { get; set; }
+        public RelayCommandClass RemoveNote { get; set; }
+        
+        public NoteHandler NoteHandler { get; set; }
 
-        public ObservableCollection<Notes> NotesCatalog { get; set; }
+        public ObservableCollection<Notes> NotesCatalog { get; }
 
-        public ObservableCollection<Station> StationCollection
+        public ObservableCollection<Station> StationCollection { get; set; }
+
+        public int NotesId
         {
-            get
-            {
-                return _stationCollection;
-            }
-            set { _stationCollection = value; }
-        }
-
-        public int NotesID
-        {
-            get { return _notesID; }
+            get => _notesId;
             set
             {
-                _notesID = value;
-                OnPropertyChanged(nameof(NotesID));
+                _notesId = value;
+                OnPropertyChanged(nameof(NotesId));
             }
         }
 
         public string Note1
         {
-            get
-            {
-                return _note1;
-            }
+            get => _note1;
             set
             {
                 _note1 = value;
@@ -60,7 +53,7 @@ namespace StationLogApp.ViewModel
 
         public DateTimeOffset DueDate
         {
-            get { return _dueDate; }
+            get => _dueDate;
             set
             {
                 _dueDate = value;
@@ -68,29 +61,39 @@ namespace StationLogApp.ViewModel
             }
         }
 
-        public int StationID
+        public int StationId
         {
-            get { return _stationID; }
+            get => _stationId;
             set
             {
-                _stationID = value;
-                OnPropertyChanged(nameof(StationID));
+                _stationId = value;
+                OnPropertyChanged(nameof(StationId));
             }
         }
 
-        public int UserID
+        public string StationName
         {
-            get { return _userID; }
+            get => _stationName;
             set
             {
-                _userID = value;
-                OnPropertyChanged(nameof(UserID));
+                _stationName = value;
+                OnPropertyChanged(nameof(StationName));
+            }
+        }
+
+        public int UserId
+        {
+            get => _userId;
+            set
+            {
+                _userId = value;
+                OnPropertyChanged(nameof(UserId));
             }
         }
 
         public Station SelectedStationItem
         {
-            get { return _selectedStationItem; }
+            get => _selectedStationItem;
             set
             {
                 _selectedStationItem = value;
@@ -101,10 +104,7 @@ namespace StationLogApp.ViewModel
 
         public Notes SelectedNote
         {
-            get
-            {
-                return _selectedNote;
-            }
+            get => _selectedNote;
             set
             {
                 _selectedNote = value;
@@ -112,24 +112,18 @@ namespace StationLogApp.ViewModel
             }
         }
 
-        public RelayCommandClass SaveNote { get; set; }
-        public RelayCommandClass RemoveNote { get; set; }
-
-
-        public NoteHandler NoteHandler { get; set; }
-
-        public NoteVM()
+        public NoteVm()
         {
             NoteHandler = new NoteHandler(this);
-            NotesCatalog = NoteHandler.LoadNotes();
+            NotesCatalog = NoteHandler.NotesCollection;
             _dueDate = DateTimeOffset.Now;
-            _stationCollection = NoteHandler.LoadStations();
+            StationCollection = NoteHandler.StationCollection;
             _selectedStationItem = SelectedStationItem;
-            _userID = _currentUser.UserID;
+            _userId = _currentUser.UserId;
             SaveNote = new RelayCommandClass(NoteHandler.CreateAndSaveNote);
             SelectedNote = new Notes();
             RemoveNote = new RelayCommandClass(NoteHandler.RemoveNote);
+            SelectedStationItem = new Station();
         }
-
     }
 }

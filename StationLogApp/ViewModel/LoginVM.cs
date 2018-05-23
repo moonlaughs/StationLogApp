@@ -14,13 +14,13 @@ using StationLogApp.View;
 
 namespace StationLogApp.ViewModel
 {
-    public class LoginVM : NotifyPropertyChangedClass
+    public class LoginVm : NotifyPropertyChangedClass
     {
         private User _currentUser = new User();
 
         private readonly FrameNavigateClass _frame;
 
-        private UserSingleton _userSingleton;
+        private readonly UserSingleton _userSingleton;
 
         private bool LoginStatus { get; set; }
 
@@ -36,7 +36,7 @@ namespace StationLogApp.ViewModel
             }
         }
 
-        public LoginVM()
+        public LoginVm()
         {
             _frame = new FrameNavigateClass();
             _userSingleton = UserSingleton.GetInstance();
@@ -44,46 +44,41 @@ namespace StationLogApp.ViewModel
         }
 
         // Check checks the Currrent User information against tha information of the user in the database
-
         public async void Check()
         {
             LoginStatus = false;
             ILoad<User> loaded = new LoadM<User>();
-            Task<ObservableCollection<User>> sth = loaded.Load("UserTables");
+            var sth = loaded.Load("UserTables");
             await sth;
-            ObservableCollection<User> col = sth.Result;
+            var col = sth.Result;
             if (col != null)
             {
                 foreach (User user in col)
                 {
-                    if ((user.Username == CurrentUser.Username) && (user.UserPassword == CurrentUser.UserPassword))
+                    if ((user.Username != CurrentUser.Username) ||
+                        (user.UserPassword != CurrentUser.UserPassword)) continue;
+                    _userSingleton.SetPerson(user);
+                    LoginStatus = true;
+                    if (user.UserType == "admin" || user.UserType == "manager")
                     {
-                        _userSingleton.SetPerson(user);
-                        LoginStatus = true;
-                        if (user.UserType == "admin" || user.UserType == "manager")
-                        {
-                            _frame.ActivateFrameNavigation(typeof(TaskPage), user);
-                            CurrentUser = user;
-                            break;
-                        }
-                        else
-                        {
-                            _frame.ActivateFrameNavigation(typeof(MenuTreePage), user);
-                            CurrentUser = user;
-                            break;
-                        }
+                        _frame.ActivateFrameNavigation(typeof(MenuTreePage), user);
+                        CurrentUser = user;
+                        break;
                     }
-
+                    else
+                    {
+                        _frame.ActivateFrameNavigation(typeof(MenuTreePage), user);
+                        CurrentUser = user;
+                        break;
+                    }
                 }
-                if (LoginStatus == false)
-                {
-                    MessageDialog msg = new MessageDialog("No user found with that username and password!");
-                    await msg.ShowAsync();
-                }
+                if (LoginStatus != false) return;
+                var msg = new MessageDialog("No user found with that username and password!");
+                await msg.ShowAsync();
             }
             else
             {
-                MessageDialog msg = new MessageDialog("No user found with that username and password!");
+                var msg = new MessageDialog("No user found with that username and password!");
                 await msg.ShowAsync();
             }
         }

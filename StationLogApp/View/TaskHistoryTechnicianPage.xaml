@@ -83,19 +83,9 @@
                        Foreground="White" 
                        FontSize="20"
                        Margin="15,0,10,0"/>
-            <ComboBox Name="Stations" ItemsSource="{Binding EquipmentStations}" SelectedItem="{Binding SelectedItem.EquipmentID}" Foreground="Black" Margin="20,0,0,0" Width="200"/>
+            <ComboBox Name="Stations" ItemsSource="{Binding StationCollection}" SelectedItem="{Binding SelectedItem.EquipmentId}" Foreground="Black" Margin="20,0,0,0" Width="200"/>
             <ComboBox Name="Date" ItemsSource="{Binding ScheduleArray}" SelectedItem="{Binding SelectedItem.TaskSchedule}" Margin="20,0,0,0" Width="200" Foreground="Black"/>
         </StackPanel>
-
-                <!--<ComboBox Name="Stations" Foreground="Black" Margin="20,0,0,0" Width="200"
-                          ItemsSource="{Binding StationCatalog, Mode=TwoWay}" SelectedItem="{Binding SelectedItemsStation, Mode=TwoWay}"/>
-                <ComboBox Name="Date" Margin="20,0,0,0" Width="200">
-                    <ComboBoxItem Content="Today" Foreground="Black"/>
-                    <ComboBoxItem Content="This week" Foreground="Black"/>
-                    <ComboBoxItem Content="This month" Foreground="Black"/>
-                </ComboBox>
-            </StackPanel>-->
-
 
         <ListView Name="Tasks" 
                   ItemsSource="{Binding DoneCatalog, Mode=TwoWay}" 
@@ -148,45 +138,6 @@
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
-            <!--<ListView.ItemTemplate>
-                <DataTemplate>
-                    <Border Margin="5" 
-                                Width="1300"
-                                BorderBrush="Black" BorderThickness="2">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="0.7*"/>
-                                <ColumnDefinition Width="0.2*"/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Margin="0,0,20,0">
-                                <TextBlock Text="{Binding TaskName, Mode=TwoWay}" 
-                                           Foreground="Black"
-                                           FontSize="25" 
-                                           Margin="10,0,0,5"/>
-                                <StackPanel Orientation="Horizontal" Margin="5">
-                                    <Image Source="../Assets/place.png" Width="30" Margin="10,0,10,0"/>
-                                    <TextBlock Text="{Binding StationName, Mode=TwoWay}" Foreground="Black" FontSize="20"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <StackPanel Margin="10">
-                                        <TextBlock Text="Done:" Foreground="Black" FontSize="20"/>
-                                        <TextBlock Text="Type:" Foreground="Black" FontSize="20"/>
-                                    </StackPanel>
-                                    <StackPanel Margin="10">
-                                        <TextBlock Text="{Binding DoneDate, Mode=TwoWay}" Foreground="Black" FontSize="20"/>
-                                        <TextBlock Text="{Binding TaskType, Mode=TwoWay}" Foreground="Black" FontSize="20"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </StackPanel >
-                            <TextBlock Text="COMMENT:" Grid.Column="1"/>
-                            <TextBlock Text="{Binding Comment, Mode=TwoWay}" 
-                                           TextWrapping="Wrap" Foreground="DarkGreen" FontSize="20"
-                                           Grid.Column="1" Width="210" Height="110" Margin="-90,20,5,0"/>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ListView.ItemTemplate>-->
         </ListView>
 
     </Grid>
