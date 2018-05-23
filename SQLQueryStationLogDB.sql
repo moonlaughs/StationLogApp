@@ -113,3 +113,27 @@ INSERT INTO UserTable VALUES ("John", "Smith", "Admin", "pass", "admin");
 INSERT INTO UserTable VALUES ("Diya", "B", "Diya", "123", "scientist");
 INSERT INTO UserTable VALUES ("Iza", "K", "Iza", "123", "technician");
 INSERT INTO UserTable VALUES ("Mimi", "O", "Mimi", "123", "technician");
+
+--1 Get all tasks that are defined as 'register' in the database.
+SELECT * FROM dbo.Task WHERE TaskType = 'register'
+
+--2 Get all tasks that should be performed every week.
+SELECT * FROM dbo.Task WHERE TaskSchedule = 'Every week'
+
+--3 Put all equipement in order by it's type.
+SELECT * FROM dbo.Equipment ORDER BY EquipmentType ASC
+
+--4 Get all users who are defined as 'technicians' in the database.
+SELECT * FROM dbo.UserTable WHERE UserType = 'Technician'
+
+--5 Simply count how many tasks are in the database for this moment.
+SELECT COUNT(TaskID) FROM dbo.Task 
+
+--6 Get all already performed tasks.
+SELECT * FROM dbo.Task WHERE DoneVar = 'Y'
+
+--7 Get all information about Stations
+SELECT * FROM dbo.Station ORDER BY StationID
+
+--8 Testing normalization
+INSERT INTO STATION VALUES  (1103, 'HCAB', 'H.C. Andersens Boulevard')

@@ -13,7 +13,7 @@ using StationLogApp.View;
 
 namespace StationLogApp.ViewModel
 {
-    public class ButtonsVm
+    public class NavigationHelperVm
     {
         private readonly FrameNavigateClass _frameNavigation;
 
@@ -30,7 +30,7 @@ namespace StationLogApp.ViewModel
 
         public TaskEquipmentStationSingleton TaskSingleton { get; set; }
 
-        public ButtonsVm()
+        public NavigationHelperVm()
         {
             CurrentUser = UserSingleton.GetInstance();
             TaskSingleton = TaskEquipmentStationSingleton.GetInstance();

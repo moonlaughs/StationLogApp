@@ -25,7 +25,7 @@ namespace StationLogApp.View
     /// </summary>
     public sealed partial class TaskPage : Page
     {
-        private ButtonsVm Bvm { get; }
+        private NavigationHelperVm Bvm { get; }
         
         public TaskPage()
         {
@@ -34,7 +34,7 @@ namespace StationLogApp.View
             CreateButonM.Visibility = Visibility.Collapsed;
             DeleteButtonM.Visibility = Visibility.Collapsed;
             UpdateButtonM.Visibility = Visibility.Collapsed;
-            Bvm = new ButtonsVm();
+            Bvm = new NavigationHelperVm();
             CheckIfManager();
         }
 

@@ -126,7 +126,7 @@
     <Compile Include="Model\TaskClass.cs" />
     <Compile Include="Singletons\TaskEquipmentStationSingleton.cs" />
     <Compile Include="Singletons\UserSingleton.cs" />
-    <Compile Include="ViewModel\ButtonsVm.cs" />
+    <Compile Include="ViewModel\NavigationHelperVm.cs" />
     <Compile Include="ViewModel\CreateTaskVm.cs" />
     <Compile Include="ViewModel\LoginVm.cs" />
     <Compile Include="ViewModel\NoteVm.cs" />

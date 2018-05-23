@@ -24,14 +24,14 @@ namespace StationLogApp.Handlers
         #endregion
 
         public RelayCommandClass DoGoTask { get; set; }
-        private ButtonsVm Bvm { get; }
+        private NavigationHelperVm Bvm { get; }
         public DateConverter Dc { get; }
 
         #region Constructor
         public CreateTaskHandler(CreateTaskVm createVm)
         {
             _createVm = createVm;
-            Bvm = new ButtonsVm();
+            Bvm = new NavigationHelperVm();
             DoGoTask = new RelayCommandClass(GoTask);
             Dc = new DateConverter();
         }
