@@ -91,7 +91,6 @@
             ></Button>
         </StackPanel>
 
-
         <ListView Name="Tasks"
                   ItemsSource="{Binding Tvm.TaskCatalog, Mode=TwoWay}"
                   SelectedItem="{Binding Tvm.SelectedItem, Mode= TwoWay}"
