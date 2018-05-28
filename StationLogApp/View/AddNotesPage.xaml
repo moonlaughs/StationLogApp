@@ -15,11 +15,11 @@
                     HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal" Margin="10">
                 <TextBlock Text="Name:" Foreground="Black" FontSize="18"/>
-                <TextBox Text="{Binding Note1, Mode=TwoWay}" FontSize="18" Margin="10,0,0,0"/>
+                <TextBox Text="{Binding Nvm.Note1, Mode=TwoWay}" FontSize="18" Margin="10,0,0,0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="10">
                 <TextBlock Text="Station:" Foreground="Black" FontSize="18"/>
-                <ComboBox ItemsSource="{Binding StationCollection}" SelectedItem="{Binding SelectedStationItem, Mode=TwoWay}" Height="40" Width="200">
+                <ComboBox ItemsSource="{Binding Nvm.StationCollection}" SelectedItem="{Binding Nvm.SelectedStationItem, Mode=TwoWay}" Height="40" Width="200">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding StationName, Mode=TwoWay}"/>
@@ -29,7 +29,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="10">
                 <TextBlock Text="Due date:" Foreground="Black" FontSize="18"/>
-                <DatePicker x:Name="DatePicker" Date="{Binding DueDate, Mode=TwoWay}"/>
+                <DatePicker x:Name="DatePicker" Date="{Binding Nvm.DueDate, Mode=TwoWay}"/>
             </StackPanel>
             <Button Content="Add log" 
                     HorizontalAlignment="Center"
@@ -39,7 +39,7 @@
                     Background="Transparent" 
                     BorderBrush="Black" 
                     BorderThickness="2" 
-                    Margin="122,30,122,10" Command="{Binding Path=SaveNote}">
+                    Margin="122,30,122,10" Command="{Binding Path=Nvm.SaveNote}">
             </Button>
         </StackPanel>
 

@@ -26,7 +26,7 @@ namespace StationLogApp.View
         public UpdatePage()
         {
             this.InitializeComponent();
-            this.DataContext = new UpdateTaskVm();
+            this.DataContext = new VmContainer();
         }
     }
 }

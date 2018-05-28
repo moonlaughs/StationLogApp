@@ -144,9 +144,6 @@
       <DependentUpon>LogInPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\MenuTreePage.xaml.cs">
-      <DependentUpon>MenuTreePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\TaskHistoryTechnicianPage.xaml.cs">
       <DependentUpon>TaskHistoryTechnicianPage.xaml</DependentUpon>
     </Compile>
@@ -208,7 +205,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\MenuTreePage.xaml" />
     <Page Include="View\TaskHistoryTechnicianPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

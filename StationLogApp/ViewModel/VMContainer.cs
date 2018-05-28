@@ -13,5 +13,11 @@ namespace StationLogApp.ViewModel
        public NoteVm Nvm { get; set; } = new NoteVm();
 
        public NavigationHelperVm Bvm { get; set; } = new NavigationHelperVm();
+
+       public CreateTaskVm Ctvm { get; set; } = new CreateTaskVm();
+
+       public LoginVm Lvm { get; set; } = new LoginVm();
+
+       public UpdateTaskVm Uvm { get; set; } = new UpdateTaskVm();
    }
 }
