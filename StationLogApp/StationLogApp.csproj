@@ -169,9 +169,11 @@
     <Content Include="Assets\fuck.png" />
     <Content Include="Assets\gr.png" />
     <Content Include="Assets\Green.png" />
+    <Content Include="Assets\mainprofile.png" />
     <Content Include="Assets\mm.png" />
     <Content Include="Assets\place.png" />
     <Content Include="Assets\profile.png" />
+    <Content Include="Assets\profilemain.png" />
     <Content Include="Assets\s.png" />
     <Content Include="Assets\sign.png" />
     <Content Include="Assets\smokeGreen.png" />
