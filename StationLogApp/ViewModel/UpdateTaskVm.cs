@@ -19,7 +19,6 @@ namespace StationLogApp.ViewModel
         private string _registration;
         private string _taskType;
         private DateTimeOffset _dueDate;
-        //private DateTimeOffset? _doneDate;
         private string _comment;
         private string _doneVar;
 
@@ -90,16 +89,6 @@ namespace StationLogApp.ViewModel
                 OnPropertyChanged(nameof(DueDate));
             }
         }
-
-        //public DateTimeOffset? DoneDate
-        //{
-        //    get { return _doneDate; }
-        //    set
-        //    {
-        //        _doneDate = value;
-        //        OnPropertyChanged(nameof(DoneDate));
-        //    }
-        //}
         
         public string TaskName
         {

@@ -46,7 +46,7 @@ namespace StationLogApp.Handlers
                 _noteObj = new Notes(_noteVm.NotesId, _noteVm.Note1, convertedDate, convertedStationName, _noteVm.UserId);
                 await _savedNote.Save(_noteObj, "Notes");
                 FrameNavigateClass _frame = new FrameNavigateClass();
-                _frame.ActivateFrameNavigation(typeof(TaskPage));
+                _frame.ActivateFrameNavigation(typeof(MenuPage));
                 MessageDialog msg = new MessageDialog("You just created a note!");
                 await msg.ShowAsync();
             }
@@ -63,7 +63,7 @@ namespace StationLogApp.Handlers
             {
                 await _deleteNote.Delete("Notes", _noteVm.SelectedNote.NotesId);
                 FrameNavigateClass _frame = new FrameNavigateClass();
-                _frame.ActivateFrameNavigation(typeof(TaskPage));
+                _frame.ActivateFrameNavigation(typeof(MenuPage));
                 MessageDialog msg = new MessageDialog("Note deleted!");
                 await msg.ShowAsync();
             }

@@ -110,7 +110,7 @@ namespace StationLogApp.ViewModel
             {
                 _singleton.SetTaskEquipmentStation(SelectedItem);
                 var frame = new FrameNavigateClass();
-                frame.ActivateFrameNavigation(typeof(UpdatePage), SelectedItem);
+                frame.ActivateFrameNavigation(typeof(MenuPage), SelectedItem);
             }
             else
             {

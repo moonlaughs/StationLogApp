@@ -7,20 +7,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModel="using:StationLogApp.ViewModel"
     mc:Ignorable="d">
-    <Page.Resources>
-        <Style TargetType="TextBlock" x:Key="MainPageTextBlockStyle">
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Foreground" Value="White"/>
-        </Style>
-        <Style TargetType="Border" x:Key="MainPageBorderStyle">
-            <Setter Property="Height" Value="50"/>
-            <Setter Property="Width" Value="500"/>
-            <Setter Property="CornerRadius" Value="13"/>
-            <Setter Property="BorderBrush" Value="#407c3a"/>
-            <Setter Property="BorderThickness" Value="2"/>
-        </Style>
-    </Page.Resources>
 
     <Grid>
         <Grid.Background>
@@ -46,9 +32,15 @@
                            Password="{Binding CurrentUser.UserPassword, Mode=TwoWay}"/>
             </Border>
             <Border CornerRadius="13" BorderBrush="#407c3a" BorderThickness="2" Height="50" Width="500" Margin="0,50,0,40">
-                <Button Content="LOG IN" FontSize="20" HorizontalAlignment="Center"
-                    Height="50" Width="500" BorderBrush="Transparent"
-                    Foreground="White" Command="{Binding CheckCommand}"/>
+                <Button Content="LOG IN" 
+                        FontSize="20" 
+                        HorizontalAlignment="Center"
+                        Height="50" 
+                        Width="500" 
+                        BorderBrush="Transparent"
+                        Foreground="White" 
+                        Background="#407c3a"
+                        Command="{Binding CheckCommand}"/>
             </Border>
         </StackPanel>
     </Grid>

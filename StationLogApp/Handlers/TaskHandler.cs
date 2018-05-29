@@ -93,7 +93,7 @@ namespace StationLogApp.Handlers
 
                 ReScheduleTask();
 
-                _frameNavigation.ActivateFrameNavigation(typeof(TaskPage));
+                _frameNavigation.ActivateFrameNavigation(typeof(MenuPage));
 
                 var msg = new MessageDialog("Task saved");
                 msg.ShowAsync();

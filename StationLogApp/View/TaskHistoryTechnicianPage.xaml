@@ -10,127 +10,78 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="ms-appx:///Assets/2.jpg"/>
+            <ImageBrush ImageSource="../Assets/yas2.jpg"/>
         </Grid.Background>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height ="10"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
 
-        <RelativePanel Grid.Row="1" 
-                       Grid.Column="1"
-                       Grid.ColumnSpan="2">
-
-            <TextBlock Text="Hej, " 
-                       FontSize="30" 
-                       Name="TextBlock1"
-                       Margin="22,0,0,0"
-                       Foreground="White"/>
-
-            <TextBlock FontSize="30" 
-                       RelativePanel.RightOf="TextBlock1"
-                       Text="{Binding Bvm.UserName}"
-                       Margin="32,0,0,0"
-                       Foreground="White"/>
-
-            <Button Name="TodoButton" 
-                    RelativePanel.LeftOf="DoneButton" 
-                    Content="TO DO" 
-                    Background="Transparent" FontSize="30"
-                    BorderThickness="2" BorderBrush="White"
-                    Foreground="White"
-                        Command="{Binding Bvm.GoTask}">
-            </Button>
-            <Button Name="DoneButton" 
-                    RelativePanel.LeftOf="ProfileButton"
-                    Content="DONE" 
-                    Background="Transparent" FontSize="30"
-                    BorderThickness="2" BorderBrush="White" Foreground="White"/>
-            <Button Name="ProfileButton" Background="Transparent" RelativePanel.AlignRightWithPanel="True" BorderBrush="White">
-                <Image Source="../Assets/profile.png"/>
-                <Button.Flyout>
-                    <MenuFlyout>
-                        <MenuFlyoutItem Text="Log out" Click="MenuFlyoutItem_OnClick" Foreground="Black"/>
-                    </MenuFlyout>
-                </Button.Flyout>
-
-            </Button>
-        </RelativePanel>
-
-        <StackPanel Grid.Row="2" 
-                    Grid.Column="1" 
-                    Orientation="Horizontal" 
-                    Margin="5">
-            <TextBlock Text="Filters" 
-                       Foreground="White" 
-                       FontSize="20"
-                       Margin="15,0,10,0"/>
-            <ComboBox Name="Stations" ItemsSource="{Binding Tvm.StationCollection}" SelectedItem="{Binding Tvm.SelectedItem.EquipmentId}" Foreground="Black" Margin="20,0,0,0" Width="200"/>
-            <ComboBox Name="Date" ItemsSource="{Binding Tvm.ScheduleArray}" SelectedItem="{Binding Tvm.SelectedItem.TaskSchedule}" Margin="20,0,0,0" Width="200" Foreground="Black"/>
-        </StackPanel>
-
-        <ListView Name="Tasks" 
-                  ItemsSource="{Binding Tvm.DoneCatalog, Mode=TwoWay}" 
-                  Grid.Row="3" 
+        <ListView Grid.Row="1"
                   Grid.Column="1" 
-                  Width="1400" 
-                  HorizontalAlignment="Center">
+                  Width="1550"
+                  HorizontalAlignment="Center"
+                  ItemsSource="{Binding Tvm.DoneCatalog, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border Margin="5" 
-                            Width="1300"
-                            BorderBrush="Black" BorderThickness="2">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1.5*"/>
-                                <ColumnDefinition Width="0.7*"/>
-                                <ColumnDefinition Width="0.7*"/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Margin="0,0,20,0">
-                                <TextBlock Text="{Binding TaskName, Mode=TwoWay}" 
-                                           Foreground="White"
-                                           FontSize="25" 
-                                           Margin="10,0,0,5"/>
-                                <StackPanel Orientation="Horizontal" Margin="5">
-                                    <Image Source="../Assets/place.png" Width="30" Margin="10,0,10,0"/>
-                                    <TextBlock Text="{Binding StationName}" Foreground="White" FontSize="20"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <StackPanel Margin="10">
-                                        <TextBlock Text="Due to:" Foreground="White" FontSize="20"/>
-                                        <TextBlock Text="Type:" Foreground="White" FontSize="20"/>
-                                    </StackPanel>
-                                    <StackPanel Margin="10">
-                                        <TextBlock Text="{Binding DoneDate, Mode=TwoWay}" Foreground="White" FontSize="20"/>
-                                        <TextBlock Text="{Binding TaskType}" Foreground="White" FontSize="20"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </StackPanel >
-                            <TextBlock Text="Registrations:" Foreground="White" Grid.Column="1"/>
-                            <TextBlock Name="Registrations"
-                                     Text="{Binding Registration, Mode=TwoWay}" Foreground="DarkRed" Grid.Column="1" Width="250" Height="110" Margin="0,20,5,0" FontWeight="Bold"/>
-                            <TextBlock Text="Add comment:" Foreground="White" Grid.Column="2"/>
-                            <TextBlock Name="Comment" Foreground="DarkGreen" FontWeight="Bold"
-                                     Text="{Binding Comment, Mode=TwoWay}"
-                                     Grid.Column="2" 
-                                     Width="250" 
-                                     Height="110" 
-                                     Margin="0,20,5,0"/>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                    <StackPanel>
+                        <Border BorderBrush="Black" BorderThickness="2"
+                            Width="1530"
+                            Height="170"
+                            HorizontalAlignment="Center">
+                <Grid Background="PowderBlue" Opacity="0.8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.6*"/>
+                        <ColumnDefinition Width="1.8*"/>
+                        <ColumnDefinition Width="0.9*"/>
+                        <ColumnDefinition Width="0.9*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{Binding DoneDate, Mode=TwoWay}"
+                               Style="{StaticResource TaskDateTextBlockStyle}"/>
+                    <Border Style="{StaticResource TaskBorderStyle}"/>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="{Binding TaskName, Mode=TwoWay}"
+                                   Style="{StaticResource TaskNameTextBlockStyle}"/>
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="20,0,10,0">
+                            <Image Source="../Assets/place.png"
+                                   Height="30"/>
+                            <TextBlock Text="{Binding StationName}"
+                                       Style="{StaticResource TaskStationTextBlockStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="20,15,10,0">
+                            <TextBlock Text="Type:" FontSize="20"/>
+                            <TextBlock Text="{Binding TaskType}" 
+                                       FontSize="20"
+                                       Margin="15,0,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel  Grid.Column="2" Margin="10,10,0,0">
+                        <TextBlock Text="Registration: " 
+                                   HorizontalAlignment="Center"/>
+                        <TextBox  Style="{StaticResource TaskCommentTextBoxStyle}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="3" Margin="10,10,0,0">
+                        <TextBlock Text="Comment: " 
+                                   HorizontalAlignment="Center"/>
+                        <TextBox Style="{StaticResource TaskCommentTextBoxStyle}"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
     </Grid>
+
 </Page>

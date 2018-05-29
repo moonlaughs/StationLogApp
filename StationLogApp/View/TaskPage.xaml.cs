@@ -26,34 +26,32 @@ namespace StationLogApp.View
     public sealed partial class TaskPage : Page
     {
         private NavigationHelperVm Bvm { get; }
-        
+        private TaskVm Tvm { get; }
+        private NoteVm Nvm { get; }
+        private CreateTaskVm Ctvm { get; }
+        private UpdateTaskVm Uvm { get; }
+
         public TaskPage()
         {
             this.InitializeComponent();
             this.DataContext = new VmContainer();
-            CreateButonM.Visibility = Visibility.Collapsed;
-            DeleteButtonM.Visibility = Visibility.Collapsed;
-            UpdateButtonM.Visibility = Visibility.Collapsed;
+            CreateButton.Visibility = Visibility.Collapsed;
+            DeleteButton.Visibility = Visibility.Collapsed;
+            UpdateButton.Visibility = Visibility.Collapsed;
             Bvm = new NavigationHelperVm();
+            Tvm = new TaskVm();
+            Nvm = new NoteVm();
+            Ctvm = new CreateTaskVm();
+            Uvm = new UpdateTaskVm();
             CheckIfManager();
-        }
-
-        private void MenuFlyoutItem_OnClick(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(LogInPage));
-        }
-        
-        private void GoToNotesPage(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(AddNotesPage));
         }
 
         public void CheckIfManager()
         {
             if (Bvm.CurrentUser.GetUserType() != "manager" && Bvm.CurrentUser.GetUserType() != "admin") return;
-            CreateButonM.Visibility = Visibility.Visible;
-            DeleteButtonM.Visibility = Visibility.Visible;
-            UpdateButtonM.Visibility = Visibility.Visible;
+            CreateButton.Visibility = Visibility.Visible;
+            DeleteButton.Visibility = Visibility.Visible;
+            UpdateButton.Visibility = Visibility.Visible;
         }
     }
 }
