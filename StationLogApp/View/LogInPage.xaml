@@ -12,27 +12,35 @@
         <Grid.Background>
             <ImageBrush ImageSource="ms-appx:///Assets/yas.jpg"/>
         </Grid.Background>
-        
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        
-        <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical" Width="400" Height="1100">
+
+        <Grid.DataContext>
+            <viewModel:LoginVm/>
+        </Grid.DataContext>
+
+        <StackPanel HorizontalAlignment="Center" Width="1000" Height="1100">
             <StackPanel.Background>
                 <SolidColorBrush Color="Black" Opacity="0.7" />
             </StackPanel.Background>
-            <TextBlock Text="USERNAME" FontSize="15"  Margin="100,300,43,0" Foreground="#407c3a" />
-            <Border CornerRadius="13" BorderBrush="White" BorderThickness="2" Height="50" Width="200">
-            <TextBox FontSize="23" Height="40" Width="200" Background="Transparent" Text="{Binding Lvm.CurrentUser.Username, Mode=TwoWay}"/>
+            <Image Source="../Assets/mainprofile.png" Height="250" HorizontalAlignment="Center" Margin="0,150,0,0"/>
+            <TextBlock Margin="0,100,0,0" Text="USERNAME" Style="{StaticResource MainPageTextBlockStyle}" />
+            <Border Style="{StaticResource MainPageBorderStyle}">
+                <TextBox FontSize="23" Height="40" Width="500" Background="Transparent" Text="{Binding CurrentUser.Username, Mode=TwoWay}" BorderBrush="Transparent"/>
             </Border>
-            <TextBlock Text="PASSWORD" FontSize="15" Margin="100,20,43,0" Foreground="#407c3a"/>
-            <Border CornerRadius="13" BorderBrush="White" BorderThickness="2" Height="50" Width="200">
-            <PasswordBox FontSize="23" Height="40" Width="200" Background="Transparent" Password="{Binding Lvm.CurrentUser.UserPassword, Mode=TwoWay}"/>
+            <TextBlock Text="PASSWORD" Margin="0,15,0,0" Style="{StaticResource MainPageTextBlockStyle}"/>
+            <Border Style="{StaticResource MainPageBorderStyle}">
+              <PasswordBox FontSize="23" Height="40" Width="500" Background="Transparent" BorderBrush="Transparent"
+                           Password="{Binding CurrentUser.UserPassword, Mode=TwoWay}"/>
             </Border>
-            <Border CornerRadius="13" BorderBrush="White" BorderThickness="2" Height="50" Width="200" Margin="0,50,0,40">
-                <Button Content="LOG IN" FontSize="20" HorizontalAlignment="Center"
-                    Height="50" Width="100" 
-                    Foreground="#407c3a" Command="{Binding Lvm.CheckCommand}"/>
+            <Border CornerRadius="13" BorderBrush="#407c3a" BorderThickness="2" Height="50" Width="500" Margin="0,50,0,40">
+                <Button Content="LOG IN" 
+                        FontSize="20" 
+                        HorizontalAlignment="Center"
+                        Height="50" 
+                        Width="500" 
+                        BorderBrush="Transparent"
+                        Foreground="White" 
+                        Background="#407c3a"
+                        Command="{Binding CheckCommand}"/>
             </Border>
         </StackPanel>
     </Grid>

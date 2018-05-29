@@ -10,227 +10,335 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="ms-appx:///Assets/smokeGreen.png"/>
+            <ImageBrush ImageSource="../Assets/yas2.jpg" />
         </Grid.Background>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height ="10"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="3.2*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="80"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="2.8*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
 
-        <RelativePanel Grid.Row="1" 
-                       Grid.Column="1"
-                       Grid.ColumnSpan="2">
+        <Border Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="4"
+                Grid.RowSpan="2"
+                Background="Black" 
+                Opacity="0.5"/>
 
-            <TextBlock Text="Hej, " 
-                       FontSize="30" 
-                       Name="TextBlock1"
-                       Margin="22,0,0,0"
-                       Foreground="White"/>
-
-            <TextBlock FontSize="30" 
-                       RelativePanel.RightOf="TextBlock1"
-                       Text="{Binding Bvm.UserName}"
-                       Margin="32,0,0,0"
-                       Foreground="White"/>
-
-            <Button Name="TodoButton" 
-                    RelativePanel.LeftOf="DoneButton" 
-                    Content="TO DO" 
-                    Background="Transparent" FontSize="30"
-                    BorderThickness="2" BorderBrush="White"
-                    Foreground="White"/>
-            <Button Name="DoneButton" 
-                    RelativePanel.LeftOf="ProfileButton"
-                    Content="DONE" 
-                    Background="Transparent" FontSize="30" Foreground="White"
-                    BorderThickness="2" BorderBrush="White" VerticalAlignment="Bottom" Command="{Binding Bvm.GoDone}"/>
-            <Button Name="ProfileButton" Background="Transparent" Foreground="White" RelativePanel.AlignRightWithPanel="True">
-                <Image Source="../Assets/profile.png"/>
-                <Button.Flyout>
-                    <MenuFlyout>
-                        <MenuFlyoutItem Text="Log out" Click="MenuFlyoutItem_OnClick" Foreground="Black"/>
-                    </MenuFlyout>
-                </Button.Flyout>
-            </Button>
-        </RelativePanel>
-
-        <StackPanel Grid.Row="2" 
-                    Grid.Column="1" 
+        <StackPanel Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="4"
                     Orientation="Horizontal" 
-                    Margin="5">
+                    HorizontalAlignment="Center"
+                    Opacity="0.7">
             <TextBlock Text="Filters" 
+                       VerticalAlignment="Center"
                        Foreground="White" 
-                       FontSize="20"
-                       Margin="15,0,10,0"/>
-            <ComboBox Name="Stations" Foreground="Black" Margin="20,0,0,0" Width="200"
+                       FontSize="25"
+                       Margin="15,0,20,0"/>
+            <Image Source="../Assets/arrow.png"  
+                   Height="25"
+                   Margin="0,5,20,0"/>
+            <ComboBox PlaceholderText="By station" 
+                      Margin="20,0,0,0" 
+                      Width="200"
+                      VerticalAlignment="Center"
                       ItemsSource="{Binding Tvm.StationCollection, Mode=TwoWay}"  
-                      SelectedItem="{Binding Tvm.SelectedItemStation, Mode=TwoWay}">
-            </ComboBox>
-            <ComboBox Name="TaskPeriodicityPicker" Margin="20,0,0,0" Width="200" 
-                      ItemsSource="{Binding Tvm.ScheduleArray}" SelectedItem="{Binding Tvm.SelectedItemPeriodicity, Mode=TwoWay}">
-            </ComboBox>
-            <Button Name = "Sort" Content="Sort" Foreground="White" 
-                    Background="black" 
-                    Command="{Binding Tvm.SortCommand, Mode=TwoWay}"
-            ></Button>
-            <Button Name = "Clear" Content="Clear" Foreground="White" 
-                    Background="black" 
-                    Command="{Binding Tvm.DoClear, Mode=TwoWay}"
-            ></Button>
+                      SelectedItem="{Binding Tvm.SelectedItemStation, Mode=TwoWay}"/>
+            <ComboBox PlaceholderText="By periodicity" 
+                      Margin="20,0,30,0" 
+                      Width="200" 
+                      VerticalAlignment="Center"
+                      ItemsSource="{Binding Tvm.ScheduleArray}" 
+                      SelectedItem="{Binding Tvm.SelectedItemPeriodicity, Mode=TwoWay}"/>
+            <Button Content="SORT" 
+                    Style="{StaticResource MenuSortButtonStyle}"
+                    Command="{Binding Tvm.SortCommand, Mode=TwoWay}"/>
+            <Button Content="CLEAR" 
+                    Style="{StaticResource MenuSortButtonStyle}"
+                    Command="{Binding Tvm.DoClear, Mode=TwoWay}"/>
         </StackPanel>
 
         <ListView Name="Tasks"
-                  ItemsSource="{Binding Tvm.TaskCatalog, Mode=TwoWay}"
-                  SelectedItem="{Binding Tvm.SelectedItem, Mode= TwoWay}"
-                  Grid.Row="3"
+                  Grid.Row="2"
                   Grid.Column="1" 
-                  Width="1100"
-                  HorizontalAlignment="Left"
-                  >
-            <ListView.ItemTemplate>
+                  Width="1300"
+                  HorizontalAlignment="Center"
+                  ItemsSource="{Binding Tvm.TaskCatalog, Mode=TwoWay}"
+                  SelectedItem="{Binding Tvm.SelectedItem, Mode= TwoWay}">
+            
+        <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border Margin="5"
-                            Width="1060"
-                            BorderBrush="#407c3a" BorderThickness="2">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1.5*"/>
-                                <ColumnDefinition Width="0.7*"/>
-                                <ColumnDefinition Width="0.7*"/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Margin="0,0,20,0">
-                                <TextBlock Text="{Binding TaskName, Mode=TwoWay}" 
-                                           Foreground="White"
-                                           FontSize="25" 
-                                           Margin="10,0,0,5"/>
-                                <StackPanel Orientation="Horizontal" Margin="5">
-                                    <Image Source="../Assets/place.png" Width="30" Margin="10,0,10,0"/>
-                                    <TextBlock Text="{Binding StationName}" Foreground="White" FontSize="20"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <StackPanel Margin="10">
-                                        <TextBlock Text="Due to:" Foreground="White" FontSize="20"/>
-                                        <TextBlock Text="Type:" Foreground="White" FontSize="20"/>
-                                    </StackPanel>
-                                    <StackPanel Margin="10">
-                                        <TextBlock Text="{Binding DueDate, Mode=TwoWay}" Foreground="White" FontSize="20"/>
-                                        <TextBlock Name="TypeBlock" Text="{Binding TaskType}" Foreground="White" FontSize="20"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </StackPanel >
-                            <TextBlock Text="Registrations:" Foreground="White" Grid.Column="1"/>
-                            <TextBox Name="Registrations"
-                                     Text="{Binding Registration, Mode=TwoWay}" Foreground="White" Grid.Column="1" Width="250" Height="110" Margin="0,20,5,0"/>
-                            <TextBlock Text="Add comment:" Foreground="White" Grid.Column="2"/>
-                            <TextBox Name="Comment" Foreground="White"
-                                     Text="{Binding Comment, Mode=TwoWay}"
-                                     Grid.Column="2" 
-                                     Width="250" 
-                                     Height="110" 
-                                     Margin="0,20,5,0"/>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
+                    <StackPanel>
+                        <Border BorderBrush="Black" BorderThickness="2"
+                            Width="1250"
+                            Height="170"
+                            HorizontalAlignment="Center">
+                <Grid Background="PowderBlue" Opacity="0.8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="1.9*"/>
+                        <ColumnDefinition Width="0.8*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{Binding DueDate, Mode=TwoWay}" 
+                               Style="{StaticResource TaskDateTextBlockStyle}"/>
+                    <Border Grid.Column="0" 
+                            Margin="190,0,0,0" 
+                            Style="{StaticResource TaskBorderStyle}"/>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="{Binding TaskName, Mode=TwoWay}" 
+                                   Style="{StaticResource TaskNameTextBlockStyle}"/>
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="20,0,10,0">
+                            <Image Source="../Assets/place.png"  Height="30"/>
+                            <TextBlock Text="{Binding StationName, Mode=TwoWay}" 
+                                       Style="{StaticResource TaskStationTextBlockStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                Margin="20,15,10,0">
+                            <TextBlock Text="Type:" 
+                                       FontSize="20"/>
+                            <TextBlock Text="{Binding TaskType, Mode=TwoWay}" 
+                                       FontSize="20"
+                                       Margin="15,0,0,0"/>
+                            <Button Content="ADD REGISTRATION" 
+                                    FontSize="13" 
+                                    HorizontalAlignment="Center" 
+                                    Width="190" 
+                                    Margin="30,0,0,0"
+                                    BorderBrush="Black"
+                                    BorderThickness="1">
+                                <Button.Flyout>
+                                    <Flyout>
+                                        <TextBox PlaceholderText="Type here the registration information ..."
+                                                 Text="{Binding Registration, Mode=TwoWay}"
+                                                 Height="100"
+                                                 TextWrapping="Wrap"/>
+                                    </Flyout>
+                                </Button.Flyout>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                    <TextBox Grid.Column="2"
+                             PlaceholderText="ADD COMMENT"
+                             Text="{Binding Comment, Mode=TwoWay}"
+                             Style="{StaticResource TaskCommentTextBoxStyle}"/>
+                </Grid>
+            </Border>
+            </StackPanel>
+        </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-        <ListView ItemsSource="{Binding Nvm.NotesCatalog, Mode=TwoWay}" SelectedItem="{Binding Nvm.SelectedNote, Mode=TwoWay}" Grid.Row="3" Grid.Column="2" Name="Notes" HorizontalAlignment="Left">
+        <ListView ItemsSource="{Binding Nvm.NotesCatalog, Mode=TwoWay}" 
+                  SelectedItem="{Binding Nvm.SelectedNote, Mode=TwoWay}" 
+                  Grid.Row="2" 
+                  Grid.Column="2"  
+                  HorizontalAlignment="Left">
             <ListView.Background>Transparent</ListView.Background>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Background="#407c3a" Opacity="0.7" Width="450" 
-                          BorderThickness="3" BorderBrush="White"
-                          HorizontalAlignment="Left">
-
-                        <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Text="Name:" Foreground="White" FontSize="18"/>
-                            <TextBlock Text="{Binding Note1, Mode=TwoWay}" Foreground="White" FontSize="18" Margin="10,0,0,0"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Text="Due date:" Foreground="White" FontSize="18"/>
-                            <TextBlock Text="{Binding DueDate, Mode=TwoWay}" Margin="10,0,0,0" Foreground="White" FontSize="18"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Text="Station:" Foreground="White" FontSize="18"/>
-                            <TextBlock Text="{Binding StationName, Mode=TwoWay}" Margin="10,0,0,0"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Text="Technician/Station:" Foreground="White" FontSize="18"/>
-                            <TextBlock Text="{Binding UserId, Mode=TwoWay}" Foreground="White" Margin="10,0,0,0" FontSize="18"/>
-                    </StackPanel>
-                    </StackPanel>
-                </DataTemplate>
+        <StackPanel>
+            <StackPanel Height="150"
+                                Width="470" 
+                                VerticalAlignment="Top"
+                                Opacity="0.6" 
+                                Style="{StaticResource CuTaskStackPanelStyle}">
+                <RelativePanel Margin="15,10,5,10">
+                    <Image Source="../Assets/place.png"
+                           Height="25"
+                           Name="PlaceIcon"
+                           RelativePanel.AlignLeftWithPanel="True"/>
+                    <TextBlock Text="{Binding StationName, Mode=TwoWay}" 
+                               FontWeight="Medium" 
+                               Margin="10,0,0,0"
+                               RelativePanel.RightOf="PlaceIcon"/>
+                    <TextBlock Text="{Binding DueDate, Mode=TwoWay}" 
+                               RelativePanel.AlignRightWithPanel="True"
+                               Margin="0,0,15,0"/>
+                </RelativePanel>
+                <Border Width="440"
+                        Style="{StaticResource CuTaskBorderStyle}"/>
+                <TextBlock Text="{Binding Note1, Mode=TwoWay}"
+                                    FontStyle="Italic"
+                                    FontWeight="Medium"
+                                    TextWrapping="Wrap"
+                                    Margin="15,10,5,10"/>
+                <StackPanel Orientation="Horizontal" Margin="15,10,5,10">
+                    <TextBlock Text="Technician ID:"/>
+                    <TextBlock Text="{Binding UserId, Mode=TwoWay}" Margin="5,0,0,0"/>
+                </StackPanel>
+            </StackPanel>
+            </StackPanel>
+        </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-        <Button Name="CreateButonM" Grid.Column="1"
-                Grid.Row="4" HorizontalAlignment="Left" Margin="0,0,0,0" Content="Create" Command="{Binding Bvm.DoGoCreate}" FontSize="18" Foreground="White" BorderBrush="White" BorderThickness="1"/>
-            <Button Name="UpdateButtonM" Grid.Column="1"
-                Grid.Row="4" HorizontalAlignment="Left" Margin="100,0,0,0" Content="Update" Command="{Binding Tvm.DoGoUpdate}" FontSize="18" Foreground="White" BorderBrush="White" BorderThickness="1" />
-        <Button Name="DeleteButtonM" Grid.Column="1" Command="{Binding Tvm.DoDelete}"
-                Grid.Row="4" HorizontalAlignment="Left" Margin="200,0,0,0" Content="Delete" FontSize="18" Foreground="White" BorderBrush="White" BorderThickness="1" />
-
-            <Button Name="DoneCommandButton"
-                Command="{Binding Tvm.SaveTaskClass}"
-                Grid.Column="1"
-                Grid.Row="4"
-                Width="200"
-                FontSize="40"
-                HorizontalAlignment="Center"
-                Background="DarkGreen"
-                BorderThickness="1" BorderBrush="White">
-            <StackPanel Orientation="Horizontal">
-                <Image Source="../Assets/Done.png" Width="35"/>
-                <TextBlock Text="DONE" Foreground="White" Margin="20,0,0,0"/>
+        <StackPanel Grid.Row="3" Grid.Column="1">
+            <Button Content="SEE MORE INFORMATION  ABOUT THE TASK" 
+                    Command="{Binding Tvm.DoInfo}"
+                Width="1250"
+                Margin="0,30,0,0" 
+                Opacity="0.6"
+                Style="{StaticResource TaskButtonStyle}"/>
+            <Button Content="PERFORM SELECTED TASK"
+                    Command="{Binding Tvm.SaveTaskClass}"
+                Width="1250"
+                Height="60"
+                Margin="0,5,0,0"
+                Opacity="0.8"
+                Style="{StaticResource TaskButtonStyle}"/>
+            <StackPanel Margin="0,5,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="CREATE TASK" 
+                        Name="CreateButton"
+                        Margin="0,0,3,0"
+                        Style="{StaticResource TaskButtonStyle}">
+                    <Button.Flyout>
+                        <Flyout>
+                            <StackPanel Style="{StaticResource CuTaskStackPanelStyle}">
+                                <TextBlock Text="CREATE A NEW TASK" 
+                                           Style="{StaticResource CuTaskHeaderStyle}"/>
+                                <Border Style="{StaticResource CuTaskBorderStyle}"/>
+                                <TextBlock Text="Name:" 
+                                           Margin="10,20,0,0"
+                                           Style="{StaticResource CuTaskTextBlockStyle}"/>
+                                <TextBox PlaceholderText="Type the name of the task here ... "
+                                         Text="{Binding Ctvm.NewItem.TaskName, Mode=TwoWay}"
+                                         Style="{StaticResource CuTaskTextBoxStyle}"/>
+                                <TextBlock Text="Station:" 
+                                           Style="{StaticResource CuTaskTextBlockStyle}"/>
+                                <ComboBox Style="{StaticResource CuTaskComboBoxStyle}"
+                                          ItemsSource="{Binding Ctvm.EquipmentStations}" 
+                                          SelectedItem="{Binding Ctvm.NewItem, Mode=TwoWay}"/>
+                                <TextBlock Text="Due date:" 
+                                           Style="{StaticResource CuTaskTextBlockStyle}"/>
+                                <DatePicker Margin="10,0,0,0" 
+                                            Width="200"
+                                            Date="{Binding Ctvm.DueDate, Mode=TwoWay}"/>
+                                <TextBlock Text="Periodicity:" 
+                                           Style="{StaticResource CuTaskTextBlockStyle}"/>
+                                <ComboBox Style="{StaticResource CuTaskComboBoxStyle}"
+                                          ItemsSource="{Binding Ctvm.TaskSchedules}" 
+                                          SelectedItem="{Binding Ctvm.NewItem.TaskSchedule, Mode=TwoWay}"/>
+                                <TextBlock Text="Type:" 
+                                           Style="{StaticResource CuTaskTextBlockStyle}"/>
+                                <ComboBox Style="{StaticResource CuTaskComboBoxStyle}"
+                                          ItemsSource="{Binding Ctvm.TaskTypes}" 
+                                          SelectedItem="{Binding Ctvm.NewItem.TaskType, Mode=TwoWay}"/>
+                                <Button Content="CREATE TASK" 
+                                        Style="{StaticResource CuTaskButtonStyle}"
+                                        Command="{Binding Ctvm.DoCreateTask}"/>
+                            </StackPanel>
+                        </Flyout>
+                    </Button.Flyout>
+                </Button>
+                <Button Content="UPDATE TASK" 
+                        Name="UpdateButton"
+                        Margin="0,0,3,0"
+                        Style="{StaticResource TaskButtonStyle}"
+                        Command="{Binding Tvm.DoGoUpdate}">
+                    <Button.Flyout>
+                        <Flyout>
+                            <StackPanel Style="{StaticResource CuTaskStackPanelStyle}">
+                                <TextBlock Text="UPDATE THIS TASK" 
+                                           Style="{StaticResource CuTaskHeaderStyle}"/>
+                                <Border Style="{StaticResource CuTaskBorderStyle}"/>
+                                <TextBlock Text="Name:" 
+                                           Margin="10,20,0,0"
+                                           Style="{StaticResource CuTaskTextBlockStyle}"/>
+                                <TextBox PlaceholderText="Type the new name of the task here ... " 
+                                         Text="{Binding Uvm.TaskName, Mode=TwoWay}"
+                                         Style="{StaticResource CuTaskTextBoxStyle}"/>
+                                <TextBlock Text="Due date:" 
+                                           Style="{StaticResource CuTaskTextBlockStyle}"/>
+                                <DatePicker Margin="10,0,0,0" Width="200"
+                                            Date="{Binding Uvm.DueDate, Mode=TwoWay}"/>
+                                <TextBlock Text="Periodicity:" 
+                                           Style="{StaticResource CuTaskTextBlockStyle}"/>
+                                <ComboBox Style="{StaticResource CuTaskComboBoxStyle}"
+                                          ItemsSource="{Binding Uvm.TaskSchedules}" 
+                                          SelectedItem="{Binding Uvm.TaskSchedule, Mode=TwoWay}"/>
+                                <TextBlock Text="Type:" 
+                                           Style="{StaticResource CuTaskTextBlockStyle}"/>
+                                <ComboBox Style="{StaticResource CuTaskComboBoxStyle}"
+                                          ItemsSource="{Binding Uvm.TaskTypes}" 
+                                          SelectedItem="{Binding Uvm.TaskType, Mode=TwoWay}"/>
+                                <Button Content="UPDATE TASK"
+                                        Style="{StaticResource CuTaskButtonStyle}"
+                                        Command="{Binding Uvm.DoUpdate}"/>
+                            </StackPanel>
+                        </Flyout>
+                    </Button.Flyout>
+                </Button>
+                <Button Content="DELETE TASK"
+                        Name="DeleteButton"
+                        Style="{StaticResource TaskButtonStyle}"
+                        Command="{Binding Tvm.DoDelete}"/>
             </StackPanel>
-        </Button>
-        
-        <Button Name="InfoButton"
-                Command="{Binding Tvm.DoInfo}"
-                Grid.Column="1"
-                Grid.Row="4"
-                Width="200"
-                FontSize="20"
-                HorizontalAlignment="Right"
-                Background="DarkGreen"
-                BorderThickness="1" BorderBrush="White"
-                Margin="50,0,0,0">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="More info" Foreground="White"/>
-            </StackPanel>
-        </Button>
-
-        <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="4">
-            <Button Content="ADD NOTE" 
-                    Width="200"
-                    Foreground="White" 
-                    FontSize="18" 
-                    Background="Transparent" 
-                    BorderBrush="White" 
-                    BorderThickness="2" 
-                    Margin="0,30,0,10"
-                    Click="GoToNotesPage"/>
-            <Button Content="REMOVE"
-                    Width="200"
-                    Foreground="White" 
-                    FontSize="18" 
-                    Background="Transparent" 
-                    BorderBrush="White" 
-                    BorderThickness="2" 
-                    Margin="0,30,0,10"
-                    Command="{Binding Nvm.RemoveNote}"/>
         </StackPanel>
+
+        <StackPanel Grid.Column="2"
+                    Grid.Row="3"
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Center">
+            <Button Content="ADD NEW NOTE"
+                        Margin="10,30,0,0"
+                        Width="210"
+                        Style="{StaticResource TaskButtonStyle}">
+                <Button.Flyout>
+                    <Flyout>
+                        <StackPanel Opacity="0.6" 
+                                        Width="420" 
+                                        Style="{StaticResource CuTaskStackPanelStyle}">
+                            <TextBlock Text="ADD NEW NOTE HERE" 
+                                       Style="{StaticResource CuTaskHeaderStyle}"/>
+                            <Border Width="400"
+                                    Style="{StaticResource CuTaskBorderStyle}"/>
+                            <TextBox PlaceholderText="Type here the message of the note ... " 
+                                     Text="{Binding Nvm.Note1, Mode=TwoWay}"
+                                     FontSize="18" 
+                                     Margin="10,20,10,5"
+                                     TextWrapping="Wrap"
+                                     Height="130"/>
+                            <ComboBox PlaceholderText="Pick station" 
+                                      ItemsSource="{Binding Nvm.StationCollection}" 
+                                      SelectedItem="{Binding Nvm.SelectedStationItem, Mode=TwoWay}"
+                                      Height="40" 
+                                      Width="200" 
+                                      Margin="10,5,10,5">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding StationName, Mode=TwoWay}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <DatePicker x:Name="DatePicker" 
+                                        Margin="10,5,0,10" 
+                                        Date="{Binding Nvm.DueDate, Mode=TwoWay}"/>
+                            <Button Content="SAVE THIS NOTE" 
+                                    Command="{Binding Path=Nvm.SaveNote}"
+                                    Style="{StaticResource CuTaskButtonStyle}">
+                            </Button>
+                        </StackPanel>
+                    </Flyout>
+                </Button.Flyout>
+            </Button>
+            <Button Content="REMOVE NOTE"
+                    Command="{Binding Nvm.RemoveNote}"
+                    Margin="5,30,0,0"
+                    Style="{StaticResource TaskButtonStyle}"
+                    Width="210"/>
+        </StackPanel>
+
     </Grid>
 </Page>

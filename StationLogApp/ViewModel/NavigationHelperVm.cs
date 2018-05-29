@@ -44,7 +44,7 @@ namespace StationLogApp.ViewModel
 
         public void DoTask()
         {
-            _frameNavigation.ActivateFrameNavigation(typeof(TaskPage), CurrentUser);
+            _frameNavigation.ActivateFrameNavigation(typeof(MenuPage), CurrentUser);
         }
 
         public void DoDone()
@@ -54,7 +54,7 @@ namespace StationLogApp.ViewModel
 
         public void GoCreate()
         {
-            _frameNavigation.ActivateFrameNavigation(typeof(CreateTaskPage), CurrentUser);
+            _frameNavigation.ActivateFrameNavigation(typeof(MenuPage), CurrentUser);
         }
     }
 }

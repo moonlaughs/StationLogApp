@@ -61,13 +61,13 @@ namespace StationLogApp.ViewModel
                     LoginStatus = true;
                     if (user.UserType == "admin" || user.UserType == "manager")
                     {
-                        _frame.ActivateFrameNavigation(typeof(TaskPage), user);
+                        _frame.ActivateFrameNavigation(typeof(MenuPage), user);
                         CurrentUser = user;
                         break;
                     }
                     else
                     {
-                        _frame.ActivateFrameNavigation(typeof(TaskPage), user);
+                        _frame.ActivateFrameNavigation(typeof(MenuPage), user);
                         CurrentUser = user;
                         break;
                     }
