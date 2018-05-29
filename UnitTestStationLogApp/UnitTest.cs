@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.ObjectModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StationLogApp.Common;
 using StationLogApp.Converters;
@@ -132,6 +133,32 @@ namespace UnitTestStationLogApp
             } 
 
             Assert.AreEqual(myValue, realValue);    //passed
+        }
+    }
+
+    [TestClass]
+    public class LoadMTest
+    {
+        ILoad<User> users { get; set; }
+        ObservableCollection<User> collection { get; set; }
+
+        [TestInitialize]
+        public void BeforeTest()
+        {
+            users = new LoadM<User>();
+            collection = users.RetriveCollection("Users");
+        }
+        
+        [TestMethod]
+        public void LoadTest()
+        {
+            users.Load("Users");
+            collection = users.RetriveCollection("Users");
+
+            int myValue = 5;
+            int realValue = collection.Count;
+
+            Assert.AreEqual(myValue, realValue);
         }
     }
 

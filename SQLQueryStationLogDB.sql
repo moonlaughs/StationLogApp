@@ -136,4 +136,4 @@ SELECT * FROM dbo.Task WHERE DoneVar = 'Y'
 SELECT * FROM dbo.Station ORDER BY StationID
 
 --8 Testing normalization
-INSERT INTO STATION VALUES  (1103, 'HCAB', 'H.C. Andersens Boulevard')
+INSERT INTO STATION VALUES  (1103, 'New', 'H.C. Andersens Boulevard')
