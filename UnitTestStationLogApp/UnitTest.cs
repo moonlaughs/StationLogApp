@@ -242,4 +242,38 @@ namespace UnitTestStationLogApp
             Assert.AreEqual(myValue, realValue);
         }
     }
+
+    [TestClass]
+    public class UnitTestCreateTaskHandler
+    {
+        public CreateTaskHandler CreateTaskHandler { get; set; }
+        public CreateTaskVm Cvm { get; set; }
+        public TaskClass CreateTask;
+        public Collections Collections { get; set; }
+
+        [TestInitialize]
+        public void BeforeTest()
+        {
+            CreateTask = new TaskClass(90, "new name", "Every week", null, "check", DateTime.Now, null, null, "N", 4);
+            Cvm = new CreateTaskVm();
+            CreateTaskHandler = new CreateTaskHandler(Cvm);
+            Collections = new Collections();
+        }
+
+        [TestMethod]
+        public void CreateTaskTest()
+        {
+            Cvm.NewItem.TaskName = CreateTask.TaskName;
+            Cvm.NewItem.TaskSchedule = CreateTask.TaskSchedule;
+            Cvm.NewItem.TaskType = CreateTask.TaskType;
+            Cvm.NewItem.EquipmentId = CreateTask.EquipmentId;
+
+            CreateTaskHandler.CreateTask();
+
+            int myValue = 43;
+            int realValue = Collections.LoadToDo().Count;
+
+            Assert.AreEqual(myValue, realValue);
+        }
+    }
 }
