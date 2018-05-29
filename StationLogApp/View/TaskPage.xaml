@@ -9,13 +9,13 @@
     mc:Ignorable="d">
 
     <Grid>
-
         <Grid.Background>
             <ImageBrush ImageSource="../Assets/yas2.jpg" />
         </Grid.Background>
 
         <Grid.RowDefinitions>
             <RowDefinition Height ="10"/>
+            <RowDefinition Height="70"/>
             <RowDefinition Height="3.2*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="10"/>
@@ -28,8 +28,49 @@
             <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
 
+        <Border Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="4"
+                Grid.RowSpan="2"
+                Background="Black" 
+                Opacity="0.5"/>
+
+        <StackPanel Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="4"
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Center"
+                    Opacity="0.7">
+            <TextBlock Text="Filters" 
+                       VerticalAlignment="Center"
+                       Foreground="White" 
+                       FontSize="25"
+                       Margin="15,0,20,0"/>
+            <Image Source="../Assets/arrow.png"  
+                   Height="25"
+                   Margin="0,5,20,0"/>
+            <ComboBox PlaceholderText="By station" 
+                      Margin="20,0,0,0" 
+                      Width="200"
+                      VerticalAlignment="Center"
+                      ItemsSource="{Binding Tvm.StationCollection, Mode=TwoWay}"  
+                      SelectedItem="{Binding Tvm.SelectedItemStation, Mode=TwoWay}"/>
+            <ComboBox PlaceholderText="By periodicity" 
+                      Margin="20,0,30,0" 
+                      Width="200" 
+                      VerticalAlignment="Center"
+                      ItemsSource="{Binding Tvm.ScheduleArray}" 
+                      SelectedItem="{Binding Tvm.SelectedItemPeriodicity, Mode=TwoWay}"/>
+            <Button Content="SORT" 
+                    Style="{StaticResource MenuSortButtonStyle}"
+                    Command="{Binding Tvm.SortCommand, Mode=TwoWay}"/>
+            <Button Content="CLEAR" 
+                    Style="{StaticResource MenuSortButtonStyle}"
+                    Command="{Binding Tvm.DoClear, Mode=TwoWay}"/>
+        </StackPanel>
+
         <ListView Name="Tasks"
-                  Grid.Row="1"
+                  Grid.Row="2"
                   Grid.Column="1" 
                   Width="1300"
                   HorizontalAlignment="Center"
@@ -101,7 +142,7 @@
 
         <ListView ItemsSource="{Binding Nvm.NotesCatalog, Mode=TwoWay}" 
                   SelectedItem="{Binding Nvm.SelectedNote, Mode=TwoWay}" 
-                  Grid.Row="1" 
+                  Grid.Row="2" 
                   Grid.Column="2"  
                   HorizontalAlignment="Left">
             <ListView.Background>Transparent</ListView.Background>
@@ -143,7 +184,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <StackPanel Grid.Row="2" Grid.Column="1">
+        <StackPanel Grid.Row="3" Grid.Column="1">
             <Button Content="SEE MORE INFORMATION  ABOUT THE TASK" 
                     Command="{Binding Tvm.DoInfo}"
                 Width="1250"
@@ -247,7 +288,7 @@
         </StackPanel>
 
         <StackPanel Grid.Column="2"
-                    Grid.Row="2"
+                    Grid.Row="3"
                     Orientation="Horizontal" 
                     HorizontalAlignment="Center">
             <Button Content="ADD NEW NOTE"

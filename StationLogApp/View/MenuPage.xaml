@@ -15,7 +15,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height ="10"/>
             <RowDefinition Height="100"/>
-            <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
@@ -31,14 +30,7 @@
                 Grid.ColumnSpan="4"
                 Grid.Row="0"
                 Grid.RowSpan="2"
-                Background="Black" Opacity="0.99" Height="100"/>
-
-        <Border Grid.Row="0"
-                Grid.Column="0"
-                Grid.ColumnSpan="4"
-                Grid.RowSpan="3"
-                Background="Black" 
-                Opacity="0.5"/>
+                Background="Black" Opacity="0.99" Height="120"/>
 
         <StackPanel  Orientation="Horizontal" 
                      Grid.Column="0"
@@ -87,43 +79,9 @@
             </Button>
         </StackPanel>
 
-        <StackPanel Grid.Row="2"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="4"
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center"
-                    Opacity="0.7">
-            <TextBlock Text="Filters" 
-                       VerticalAlignment="Center"
-                       Foreground="White" 
-                       FontSize="25"
-                       Margin="15,0,20,0"/>
-            <Image Source="../Assets/arrow.png"  
-                   Height="25"
-                   Margin="0,5,20,0"/>
-            <ComboBox PlaceholderText="By station" 
-                      Margin="20,0,0,0" 
-                      Width="200"
-                      VerticalAlignment="Center"
-                      ItemsSource="{Binding Tvm.StationCollection, Mode=TwoWay}"  
-                      SelectedItem="{Binding Tvm.SelectedItemStation, Mode=TwoWay}"/>
-            <ComboBox PlaceholderText="By periodicity" 
-                      Margin="20,0,30,0" 
-                      Width="200" 
-                      VerticalAlignment="Center"
-                      ItemsSource="{Binding Tvm.ScheduleArray}" 
-                      SelectedItem="{Binding Tvm.SelectedItemPeriodicity, Mode=TwoWay}"/>
-            <Button Content="SORT" 
-                    Style="{StaticResource MenuSortButtonStyle}"
-                    Command="{Binding Tvm.SortCommand, Mode=TwoWay}"/>
-            <Button Content="CLEAR" 
-                    Style="{StaticResource MenuSortButtonStyle}"
-                    Command="{Binding Tvm.DoClear, Mode=TwoWay}"/>
-        </StackPanel>
-
-        <Frame Name="MyFrame"
+       <Frame Name="MyFrame"
             Grid.Column="0"
                Grid.ColumnSpan="4"
-               Grid.Row="3"/>
+               Grid.Row="2"/>
     </Grid>
 </Page>
