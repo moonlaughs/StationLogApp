@@ -55,19 +55,21 @@ namespace StationLogApp.ViewModel
             EquipmentStations = Col.EquipmentStationsCollection();
             var singleton = TaskEquipmentStationSingleton.GetInstance();
             DC = new DateConverter();
+            TaskVm tvm = new TaskVm();
 
             TaskId = singleton.GetTaskId();
-            TaskName = singleton.GetTaskName();
-            TaskSchedule = singleton.GetTaskSchedule();
-            TaskType = singleton.GetTaskType();
-            EquipmentId = singleton.GetEquipmentId();
+            //TaskId = singleton.GetTaskId();
+            ////TaskName = tvm.SelectedItem.TaskName;//singleton.GetTaskName();
+            //TaskSchedule = singleton.GetTaskSchedule();
+            //TaskType = singleton.GetTaskType();
+            //EquipmentId = singleton.GetEquipmentId();
             DueDate = DateTimeOffset.Now;
-            //DoneDate = _singleton.GetDoneDate();
-            EquipmentName = singleton.GetEquipmentName();
-            StationName = singleton.GetStationName();
-            Registration = singleton.GetRegistration();
-            Comment = singleton.GetComment();
-            DoneVar = singleton.GetDoneVar();
+            ////DoneDate = _singleton.GetDoneDate();
+            //EquipmentName = singleton.GetEquipmentName();
+            //StationName = singleton.GetStationName();
+            //Registration = singleton.GetRegistration();
+            //Comment = singleton.GetComment();
+            //DoneVar = singleton.GetDoneVar();
 
             Uph = new UpdateTaskHandler(this);
             DoUpdate = new RelayCommandClass(Uph.UpdateTask);

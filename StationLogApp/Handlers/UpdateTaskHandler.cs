@@ -13,6 +13,7 @@ using StationLogApp.Model;
 using StationLogApp.Persistancy;
 using StationLogApp.View;
 using StationLogApp.ViewModel;
+using StationLogApp.Singletons;
 
 namespace StationLogApp.Handlers
 {
@@ -23,8 +24,10 @@ namespace StationLogApp.Handlers
 
         public NavigationHelperVm Bvm { get; }
         public DateConverter Dc { get; }
+        public TaskVm Tvm { get; set; }
 
         public RelayCommandClass DoGoTask { get; set; }
+        public TaskEquipmentStationSingleton Singleton { get; set; }
 
         public UpdateTaskHandler(UpdateTaskVm updateVm)
         {
@@ -32,26 +35,29 @@ namespace StationLogApp.Handlers
             Bvm = new NavigationHelperVm();
             DoGoTask = new RelayCommandClass(GoTask);
             Dc = new DateConverter();
+            Tvm = new TaskVm();
+            Tvm.SelectedItem = new TaskEquipmentStation();
+            Singleton = TaskEquipmentStationSingleton.GetInstance();
         }
         
         public async void UpdateTask()
         {
-            if (_updateVm.TaskId != 0)
+            if (Singleton.GetTaskId() != 0)
             {
                 var updatedItem = new TaskClass(
-                _updateVm.TaskId,
-                _updateVm.TaskName,
-                _updateVm.TaskSchedule,
-                _updateVm.Registration,
-                _updateVm.TaskType,
+                Singleton.GetTaskId(),
+                Tvm.SelectedItem.TaskName = Singleton.GetTaskName(),
+                Tvm.SelectedItem.TaskSchedule = Singleton.GetTaskSchedule(),
+                null,
+                Tvm.SelectedItem.TaskType = Singleton.GetTaskType(),
                 Dc.ConvertToDate(_updateVm.DueDate),
                 null,
-                _updateVm.Comment,
-                _updateVm.DoneVar,
-                _updateVm.EquipmentId
+                null,
+                Tvm.SelectedItem.DoneVar = Singleton.GetDoneVar(),
+                Tvm.SelectedItem.EquipmentId = Singleton.GetEquipmentId()
                 );
 
-                await _update.Update(updatedItem, "Tasks", _updateVm.TaskId);
+                await _update.Update(updatedItem, "Tasks", Singleton.GetTaskId());
 
                 GoTask();
 

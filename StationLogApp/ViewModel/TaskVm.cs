@@ -109,8 +109,8 @@ namespace StationLogApp.ViewModel
             if (SelectedItem.TaskId != 0)
             {
                 _singleton.SetTaskEquipmentStation(SelectedItem);
-                var frame = new FrameNavigateClass();
-                frame.ActivateFrameNavigation(typeof(MenuPage), SelectedItem);
+                //var frame = new FrameNavigateClass();
+                //frame.ActivateFrameNavigation(typeof(MenuPage), SelectedItem);
             }
             else
             {

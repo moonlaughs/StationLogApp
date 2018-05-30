@@ -209,17 +209,17 @@
                                 <TextBlock Text="CREATE A NEW TASK" 
                                            Style="{StaticResource CuTaskHeaderStyle}"/>
                                 <Border Style="{StaticResource CuTaskBorderStyle}"/>
+                                <TextBlock Text="Station:" 
+                                           Style="{StaticResource CuTaskTextBlockStyle}"/>
+                                <ComboBox Style="{StaticResource CuTaskComboBoxStyle}"
+                                          ItemsSource="{Binding Ctvm.EquipmentStations}" 
+                                          SelectedItem="{Binding Ctvm.NewItem, Mode=TwoWay}"/>
                                 <TextBlock Text="Name:" 
                                            Margin="10,20,0,0"
                                            Style="{StaticResource CuTaskTextBlockStyle}"/>
                                 <TextBox PlaceholderText="Type the name of the task here ... "
                                          Text="{Binding Ctvm.NewItem.TaskName, Mode=TwoWay}"
                                          Style="{StaticResource CuTaskTextBoxStyle}"/>
-                                <TextBlock Text="Station:" 
-                                           Style="{StaticResource CuTaskTextBlockStyle}"/>
-                                <ComboBox Style="{StaticResource CuTaskComboBoxStyle}"
-                                          ItemsSource="{Binding Ctvm.EquipmentStations}" 
-                                          SelectedItem="{Binding Ctvm.NewItem, Mode=TwoWay}"/>
                                 <TextBlock Text="Due date:" 
                                            Style="{StaticResource CuTaskTextBlockStyle}"/>
                                 <DatePicker Margin="10,0,0,0" 
@@ -256,8 +256,9 @@
                                 <TextBlock Text="Name:" 
                                            Margin="10,20,0,0"
                                            Style="{StaticResource CuTaskTextBlockStyle}"/>
-                                <TextBox PlaceholderText="Type the new name of the task here ... " 
-                                         Text="{Binding Uvm.TaskName, Mode=TwoWay}"
+                                <!--PlaceholderText="Type the new name of the task here ... "-->
+                                <TextBox 
+                                         Text="{Binding Tvm.SelectedItem.TaskName, Mode=TwoWay}"
                                          Style="{StaticResource CuTaskTextBoxStyle}"/>
                                 <TextBlock Text="Due date:" 
                                            Style="{StaticResource CuTaskTextBlockStyle}"/>
@@ -267,12 +268,12 @@
                                            Style="{StaticResource CuTaskTextBlockStyle}"/>
                                 <ComboBox Style="{StaticResource CuTaskComboBoxStyle}"
                                           ItemsSource="{Binding Uvm.TaskSchedules}" 
-                                          SelectedItem="{Binding Uvm.TaskSchedule, Mode=TwoWay}"/>
+                                          SelectedItem="{Binding Tvm.SelectedItem.TaskSchedule, Mode=TwoWay}"/>
                                 <TextBlock Text="Type:" 
                                            Style="{StaticResource CuTaskTextBlockStyle}"/>
                                 <ComboBox Style="{StaticResource CuTaskComboBoxStyle}"
                                           ItemsSource="{Binding Uvm.TaskTypes}" 
-                                          SelectedItem="{Binding Uvm.TaskType, Mode=TwoWay}"/>
+                                          SelectedItem="{Binding Tvm.SelectedItem.TaskType, Mode=TwoWay}"/>
                                 <Button Content="UPDATE TASK"
                                         Style="{StaticResource CuTaskButtonStyle}"
                                         Command="{Binding Uvm.DoUpdate}"/>

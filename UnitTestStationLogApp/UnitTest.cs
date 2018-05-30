@@ -235,7 +235,7 @@ namespace UnitTestStationLogApp
 
             CreateTaskHandler.CreateTask();
 
-            int myValue = 43;
+            int myValue = 54;
             int realValue = Collections.LoadToDo().Count;
 
             Assert.AreEqual(myValue, realValue);
