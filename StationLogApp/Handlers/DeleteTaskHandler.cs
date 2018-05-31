@@ -25,7 +25,7 @@ namespace StationLogApp.Handlers
             {
                 await _delete.Delete("Tasks", key);
 
-                _frame.ActivateFrameNavigation(typeof(TaskPage));
+                _frame.ActivateFrameNavigation(typeof(MenuPage));
 
                 var msg = new MessageDialog("Task deleted");
                 await msg.ShowAsync();
