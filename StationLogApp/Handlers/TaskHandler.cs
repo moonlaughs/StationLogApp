@@ -164,7 +164,8 @@ namespace StationLogApp.Handlers
         private DateTime GetNextDate(int periodicity)
         {
             var today = DateTime.Today;
-            var nextTuesdayDate = today.AddDays(periodicity + 1);
+            int daysUntilNextTuesday = ((int)Windows.Globalization.DayOfWeek.Tuesday - (int)today.DayOfWeek + periodicity) % periodicity;
+            var nextTuesdayDate = today.AddDays(daysUntilNextTuesday);
             return nextTuesdayDate;
         }
 
