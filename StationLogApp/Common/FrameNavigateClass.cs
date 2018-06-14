@@ -18,7 +18,7 @@ namespace StationLogApp.Common
             Window.Current.Activate();
         }
 
-        public void ActivateFrameNavigation(Type type, Object obj)
+        public void ActivateFrameNavigation(Type type, Object obj)   //method overload
         {
             var frame = (Frame)Window.Current.Content;
             frame.Navigate(type, obj);

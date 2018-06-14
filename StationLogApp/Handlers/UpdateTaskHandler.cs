@@ -45,7 +45,7 @@ namespace StationLogApp.Handlers
             if (Singleton.GetTaskId() != 0)
             {
                 var updatedItem = new TaskClass(
-                Singleton.GetTaskId(),
+                Singleton.GetTaskId(),   
                 Tvm.SelectedItem.TaskName = Singleton.GetTaskName(),
                 Tvm.SelectedItem.TaskSchedule = Singleton.GetTaskSchedule(),
                 null,

@@ -26,10 +26,10 @@ namespace StationLogApp.View
     public sealed partial class TaskPage : Page
     {
         private NavigationHelperVm Bvm { get; }
-        private TaskVm Tvm { get; }
-        private NoteVm Nvm { get; }
-        private CreateTaskVm Ctvm { get; }
-        private UpdateTaskVm Uvm { get; }
+        //private TaskVm Tvm { get; }
+        //private NoteVm Nvm { get; }
+        //private CreateTaskVm Ctvm { get; }
+        //private UpdateTaskVm Uvm { get; }
 
         public TaskPage()
         {
@@ -39,10 +39,10 @@ namespace StationLogApp.View
             DeleteButton.Visibility = Visibility.Collapsed;
             UpdateButton.Visibility = Visibility.Collapsed;
             Bvm = new NavigationHelperVm();
-            Tvm = new TaskVm();
-            Nvm = new NoteVm();
-            Ctvm = new CreateTaskVm();
-            Uvm = new UpdateTaskVm();
+            //Tvm = new TaskVm();
+            //Nvm = new NoteVm();
+            //Ctvm = new CreateTaskVm();
+            //Uvm = new UpdateTaskVm();
             CheckIfManager();
         }
 

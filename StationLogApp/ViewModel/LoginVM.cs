@@ -78,7 +78,7 @@ namespace StationLogApp.ViewModel
             }
             else
             {
-                var msg = new MessageDialog("Incorrect username or password.");
+                var msg = new MessageDialog("No data");
                 await msg.ShowAsync();
             }
         }

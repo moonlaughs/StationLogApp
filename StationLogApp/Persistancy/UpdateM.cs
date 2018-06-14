@@ -14,7 +14,7 @@ namespace StationLogApp.Persistancy
 {
     public class UpdateM<T> : IUpdate<T> where T : class
     {
-        #region
+        #region instance fields
         private const string ServerUrl = "http://stationlogdbwebservice20180514015122.azurewebsites.net/";
 
         public readonly string ApiPrefix = "api/";

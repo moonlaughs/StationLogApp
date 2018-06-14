@@ -26,7 +26,7 @@ namespace StationLogApp.Singletons
         {
             return Instance ?? (Instance = new TaskEquipmentStationSingleton());
         }
-
+        
         public void SetTaskEquipmentStation(TaskEquipmentStation tes)
         {
             _taskEquipmentStation = tes;

@@ -55,7 +55,7 @@ namespace StationLogApp.ViewModel
             EquipmentStations = Col.EquipmentStationsCollection();
             var singleton = TaskEquipmentStationSingleton.GetInstance();
             DC = new DateConverter();
-            TaskVm tvm = new TaskVm();
+            //TaskVm tvm = new TaskVm();
 
             TaskId = singleton.GetTaskId();
             //TaskId = singleton.GetTaskId();

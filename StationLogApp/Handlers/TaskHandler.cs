@@ -19,16 +19,15 @@ namespace StationLogApp.Handlers
         #region instance fields
         private readonly ISave<TaskClass> _savedTaskClass = new SaveM<TaskClass>();
         private readonly IUpdate<TaskClass> _updateTaskClass = new UpdateM<TaskClass>();
-        private  TaskVm _taskVm;
         private readonly FrameNavigateClass _frameNavigation;
         private readonly Collections _collectionsClass;
         private SortingHandler _sortingHandler;
 
         
-        #endregion
+        #endregion  
 
         #region properties
-        public TaskClass SelectedTask => _taskVm.SelectedItem;
+        public TaskClass SelectedTask => TaskVm.SelectedItem;
 
         public string SelectedPeriodicityItem { get; set; }
         public Station SelectedStation { get; set; }
@@ -39,18 +38,14 @@ namespace StationLogApp.Handlers
         public ObservableCollection<TaskEquipmentStation> LoadedCollection { get; set; }
 
 
-        public TaskVm TaskVm
-        {
-            get { return _taskVm; }
-            set { _taskVm = value; }
-        }
+        public TaskVm TaskVm { get; set; }
 
         #endregion
 
         #region Constructor
         public TaskHandler(TaskVm taskVm)
         {
-            _taskVm = taskVm;
+            TaskVm = taskVm;
             _frameNavigation = new FrameNavigateClass();
             _collectionsClass = new Collections();
             _sortingHandler = new SortingHandler(this);
